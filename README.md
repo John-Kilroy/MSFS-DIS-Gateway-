@@ -161,3 +161,4 @@ Run the following commands:
 3. `pushd SDL2_net-2.0.1/`
 4. `./configure --prefix=/usr && make && sudo make install`
 5. `popd`
+
