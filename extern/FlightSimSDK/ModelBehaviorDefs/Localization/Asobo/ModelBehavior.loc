@@ -1,0 +1,1771 @@
+{
+  "LocalisationFile": {
+    "Version": 3,
+    "UUID": "51093339-0259-4b16-a4fe-501f2fc30e0a",
+    "Languages": [
+      "de-DE",
+      "en-US",
+      "es-ES",
+      "es-MX",
+      "fi-FI",
+      "fr-FR",
+      "it-IT",
+      "ja-JP",
+      "ko-KR",
+      "nb-NO",
+      "nl-NL",
+      "pl-PL",
+      "pt-BR",
+      "pt-PT",
+      "ru-RU",
+      "sv-SE",
+      "tr-TR",
+      "zh-CN"
+    ],
+    "Strings": {
+      "0bf98900-a078-4bf9-973d-c5e63b7f732f": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.COMPASS",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:35",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation des Kompasses",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the compass' animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación de la brújula",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación de la brújula",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Kompassianimaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du compas",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione della bussola",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "コンパスのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "나침반 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til kompasset",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van het kompas",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji busoli",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da animação da bússola",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação da bússola",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации компаса",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av kompass",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Pusula animasyonunun adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "罗盘动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "2a96c5a9-54ad-4f87-bb95-8bd3b0007b46": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_EMISSIVE_NAV",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt einen Emissive NAV-Indicator ab",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of an emissive NAV indicator",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye un indicador de NAV emisivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye un indicador emisivo de NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää valaistun NAV-ilmaisimen pois",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter un indicateur émissif NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione indicatore NAV emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "エミッシブ NAV インジケーターの停止",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "방사형 NAV 지시계에서 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort en lysende NAV-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een NAV-emissiviteitsindicator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza wskaźnik emisji NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de um indicador de Navegação (NAV) emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de um indicador NAV emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает излучающий индикатор NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort en sändande NAV-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Bir yayıcı NAV göstergesini devre dışı bırakır",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止导航无线电高亮指示显示",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "5a5fadd2-ca0b-41c3-95da-a59e69d79112": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.NODE_ID.EMISSIVE_VLOC",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name des „VLOC Emissive Indicator“-Knotens",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the VLOC Emissive Indicator's node",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre del nodo del indicador de VLOC emisivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre del nodo del indicador emisivo de VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Valaistun VLOC-ilmaisimen solmun nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom du nœud de l'indicateur émissif VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome del nodo dell'indicatore VLOC emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "VLOC エミッシブ インジケーターのノードの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "방사형 VLOC 지시계 노드 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på noden til den lysende VLOC-indikatoren",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van het knooppunt van de VLOC-emissiviteitsindicator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa węzła wskaźnika emisji VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome do nó do Indicador Emissivo VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome do nó do Indicador emissivo VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название точки пересечения излучающего индикатора VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på nod för sändande VLOC-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "VLOC Yayıcı Gösterge düğümünün adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "全向无线电信标/航向台高亮指示节点名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "5d4394cf-e4ed-4a06-a391-9cd359ea114e": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.FLAG_OFF",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Aus-Flagge",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the Off Flag's Animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación del indicador de apagado",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación del indicador de apagado",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Pois-merkinnän animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du drapeau de départ",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'indicatore di fuori rotta",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "オフ フラグのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "꺼짐 플래그 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til av-flagget",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de Uit-vlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskaźnika niedostępności sygnału",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da Animação do Sinalizador Desligado",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação do sinalizador Desligado",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации флажка сноса",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av Av-flagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Kapatma Bayrağı Animasyonunun Adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "出发旗动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "7b62d84c-ac30-452e-bd36-785a723289a1": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.NODE_ID.COURSE_KNOB",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name des Kursregler-Knotens",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the Course Knob's node",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre del nodo de la rueda de curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre del nodo de la rueda de curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Kurssinupin solmun nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom du nœud du bouton de trajectoire",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome del nodo del selettore di rotta",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "コース ノブのノードの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "항로 손잡이 노드 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på noden til kursknotten",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van het knooppunt van de koersknop",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa węzła pokrętła kursu",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome do nó do Botão de Curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome do nó do Botão de curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название точки пересечения задатчика путевого угла",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på nod för kursvred",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Rota Topuzu düğümünün adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "航向旋钮节点名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "7dbaa389-395e-4bd8-86de-78f37a1df311": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_GLIDE_LOCALIZER_INIT_ANIMATION",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt eine Initialisierungsanimation für den Gleitlandekurssender ab.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of a initialization animation for the glide localizer.",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye la inicialización de una animación para el localizador de planeo.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye el inicio de una animación para el localizador de planeo.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää liidon suuntasäteen alustusanimaation pois.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter l'animation d'initialisation du localiseur de vol plané.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione animazione di inizializzazione per il localizzatore di planata",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "グライド ローカライザーの初期化アニメーションを停止します。",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "활공 로컬라이저에 대한 초기화 애니메이션을 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort en startanimasjon for glidelokalisereren.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een initialisatie-animatie voor de koersbakenvlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza animację inicjalizacji localizera zniżania.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de uma animação de inicialização para o localizador de planeio.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de uma animação de iniciação para o localizador de planeio.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает начальную анимацию для курсового маяка глиссады",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort startanimerigen för glidlokaliseraren.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Süzülme lokalizeri için başlatma animasyonunu devre dışı bırakır.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止下滑信标台初始化动画。",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "9dd99b14-74fd-4907-93c0-855e92c0e462": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.NODE_ID.EMISSIVE_NAV",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name des „NAV Emissive Indicator“-Knotens",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the NAV Emissive Indicator's node",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre del nodo del indicador de NAV emisivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre del nodo del indicador emisivo de NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Valaistun NAV-ilmaisimen solmun nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom du nœud de l'indicateur émissif NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome del nodo dell'indicatore NAV emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "NAV エミッシブ インジケーターのノードの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "방사형 NAV 지시계 노드 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på noden til den lysende NAV-indikatoren",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van het knooppunt van de NAV-emissiviteitsindicator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa węzła wskaźnika emisji NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome do nó do Indicador Emissivo de Navegação (NAV)",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome do nó do Indicador emissivo NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название точки пересечения излучающего индикатора NAV",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på nod för sändande NAV-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "NAV Yayıcı Gösterge düğümünün adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "导航无线电高亮指示节点名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "9fe2424d-f8fe-427e-8b7e-157bee23d79f": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_EMISSIVE_VLOC",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt einen Emissive VLOC-Indicator ab",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of an emissive VLOC indicator",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye un indicador de VLOC emisivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye un indicador emisivo de VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää valaistun VLOC-ilmaisimen pois",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter un indicateur émissif VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione indicatore VLOC emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "エミッシブ VLOC インジケーターの停止",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "방사형 VLOC 지시계에서 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort en lysende VLOC-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een VLOC-emissiviteitsindicator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza wskaźnik emisji VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de um indicador de VLOC emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de um indicador VLOC emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает излучающий индикатор VLOC",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort en sändande VLOC-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Yayıcı bir VLOC göstergesini devre dışı bırakır",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止全向无线电信标/航向台高亮指示显示",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "10f52099-3d01-45d5-8c19-7303a19b905d": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_FLAG_GLIDE",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:35",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt die Gleitflagge ab",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of a Glide Flag",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye un indicador de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye un indicador de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää liitomerkinnän pois",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter un drapeau de vol plané.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione indicatore di planata",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "グライド フラグの停止",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "활공 플래그에서 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort et glideflagg",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een glijvlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza wskaźnik zniżania",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de um Sinalizador de Planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de um sinalizador de planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает флажок глиссады",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort en glidflagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Süzülme Bayrağını devre dışı bırakır",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止下滑旗显示",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "62a97d9b-45e8-43ca-9260-4aa0d562b489": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.NODE_ID.HIGHLIGHT",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Der Name des Knotens wird für Markierungen verwendet",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the node used for highlights",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre del nodo utilizado para resaltar",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre del nodo utilizado para resaltar",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Kohokohtasolmun nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom du nœud utilisé pour les faits marquants",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome del nodo utilizzato per gli highlight",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "ハイライトに使用されるノードの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "하이라이트에 사용되는 노드 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på noden som brukes for høydepunkter",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van het knooppunt dat wordt gebruikt voor markeringen",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa węzła używanego do wyróżnień",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome do nó usado para destaques",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome do nó utilizado para destaques",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название точки пересечения, используемой для подсветки",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på nod som används för höjdpunkter",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Vurgular için kullanılan düğümün adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "高亮节点名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "77a2685d-3a24-4cda-a686-bec7a4a8b3bd": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.NEEDLE_GLIDE",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Gleitnadel",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the Glide Needle's animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación de la aguja de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación de la aguja de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Liidon neula-animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation de l'aiguille du vol plané",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'ago di planata",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "グライド ニードルのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "활공 바늘 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til glidenålen",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de glijnaald",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskazówki zniżania",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da animação da Agulha de Planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação da Agulha de Planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации планки глиссады",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av glidnål",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Süzülme İğnesi animasyonunun adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "下滑指针动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "367d8ed2-3fae-4117-ba17-37b363d2fef5": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.FLAG_GLIDE",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Gleitflagge",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the Glide Flag's animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación del indicador de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación del indicador de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Liitomerkintäanimaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du drapeau du vol plané",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'indicatore di planata",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "グライド フラグのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "활공 플래그 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til glideflagget",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de glijvlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskaźnika zniżania",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da animação do Sinalizador de Planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação do sinalizador Planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации флажка глиссады",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av glidflagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Süzülme Bayrağı animasyonunun adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "下滑旗动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "918ad653-4488-41cb-82d4-0f47884d8d67": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.FLAG_FROM",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Von-Flagge",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the From Flag's Animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación del indicador de procedencia",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación del indicador de procedencia",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Merkinnästä-animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du drapeau de point de départ",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'indicatore di partenza",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "フロム フラグのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "출발 플래그 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til fra-flagget",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de Van-vlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskaźnika FROM",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da Animação do Sinalizador De",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação do sinalizador De",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации флажка пункта отправления",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av Från-flagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Kaynak Bayrağı Animasyonunun Adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "来自旗动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "8724a042-b8ab-4308-bbd3-9ab54271f39d": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_FLAG_LOCALIZER",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:35",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt die Landekurssenderflagge ab",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of a Localizer Flag",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye un indicador de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye un indicador de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää suuntasädemerkinnän pois",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter un drapeau de localiseur.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione indicatore del localizzatore",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "ローカライザー フラグの停止",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "로컬라이저 플래그에서 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort et lokalisererflagg",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een koersbakenvlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza wskaźnik localizera",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de um Sinalizador de Localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de um sinalizador de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает флажок курсового маяка",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort en lokaliseringsflagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Lokalizer Bayrağını devre dışı bırakır",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止航向信标台旗显示",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "8978f81f-aa88-40b7-91fc-f3377bab7024": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.FLAG_LOCALIZER",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Landekurssenderflagge",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the Localizer Flag's animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación del indicador de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación del indicador de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Suuntasädemerkinnän animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du drapeau du localiseur",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'indicatore del localizzatore",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "ローカライザー フラグのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "로컬라이저 플래그 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til lokalisererflagget",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de koersbakenvlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskaźnika localizera",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da animação do Sinalizador do Localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação do sinalizador Localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации флажка курсового маяка",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av lokaliserarflagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Lokalizer Bayrağı animasyonunun adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "航向信标台旗动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "157737ea-a350-4d06-91ea-bacd4340b548": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_EMISSIVE_GPS",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt einen Emissive GPS-Indicator ab",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of an emissive GPS indicator",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye un indicador de GPS emisivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye un indicador emisivo de GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää valaistun GPS-ilmaisimen pois",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter un indicateur émissif GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione indicatore GPS emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "エミッシブ GPS インジケーターの停止",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "방사형 GPS 지시계에서 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort en lysende GPS-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een GPS-emissiviteitsindicator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza wskaźnik emisji GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de um indicador de GPS emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de um indicador de GPS emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает излучающий индикатор GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort en sändande GPS-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Yayıcı GPS göstergesini devre dışı bırakır",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止GPS高亮指示显示",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "275093bd-401c-495d-976d-e4b535b4fea3": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.FLAG_TO",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Zu-Flagge",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the To Flag's Animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación del indicador de dirección",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación del indicador de dirección",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Päättyy-merkinnän animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du drapeau de direction",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'indicatore di destinazione",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "トゥー フラグのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "도착 플래그 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til til-flagget",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de Naar-vlag",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskaźnika TO",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da Animação do Sinalizador Para",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação do sinalizador Para",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации флажка пункта назначения",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av Till-flagga",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Hedef Bayrak Animasyonunun Adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "飞往旗动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "46846986-6b51-4837-9773-40b0f4ca7bbc": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.NEEDLE_LOCALIZER",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:36",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation der Landekurssendernadel",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the Localizer Needle's animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación de la aguja de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación de la aguja de localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Suuntasädeneulan animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation de l'aiguille du localiseur",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione dell'ago del localizzatore",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "ローカライザー ニードルのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "로컬라이저 바늘 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til lokaliserernålen",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de koersbakennaald",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji wskazówki localizera",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da animação da Agulha do Localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação da Agulha do localizador",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации планки курсового маяка",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av lokaliseringsnål",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Lokalizer İğnesi animasyonunun adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "航向信标台指针动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "a125b5ee-aa3a-4ba2-968d-49fa3dae7874": {
+        "Name": "MODELBEHAVIOR.CDI.OPTIONS.NO_NEEDLE_GLIDE",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:35",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Wählt die Gleitnadel ab",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Opts out of a Glide Needle",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Excluye la aguja de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Excluye la aguja de planeo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Jättää liidon neulan pois",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Quitter une aiguille de vol plané.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Disattivazione ago di planata",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "グライド ニードルの停止",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "활공 바늘에서 옵트아웃합니다.",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Velger bort en glidenål",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Geen gebruik maken van een glijnaald",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Wyłącza wskazówkę zniżania",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Recusa de uma Agulha de Planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Recusa de uma agulha de planeio",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Отключает планку глиссады",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Väljer bort en glidnål",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Süzülme İğnesini Devre Dışı Bırakır",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "中止下滑指针显示",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "a216cb19-e777-44f3-969d-fe2ae38c83f5": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.ANIM_NAME.COURSE_KNOB",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2023-07-19 16:11:35",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name der Animation des Kursreglers",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the course Knob's animation",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre de la animación de la rueda de curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre de la animación de la rueda de curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Kurssinupin animaation nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom de l'animation du bouton de trajectoire",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome dell'animazione del selettore di rotta",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "コース ノブのアニメーションの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "항로 손잡이 애니메이션 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på animasjonen til kursknotten",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van de animatie van de koersknop",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa animacji pokrętła kursu",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome da animação do Botão de Curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome da animação do Botão de curso",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название анимации задатчика путевого угла",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på animering av kursvredet",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "Rota Topuzu animasyonunun adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "航向旋钮动画名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      },
+      "ac5a3040-ca6b-4f32-a82b-7e1d8cf345ba": {
+        "Name": "MODELBEHAVIOR.CDI.PARAMS.NODE_ID.EMISSIVE_GPS",
+        "LastModifiedBy": "pzochalves",
+        "LastModifiedDate": "2024-08-27 15:05:53",
+        "LocalizationStatus": "Active",
+        "Tags": {
+          "Locked": "False"
+        },
+        "Languages": {
+          "de-DE": {
+            "Text": "Name des „GPS Emissive Indicator“-Knotens",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "en-US": {
+            "Text": "Name of the GPS Emissive Indicator's node",
+            "LocalizationStatus": "TranslationNeeded"
+          },
+          "es-ES": {
+            "Text": "Nombre del nodo del indicador de GPS emisivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "es-MX": {
+            "Text": "Nombre del nodo del indicador emisivo de GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fi-FI": {
+            "Text": "Valaistun GPS-ilmaisimen solmun nimi",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "fr-FR": {
+            "Text": "Nom du nœud de l'indicateur émissif GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "it-IT": {
+            "Text": "Nome del nodo dell'indicatore GPS emissivo",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ja-JP": {
+            "Text": "GPS エミッシブ ブインジケーターのノードの名前",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ko-KR": {
+            "Text": "방사형 GPS 지시계 노드 이름",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nb-NO": {
+            "Text": "Navnet på noden til den lysende GPS-indikatoren",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "nl-NL": {
+            "Text": "Naam van het knooppunt van de GPS-emissiviteitsindicator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pl-PL": {
+            "Text": "Nazwa węzła wskaźnika emisji GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-BR": {
+            "Text": "Nome do nó do Indicador Emissivo GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "pt-PT": {
+            "Text": "Nome do nó do Indicador emissivo GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "ru-RU": {
+            "Text": "Название точки пересечения излучающего индикатора GPS",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "sv-SE": {
+            "Text": "Namn på nod för sändande GPS-indikator",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "tr-TR": {
+            "Text": "GPS Yayıcı Gösterge düğümünün adı",
+            "LocalizationStatus": "TranslationOk"
+          },
+          "zh-CN": {
+            "Text": "GPS高亮指示节点名称",
+            "LocalizationStatus": "TranslationOk"
+          }
+        }
+      }
+    }
+  }
+}

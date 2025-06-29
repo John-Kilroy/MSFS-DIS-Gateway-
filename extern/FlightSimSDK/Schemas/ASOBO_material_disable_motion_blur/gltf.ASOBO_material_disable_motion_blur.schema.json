@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_disable_motion_blur glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "enabled": {
+            "description": "When this value is ON, the MotionBlur is disabled on the material, no matter what is defined in graphic options",
+            "type": "boolean"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

@@ -1,0 +1,137 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="InteractionPresets\\Common_Interactions.xml"/>
+	<!-- ############################################################################## -->
+    <ParametersFn Name="ASOBO_Var_Toggle_Parameters">
+        <Parameters Type="Default">
+            <VAR_NAME>Anim_#IE_NAME#_Position</VAR_NAME>
+            <VAR_SCOPE>L:1</VAR_SCOPE>
+        </Parameters>
+        <Parameters Type="Default">
+            <VAR_FULL_NAME>#VAR_SCOPE#:#VAR_NAME#</VAR_FULL_NAME>
+        </Parameters>
+        <Parameters Type="Default">
+            <GET_VAR_IN_PERCENT>(#VAR_FULL_NAME#) 100 *</GET_VAR_IN_PERCENT>
+            <GET_VAR>(#VAR_FULL_NAME#)</GET_VAR>
+            <SET_VAR>(&gt;#VAR_FULL_NAME#)</SET_VAR>
+        </Parameters>
+        <Parameters Type="Default">
+            <TOGGLE_VAR>#GET_VAR# ! #SET_VAR#</TOGGLE_VAR>
+        </Parameters>
+        <ReturnParameters>
+            <GET_VAR_IN_PERCENT>#GET_VAR_IN_PERCENT#</GET_VAR_IN_PERCENT>
+            <GET_VAR>#GET_VAR#</GET_VAR>
+            <SET_VAR>#SET_VAR#</SET_VAR>
+            <TOGGLE_VAR>#TOGGLE_VAR#</TOGGLE_VAR>
+        </ReturnParameters>
+    </ParametersFn>
+    <!-- ############################################################################## -->
+    <ParametersFn Name="ASOBO_Conditional_Var_Toggle_Parameters">
+        <Parameters Type="Default">
+            <VAR_NAME>Anim_#IE_NAME#_Position</VAR_NAME>
+            <VAR_SCOPE>L:1</VAR_SCOPE>
+            <SET_CONDITION>1</SET_CONDITION>
+            <RESET_CONDITION>1</RESET_CONDITION>
+        </Parameters>
+        <Parameters Type="Default">
+            <VAR_FULL_NAME>#VAR_SCOPE#:#VAR_NAME#</VAR_FULL_NAME>
+        </Parameters>
+        <Condition NotEmpty="TOGGLE_CONDITION">
+            <Parameters Type="Override">
+                <SET_CONDITION>#TOGGLE_CONDITION#</SET_CONDITION>
+                <RESET_CONDITION>#TOGGLE_CONDITION#</RESET_CONDITION>
+            </Parameters>
+        </Condition>
+        <Parameters Type="Override">
+            <GET_VAR_IN_PERCENT>(#VAR_FULL_NAME#) 100 *</GET_VAR_IN_PERCENT>
+            <GET_VAR>(#VAR_FULL_NAME#)</GET_VAR>
+            <SET_VALUE>(&gt;#VAR_FULL_NAME#)</SET_VALUE>
+        </Parameters>
+        <Parameters Type="Override">
+            <SET_VAR>
+                s0 if{ #SET_CONDITION# if{ l0 #SET_VALUE# } }
+                els{ #RESET_CONDITION# if{ l0 #SET_VALUE# } }
+            </SET_VAR>
+        </Parameters>
+        <Parameters Type="Override">
+            <TOGGLE_VAR>#GET_VAR# ! #SET_VAR#</TOGGLE_VAR>
+        </Parameters>
+        <ReturnParameters>
+            <GET_VAR_IN_PERCENT>#GET_VAR_IN_PERCENT#</GET_VAR_IN_PERCENT>
+            <GET_VAR>#GET_VAR#</GET_VAR>
+            <SET_VAR>#SET_VAR#</SET_VAR>
+            <TOGGLE_VAR>#TOGGLE_VAR#</TOGGLE_VAR>
+        </ReturnParameters>
+    </ParametersFn>
+    <!-- ############################################################################## -->
+    <ParametersFn Name="ASOBO_Progressive_Anim_Parameters">
+        <Parameters Type="Override">
+            <FULL_IE_NAME>#IE_NAME#</FULL_IE_NAME>
+        </Parameters>
+        <Parameters Type="Override">
+            <Condition NotEmpty="IE_NAME_UID">
+                <FULL_IE_NAME>#FULL_IE_NAME#_#IE_NAME_UID#</FULL_IE_NAME>
+            </Condition>
+        </Parameters>
+        <Parameters Type="Default">
+            <PROGRESS_VAR_NAME>Anim_#FULL_IE_NAME#_Position_Progression</PROGRESS_VAR_NAME>
+            <PROGRESS_VAR_SCOPE>L:1</PROGRESS_VAR_SCOPE>
+            <PROGRESS_PER_SECOND>1.0</PROGRESS_PER_SECOND>
+        </Parameters>
+        <Parameters Type="Default">
+            <PROGRESS_VAR_NAME_FULL_NAME>#PROGRESS_VAR_SCOPE#:#PROGRESS_VAR_NAME#</PROGRESS_VAR_NAME_FULL_NAME>
+        </Parameters>
+        <Parameters Type="Default">
+            <GET_PROGRESS_VAR_IN_PERCENT>(#PROGRESS_VAR_NAME_FULL_NAME#) 100 *</GET_PROGRESS_VAR_IN_PERCENT>
+            <GET_PROGRESS_VAR>(#PROGRESS_VAR_NAME_FULL_NAME#)</GET_PROGRESS_VAR>
+            <SET_PROGRESS_VAR>(&gt;#PROGRESS_VAR_NAME_FULL_NAME#)</SET_PROGRESS_VAR>
+        </Parameters>
+        <Parameters Type="Override">
+            <MAX_INCREMENT>#PROGRESS_PER_SECOND# (A:ANIMATION DELTA TIME, seconds) *</MAX_INCREMENT>
+        </Parameters>
+        <ReturnParameters>
+            <UseParametersFn Name="ASOBO_Add_Update_Helper">
+                <UPDATE_FREQUENCY>30</UPDATE_FREQUENCY>
+                <UPDATE_CODE>#GET_PROGRESS_VAR# #GET_VAR# #GET_PROGRESS_VAR# - #MAX_INCREMENT# min -#MAX_INCREMENT# max + #SET_PROGRESS_VAR#</UPDATE_CODE>
+            </UseParametersFn>
+            <GET_VAR_IN_PERCENT>#GET_PROGRESS_VAR_IN_PERCENT#</GET_VAR_IN_PERCENT>
+            <ANIM_LAG>0</ANIM_LAG>
+        </ReturnParameters>
+    </ParametersFn>
+    <!-- ############################################################################## -->
+    <!-- 
+        Returns a <PROGRESSION_CHECK_CODE> which implements some logic to validate the checkup when the user moves the interaction down, then up, then back to the middle.
+        Requires : 
+            <GET_VALUE> -> Return the current value of the interaction
+            <MIN_VALUE> -> Minimum possible value of the interaction
+            <MAX_VALUE> -> Maximum possible value of the interaction
+             A SavedParameter WearAndTearElements with the list of elements affected
+    -->
+    <ParametersFn Name="ASOBO_WearAndTear_DownUp_Checkup_Parameters">
+        <Parameters Type="Override">
+            <UseParametersFn Name="ASOBO_WearAndTear_Parameters"/>
+        </Parameters>
+        <Parameters Type="Default">
+            <MIN_VALUE_VALIDATION>#MIN_VALUE#</MIN_VALUE_VALIDATION>
+            <MAX_VALUE_VALIDATION>#MAX_VALUE#</MAX_VALUE_VALIDATION>
+        </Parameters>
+        <Parameters Type="Override">
+            <RANGE Process="Int">#MAX_VALUE_VALIDATION# #MIN_VALUE_VALIDATION# -</RANGE>
+        </Parameters>
+        <Parameters Type="Override">
+            <RANGE_WITH_MARGIN Process="Float">#RANGE# 0.95 *</RANGE_WITH_MARGIN>
+        </Parameters>
+        <ReturnParameters>
+            <PROGRESSION_CHECK_CODE>
+                (O:XMLVAR_MinReached) #GET_VALUE# &gt; if{
+                    #GET_VALUE# (&gt;O:XMLVAR_MinReached)
+                }
+                (O:XMLVAR_MaxReached) #GET_VALUE# &lt; if{
+                    #GET_VALUE# (&gt;O:XMLVAR_MaxReached)
+                }
+                (O:XMLVAR_MaxReached) (O:XMLVAR_MinReached) - #RANGE_WITH_MARGIN# / 1 min #SET_ELEMENTS_STATE#
+            </PROGRESSION_CHECK_CODE>
+        </ReturnParameters>
+    </ParametersFn>
+</ModelBehaviors>

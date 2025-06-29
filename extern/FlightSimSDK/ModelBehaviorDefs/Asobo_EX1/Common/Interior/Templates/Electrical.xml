@@ -1,0 +1,17 @@
+<ModelBehaviors>
+	<!-- ################################## ELECTRICAL ################################ -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\ELECTRICAL_Inputs.xml"/>
+	<Include RelativeFile="ParametersFn\\ELECTRICAL_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\ELECTRICAL_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_ELECTRICAL_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>ELECTRICAL</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

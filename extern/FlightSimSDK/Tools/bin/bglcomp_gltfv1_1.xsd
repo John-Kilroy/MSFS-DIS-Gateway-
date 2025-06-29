@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--
+To use this add the following attributes to your FSDATA tag:
+
+xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+xsi:noNamespaceSchemaLocation="bglcomp_gltf.xsd"
+-->
+
+<xs:annotation>
+    <xs:documentation xml:lang="en">
+    Schema for GLTF definition data supported by facilities compiler.
+    This file is: "bglcomp_gltf.xsd"
+    </xs:documentation>
+</xs:annotation>
+
+<xs:element name="ModelInfo" type="ctModelInfo" />
+
+<xs:complexType name="ctModelInfo">
+	<xs:sequence>
+		<xs:element name="Animation" type="ctAnimation" minOccurs="0" maxOccurs="unbounded"/>
+		<xs:element name="PartInfo" type="ctPartInfo" minOccurs="0" maxOccurs="unbounded" />
+	</xs:sequence>
+	<xs:attribute name="version" type="xs:string" use="required" />
+	<xs:attribute name="guid" type="stGUIDBr" use="required" />
+	<xs:attribute name="name" type="xs:string" use="optional" />
+</xs:complexType>
+
+<xs:complexType name="ctAnimation">
+	<xs:attribute name="name" type="xs:string" use="required" />
+	<xs:attribute name="guid" type="stGUID" use="required" />
+	<xs:attribute name="type" type="stAnimationType" use="required" />
+	<xs:attribute name="typeParam" type="stAnimationTypeParam" use="required" />
+	<xs:attribute name="length" type="xs:integer" use="optional" />
+	<xs:attribute name="typeParam2" type="xs:string" use="optional" />
+</xs:complexType>
+
+<xs:complexType name="ctPartInfo">
+	<xs:group ref="grpPartInfo" maxOccurs="unbounded" />
+</xs:complexType>
+
+<xs:group name="grpPartInfo">
+	<xs:choice>
+		<xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" />
+		<xs:element name="Copy" type="xs:string" minOccurs="0" maxOccurs="1" />
+		<xs:element name="AnimLength" type="xs:integer" minOccurs="0" maxOccurs="1" />
+		<xs:element name="Animation" type="ctPartInfoAnimation" minOccurs="0" maxOccurs="1" />
+		<xs:element name="Visibility" type="ctPartInfoVisibility" minOccurs="0" maxOccurs="1" />
+		<xs:element name="VisibleInRange" type="ctPartInfoVisibleInRange" minOccurs="0" maxOccurs="1" />
+		<xs:element name="MouseRect" type="ctPartInfoMouseRect" minOccurs="0" maxOccurs="1" />
+	</xs:choice>
+</xs:group>
+
+<xs:complexType name="ctPartInfoAnimation">
+	<xs:sequence>
+		<xs:element name="Parameter" type="ctPartInfoParameter" minOccurs="1" maxOccurs="1" />
+	</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ctPartInfoVisibility">
+	<xs:sequence>
+		<xs:element name="Parameter" type="ctPartInfoParameter" minOccurs="1" maxOccurs="1" />
+	</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ctPartInfoVisibleInRange">
+	<xs:sequence>
+		<xs:element name="Parameter" type="ctPartInfoParameter" minOccurs="1" maxOccurs="1" />
+		<xs:choice minOccurs="1" maxOccurs="2">
+			<xs:element name="MinValue" type="xs:float" minOccurs="0" maxOccurs="1" />
+			<xs:element name="MaxValue" type="xs:float" minOccurs="0" maxOccurs="1" />
+		</xs:choice>
+	</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ctPartInfoParameter">
+	<xs:sequence>
+		<xs:choice maxOccurs="1">
+			<xs:element name="Sim" type="ctPartInfoParameterSim" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Code" type="xs:string" minOccurs="0" maxOccurs="1" />
+		</xs:choice>
+		<xs:element name="Lag" type="xs:integer" minOccurs="0" maxOccurs="1" />
+	</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ctPartInfoParameterSim">
+	<xs:sequence>
+		<xs:element name="Variable" type="xs:string" minOccurs="1" maxOccurs="1" />
+		<xs:choice maxOccurs="3">
+			<xs:element name="Units" type="xs:string" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Scale" type="xs:float" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Bias" type="xs:float" minOccurs="0" maxOccurs="1" />
+		</xs:choice>
+	</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ctPartInfoMouseRect">
+	<xs:choice maxOccurs="8">
+		<xs:element name="Cursor" type="stCursors" minOccurs="0" maxOccurs="1" />
+		<xs:element name="HelpID" type="xs:string" minOccurs="0" maxOccurs="1" />
+		<xs:element name="TooltipID" type="xs:string" minOccurs="0" maxOccurs="1" />
+		<xs:element name="EventID" type="xs:string" minOccurs="0" maxOccurs="1" />
+		<xs:element name="MouseFlags" type="xs:string" minOccurs="0" maxOccurs="1" />
+		<xs:element name="CallbackCode" type="xs:string" minOccurs="0" maxOccurs="1" />
+		<xs:element name="CallbackDragging" type="ctCallbackDragging" minOccurs="0" maxOccurs="1" />
+		<xs:element name="CallbackJumpDragging" type="ctCallbackJumpDragging" minOccurs="0" maxOccurs="1" />
+	</xs:choice>
+</xs:complexType>
+
+<xs:complexType name="ctCallbackDragging">
+	<xs:choice maxOccurs="7">
+		<xs:element name="Variable" type="xs:string" minOccurs="1" maxOccurs="1" />
+		<xs:element name="Units" type="xs:string" minOccurs="1" maxOccurs="1" />
+		<xs:element name="XScale" type="xs:float" minOccurs="0" maxOccurs="1" />
+		<xs:element name="YScale" type="xs:float" minOccurs="0" maxOccurs="1" />
+		<xs:element name="MinValue" type="xs:float" minOccurs="0" maxOccurs="1" />
+		<xs:element name="MaxValue" type="xs:float" minOccurs="0" maxOccurs="1" />
+		<xs:element name="EventID" type="xs:string" minOccurs="0" maxOccurs="1" />
+	</xs:choice>
+</xs:complexType>
+
+<xs:complexType name="ctCallbackJumpDragging">
+	<xs:choice minOccurs="1" maxOccurs="2">
+		<xs:element name="XMovement" type="ctMovement" minOccurs="0" maxOccurs="1" />
+		<xs:element name="YMovement" type="ctMovement" minOccurs="0" maxOccurs="1" />
+	</xs:choice>
+</xs:complexType>
+
+<xs:complexType name="ctMovement">
+	<xs:choice minOccurs="3" maxOccurs="3">
+		<xs:element name="Delta" type="xs:float" minOccurs="1" maxOccurs="1" />
+		<xs:element name="EventIdInc" type="xs:string" minOccurs="1" maxOccurs="1" />
+		<xs:element name="EventIdDec" type="xs:string" minOccurs="1" maxOccurs="1" />
+	</xs:choice>
+</xs:complexType>
+
+<xs:simpleType name="stGUIDBr">
+	<xs:restriction base="xs:string">
+		<xs:pattern value="\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}" />
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="stGUID">
+	<xs:restriction base="xs:string">
+		<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+		<xs:pattern value="\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}" />
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="stAnimationType">
+	<xs:restriction base="xs:string">
+        <xs:enumeration value="Standard"/>
+        <xs:enumeration value="Sim"/>
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="stAnimationTypeParam">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value=""/>
+		<xs:enumeration value="AutoPlay"/>
+		<xs:enumeration value="Random"/>
+		<xs:enumeration value="AutoPlay,Random"/>
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="stCursors">
+	<xs:restriction base="xs:string">
+		<xs:pattern value="[nN][oO][nN][eE]" />
+		<xs:pattern value="[nN][oO][rR][mM][aA][lL]" />
+		<xs:pattern value="[uU][pP][aA][rR][rR][oO][wW]" />
+		<xs:pattern value="[dD][oO][wW][nN][aA][rR][rR][oO][wW]" />
+		<xs:pattern value="[lL][eE][fF][tT][aA][rR][rR][oO][wW]" />
+		<xs:pattern value="[rR][iI][gG][hH][tT][aA][rR][rR][oO][wW]" />
+		<xs:pattern value="[hH][aA][nN][dD]" />
+		<xs:pattern value="[cC][rR][oO][sS][sS][hH][aA][iI][rR]" />
+	</xs:restriction>
+</xs:simpleType>
+
+</xs:schema>

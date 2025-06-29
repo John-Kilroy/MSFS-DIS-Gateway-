@@ -1,0 +1,26 @@
+<ModelBehaviors>
+	<!-- ################################## AUXILIARY ################################## -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\AUXILIARY_Inputs.xml"/>
+	<Include RelativeFile="ParametersFn\\AUXILIARY_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\AUXILIARY_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_AUXILIARY_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>AUXILIARY</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- IN: See ASOBO_Liquid_Dropping_Door_Animation_SubTemplate -->
+	 <Template Name="ASOBO_Liquid_Dropping_Door_Animation_Template">
+		<UseTemplate Name="ASOBO_Liquid_Dropping_Door_Animation_SubTemplate" />
+	 </Template>
+	<!-- ############################################################################## -->
+	<!-- IN: See ASOBO_Liquid_Dropping_Scoop_Animation_SubTemplate -->
+	 <Template Name="ASOBO_Liquid_Dropping_Scoop_Animation_Template">
+		<UseTemplate Name="ASOBO_Liquid_Dropping_Scoop_Animation_SubTemplate" />
+	 </Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

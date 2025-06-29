@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_parallax_window glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "parallaxScale": {
+            "type": "number"
+        },
+        "roomSizeXScale": {
+            "type": "number"
+        },  
+        "roomSizeYScale": {
+            "type": "number"
+        },  
+        "roomNumberXY": {
+            "type": "number"
+        },
+        "behindWindowMapTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

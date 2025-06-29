@@ -1,0 +1,607 @@
+<ModelBehaviors>
+	<!-- ################################## INSTRUMENT ################################ -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Flag_Indicator_SubTemplate">
+		<Parameters Type="Default">
+			<ANIM_LAG>300</ANIM_LAG>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="FLAG_HIDDEN_AT_0">
+				<False>
+					<!-- flag is shown by default in the animation so 100 means hidden -->
+					<SHOW_FLAG_CONDITION>#SHOW_FLAG_CONDITION# !</SHOW_FLAG_CONDITION>
+				</False>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template">
+			<ANIM_CODE>#SHOW_FLAG_CONDITION# 100 *</ANIM_CODE>
+			<ANIM_NAME>#ANIM_NAME_FLAG#</ANIM_NAME>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Airspeed_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Aircraft_Sim_Parameters">
+				<Condition Check="UNITS">
+					<AIRSPEED_UNITS>#UNITS#</AIRSPEED_UNITS>
+				</Condition>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_AIRSPEED#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Heading_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Heading_Parameters">
+				<Condition Check="UNITS">
+					<UNITS_HEADING>#UNITS#</UNITS_HEADING>
+				</Condition>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_LAG>100</ANIM_LAG>
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>360</GAUGE_MAX>
+			<ANIM_WRAP>True</ANIM_WRAP>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="ON_ANIMATION_FAILURE">
+				<UseParametersFn Name="ASOBO_Instrument_Failure_Animation_Parameters"/>
+				<ANIM_TEST_NO_FAILURE_CODE>#IS_INSTRUMENT_WORKING#</ANIM_TEST_NO_FAILURE_CODE>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_HEADING#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Attitude_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Attitude_Indicator_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_LAG>100</ANIM_LAG>
+			<Condition Check="ANIM_NAME_PITCH">
+				<PITCH_GAUGE_MIN>-25</PITCH_GAUGE_MIN>
+				<PITCH_GAUGE_MID>0</PITCH_GAUGE_MID>
+				<PITCH_GAUGE_MAX>30</PITCH_GAUGE_MAX>
+			</Condition>
+			<Condition Check="ANIM_NAME_BANK">
+				<BANK_GAUGE_MIN>-180</BANK_GAUGE_MIN>
+				<BANK_GAUGE_MAX>180</BANK_GAUGE_MAX>
+				<BANK_ANIM_WRAP>True</BANK_ANIM_WRAP>
+			</Condition>
+			<Condition Check="ANIM_NAME_BARS">
+				<BARS_GAUGE_MIN>-100</BARS_GAUGE_MIN>
+				<BARS_GAUGE_MAX>100</BARS_GAUGE_MAX>
+			</Condition>
+		</Parameters>
+		<Condition Check="ANIM_NAME_PITCH">
+			<UseTemplate Name="ASOBO_IT_Gauge_Template">
+				<ANIM_NAME>#ANIM_NAME_PITCH#</ANIM_NAME>
+				<GAUGE_VALUE>#GET_ATTITUDE_INDICATOR_PITCH#</GAUGE_VALUE>
+				<GAUGE_MIN>#PITCH_GAUGE_MIN#</GAUGE_MIN>
+				<GAUGE_MID>#PITCH_GAUGE_MID#</GAUGE_MID>
+				<GAUGE_MAX>#PITCH_GAUGE_MAX#</GAUGE_MAX>
+				<ON_ANIMATION_FAILURE>FREEZE</ON_ANIMATION_FAILURE>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_BANK">
+			<UseTemplate Name="ASOBO_IT_Gauge_Template">
+				<ANIM_NAME>#ANIM_NAME_BANK#</ANIM_NAME>
+				<GAUGE_VALUE>#GET_ATTITUDE_INDICATOR_BANK#</GAUGE_VALUE>
+				<ANIM_WRAP>#BANK_ANIM_WRAP#</ANIM_WRAP>
+				<GAUGE_MIN>#BANK_GAUGE_MIN#</GAUGE_MIN>
+				<GAUGE_MAX>#BANK_GAUGE_MAX#</GAUGE_MAX>
+				<ON_ANIMATION_FAILURE>FREEZE</ON_ANIMATION_FAILURE>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_BARS">
+			<UseTemplate Name="ASOBO_IT_Gauge_Template">
+				<ANIM_NAME>#ANIM_NAME_BARS#</ANIM_NAME>
+				<GAUGE_VALUE>#GET_ATTITUDE_INDICATOR_BARS#</GAUGE_VALUE>
+				<GAUGE_MIN>#BARS_GAUGE_MIN#</GAUGE_MIN>
+				<GAUGE_MAX>#BARS_GAUGE_MAX#</GAUGE_MAX>
+				<ANIM_TEST_NO_FAILURE_CODE/>
+			</UseTemplate>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Altitude_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Altimeter_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>100</GAUGE_MAX>
+			<ANIM_WRAP>True</ANIM_WRAP>
+			<ALTITUDE_TO_GAUGE_VALUE>/ 100 %</ALTITUDE_TO_GAUGE_VALUE>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<Loop>
+			<Setup>
+				<Param>ALTITUDE</Param>
+				<Value>ANIM_NAME</Value>
+				<Parameters>
+					<LoadParameters ID="Altitude_Indicator_ALTITUDE_TO_ANIM_NAME"/>
+					<RemoveSavedParameters ID="Altitude_Indicator_ALTITUDE_TO_ANIM_NAME"/>
+				</Parameters>
+			</Setup>
+			<Do>
+				<Parameters Type="Override">
+					<ALTITUDE Process="Int">#ALTITUDE# 10 /</ALTITUDE>
+				</Parameters>
+				<UseTemplate Name="ASOBO_IT_Gauge_Template">
+					<GAUGE_VALUE>#GET_ALTIMETER_ALTITUDE# #ALTITUDE# #ALTITUDE_TO_GAUGE_VALUE#</GAUGE_VALUE>
+				</UseTemplate>
+			</Do>
+		</Loop>
+	</Template>
+	<Template Name="ASOBO_IT_Altitude_Strip_Indicator_SubTemplate">
+		<Parameters Type="Default">
+			<UNITS_ALTIMETER_SETTING>inHg</UNITS_ALTIMETER_SETTING>
+			<GAUGE_MIN_INHG>28.1</GAUGE_MIN_INHG>
+			<GAUGE_MAX_INHG>31.4</GAUGE_MAX_INHG>
+			<USE_AUTO_CALIBRATED_MIN_MAX>True</USE_AUTO_CALIBRATED_MIN_MAX>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<Condition Valid="USE_AUTO_CALIBRATED_MIN_MAX">
+			<Parameters Type="Default">
+				<PERCENT_ANIM_FOR_GAUGE_MIN>5</PERCENT_ANIM_FOR_GAUGE_MIN>
+				<PERCENT_ANIM_FOR_GAUGE_MAX>95</PERCENT_ANIM_FOR_GAUGE_MAX>
+			</Parameters>
+			<Parameters Type="Override">
+				<INC_FACTOR Process="Float">#GAUGE_MAX_INHG# #GAUGE_MIN_INHG# - #PERCENT_ANIM_FOR_GAUGE_MAX# #PERCENT_ANIM_FOR_GAUGE_MIN# - /</INC_FACTOR>
+			</Parameters>
+			<Parameters Type="Override">
+				<GAUGE_MIN_INHG Process="Float">#GAUGE_MIN_INHG# #INC_FACTOR# #PERCENT_ANIM_FOR_GAUGE_MIN# * -</MIN_VALUE>
+				<!-- check value for 0% of anim -->
+				<GAUGE_MAX_INHG Process="Float">#GAUGE_MAX_INHG# #INC_FACTOR# 100 #PERCENT_ANIM_FOR_GAUGE_MAX# - * +</MAX_VALUE>
+				<!-- check value for 100% of anim -->
+			</Parameters>
+		</Condition>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Altimeter_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="UNITS_ALTIMETER_SETTING">
+				<Case Value="inHg">
+					<GAUGE_MIN>#GAUGE_MIN_INHG#</GAUGE_MIN>
+					<GAUGE_MAX>#GAUGE_MAX_INHG#</GAUGE_MAX>
+				</Case>
+				<Case Value="millibars">
+					<GAUGE_MIN Process="Float">#GAUGE_MIN_INHG# @inHg_to_millibar</GAUGE_MIN>
+					<GAUGE_MAX Process="Float">#GAUGE_MAX_INHG# @inHg_to_millibar</GAUGE_MAX>
+				</Case>
+			</Switch>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_ALTIMETER_SETTING#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Turn_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Turn_Coordinator_Parameters"/>
+			<UseParametersFn Name="ASOBO_Turn_Indicator_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_LAG>100</ANIM_LAG>
+			<Condition Check="ANIM_NAME_BALL">
+				<BALL_GAUGE_MIN>0</BALL_GAUGE_MIN>
+				<BALL_GAUGE_MAX>100</BALL_GAUGE_MAX>
+			</Condition>
+			<Condition Check="ANIM_NAME_NEEDLE">
+				<NEEDLE_GAUGE_MIN>-6.3</NEEDLE_GAUGE_MIN>
+				<NEEDLE_GAUGE_MAX>6.3</NEEDLE_GAUGE_MAX>
+			</Condition>
+		</Parameters>
+		<Condition Check="ANIM_NAME_BALL">
+			<UseTemplate Name="ASOBO_IT_Gauge_Template">
+				<ANIM_NAME>#ANIM_NAME_BALL#</ANIM_NAME>
+				<GAUGE_MIN>#BALL_GAUGE_MIN#</GAUGE_MIN>
+				<GAUGE_MAX>#BALL_GAUGE_MAX#</GAUGE_MAX>
+				<Condition Valid="UPSIDE_DOWN">
+					<True>
+						<GAUGE_VALUE>#GET_TURN_COORDINATOR_BALL_INV# 50 * 50 +</GAUGE_VALUE>
+					</True>
+					<False>
+						<GAUGE_VALUE>#GET_TURN_COORDINATOR_BALL# 50 * 50 +</GAUGE_VALUE>
+					</False>
+				</Condition>
+				<Condition Valid="DISABLE_BALL_FAILURE">
+					<ANIM_TEST_NO_FAILURE_CODE/>
+				</Condition>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_NEEDLE">
+			<UseTemplate Name="ASOBO_IT_Gauge_Template">
+				<ANIM_NAME>#ANIM_NAME_NEEDLE#</ANIM_NAME>
+				<GAUGE_MIN>#NEEDLE_GAUGE_MIN#</GAUGE_MIN>
+				<GAUGE_MAX>#NEEDLE_GAUGE_MAX#</GAUGE_MAX>
+				<GAUGE_VALUE>#GET_TURN_INDICATOR_RATE#</GAUGE_VALUE>
+			</UseTemplate>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Vertical_Speed_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Vertical_Speed_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>-2000</GAUGE_MIN>
+			<GAUGE_MAX>2000</GAUGE_MAX>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_VERTICAL_SPEED#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_CDI_Indicator_SubTemplate">
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Indicator_Base_Template">
+			<UseParametersFn Name="ASOBO_NAV_Parameters"/>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_IT_CDI_Indicator_With_GPS_SubTemplate">
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Indicator_Base_Template">
+			<UseParametersFn Name="ASOBO_GPS_Parameters"/>
+			<UseParametersFn Name="ASOBO_NAV_Parameters"/>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_LOCAL_CDI_Indicator_Base_Template">
+		<Condition Check="ANIM_NAME_COMPASS">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Compass_Template">
+				<ANIM_NAME>#ANIM_NAME_COMPASS#</ANIM_NAME>
+				<ANIM_TEST_NO_FAILURE_CODE/>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_NEEDLE_LOCALIZER">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Localizer_Needle_Template">
+				<ON_ANIMATION_FAILURE>CENTER</ON_ANIMATION_FAILURE>
+				<ANIM_NAME>#ANIM_NAME_NEEDLE_LOCALIZER#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_NEEDLE_GLIDE">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Glide_Needle_Template">
+				<ANIM_NAME>#ANIM_NAME_NEEDLE_GLIDE#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_FLAG_GLIDE">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Glide_Template">
+				<ANIM_NAME>#ANIM_NAME_FLAG_GLIDE#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_FLAG_LOCALIZER">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Localizer_Template">
+				<ANIM_NAME>#ANIM_NAME_FLAG_LOCALIZER#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_FLAG_NAV">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Nav_Template">
+				<ANIM_NAME>#ANIM_NAME_FLAG_NAV#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_FLAG_TO">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_To_Template">
+				<ANIM_NAME>#ANIM_NAME_FLAG_TO#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="ANIM_NAME_FLAG_FROM">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_From_Template">
+				<ANIM_NAME>#ANIM_NAME_FLAG_FROM#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="NODE_ID_INDICATOR_GPS">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_GPS_Indicator_Template">
+				<NODE_ID>#NODE_ID_INDICATOR_GPS#</NODE_ID>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="NODE_ID_INDICATOR_VLOC">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_VLOC_Indicator_Template">
+				<NODE_ID>#NODE_ID_INDICATOR_VLOC#</NODE_ID>
+			</UseTemplate>
+		</Condition>
+		<Condition Check="NODE_ID_INDICATOR_NAV">
+			<UseTemplate Name="ASOBO_LOCAL_CDI_NAV_Indicator_Template">
+				<NODE_ID>#NODE_ID_INDICATOR_NAV#</NODE_ID>
+			</UseTemplate>
+		</Condition>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Compass_Template">
+		<Parameters Type="Default">
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>360</GAUGE_MAX>
+			<ANIM_WRAP>True</ANIM_WRAP>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_NAV_OBS#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Localizer_Needle_Template">
+		<Parameters Type="Default">
+			<GAUGE_MIN>-127</GAUGE_MIN>
+			<GAUGE_MAX>127</GAUGE_MAX>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<GAUGE_VALUE>#GET_GPS_DRIVES_NAV# if{ #GET_GPS_CDI# } els{ #GET_NAV_CDI# }</GAUGE_VALUE>
+				</True>
+				<False>
+					<GAUGE_VALUE>#GET_NAV_CDI#</GAUGE_VALUE>
+				</False>
+			</Condition>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Glide_Needle_Template">
+		<Parameters Type="Default">
+			<GAUGE_MIN>-127</GAUGE_MIN>
+			<GAUGE_MAX>127</GAUGE_MAX>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<GAUGE_VALUE>#GET_GPS_DRIVES_NAV# if{ #GET_GPS_GSI# } els{ #GET_NAV_GSI# }</GAUGE_VALUE>
+				</True>
+				<False>
+					<GAUGE_VALUE>#GET_NAV_GSI#</GAUGE_VALUE>
+				</False>
+			</Condition>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Flag_To_Template">
+		<Parameters Type="Default">
+			<SHOW_FLAG_TO_CONDITION>#IS_NAV_TO#</SHOW_FLAG_TO_CONDITION>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Template">
+			<SHOW_FLAG_CONDITION>#SHOW_FLAG_TO_CONDITION#</SHOW_FLAG_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Flag_From_Template">
+		<Parameters Type="Default">
+			<SHOW_FLAG_FROM_CONDITION>#IS_NAV_FROM#</SHOW_FLAG_FROM_CONDITION>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Template">
+			<SHOW_FLAG_CONDITION>#SHOW_FLAG_FROM_CONDITION#</SHOW_FLAG_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Flag_Localizer_Template">
+		<Parameters Type="Default">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<SHOW_FLAG_LOCALIZER_CONDITION>#GET_GPS_DRIVES_NAV# if{ #GET_GPS_IS_ACTIVE_FLIGHT_PLAN# } els{ #GET_NAV_HAS_NAV# }</SHOW_FLAG_LOCALIZER_CONDITION>
+				</True>
+				<False>
+					<SHOW_FLAG_LOCALIZER_CONDITION>#GET_NAV_HAS_NAV#</SHOW_FLAG_LOCALIZER_CONDITION>
+				</False>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Template">
+			<SHOW_FLAG_CONDITION>#SHOW_FLAG_LOCALIZER_CONDITION#</SHOW_FLAG_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Flag_Nav_Template">
+		<Parameters Type="Default">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<SHOW_FLAG_NAV_CONDITION>#GET_GPS_DRIVES_NAV# if{ #GET_GPS_IS_ACTIVE_FLIGHT_PLAN# } els{ #GET_NAV_HAS_NAV# }</SHOW_FLAG_NAV_CONDITION>
+				</True>
+				<False>
+					<SHOW_FLAG_NAV_CONDITION>#GET_NAV_HAS_NAV#</SHOW_FLAG_NAV_CONDITION>
+				</False>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Template">
+			<SHOW_FLAG_CONDITION>#SHOW_FLAG_NAV_CONDITION# !</SHOW_FLAG_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Flag_Glide_Template">
+		<Parameters Type="Default">
+			<SHOW_FLAG_GLIDE_CONDITION>#GET_NAV_HAS_GLIDE_SLOPE#</SHOW_FLAG_GLIDE_CONDITION>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Flag_Template">
+			<SHOW_FLAG_CONDITION>#SHOW_FLAG_GLIDE_CONDITION#</SHOW_FLAG_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Flag_Template">
+		<Parameters Type="Default">
+			<ANIM_LAG>300</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template">
+			<ANIM_CODE>#SHOW_FLAG_CONDITION# 100 *</ANIM_CODE>
+			<ANIM_TEST_NO_FAILURE_CODE/>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_GPS_Indicator_Template">
+		<Parameters Type="Default">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<SHOW_GPS_INDICATOR_CONDITION>#GET_GPS_DRIVES_NAV#</SHOW_GPS_INDICATOR_CONDITION>
+				</True>
+				<False>
+					<SHOW_GPS_INDICATOR_CONDITION>0</SHOW_GPS_INDICATOR_CONDITION>
+				</False>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Indicator_Template">
+			<SHOW_INDICATOR_CONDITION>#SHOW_GPS_INDICATOR_CONDITION#</SHOW_INDICATOR_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_VLOC_Indicator_Template">
+		<Parameters Type="Default">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<SHOW_VLOC_INDICATOR_CONDITION>#GET_NAV_HAS_GLIDE_SLOPE# #GET_NAV_HAS_NAV# and #GET_GPS_DRIVES_NAV# ! and</SHOW_VLOC_INDICATOR_CONDITION>
+				</True>
+				<False>
+					<SHOW_VLOC_INDICATOR_CONDITION>#GET_NAV_HAS_GLIDE_SLOPE# #GET_NAV_HAS_NAV# and</SHOW_VLOC_INDICATOR_CONDITION>
+				</False>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Indicator_Template">
+			<SHOW_INDICATOR_CONDITION>#SHOW_VLOC_INDICATOR_CONDITION#</SHOW_INDICATOR_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_NAV_Indicator_Template">
+		<Parameters Type="Default">
+			<Condition NotEmpty="GET_GPS_DRIVES_NAV">
+				<True>
+					<SHOW_NAV_INDICATOR_CONDITION>#GET_NAV_HAS_GLIDE_SLOPE# ! #GET_NAV_HAS_NAV# and #GET_GPS_DRIVES_NAV# ! and</SHOW_NAV_INDICATOR_CONDITION>
+				</True>
+				<False>
+					<SHOW_NAV_INDICATOR_CONDITION>#GET_NAV_HAS_GLIDE_SLOPE# ! #GET_NAV_HAS_NAV# and</SHOW_NAV_INDICATOR_CONDITION>
+				</False>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_LOCAL_CDI_Indicator_Template">
+			<SHOW_INDICATOR_CONDITION>#SHOW_NAV_INDICATOR_CONDITION#</SHOW_INDICATOR_CONDITION>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_LOCAL_CDI_Indicator_Template">
+		<Parameters Type="Default">
+			<EMISSIVE_TEMPLATE>ASOBO_IT_Emissive_Brightness_Template</EMISSIVE_TEMPLATE>
+		</Parameters>
+		<UseTemplate Name="#EMISSIVE_TEMPLATE#">
+			<EMISSIVE_CODE>#SHOW_INDICATOR_CONDITION#</EMISSIVE_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Hourmeter_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Hourmeter_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>100</GAUGE_MAX>
+			<ANIM_WRAP>True</ANIM_WRAP>
+			<ANIM_LAG>100</ANIM_LAG>
+			<DECIMAL_SHOWN>1</DECIMAL_SHOWN>
+			<Condition Valid="USE_HOBBS_TIME">
+				<True>
+					<GET_ELAPSED_TIME>#GET_ELAPSED_ENG_HOBBS_TIME#</GET_ELAPSED_TIME>
+				</True>
+				<False>
+					<GET_ELAPSED_TIME>#GET_ELAPSED_ENG_TIME#</GET_ELAPSED_TIME>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<DIGIT_PRECISION Process="Int">#DECIMAL_SHOWN# 1 +</DIGIT_PRECISION>
+		</Parameters>
+		<Loop>
+			<Setup>
+				<Param>DIGIT_INDEX</Param>
+				<Value>ANIM_NAME</Value>
+				<Parameters>
+					<LoadParameters ID="Hourmeter_Indicator_DIGIT_INDEX_TO_ANIM_NAME"/>
+					<RemoveSavedParameters ID="Hourmeter_Indicator_DIGIT_INDEX_TO_ANIM_NAME"/>
+				</Parameters>
+			</Setup>
+			<Do>
+				<Parameters Type="Override">
+					<DIGIT_INDEX Process="Float">10 #DIGIT_INDEX# #DIGIT_PRECISION# - pow</DIGIT_INDEX>
+				</Parameters>
+				<Parameters Type="Override">
+					<Condition>
+						<Test>
+							<Lower>
+								<Number>#DIGIT_INDEX#</Number>
+								<Number>1</Number>
+							</Lower>
+						</Test>
+						<True>
+							<TIME_TO_GAUGE_VALUE>#DIGIT_INDEX# / 10 % 10 *</TIME_TO_GAUGE_VALUE>
+						</True>
+						<False>
+							<TIME_TO_GAUGE_VALUE>#DIGIT_INDEX# / 10 % int 10 *</TIME_TO_GAUGE_VALUE>
+						</False>
+					</Condition>
+				</Parameters>
+				<UseTemplate Name="ASOBO_IT_Gauge_Template">
+					<GAUGE_VALUE>#GET_ELAPSED_TIME# #TIME_TO_GAUGE_VALUE#</GAUGE_VALUE>
+				</UseTemplate>
+			</Do>
+		</Loop>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Compass_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Compass_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>360</GAUGE_MAX>
+			<ANIM_WRAP>True</ANIM_WRAP>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_COMPASS#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Compass_Bank_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Compass_Bank_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>-50</GAUGE_MIN>
+			<GAUGE_MAX>50</GAUGE_MAX>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_COMPASS_BANK#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Compass_Pitch_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Compass_Pitch_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>-50</GAUGE_MIN>
+			<GAUGE_MAX>50</GAUGE_MAX>
+			<ANIM_LAG>100</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_COMPASS_PITCH#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Fuel_Pressure_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Fuel_Pressure_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>100</GAUGE_MAX>
+			<ANIM_LAG>0</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_PRESSURE#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Liquid_Dropping_Indicator_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Liquid_Dropping_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_MIN>0</GAUGE_MIN>
+			<GAUGE_MAX>100</GAUGE_MAX>
+			<ANIM_LAG>0</ANIM_LAG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_Gauge_Template">
+			<GAUGE_VALUE>#GET_LIQUID_DROPPING_TOTAL_TANK_VOLUME#</GAUGE_VALUE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

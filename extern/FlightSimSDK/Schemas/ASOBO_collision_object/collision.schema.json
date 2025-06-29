@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "collision",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFProperty.schema.json" } ],
+    "properties": {
+        "type": {
+            "description": "Specifies the collision type.",
+            "anyOf": [
+                {
+                    "enum": [ "box" ]
+                },
+                {
+                    "enum": [ "sphere" ]
+                },
+                {
+                    "enum": [ "cylinder" ]
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "translation": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Translation of the collision node"
+        },
+        "rotation": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Rotation of the collision node"
+        },
+        "params": {
+            "type": "object",
+            "oneOf": [                
+                { "type": "number", "$ref": "boxcollision.schema.json" },
+                { "type": "number", "$ref": "spherecollision.schema.json"},
+                { "type": "number", "$ref": "cylindercollision.schema.json" }
+              ],            
+            "description": "Parameters for collision type"
+        },        
+        "extensions": { },
+        "extras": { }
+    }
+}

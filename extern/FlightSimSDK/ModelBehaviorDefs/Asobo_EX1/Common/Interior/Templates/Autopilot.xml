@@ -1,0 +1,16 @@
+<ModelBehaviors>
+	<!-- ################################## AUTOPILOT ################################# -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\AUTOPILOT_Inputs.xml"/>
+	<Include RelativeFile="ParametersFn\\AUTOPILOT_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\AUTOPILOT_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_AUTOPILOT_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>AUTOPILOT</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

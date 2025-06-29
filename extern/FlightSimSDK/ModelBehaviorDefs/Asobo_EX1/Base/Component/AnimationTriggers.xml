@@ -1,0 +1,170 @@
+<ModelBehaviors>
+	<!-- ParametersFn Definitions -->
+	<ParametersFn Name="ASOBO_Anim_Event_Triggers_Base_Parameters">
+		<ReturnParameters>
+			<NAME>#ANIM_NAME#</NAME>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Anim_Event_Trigger_Defaults_Parameters">
+		<ReturnParameters>
+			<ANIM_EVENT_DIRECTION>Both</ANIM_EVENT_DIRECTION>
+			<ANIM_EVENT_NAME/>
+			<ANIM_EVENT_COUNT/>
+			<ANIM_EVENT_NORMALIZED_TIME/>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Anim_Event_Trigger_Base_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Anim_Event_Trigger_Defaults_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<DIRECTION>#ANIM_EVENT_DIRECTION#</DIRECTION>
+			<EVENT_NAME>#ANIM_EVENT_NAME#</EVENT_NAME>
+			<Condition NotEmpty="ANIM_EVENT_COUNT">
+				<COUNT>#ANIM_EVENT_COUNT#</COUNT>
+			</Condition>
+			<Condition NotEmpty="ANIM_EVENT_NORMALIZED_TIME">
+				<NORMALIZED_TIME>#ANIM_EVENT_NORMALIZED_TIME#</NORMALIZED_TIME>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Add/Save triggers -->
+	<ParametersFn Name="ASOBO_Save_Anim_Trigger_Helper">
+		<Parameters Type="Default">
+			<SAVE_ANIM_TRIGGER_TO>Temp_Anim_Trigger</SAVE_ANIM_TRIGGER_TO>
+			<UseParametersFn Name="ASOBO_Anim_Event_Trigger_Defaults_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="#SAVE_ANIM_TRIGGER_TO#" Append="Default">
+				<Condition Check="APPEND_WITH_SAVED_ANIM_TRIGGER">
+					<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+						<SAVED_PARAMETERS>APPEND_WITH_SAVED_ANIM_TRIGGER</SAVED_PARAMETERS>
+					</UseParametersFn>	
+				</Condition>
+				<ANIM_EVENT_TYPE>#ANIM_EVENT_TYPE#</ANIM_EVENT_TYPE>
+				<ANIM_EVENT_DIRECTION>#ANIM_EVENT_DIRECTION#</ANIM_EVENT_DIRECTION>
+				<ANIM_EVENT_NAME>#ANIM_EVENT_NAME#</ANIM_EVENT_NAME>
+				<ANIM_EVENT_COUNT>#ANIM_EVENT_COUNT#</ANIM_EVENT_COUNT>
+				<ANIM_EVENT_NORMALIZED_TIME>#ANIM_EVENT_NORMALIZED_TIME#</ANIM_EVENT_NORMALIZED_TIME>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Add_Anim_Trigger_Helper">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Next_Animation_Sparams_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<SAVE_ELEMENT_PREFIX>#SPARAMS_ANIMATION#_Anim_Trigger</SAVE_ELEMENT_PREFIX>
+			<SAVE_INCREMENT_TO>#SPARAMS_ANIMATION#</SAVE_INCREMENT_TO>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Incremental_Save_Helper">
+				<ELEMENT_TYPE_NAME>Anim_Trigger</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+		<Parameters Type="Default">
+			<WWISE_EVENT_DIRECTION>Both</WWISE_EVENT_DIRECTION>
+			<WWISE_EVENT_NAME/>
+			<WWISE_EVENT_COUNT/>
+			<WWISE_EVENT_NORMALIZED_TIME/>
+			<WWISE_EVENT_ACTION>Play</WWISE_EVENT_ACTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Add_Anim_Trigger_Helper">
+				<ANIM_EVENT_TYPE>SOUND</ANIM_EVENT_TYPE>
+				<ANIM_EVENT_DIRECTION>#WWISE_EVENT_DIRECTION#</ANIM_EVENT_DIRECTION>
+				<ANIM_EVENT_NAME>#WWISE_EVENT_NAME#</ANIM_EVENT_NAME>
+				<ANIM_EVENT_COUNT>#WWISE_EVENT_COUNT#</ANIM_EVENT_COUNT>
+				<ANIM_EVENT_NORMALIZED_TIME>#WWISE_EVENT_NORMALIZED_TIME#</ANIM_EVENT_NORMALIZED_TIME>
+				<SaveParameters ID="Append_With_Anim_Trigger" Append="Default">
+					<ACTION>#WWISE_EVENT_ACTION#</ACTION>
+				</SaveParameters>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Add_Anim_Effect_Helper">
+		<Parameters Type="Default">
+			<ANIM_EFFECT_DIRECTION>Both</ANIM_EFFECT_DIRECTION>
+			<ANIM_EFFECT_NAME/>
+			<ANIM_EFFECT_COUNT/>
+			<ANIM_EFFECT_NORMALIZED_TIME/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Add_Anim_Trigger_Helper">
+				<ANIM_EVENT_TYPE>EFFECT</ANIM_EVENT_TYPE>
+				<ANIM_EVENT_DIRECTION>#ANIM_EFFECT_DIRECTION#</ANIM_EVENT_DIRECTION>
+				<ANIM_EVENT_NAME>#ANIM_EFFECT_NAME#</ANIM_EVENT_NAME>
+				<ANIM_EVENT_COUNT>#ANIM_EFFECT_COUNT#</ANIM_EVENT_COUNT>
+				<ANIM_EVENT_NORMALIZED_TIME>#ANIM_EFFECT_NORMALIZED_TIME#</ANIM_EVENT_NORMALIZED_TIME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- Template Definitions -->
+	<Template Name="ASOBO_Anim_Event_Triggers_Template">
+		<Parameters Type="Default">
+			<Condition Check="ANIMATION_ID">
+				<True>
+					<GET_ANIM_TRIGGER_PREFIX>Saved_Animation_#ANIMATION_ID#_Anim_Trigger</GET_ANIM_TRIGGER_PREFIX>
+				</True>
+				<False>
+					<GET_ANIM_TRIGGER_PREFIX>Saved_Animation_Anim_Trigger</GET_ANIM_TRIGGER_PREFIX>
+				</False>
+			</Condition>
+			<UseParametersFn Name="ASOBO_Anim_Event_Triggers_Base_Parameters"/>
+		</Parameters>
+		<Loop>
+			<Setup>
+				<Param>ANIM_TRIGGER_ID</Param>
+				<From>0</From>
+				<Inc>1</Inc>
+				<To>#ANIM_TRIGGER_LAST_ID_USED#</To>
+			</Setup>
+			<Do>
+				<Parameters Type="Override">
+					<LoadParameters ID="#GET_ANIM_TRIGGER_PREFIX#_#ANIM_TRIGGER_ID#"/>
+					<RemoveSavedParameters ID="#GET_ANIM_TRIGGER_PREFIX#_#ANIM_TRIGGER_ID#"/>
+				</Parameters>
+				<Parameters Type="Override">
+					<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+						<PFN_PARAM_DEFAULT>ASOBO_Anim_Event_Trigger_Base_Parameters</PFN_PARAM_DEFAULT>
+						<PFN_PARAM_NAME>ANIM_EVENT_TRIGGER_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+					</UseParametersFn>
+				</Parameters>
+				<Switch Param="ANIM_EVENT_TYPE">
+					<Case Value="EFFECT">
+						<AnimationTriggers Animation="#NAME#">
+							<EventTrigger NormalizedTime="#NORMALIZED_TIME#" Direction="#DIRECTION#">
+								<EffectEvent Name="#EVENT_NAME#"/>
+							</EventTrigger>
+						</AnimationTriggers>
+					</Case>
+					<Case Value="SOUND">
+						<Condition NotEmpty="ANIM_EVENT_COUNT">
+							<True>
+								<AnimationTriggers Animation="#NAME#">
+									<EventTrigger Count="#COUNT#" Direction="#DIRECTION#">
+										<SoundEvent WwiseEvent="#EVENT_NAME#" Action="#ACTION#"/>
+									</EventTrigger>
+								</AnimationTriggers>
+							</True>
+							<False>
+								<AnimationTriggers Animation="#NAME#">
+									<EventTrigger NormalizedTime="#NORMALIZED_TIME#" Direction="#DIRECTION#">
+										<SoundEvent WwiseEvent="#EVENT_NAME#" Action="#ACTION#"/>
+									</EventTrigger>
+								</AnimationTriggers>
+							</False>
+						</Condition>
+					</Case>
+				</Switch>
+			</Do>
+		</Loop>
+	</Template>
+	<Template Name="ASOBO_Anim_Trigger_Template">
+		<Condition Check="ANIM_TRIGGER_LAST_ID_USED">
+			<UseTemplate Name="ASOBO_Anim_Event_Triggers_Template"/>
+		</Condition>
+	</Template>
+</ModelBehaviors>

@@ -1,0 +1,162 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="ParametersFn\\Common_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Toggle_Interaction_Template
+		@Brief Create a toggle interaction
+	-->
+    <Template Name="ASOBO_CT_Toggle_Interaction_Template">
+        <Parameters Type="Default">
+            <Condition>
+                <Test>
+                    <Or>
+                        <Or>
+                            <Arg NotEmpty="SET_CONDITION"/>
+                            <Arg NotEmpty="RESET_CONDITION"/>
+                        </Or>
+                        <Arg NotEmpty="TOGGLE_CONDITION"/>
+                    </Or>
+                </Test>
+                <True>
+                    <UseParametersFn Name="ASOBO_Conditional_Var_Toggle_Parameters" />
+                </True>
+                <False>
+                    <UseParametersFn Name="ASOBO_Var_Toggle_Parameters" />
+                </False>
+            </Condition>
+            <Condition NotEmpty="IN_BASE_NAME">
+                <ANIM_NAME>#IN_BASE_NAME#</ANIM_NAME>
+            </Condition>
+        </Parameters>
+        <Parameters Type="Override">
+            <Condition Valid="LERP_MANUALLY">
+                <UseParametersFn Name="ASOBO_Progressive_Anim_Parameters" />
+            </Condition>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Simple_Interaction_Template">
+            <ON_EVENT>#TOGGLE_VAR#</ON_EVENT>
+        </UseTemplate>
+        <UseTemplate Name="ASOBO_GT_Anim_Template">
+            <ANIM_CODE>#GET_VAR_IN_PERCENT#</ANIM_CODE>
+        </UseTemplate>
+    </Template>
+    <!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Observe_Interaction_Template
+		@Brief Create a look at interaction
+	-->
+    <Template Name="ASOBO_CT_Observe_Interaction_Template">
+        <Parameters Type="Default">
+            <UPDATE_VAR_NAME>XMLVAR_Observing_Part</UPDATE_VAR_NAME>
+            <UPDATE_VAR_SCOPE>O</UPDATE_VAR_SCOPE>
+        </Parameters>
+        <Parameters Type="Default">
+            <UseParametersFn Name="ASOBO_WearAndTear_Parameters"/>
+            <DISABLE_ANIMATION>True</DISABLE_ANIMATION>
+            <ON_ENTER>1 (&gt;#UPDATE_VAR_SCOPE#:#UPDATE_VAR_NAME#)</ON_ENTER>
+            <ON_EXIT>0 (&gt;#UPDATE_VAR_SCOPE#:#UPDATE_VAR_NAME#)</ON_EXIT>
+            <TIME_TO_COMPLETE>2</TIME_TO_COMPLETE>
+            <UPDATE_FREQUENCY>10</UPDATE_FREQUENCY>
+            <IE_TOOLTIP_ICON>Watch</IE_TOOLTIP_ICON>
+        </Parameters>
+        <Parameters Type="Override">
+            <UPDATE_INCREMENT Process="Float">1 #TIME_TO_COMPLETE# / #UPDATE_FREQUENCY# /</UPDATE_INCREMENT>
+        </Parameters>
+        <Parameters Type="Default">
+            <UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+                <EV_PARAM>ON_ENTER</EV_PARAM>
+            </UseParametersFn>
+            <UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+                <EV_PARAM>ON_EXIT</EV_PARAM>
+            </UseParametersFn>
+            <Condition Valid="NO_PROGRESS_UPDATE">
+                <False>
+                    <UseParametersFn Name="ASOBO_Add_Update_Helper">
+                        <UPDATE_CODE>
+                            #GET_ELEMENTS_STATE# sp0
+                            (#UPDATE_VAR_SCOPE#:#UPDATE_VAR_NAME#) if{
+                                l0 1 &lt; if{
+                                    l0 #UPDATE_INCREMENT# + 1 min #SET_ELEMENTS_STATE#
+                                }
+                            } els{
+                                l0 0 &gt;
+                                l0 1 &lt; and if{
+                                    l0 #UPDATE_INCREMENT# - 0 max #SET_ELEMENTS_STATE#
+                                }
+                            }
+                        </UPDATE_CODE>
+                    </UseParametersFn>
+                </False>
+            </Condition>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Simple_Interaction_Template" />
+    </Template>
+    <!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Interactive_Point_Toggle_Template
+		@Brief Create an interaction to toggle an interactive point on click
+	-->
+    <Template Name="ASOBO_CT_Interactive_Point_Toggle_Template">
+        <Parameters Type="Override">
+            <UseParametersFn Name="ASOBO_Interactive_Point_Parameters" />
+        </Parameters>
+        <Parameters Type="Default">
+            <TOGGLE_INTERACTIVE_POINT>#GET_INTERACTIVE_POINT_GOAL# ! 100 * #SET_INTERACTIVE_POINT_GOAL#</TOGGLE_INTERACTIVE_POINT>
+            <INTERACTIVE_POINT_ANIM_CODE>#GET_INTERACTIVE_POINT_OPEN#</INTERACTIVE_POINT_ANIM_CODE>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Simple_Interaction_Template">
+            <ON_EVENT>#TOGGLE_INTERACTIVE_POINT#</ON_EVENT>
+        </UseTemplate>
+        <UseTemplate Name="ASOBO_Anim_Template">
+            <ANIM_CODE>#INTERACTIVE_POINT_ANIM_CODE#</ANIM_CODE>
+        </UseTemplate>
+    </Template>
+    <!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Checkup_Interaction_Template
+		@Brief Create a wear and tear checkup interaction
+	-->
+    <Template Name="ASOBO_CT_Checkup_Interaction_Template">
+        <Parameters Type="Default">
+            <UseParametersFn Name="ASOBO_WearAndTear_Parameters"/>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Simple_Interaction_Template">
+            <ON_EVENT>1 #SET_ELEMENTS_STATE#</ON_EVENT>
+        </UseTemplate>
+    </Template>
+    <!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Aileron_Interaction_Template
+		@Brief Create an aileron checkup interaction
+	-->
+    <Template Name="ASOBO_CT_Aileron_Interaction_Template">
+        <Parameters Type="Default">
+            <DISABLE_ANIMATION>True</DISABLE_ANIMATION>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Lever_Template">
+            <GET_SETTINGS_CONFIG>ASOBO_Aileron_Interaction_Settings_Config</GET_SETTINGS_CONFIG>
+        </UseTemplate>
+    </Template>
+    <!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Elevator_Interaction_Template
+		@Brief Create an elevator checkup interaction
+	-->
+    <Template Name="ASOBO_CT_Elevator_Interaction_Template">
+        <Parameters Type="Default">
+            <DISABLE_ANIMATION>True</DISABLE_ANIMATION>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Lever_Template">
+            <GET_SETTINGS_CONFIG>ASOBO_Elevator_Interaction_Settings_Config</GET_SETTINGS_CONFIG>
+        </UseTemplate>
+    </Template>
+    <!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Rudder_Interaction_Template
+		@Brief Create a rudder checkup interaction
+	-->
+    <Template Name="ASOBO_CT_Rudder_Interaction_Template">
+        <Parameters Type="Default">
+            <DISABLE_ANIMATION>True</DISABLE_ANIMATION>
+        </Parameters>
+        <UseTemplate Name="ASOBO_IT_Lever_Template">
+            <GET_SETTINGS_CONFIG>ASOBO_Rudder_Interaction_Settings_Config</GET_SETTINGS_CONFIG>
+        </UseTemplate>
+    </Template>
+    <!-- ############################################################################## -->
+</ModelBehaviors>

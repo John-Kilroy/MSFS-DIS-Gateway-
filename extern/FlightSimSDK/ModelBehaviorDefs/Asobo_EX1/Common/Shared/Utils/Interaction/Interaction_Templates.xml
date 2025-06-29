@@ -1,0 +1,215 @@
+<ModelBehaviors>
+    <!-- ################################# TEMPLATES ################################## -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Interaction_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<!-- Use ASOBO_Configure_Global_Parameters to apply the default configuration -->
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Interaction_Template
+		@Brief Base template for interaction creation
+		@Param GET_CONFIG_PARAMETERS_PFN Function to use to get the parameters for this interaction
+	-->
+	<Template Name="ASOBO_CT_Interaction_Template">
+		<TemplateAlias>ASOBO_IT_Interaction_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Interaction_Config">
+				<LoadParameters ID="Global_Default_Interaction_Config"/>
+			</Condition>
+			<Condition CheckSavedParameters="Global_Default_Tooltips_Config">
+				<LoadParameters ID="Global_Default_Tooltips_Config"/>
+			</Condition>
+			<Condition CheckSavedParameters="Global_Default_Actions_Config">
+				<LoadParameters ID="Global_Default_Actions_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_CONFIG_PARAMETERS_PFN">
+				<UseParametersFn Name="#GET_CONFIG_PARAMETERS_PFN#"/>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Simple_Interaction_Template
+		@Brief Simple interaction (interaction without any animation, not a lot of value are preset)
+	-->
+	<Template Name="ASOBO_CT_Simple_Interaction_Template">
+		<TemplateAlias>ASOBO_IT_Simple_Interaction_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Simple_Interaction_Config">
+				<LoadParameters ID="Global_Default_Simple_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Simple</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Button_Template
+		@Brief Create a button interaction
+		@Param BUTTON_TYPE Push or Pull
+	-->
+	<Template Name="ASOBO_CT_Button_Template">
+		<TemplateAlias>ASOBO_IT_Button_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Button_Interaction_Config">
+				<LoadParameters ID="Global_Default_Button_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Button</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Toggleable_Button_Template
+		@Brief Create a button interaction
+		@Param BUTTON_TYPE Push or Pull
+	-->
+	<Template Name="ASOBO_CT_Toggleable_Button_Template">
+		<TemplateAlias>ASOBO_IT_Toggleable_Button_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Button_Interaction_Config">
+				<LoadParameters ID="Global_Default_Button_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Switch</INTERACTION_TYPE>
+			<SOUND_EVENT_INTERACTION_TYPE>Button</SOUND_EVENT_INTERACTION_TYPE>
+			<ANIM_LAG>1000</ANIM_LAG>
+			<Switch Param="BUTTON_TYPE">
+				<Case Value="Push">
+					<IE_TOOLTIP_ICON>PUSH</IE_TOOLTIP_ICON>
+				</Case>
+				<Case Value="Pull">
+					<IE_TOOLTIP_ICON>PULL</IE_TOOLTIP_ICON>
+				</Case>
+			</Switch>
+			<IE_TOOLTIP_ACTION Process="String">'#BUTTON_TYPE#' uc</IE_TOOLTIP_ACTION>
+			<IE_TOOLTIP_ELEMENT>BUTTON</IE_TOOLTIP_ELEMENT>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Switch_Template
+		@Brief Create a switch interaction
+	-->
+	<Template Name="ASOBO_CT_Switch_Template">
+		<TemplateAlias>ASOBO_IT_Switch_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Switch_Interaction_Config">
+				<LoadParameters ID="Global_Default_Switch_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Switch</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Lever_Template
+		@Brief Create a lever interaction
+	-->
+	<Template Name="ASOBO_CT_Lever_Template">
+		<TemplateAlias>ASOBO_IT_Lever_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Lever_Interaction_Config">
+				<LoadParameters ID="Global_Default_Lever_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Lever</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Knob_Template
+		@Brief Create a knob interaction with discrete states
+	-->
+	<Template Name="ASOBO_CT_Knob_Template">
+		<TemplateAlias>ASOBO_IT_Knob_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Knob_Interaction_Config">
+				<LoadParameters ID="Global_Default_Knob_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Knob</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Knob_Finite_Template
+		@Brief Create a knob interaction with bounds for the animation
+	-->
+	<Template Name="ASOBO_CT_Knob_Finite_Template">
+		<TemplateAlias>ASOBO_IT_Knob_Finite_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Knob_Finite_Interaction_Config">
+				<LoadParameters ID="Global_Default_Knob_Finite_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Knob</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Knob_Infinite_Template
+		@Brief Create a knob interaction with without any bounds for the animation (rotate indefinitely)
+	-->
+	<Template Name="ASOBO_CT_Knob_Infinite_Template">
+		<TemplateAlias>ASOBO_IT_Knob_Infinite_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Knob_Infinite_Interaction_Config">
+				<LoadParameters ID="Global_Default_Knob_Infinite_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Knob</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Wheel_Template
+		@Brief Create a wheel interaction
+		@Param WHEEL_INTERACTION_TEMPLATE Template used to create the interaction, usually pre-set in Global_Default_Wheel_Interaction_Config
+	-->
+	<Template Name="ASOBO_CT_Wheel_Template">
+		<TemplateAlias>ASOBO_IT_Wheel_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Wheel_Interaction_Config">
+				<LoadParameters ID="Global_Default_Wheel_Interaction_Config"/>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="#WHEEL_INTERACTION_TEMPLATE#"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Joystick_Template
+		@Brief Create a joystick interaction
+	-->
+	<Template Name="ASOBO_CT_Joystick_Template">
+		<TemplateAlias>ASOBO_IT_Joystick_Template</TemplateAlias>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Joystick_Interaction_Config">
+				<LoadParameters ID="Global_Default_Joystick_Interaction_Config"/>
+			</Condition>
+			<GET_COMMON_PARAMETERS_FN>ASOBO_Get_Joystick_Common_Parameters_Helper</GET_COMMON_PARAMETERS_FN>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper"/>
+			<INTERACTION_TYPE>Joystick</INTERACTION_TYPE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_CT_Interaction_Template"/>
+	</Template>
+    <!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_fake_terrain glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "enabled": {
+            "type": "boolean",
+            "default": true
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

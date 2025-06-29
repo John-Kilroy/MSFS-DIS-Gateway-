@@ -1,0 +1,23 @@
+<ModelBehaviors>
+	<!-- ################################## HYDRAULIC ################################# -->
+	<!-- ############################################################################## -->
+	<!-- ONLY USEFUL FOR ELECTRICAL HYDRAULIC PUMPS -->
+	<ParametersFn Name="ASOBO_Hydraulic_Pump_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Hydraulic_Pump_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_PUMP_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_ON_CHECK>#GET_PUMP_SWITCH#</POS_ON_CHECK>
+			<POS_OFF_CHECK>#GET_PUMP_SWITCH# !</POS_OFF_CHECK>
+			<!-- Set position -->
+			<POS_ON_CODE>1 #SET_PUMP#</POS_ON_CODE>
+			<POS_OFF_CODE>0 #SET_PUMP#</POS_OFF_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

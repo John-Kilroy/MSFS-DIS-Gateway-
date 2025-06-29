@@ -1,0 +1,76 @@
+<ModelBehaviors>
+	<!-- ################################# BALLOON #################################### -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="Asobo_Burner_Valve_Settings_Config">
+		<Parameters Type="Default">
+			<VALVE_ID>1</VALVE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Burner_Valve_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>SetOpen</ALIAS_ID>
+				<PARAM_0>1 (&gt;O:_Interaction_Is_Locked) 1</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>SetClose</ALIAS_ID>
+				<PARAM_0>0 (&gt;O:_Interaction_Is_Locked) 0</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_VALVE#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CLOSED_CHECK>#GET_VALVE# 0 ==</POS_CLOSED_CHECK>
+			<POS_OPEN_CHECK>#GET_VALVE# 0 &gt;</POS_OPEN_CHECK>
+			<!-- Set position -->
+			<POS_CLOSED_CODE>#VALVE_CLOSE_CODE#</POS_CLOSED_CODE>
+			<POS_OPEN_CODE>#VALVE_OPEN_CODE#</POS_OPEN_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="Asobo_Burner_Igniter_Settings_Config">
+		<Parameters Type="Default">
+			<BURNER_ID>1</BURNER_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Burner_Igniter_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<ON_EVENT>1 #SET_PILOT_LIGHT#</ON_EVENT>
+			<ON_RELEASE>1 #SET_PILOT_LIGHT#</ON_RELEASE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="Asobo_Parachute_Valve_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Parachute_Valve_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#PARACHUTE_VALVE_SIMVAR#</SIMVAR>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>Pull</ALIAS_ID>
+				<PARAM_0>1 (&gt;O:_Interaction_Is_Locked) @16k</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>Release</ALIAS_ID>
+				<PARAM_0>0 (&gt;O:_Interaction_Is_Locked) 0</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CLOSED_CHECK>#GET_PARACHUTE_VALVE# 0 ==</POS_CLOSED_CHECK>
+			<POS_OPEN_CHECK>#GET_PARACHUTE_VALVE# 0 &gt;</POS_OPEN_CHECK>
+			<!-- Set position -->
+			<POS_CLOSED_CODE>0 #SET_PARACHUTE_VALVE#</POS_CLOSED_CODE>
+			<POS_OPEN_CODE>@16K #SET_PARACHUTE_VALVE#</POS_OPEN_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,679 @@
+<ModelBehaviors>
+	<!-- ################################# INTERACTION ################################ -->
+	<!-- ############################################################################## -->
+	<!-- IN: AXIS (X, Y or TRAJECTORY) -->
+	<!-- VALUE_TYPE: PERCENT, S16, U16K -->
+	<!-- OUT: Get ANIM_CODE & CALLBACK_CODE for an XStates interaction -->
+	<ParametersFn Name="ASOBO_Get_Drag_Axis_Parameters">
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Lever">
+					<AXIS>TRAJECTORY</AXIS>
+				</Case>
+				<Case Value="Knob">
+					<AXIS>X</AXIS>
+				</Case>
+				<Default>
+					<AXIS>Y</AXIS>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="AXIS">
+				<Case Value="TRAJECTORY">
+					<INTERACTION_AXIS>Y</INTERACTION_AXIS>
+				</Case>
+				<Default>
+					<INTERACTION_AXIS>#AXIS#</INTERACTION_AXIS>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_LAST_DRAG_VALUE>O:_Interaction_Last_Drag_Value</VAR_LAST_DRAG_VALUE>
+			<VAR_IS_INTERACTING>O:_Interaction_Is_Locked</VAR_IS_INTERACTING>
+			<FORWARD_INC_DEC_TO_IE>True</FORWARD_INC_DEC_TO_IE>
+			<CALLBACK_DRAG_SCALAR>0.01</CALLBACK_DRAG_SCALAR>
+			<Switch Param="INTERACTION_TYPE_VARIANT">
+				<Case Value="Infinite">
+					<ANIM_LAG>360</ANIM_LAG>
+				</Case>
+				<Case Value="Wheel">
+					<ANIM_LAG>0</ANIM_LAG>
+				</Case>
+				<Default>
+					<ANIM_LAG>100</ANIM_LAG>
+				</Default>
+			</Switch>
+			<Condition NotEmpty="INVERT_DRAG_SCALAR">
+				<MR_INVERT_INC_DEC_EVENTS>#INVERT_DRAG_SCALAR#</MR_INVERT_INC_DEC_EVENTS>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<MR_TO_IE_INC_VALUE>1</MR_TO_IE_INC_VALUE>
+				<MR_TO_IE_DEC_VALUE>1</MR_TO_IE_DEC_VALUE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<ON_INCREASE>#MR_TO_IE_INC_VALUE# (&gt;B:#IE_PRESET_ID#_Inc)</ON_INCREASE>
+				<ON_DECREASE>#MR_TO_IE_DEC_VALUE# (&gt;B:#IE_PRESET_ID#_Dec)</ON_DECREASE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Process_Inc_Dec_Invertion"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_INCREASE</EV_PARAM>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_DECREASE</EV_PARAM>
+			</UseParametersFn>
+			<Switch Param="AXIS">
+				<Case Value="TRAJECTORY">
+					<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Trajectory_Parameters"/>
+				</Case>
+				<Default>
+					<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Axis_Parameters"/>
+				</Default>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- AXIS -->
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Axis_Parameters">
+		<Parameters Type="Default">
+			<NB_INCREMENT_FOR_FULL_RANGE>1000</NB_INCREMENT_FOR_FULL_RANGE>
+			<PFN_DELTA_THRESHOLD_VALUES>ASOBO_Drag_Threshold_Small</PFN_DELTA_THRESHOLD_VALUES>
+			<AUTO_CREATE_SOUND_EVENTS>True</AUTO_CREATE_SOUND_EVENTS>
+			<SOUND_EVENT_TYPE>1</SOUND_EVENT_TYPE>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="VALUE_TYPE">
+				<Case Value="PERCENT">
+					<NB_INCREMENT_FOR_FULL_RANGE Process="Float">#NB_INCREMENT_FOR_FULL_RANGE# 100 min</NB_INCREMENT_FOR_FULL_RANGE>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+			<Parameters Type="Default">
+				<Switch Param="INTERACTION_TYPE">
+					<Case Value="Knob">
+						<SOUND_EVENT_COUNT>36</SOUND_EVENT_COUNT>
+					</Case>
+				</Switch>
+				<Condition NotEmpty="SOUND_EVENT_TYPE_ID">
+					<True>
+						<SOUND_EVENT_NAME>TYPE_#SOUND_EVENT_TYPE_ID#</SOUND_EVENT_NAME>	
+					</True>
+					<False>
+						<SOUND_EVENT_NAME>#IE_PRESET_ID#</SOUND_EVENT_NAME>						
+					</False>
+				</Condition>
+				<SOUND_EVENT_INTERACTION_TYPE>#INTERACTION_TYPE#</SOUND_EVENT_INTERACTION_TYPE>
+			</Parameters>
+			<Condition NotEmpty="SOUND_EVENT_SUFFIX">
+				<Parameters Type="Override">
+					<SOUND_EVENT_NAME>#SOUND_EVENT_NAME#_#SOUND_EVENT_SUFFIX#</SOUND_EVENT_NAME>
+				</Parameters>
+			</Condition>
+			<Parameters Type="Default">
+				<FULL_SOUND_EVENT_NAME>#SOUND_EVENT_INTERACTION_TYPE#_#SOUND_EVENT_NAME#</FULL_SOUND_EVENT_NAME>
+			</Parameters>
+			<Condition NotEmpty="SOUND_EVENT_GROUP">
+				<Parameters Type="Override">
+					<FULL_SOUND_EVENT_NAME>#SOUND_EVENT_GROUP#_#FULL_SOUND_EVENT_NAME#</FULL_SOUND_EVENT_NAME>
+				</Parameters>
+			</Condition>
+		</Condition>
+		<Parameters Type="Default">
+			<UseParametersFn Name="#PFN_DELTA_THRESHOLD_VALUES#"/>
+			<AXIS_THRESHOLD_COUNT_VAR>O:_#AXIS#AxisThresholdCount</AXIS_THRESHOLD_COUNT_VAR>
+			<Condition NotEmpty="MR_INVERT_MOUSE_DRAG_INTERACTION">
+				<MR_INVERT_DRAG_POSITIVE_CONDITION>#MR_INVERT_MOUSE_DRAG_INTERACTION#</MR_INVERT_DRAG_POSITIVE_CONDITION>
+			</Condition>
+			<Switch Param="VALUE_TYPE">
+				<Case Value="PERCENT">
+					<INCREMENT_PER_THRESHOLD Process="Float">1 #NB_INCREMENT_FOR_FULL_RANGE# /</INCREMENT_PER_THRESHOLD>
+					<GET_IE_VALUE_AS_PERCENT_OVER_100>(B:#IE_PRESET_ID#, percent over 100)</GET_IE_VALUE_AS_PERCENT_OVER_100>
+				</Case>
+				<Case Value="U16K">
+					<INCREMENT_PER_THRESHOLD Process="Float">@16K #NB_INCREMENT_FOR_FULL_RANGE# / @16K /</INCREMENT_PER_THRESHOLD>
+					<GET_IE_VALUE_AS_PERCENT_OVER_100>(B:#IE_PRESET_ID#, percent over 100)</GET_IE_VALUE_AS_PERCENT_OVER_100>
+				</Case>
+				<Case Value="S16K">
+					<INCREMENT_PER_THRESHOLD Process="Float">@16K #NB_INCREMENT_FOR_FULL_RANGE# / @16K /</INCREMENT_PER_THRESHOLD>
+					<GET_IE_VALUE_AS_PERCENT_OVER_100>(B:#IE_PRESET_ID#, percent over 100)</GET_IE_VALUE_AS_PERCENT_OVER_100>
+				</Case>
+				<Case Value="M16K">
+					<INCREMENT_PER_THRESHOLD Process="Float">@16K #NB_INCREMENT_FOR_FULL_RANGE# / @16K /</INCREMENT_PER_THRESHOLD>
+					<GET_IE_VALUE_AS_PERCENT_OVER_100>(B:#IE_PRESET_ID#, percent over 100)</GET_IE_VALUE_AS_PERCENT_OVER_100>
+				</Case>
+				<Default>
+					<Condition Check="FULL_RANGE">
+						<True>
+							<INCREMENT_PER_THRESHOLD>#FULL_RANGE# #NB_INCREMENT_FOR_FULL_RANGE# / #FULL_RANGE# /</INCREMENT_PER_THRESHOLD>	
+							<GET_IE_VALUE_AS_PERCENT_OVER_100>(B:#IE_PRESET_ID#, percent over 100)</GET_IE_VALUE_AS_PERCENT_OVER_100>												
+						</True>
+						<False>
+							<INCREMENT_PER_THRESHOLD>1</INCREMENT_PER_THRESHOLD>
+						</False>
+					</Condition>
+				</Default>
+			</Switch>
+			<Switch Param="INTERACTION_TYPE_VARIANT">
+				<Case Value="Wheel">
+					<SaveParameters ID="Append_With_Animation" Append="Default">
+						<REPEAT_ANIM>3</REPEAT_ANIM>
+						<ANIM_WRAP>True</ANIM_WRAP>
+					</SaveParameters>
+				</Case>
+				<Case Value="Infinite">
+					<SaveParameters ID="Append_With_Animation" Append="Default">
+						<ANIM_WRAP>True</ANIM_WRAP>
+					</SaveParameters>
+				</Case>
+			</Switch>
+			<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+				<Switch Param="INTERACTION_TYPE">
+					<Case Value="Knob">
+						<UseParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+							<WWISE_EVENT_DIRECTION>Both</WWISE_EVENT_DIRECTION>
+							<WWISE_EVENT_NAME>#FULL_SOUND_EVENT_NAME#</WWISE_EVENT_NAME>
+							<WWISE_EVENT_COUNT>#SOUND_EVENT_COUNT#</WWISE_EVENT_COUNT>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+							<WWISE_EVENT_DIRECTION>Forward</WWISE_EVENT_DIRECTION>
+							<WWISE_EVENT_NAME>#FULL_SOUND_EVENT_NAME#_Forward</WWISE_EVENT_NAME>
+							<WWISE_EVENT_COUNT>#SOUND_EVENT_COUNT#</WWISE_EVENT_COUNT>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+							<WWISE_EVENT_DIRECTION>Backward</WWISE_EVENT_DIRECTION>
+							<WWISE_EVENT_NAME>#FULL_SOUND_EVENT_NAME#_Backward</WWISE_EVENT_NAME>
+							<WWISE_EVENT_COUNT>#SOUND_EVENT_COUNT#</WWISE_EVENT_COUNT>
+						</UseParametersFn>
+					</Case>
+				</Switch>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Delta_Value_Threshold_Helper"/>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Var_Helper">
+				<OUT_PARAM_NAME>VAR_BUFFER</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<SCALED_INCREMENT_PER_THRESHOLD>(#AXIS_THRESHOLD_COUNT_VAR#) #INCREMENT_PER_THRESHOLD# *</SCALED_INCREMENT_PER_THRESHOLD>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Check="GET_IE_VALUE_AS_PERCENT_OVER_100">
+				<True>
+					<MR_TO_IE_SET_VALUE>#DELTA_VALUE# #GET_IE_VALUE_AS_PERCENT_OVER_100# #SCALED_INCREMENT_PER_THRESHOLD# +</MR_TO_IE_SET_VALUE>
+					<MR_TO_IE_SET_CONDITION>s#VAR_BUFFER# l#VAR_BUFFER# #GET_IE_VALUE_AS_PERCENT_OVER_100# !=</MR_TO_IE_SET_CONDITION>
+				</True>
+				<False>
+					<MR_TO_IE_SET_VALUE>#DELTA_VALUE# #GET_IE_VALUE# #SCALED_INCREMENT_PER_THRESHOLD# +</MR_TO_IE_SET_VALUE>
+					<MR_TO_IE_SET_CONDITION>s#VAR_BUFFER# l#VAR_BUFFER# #GET_IE_VALUE# !=</MR_TO_IE_SET_CONDITION>
+				</False>
+			</Condition>
+			<ON_ENTER_LOCK>#DELTA_VALUE_INIT#</ON_ENTER_LOCK>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Axis_Base_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- TRAJECTORY -->
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Trajectory_Parameters">
+		<Parameters Type="Default">	
+			<MR_TO_IE_SET_VALUE>@MR_DragPercent</MR_TO_IE_SET_VALUE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Axis_Base_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Common base for Trajectory and Axis based drag interaction -->
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_Drag_Axis_Base_Parameters">
+		<Parameters Type="Override">
+			<Switch Param="VALUE_TYPE">
+				<Case Value="M16K">
+					<VAR_TOOLTIP_VALUE_UNIT>position 16k</VAR_TOOLTIP_VALUE_UNIT>
+				</Case>
+				<Default>				
+					<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+						<PFN_PARAM_DEFAULT>ASOBO_Format_Tooltip_Value_Units_Helper</PFN_PARAM_DEFAULT>
+						<PFN_PARAM_NAME>FORMAT_TOOLTIP_VALUE_UNITS_PARAMETERS_FN</PFN_PARAM_NAME>
+					</UseParametersFn>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_TYPE_VARIANT">
+				<Case Value="Infinite">
+					<ANIM_CODE>#GET_INFINITE_ANIM_VAR_VALUE_DEG#</ANIM_CODE>
+					<ANIM_LENGTH>360</ANIM_LENGTH>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="VALUE_TYPE">
+				<Case Value="M16K">
+					<VAR_TOOLTIP_VALUE>(B:#IE_PRESET_ID#, #VAR_TOOLTIP_VALUE_UNIT#) 1 #RATIO_POSITIVE# / * #MIN_VALUE# + s0 0 &gt; if{ l0 @16K / sp0 } els{ l0 #MIN_VALUE# abs / sp0 } l0 100 *</VAR_TOOLTIP_VALUE>	
+					<TOOLTIP_VALUE_FORMAT>'%.1f%%'</TOOLTIP_VALUE_FORMAT>
+				</Case>
+				<Default>
+					<VAR_TOOLTIP_VALUE>(B:#IE_PRESET_ID#, #VAR_TOOLTIP_VALUE_UNIT#)</VAR_TOOLTIP_VALUE>					
+				</Default>
+			</Switch>
+			<ON_ENTER_LOCK/>
+			<ON_EXIT_LOCK/>
+			<ON_INCREASE/>
+			<ON_DECREASE/>
+		</Parameters>
+		<Parameters Type="Override">
+			<ON_ENTER_LOCK>1 (&gt;#VAR_IS_INTERACTING#) #ON_ENTER_LOCK#</ON_ENTER_LOCK>
+			<ON_EXIT_LOCK>0 (&gt;#VAR_IS_INTERACTING#) #ON_EXIT_LOCK#</ON_EXIT_LOCK>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_TOOLTIP_VALUE>#VAR_TOOLTIP_VALUE# #TOOLTIP_VALUE_FORMAT# @sprintf</IE_TOOLTIP_VALUE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Process_Axis_Curve_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition NotEmpty="MR_TO_IE_SET_CONDITION">
+				<True>
+					<MR_SET_IE>#MR_TO_IE_SET_VALUE# #MR_TO_IE_SET_CONDITION# if{ (&gt;B:#IE_PRESET_ID#_Set) }</MR_SET_IE>
+				</True>
+				<False>
+					<MR_SET_IE>#MR_TO_IE_SET_VALUE# (&gt;B:#IE_PRESET_ID#_Set)</MR_SET_IE>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<ON_PRIMARY_DOWN>#MR_SET_IE#</ON_PRIMARY_DOWN>
+				<EV_PARAM>ON_PRIMARY_DOWN</EV_PARAM>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_ENTER_LOCK</EV_PARAM>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_EXIT_LOCK</EV_PARAM>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="Mouserect_Parameters" Append="Default">
+				<UseParametersFn Name="ASOBO_Add_Animation_Helper"/>
+				<CURSOR>Grab</CURSOR>
+				<CALLBACK_DRAG_SCALAR>#CALLBACK_DRAG_SCALAR#</CALLBACK_DRAG_SCALAR>
+				<CALLBACK_DRAG_AXIS>#INTERACTION_AXIS#</CALLBACK_DRAG_AXIS>
+				<AXIS>#AXIS#</AXIS>
+			</SaveParameters>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<Switch Param="INTERACTION_TYPE">
+					<Case Value="Lever">
+						<Switch Param="INTERACTION_TYPE_VARIANT">
+							<Case Value="Wheel">
+								<IE_TOOLTIP_ICON>ROTATE</IE_TOOLTIP_ICON>
+							</Case>
+							<Default>
+								<IE_TOOLTIP_ICON>MOVE_AXIS_#INTERACTION_AXIS#</IE_TOOLTIP_ICON>
+							</Default>
+						</Switch>
+					</Case>
+					<Case Value="Knob">
+						<IE_TOOLTIP_ICON>ROTATE</IE_TOOLTIP_ICON>
+					</Case>
+				</Switch>
+				<IE_TOOLTIP_INTERACTION>PRIMARY_DOWN+#INTERACTION_AXIS#_AXIS</IE_TOOLTIP_INTERACTION>
+				<IE_TOOLTIP_INTERACTION_LOCKABLE>#INTERACTION_AXIS#_AXIS</IE_TOOLTIP_INTERACTION_LOCKABLE>					
+			</SaveParameters>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<UseParametersFn Name="ASOBO_Format_Tooltip_Value_Helper"/>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: PLOAD_AXIS_CURVE (reinterpolate an anim value to a inputevent value) (trajectory drag only, not relevant for others) -->
+	<ParametersFn Name="ASOBO_Process_Axis_Curve_Parameters">
+		<Parameters Type="Default">
+			<PLOAD_AXIS_CURVE/>
+			<PLOAD_AXIS_CURVE_CONFIG/>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_JUMP_CODE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_JUMP_ANIM_CODE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<LAST_POINT_ANIM_PERCENT>100</LAST_POINT_ANIM_PERCENT>
+			<LAST_POINT_IE_PERCENT_SET>100</LAST_POINT_IE_PERCENT_SET>
+			<FIRST_POINT_ANIM_PERCENT>0</FIRST_POINT_ANIM_PERCENT>
+			<FIRST_POINT_IE_PERCENT_SET>0</FIRST_POINT_IE_PERCENT_SET>
+			<Condition NotEmpty="ANIM_CODE">
+				<False>
+					<CAN_OVERRIDE_ANIM_CODE>True</CAN_OVERRIDE_ANIM_CODE>
+					<Switch Param="VALUE_TYPE">
+						<Case Value="PERCENT">
+							<ANIM_CODE>(B:#IE_PRESET_ID#, percent)</ANIM_CODE>
+						</Case>
+						<Case Value="U16K">
+							<ANIM_CODE>(B:#IE_PRESET_ID#, position 16k) @U16KTo01 100 *</ANIM_CODE>
+						</Case>
+						<Case Value="S16K">
+							<ANIM_CODE>(B:#IE_PRESET_ID#, position 16k) @S16KTo01 100 *</ANIM_CODE>
+						</Case>
+						<Case Value="M16K">
+							<ANIM_CODE>(B:#IE_PRESET_ID#, position 16k) @U16KTo01 100 *</ANIM_CODE>
+						</Case>
+						<Case Value="NUMBER">
+							<Condition Check="GET_IE_VALUE_AS_PERCENT_OVER_100">
+								<ANIM_CODE>#GET_IE_VALUE_AS_PERCENT_OVER_100# 100 *</ANIM_CODE>
+							</Condition>
+						</Case>
+					</Switch>
+				</False>
+			</Condition>
+			<Condition CheckSavedParameters="#PLOAD_AXIS_CURVE#">
+				<UseParametersFn Name="ASOBO_Count_Token_Helper">
+					<TOKEN_PREFIX>POINT_</TOKEN_PREFIX>
+					<OUT_PARAM_NAME_COUNT>NUM_POINTS</OUT_PARAM_NAME_COUNT>
+					<LoadParameters ID="#PLOAD_AXIS_CURVE#"/>
+				</UseParametersFn>			
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="#PLOAD_AXIS_CURVE#">
+				<SaveParameters ID="#PLOAD_AXIS_CURVE#" Append="Override">
+					<POINT_#NUM_POINTS#>LAST_POINT</POINT_#NUM_POINTS#>
+				</SaveParameters>
+				<SaveParameters ID="#PLOAD_AXIS_CURVE_CONFIG#" Append="Override">
+					<LAST_POINT_ANIM_PERCENT>#LAST_POINT_ANIM_PERCENT#</LAST_POINT_ANIM_PERCENT>
+					<LAST_POINT_IE_PERCENT_SET>#LAST_POINT_IE_PERCENT_SET#</LAST_POINT_IE_PERCENT_SET>
+				</SaveParameters>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_AXIS_CURVE</SAVED_PARAMETERS>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_AXIS_CURVE_CONFIG</SAVED_PARAMETERS>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="POINT_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<PREV_ID Process="Int">#CUR_ID# 1 -</PREV_ID>
+					</Parameters>
+					<Parameters Type="Override">
+						<POINT_NAME Process="Param">POINT_#CUR_ID#</POINT_NAME>
+						<PREV_POINT_NAME Process="Param">POINT_#PREV_ID#</PREV_POINT_NAME>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition Check="#POINT_NAME#_GATE_DIRECTION">
+							<UseParametersFn Name="ASOBO_Increment_ID_Helper">
+								<OUT_PARAM_ID_NAME>GATE_ID</OUT_PARAM_ID_NAME>
+							</UseParametersFn>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Check="#POINT_NAME#_GATE_DIRECTION">
+							<SaveParameters ID="MR_Gates_Config" Append="Override">
+								<GATE_#GATE_ID#>#POINT_NAME#</GATE_#GATE_ID#>
+							</SaveParameters>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<POINT_ANIM_PERCENT Process="Param">#POINT_NAME#_ANIM_PERCENT</POINT_ANIM_PERCENT>
+						<POINT_IE_PERCENT_SET Process="Param">#POINT_NAME#_IE_PERCENT_SET</POINT_IE_PERCENT_SET>
+						<Condition NotEmpty="PREV_POINT_NAME">
+							<True>
+								<PREV_POINT_ANIM_PERCENT Process="Param">#PREV_POINT_NAME#_ANIM_PERCENT</PREV_POINT_ANIM_PERCENT>
+								<PREV_POINT_IE_PERCENT_SET Process="Param">#PREV_POINT_NAME#_IE_PERCENT_SET</PREV_POINT_IE_PERCENT_SET>								
+							</True>
+							<False>
+								<PREV_POINT_ANIM_PERCENT>#FIRST_POINT_ANIM_PERCENT#</PREV_POINT_ANIM_PERCENT>
+								<PREV_POINT_IE_PERCENT_SET>#FIRST_POINT_IE_PERCENT_SET#</PREV_POINT_IE_PERCENT_SET>
+							</False>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<ANIM_RANGE Process="Float">#POINT_ANIM_PERCENT# #PREV_POINT_ANIM_PERCENT# -</ANIM_RANGE>
+						<CODE_RANGE Process="Float">#POINT_IE_PERCENT_SET# #PREV_POINT_IE_PERCENT_SET# -</CODE_RANGE>
+					</Parameters>
+					<Parameters Type="Override">
+						<LERP_L0_ANIM_TO_IE_PERCENT>l0 #PREV_POINT_ANIM_PERCENT# - #ANIM_RANGE# / #CODE_RANGE# * #PREV_POINT_IE_PERCENT_SET# +</LERP_L0_ANIM_TO_IE_PERCENT>
+						<LERP_L0_IE_TO_ANIM_PERCENT>l0 #PREV_POINT_IE_PERCENT_SET# - #CODE_RANGE# / #ANIM_RANGE# * #PREV_POINT_ANIM_PERCENT# +</LERP_L0_IE_TO_ANIM_PERCENT>
+					</Parameters>
+					<Parameters Type="Override">
+						<THIS_POINT_ANIM_VAL_TO_IE_VALUE>#PREV_POINT_ANIM_PERCENT# #POINT_ANIM_PERCENT# l0 rng if{ #LERP_L0_ANIM_TO_IE_PERCENT# sp1 g#FL_JUMP_CODE# }</THIS_POINT_ANIM_VAL_TO_IE_VALUE>
+						<THIS_POINT_IE_VALUE_TO_ANIM_CODE>#PREV_POINT_IE_PERCENT_SET# #POINT_IE_PERCENT_SET# l0 rng if{ #LERP_L0_IE_TO_ANIM_PERCENT# sp1 g#FL_JUMP_ANIM_CODE# }</THIS_POINT_IE_VALUE_TO_ANIM_CODE>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition Check="ANIM_VAL_TO_IE_VALUE_T">
+							<True>
+								<ANIM_VAL_TO_IE_VALUE_T>#ANIM_VAL_TO_IE_VALUE_T# #THIS_POINT_ANIM_VAL_TO_IE_VALUE#</ANIM_VAL_TO_IE_VALUE_T>
+							</True>
+							<False>
+								<ANIM_VAL_TO_IE_VALUE_T>#THIS_POINT_ANIM_VAL_TO_IE_VALUE#</ANIM_VAL_TO_IE_VALUE_T>
+							</False>
+						</Condition>
+						<Condition Check="IE_VALUE_TO_ANIM_CODE_T">
+							<True>
+								<IE_VALUE_TO_ANIM_CODE_T>#IE_VALUE_TO_ANIM_CODE_T# #THIS_POINT_IE_VALUE_TO_ANIM_CODE#</IE_VALUE_TO_ANIM_CODE_T>
+							</True>
+							<False>
+								<IE_VALUE_TO_ANIM_CODE_T>#THIS_POINT_IE_VALUE_TO_ANIM_CODE#</IE_VALUE_TO_ANIM_CODE_T>
+							</False>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<Condition Check="ANIM_VAL_TO_IE_VALUE_T">
+						<ANIM_VAL_TO_IE_VALUE>#ANIM_VAL_TO_IE_VALUE_T#</ANIM_VAL_TO_IE_VALUE>
+					</Condition>
+					<Condition Check="IE_VALUE_TO_ANIM_CODE_T">
+						<IE_VALUE_TO_ANIM_CODE>#IE_VALUE_TO_ANIM_CODE_T#</IE_VALUE_TO_ANIM_CODE>
+					</Condition>
+				</Then>
+			</Loop>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="ANIM_VAL_TO_IE_VALUE"/>
+						<Arg Check="IE_VALUE_TO_ANIM_CODE"/>
+					</And>
+				</Test>
+				<True>
+					<MR_TO_IE_SET_VALUE_ADJUSTED>sp0 #ANIM_VAL_TO_IE_VALUE# :#FL_JUMP_CODE# l1 100 /</MR_TO_IE_SET_VALUE_ADJUSTED>
+					<MR_TO_IE_SET_VALUE>#MR_TO_IE_SET_VALUE# 100 *</MR_TO_IE_SET_VALUE>
+					<ANIM_CODE>#ANIM_CODE# sp0 #IE_VALUE_TO_ANIM_CODE# :#FL_JUMP_ANIM_CODE# l1</ANIM_CODE>
+				</True>
+				<False>
+					<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Process_Gates_Parameters_Helper">
+				<PLOAD_GATES_CONFIG>MR_Gates_Config</PLOAD_GATES_CONFIG>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="ANIM_VAL_TO_IE_VALUE"/>
+						<Arg Check="IE_VALUE_TO_ANIM_CODE"/>
+					</And>
+				</Test>
+				<True>
+					<ON_ENTER_LOCK>#ON_ENTER_LOCK#</ON_ENTER_LOCK>
+					<ON_EXIT_LOCK>#ON_EXIT_LOCK#</ON_EXIT_LOCK>
+					<MR_TO_IE_SET_VALUE>#MR_TO_IE_SET_VALUE# #MR_TO_IE_SET_VALUE_ADJUSTED#</MR_TO_IE_SET_VALUE>
+				</True>
+			</Condition>
+			<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Gates_Input_Handling
+		@Brief Use the gates listed in GET_GATES and configured in GET_GATES_CONFIG to handle gates based on #GET_POSITION_PCT_OVER_100#
+		@Param GET_GATES saved parameters containing the list of gates ex: <gate_0>idle</gate_0>
+		@Param GET_GATES_CONFIG saved parameters containing the configuration of the gates
+		@Param VAR_UID id to prefix the variables with to prevent names conflicts
+		@Param OUT_PARAM_NAME name of the parameter returned containing the code, defaults to GATE_CLAMP_VALUE_CHECK
+		@Param INC_HOLD_DURATION_TO_BYPASS_GATE hold time required before bypassing a gate when increasing position (Inc and Both)
+			can be overriden per position with #GET_NAME#_DEC_HOLD_DURATION
+		@Param DEC_HOLD_DURATION_TO_BYPASS_GATE hold time required before bypassing a gate when decreasing position (Dec and Both)
+			can be overriden per position with #GET_NAME#_INC_HOLD_DURATION
+	-->
+	<ParametersFn Name="ASOBO_Gates_Input_Handling">
+		<Parameters Type="Default">
+			<VAR_UID/>
+			<GET_GATES>Lever_Gates</GET_GATES>
+			<GET_GATES_CONFIG>Lever_Gates_Config</GET_GATES_CONFIG>
+			<OUT_PARAM_NAME>GATE_CLAMP_VALUE_CHECK</OUT_PARAM_NAME>
+			<OUT_PARAM_IS_AT_GATE>IS_AT_ANY_GATE_CHECK</OUT_PARAM_IS_AT_GATE>
+			<OUT_PARAM_SET_CAN_BYPASS_GATE>SET_CAN_BYPASS_GATE</OUT_PARAM_SET_CAN_BYPASS_GATE>
+			<INC_HOLD_DURATION_TO_BYPASS_GATE>0.0</INC_HOLD_DURATION_TO_BYPASS_GATE>
+			<DEC_HOLD_DURATION_TO_BYPASS_GATE>0.3</DEC_HOLD_DURATION_TO_BYPASS_GATE>
+			<IN_RANGE_OFFSET>0.0001</IN_RANGE_OFFSET>
+		</Parameters>
+		<Parameters Type="Override">
+			<LoadParameters ID="#GET_GATES_CONFIG#"/>
+			<Condition NotEmpty="VAR_UID">
+				<True>
+					<VAR_UID_PREFIX>_#VAR_UID#</VAR_UID_PREFIX>
+				</True>
+				<False>
+					<VAR_UID_PREFIX/>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Value>GATE_NAME</Value>
+					<Parameters>
+						<LoadParameters ID="#GET_GATES#"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<GATE_POSITION Process="Param">#GATE_NAME#_IE_PERCENT_SET</GATE_POSITION>
+						<GATE_DIRECTION Process="Param">#GATE_NAME#_GATE_DIRECTION</GATE_DIRECTION>
+						<GATE_DEC_HOLD_DURATION Process="Param">#GATE_NAME#_DEC_HOLD_DURATION</GATE_DEC_HOLD_DURATION>
+						<GATE_INC_HOLD_DURATION Process="Param">#GATE_NAME#_INC_HOLD_DURATION</GATE_INC_HOLD_DURATION>
+					</Parameters>
+					<Parameters Type="Override">
+						<GATE_POS_NORMALIZED Process="Float">#GATE_POSITION# 100 /</GATE_POS_NORMALIZED>
+						<Condition NotEmpty="GATE_INC_HOLD_DURATION">
+							<False>
+								<GATE_INC_HOLD_DURATION>#INC_HOLD_DURATION_TO_BYPASS_GATE#</GATE_INC_HOLD_DURATION>
+							</False>
+						</Condition>
+						<Condition NotEmpty="GATE_DEC_HOLD_DURATION">
+							<False>
+								<GATE_DEC_HOLD_DURATION>#DEC_HOLD_DURATION_TO_BYPASS_GATE#</GATE_DEC_HOLD_DURATION>
+							</False>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<GATE_POS_NORMALIZED_UP Process="Float">#GATE_POS_NORMALIZED# #IN_RANGE_OFFSET# +</GATE_POS_NORMALIZED_UP>
+						<GATE_POS_NORMALIZED_DN Process="Float">#GATE_POS_NORMALIZED# #IN_RANGE_OFFSET# -</GATE_POS_NORMALIZED_DN>
+					</Parameters>
+					<Parameters Type="Override">
+						<IS_AT_GATE_CHECK>#GATE_POS_NORMALIZED_DN# #GATE_POS_NORMALIZED_UP# l0 rng</IS_AT_GATE_CHECK>
+					</Parameters>
+					<Parameters Type="Override">
+						<Switch Param="GATE_DIRECTION">
+							<Case Value="Both">
+								<!-- check is we in/decremented past the gate or already are at the gate -->
+								<THIS_GATE_CHECK>
+									l1 #GATE_POS_NORMALIZED_UP# &gt; l0 #GATE_POS_NORMALIZED_DN# &lt;= and
+									l1 #GATE_POS_NORMALIZED_UP# &lt; l0 #GATE_POS_NORMALIZED_DN# &gt;= and or
+									#IS_AT_GATE_CHECK# or
+								</THIS_GATE_CHECK>
+								<THIS_GATE_VALUE_AND_HOLD_DURATION>
+									#GATE_POS_NORMALIZED# sp4 l1 l0 &gt; if{ #GATE_INC_HOLD_DURATION# sp6 } els{ #GATE_DEC_HOLD_DURATION# sp6 }
+								</THIS_GATE_VALUE_AND_HOLD_DURATION>
+							</Case>
+							<Case Value="Inc">
+								<THIS_GATE_CHECK>l1 #GATE_POS_NORMALIZED_UP# &gt; l0 #GATE_POS_NORMALIZED_DN# &lt;= and #IS_AT_GATE_CHECK# or</THIS_GATE_CHECK>
+								<THIS_GATE_VALUE_AND_HOLD_DURATION>#GATE_POS_NORMALIZED# sp4 #GATE_INC_HOLD_DURATION# sp6</THIS_GATE_VALUE_AND_HOLD_DURATION>
+							</Case>
+							<Case Value="Dec">
+								<THIS_GATE_CHECK>l1 #GATE_POS_NORMALIZED_UP# &lt; l0 #GATE_POS_NORMALIZED_DN# &gt;= and #IS_AT_GATE_CHECK# or</THIS_GATE_CHECK>
+								<THIS_GATE_VALUE_AND_HOLD_DURATION>#GATE_POS_NORMALIZED# sp4 #GATE_DEC_HOLD_DURATION# sp6</THIS_GATE_VALUE_AND_HOLD_DURATION>
+							</Case>
+						</Switch>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition NotEmpty="THIS_GATE_CHECK">
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_CHECK_GATE_BYPASSED</PARAM>
+								<OUT_PARAM_NAME>CHECK_GATE_BYPASSED</OUT_PARAM_NAME>
+								<THIS_CHECK_GATE_BYPASSED>#THIS_GATE_CHECK# if{ 1 sp3 #THIS_GATE_VALUE_AND_HOLD_DURATION# }</THIS_CHECK_GATE_BYPASSED>
+							</UseParametersFn>
+							<Condition NotEmpty="CHECK_IS_AT_ANY_GATE">
+								<True>
+									<CHECK_IS_AT_ANY_GATE>#CHECK_IS_AT_ANY_GATE# #IS_AT_GATE_CHECK# or</CHECK_IS_AT_ANY_GATE>
+								</True>
+								<False>
+									<CHECK_IS_AT_ANY_GATE>#IS_AT_GATE_CHECK#</CHECK_IS_AT_ANY_GATE>
+								</False>
+							</Condition>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<Condition NotEmpty="CHECK_GATE_BYPASSED">
+						<True>
+							<#OUT_PARAM_NAME#>
+								sp1 '#INPUT_NAME#' 'pressed_or_down'_n (F:InputAction) if{
+									#GET_POSITION_PCT_OVER_100# sp0
+									#CHECK_GATE_BYPASSED#
+									l3 if{
+										'#INPUT_NAME#' 'pressed_or_down_time'_n (F:InputAction) sp5
+										(O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate) ! if{
+											l5 (O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time) &lt; if{
+												(* we release the button and started pressing again *)
+												1 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate)
+												0 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time)
+											} els{ 
+												l5 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time) l4 sp1
+											}
+										} 
+										(O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate) if{
+											l5 l6 &lt; if{ l4 sp1 } els{ 0 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate) }
+										}
+									} els{ 0 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time) }
+								} l1
+							</#OUT_PARAM_NAME#>
+							<#OUT_PARAM_IS_AT_GATE#>#CHECK_IS_AT_ANY_GATE#</#OUT_PARAM_IS_AT_GATE#>
+							<#OUT_PARAM_SET_CAN_BYPASS_GATE#>(&gt;O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate)</#OUT_PARAM_SET_CAN_BYPASS_GATE#>
+						</True>
+						<False>
+							<#OUT_PARAM_NAME# />
+							<#OUT_PARAM_IS_AT_GATE# />
+							<#OUT_PARAM_SET_CAN_BYPASS_GATE# />
+						</False>
+					</Condition>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

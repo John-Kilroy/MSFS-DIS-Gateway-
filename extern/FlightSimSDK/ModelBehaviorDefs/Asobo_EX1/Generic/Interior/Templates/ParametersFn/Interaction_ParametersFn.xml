@@ -1,0 +1,607 @@
+<ModelBehaviors>
+	<!-- ################################# INTERACTION ################################ -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="InputEvent_ParametersFn.xml"/>
+	<!-- Variants -->
+	<Include RelativeFile="Variants\\Interaction_XStates_ParametersFn.xml"/>
+	<Include RelativeFile="Variants\\Interaction_Drag_Axis_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Default_Interaction_Parameters">
+		<Parameters Type="Default">
+			<IE_INTERACTION_PARAMETERS_FN>ASOBO_Setup_Interaction_Parameters</IE_INTERACTION_PARAMETERS_FN>
+			<IE_INTERACTION_TOOLTIP_ID_FN>ASOBO_Define_Default_Tooltip_ID_Helper</IE_INTERACTION_TOOLTIP_ID_FN>
+			<INTERACTION_PROCESSOR_FN>ASOBO_Process_Interaction_Parameters</INTERACTION_PROCESSOR_FN>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#IE_INTERACTION_PARAMETERS_FN#"/>
+			<UseParametersFn Name="#IE_INTERACTION_TOOLTIP_ID_FN#"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#INTERACTION_PROCESSOR_FN#"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Setup_Interaction_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Add_Input_Event_Helper"/><!-- The interaction itself -->
+			<UseParametersFn Name="ASOBO_Process_Saved_Attachements_Helper"/><!-- Process any attachement (secondary interactions) -->
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Process_Saved_Attachements_Helper">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+				<ELEMENT_TYPE_NAME>Attachement</ELEMENT_TYPE_NAME>
+				<PFN_TO_EXECUTE>ASOBO_Add_Input_Event_Helper</PFN_TO_EXECUTE>
+				<POP_SAVED_ELEMENTS_IN>Append_With_Input_Event</POP_SAVED_ELEMENTS_IN>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Save_Input_Event_Base_Parameters">
+		<Parameters Type="Override">
+			<Switch>
+				<Case Check="IE_NAME_UID">
+					<IE_NAME>#IE_NAME#_#IE_NAME_UID#</IE_NAME>
+					<IE_NAME_UID>#IE_NAME_UID#</IE_NAME_UID>
+				</Case>
+				<Case Check="ID">
+					<IE_NAME>#IE_NAME#_#ID#</IE_NAME>
+					<IE_NAME_UID>#ID#</IE_NAME_UID>
+				</Case>
+				<Default>
+					<IE_NAME_UID/>
+				</Default>
+			</Switch>
+			<BASE_IE_NAME>#IE_NAME#</BASE_IE_NAME>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_IE_Preset_ID_Parameters_Helper"/>
+		</Parameters>
+		<ReturnParameters>
+			<BASE_IE_NAME>#BASE_IE_NAME#</BASE_IE_NAME>
+			<IE_NAME>#IE_NAME#</IE_NAME>
+			<IE_NAME_UID>#IE_NAME_UID#</IE_NAME_UID>
+			<IE_ID_SOURCE>#IE_ID_SOURCE#</IE_ID_SOURCE>
+			<IE_PRESET_ID>#IE_PRESET_ID#</IE_PRESET_ID>
+			<IE_TO_USE>#IE_TO_USE#</IE_TO_USE>
+			<BASE_IE_NAME_UC Process="String">'#BASE_IE_NAME#' uc</BASE_IE_NAME_UC>
+			<IE_PRESET_ID_UC Process="String">'#IE_PRESET_ID#' uc</IE_PRESET_ID_UC>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Process_Load_Common_Interaction_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Interaction_Tooltip_Helper"/>
+		</Parameters>
+		<ReturnParameters>			
+			<SaveParameters ID="Interaction_Parameters" Append="Default">
+				<UseParametersFn Name="ASOBO_Format_Tooltips_Title_Helper"/>
+			</SaveParameters>
+			<LoadParameters ID="Interaction_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<Macro Name="ASOBO_Default_Interaction_Template">ASOBO_GT_Interaction_Simple_Template</Macro>
+	<Macro Name="ASOBO_Default_Covered_Interaction_Template">ASOBO_GT_Interaction_Covered_Template</Macro>
+	<ParametersFn Name="ASOBO_Process_Interaction_Parameters">
+		<Parameters Type="Override">
+			<SaveParameters ID="Interaction_Parameters" Append="Default">
+				<Condition CheckSavedParameters="Cover_Interaction_Parameters">
+					<True>
+						<INTERACTION_TEMPLATE>@ASOBO_Default_Covered_Interaction_Template</INTERACTION_TEMPLATE>
+					</True>
+					<False>
+						<INTERACTION_TEMPLATE>@ASOBO_Default_Interaction_Template</INTERACTION_TEMPLATE>
+					</False>
+				</Condition>
+			</SaveParameters>
+			<LoadParameters ID="Interaction_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<PFN_PRE_PROCESS_INPUT_EVENT>ASOBO_PreProcess_One_Interaction_Parameters</PFN_PRE_PROCESS_INPUT_EVENT>
+			<PFN_PROCESS_INPUT_EVENT>ASOBO_Process_One_Interaction_Parameters</PFN_PROCESS_INPUT_EVENT>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Input_Events_Template">
+				<PFN_TO_EXECUTE>#PFN_PRE_PROCESS_INPUT_EVENT#</PFN_TO_EXECUTE>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Process_Load_Common_Interaction_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Input_Events_Template">
+				<PFN_TO_EXECUTE>#PFN_PROCESS_INPUT_EVENT#</PFN_TO_EXECUTE>
+			</UseParametersFn>
+			<SaveParameters ID="Mouserect_Parameters" Append="Default">
+				<UseParametersFn Name="ASOBO_Get_Mouserect_Events_Callback_Code"/>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_PreProcess_One_Interaction_Parameters">
+		<Parameters Type="Override">
+			<IE_PARAMS>#SAVE_ID#</IE_PARAMS>
+		</Parameters>
+		<Parameters Type="Default">
+			<SPARAMS_BASE_NAME>#BASE_IE_NAME#</SPARAMS_BASE_NAME>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="INPUT_EVENT_ID" Match="0">
+				<False>
+					<IS_AN_ATTACHEMENT>True</IS_AN_ATTACHEMENT>
+					<ATTACHEMENT_ID>#INPUT_EVENT_ID#</ATTACHEMENT_ID>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="BEFORE_PRE_PROCESS_PFN">
+				<UseParametersFn Name="#BEFORE_PRE_PROCESS_PFN#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Simple">
+					<INTERACTION_VARIANT>SIMPLE</INTERACTION_VARIANT>
+				</Case>
+				<Case Value="Button">
+					<INTERACTION_VARIANT>EVENT</INTERACTION_VARIANT>
+				</Case>
+				<Default>
+					<INTERACTION_VARIANT>DRAG_AXIS</INTERACTION_VARIANT>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<SPARAMS_CONFIG>#SPARAMS_BASE_NAME#_Settings_Config</SPARAMS_CONFIG>
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="EVENT">
+					<Condition Check="BUTTON_TYPE">
+						<GET_#BASE_IE_NAME_UC#_EVENT_INTERACTION_SETTINGS>ASOBO_Preset_#BUTTON_TYPE#_Button_Helper</GET_#BASE_IE_NAME_UC#_EVENT_INTERACTION_SETTINGS>
+					</Condition>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Override">
+			<GET_SPARAMS_CONFIG Process="String">'#SPARAMS_CONFIG#' uc 'GET_%s' @sprintf</GET_SPARAMS_CONFIG>
+		</Parameters>
+		<Parameters Type="Override">
+			<GET_SPARAMS_CONFIG Process="Param">#GET_SPARAMS_CONFIG#</GET_SPARAMS_CONFIG>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="Temp_Interaction_Parameters">
+				<UseParametersFn Name="#GET_SPARAMS_CONFIG#"/>
+			</SaveParameters>
+			<LoadParameters ID="Temp_Interaction_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="EVENT">
+					<SPARAMS_INTERACTION_STATES>#SPARAMS_BASE_NAME#_Event_Interaction_Settings</SPARAMS_INTERACTION_STATES>
+					<Switch Param="EVENT_TYPE">
+						<Case Value="XSTATES">
+							<SPARAMS_STATES>#SPARAMS_BASE_NAME#_Settings</SPARAMS_STATES>
+						</Case>
+					</Switch>
+				</Case>
+				<Case Value="XSTATES">
+					<SPARAMS_STATES>#SPARAMS_BASE_NAME#_Settings</SPARAMS_STATES>
+				</Case>
+			</Switch>
+			<PFN_SETUP_ACTION>ASOBO_Get_Action_Config</PFN_SETUP_ACTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="EVENT">
+					<GET_SPARAMS_INTERACTION_STATES Process="String">'#SPARAMS_INTERACTION_STATES#' uc 'GET_%s' @sprintf</GET_SPARAMS_INTERACTION_STATES>
+					<Switch Param="EVENT_TYPE">
+						<Case Value="XSTATES">
+							<GET_SPARAMS_STATES Process="String">'#SPARAMS_STATES#' uc 'GET_%s' @sprintf</GET_SPARAMS_STATES>
+						</Case>
+					</Switch>
+				</Case>
+				<Case Value="XSTATES">
+					<GET_SPARAMS_STATES Process="String">'#SPARAMS_STATES#' uc 'GET_%s' @sprintf</GET_SPARAMS_STATES>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="EVENT">
+					<GET_SPARAMS_INTERACTION_STATES Process="Param">#GET_SPARAMS_INTERACTION_STATES#</GET_SPARAMS_INTERACTION_STATES>
+					<Switch Param="EVENT_TYPE">
+						<Case Value="XSTATES">
+							<GET_SPARAMS_STATES Process="Param">#GET_SPARAMS_STATES#</GET_SPARAMS_STATES>
+						</Case>
+					</Switch>
+				</Case>
+				<Case Value="XSTATES">
+					<GET_SPARAMS_STATES Process="Param">#GET_SPARAMS_STATES#</GET_SPARAMS_STATES>
+				</Case>
+			</Switch>
+			<UseParametersFn Name="#PFN_SETUP_ACTION#"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="EVENT">
+					<Switch Param="EVENT_TYPE">
+						<Case Value="XSTATES">
+							<SaveParameters ID="#SPARAMS_STATES#" Append="Default">
+								<UseParametersFn Name="#GET_SPARAMS_STATES#"/>
+							</SaveParameters>
+						</Case>
+					</Switch>
+					<SaveParameters ID="#SPARAMS_INTERACTION_STATES#" Append="Default">
+						<UseParametersFn Name="#GET_SPARAMS_INTERACTION_STATES#"/>
+					</SaveParameters>
+					<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+						<LoadParameters ID="Temp_Interaction_Parameters"/>
+						<Switch Param="EVENT_TYPE">
+							<Case Value="XSTATES">
+								<STATE_PREFIX>#BASE_IE_NAME_UC#_POS</STATE_PREFIX>
+							</Case>
+						</Switch>
+						<EVENT_STATE_PREFIX>EVENT_POS</EVENT_STATE_PREFIX>
+					</SaveParameters>
+					<SaveParameters ID="#IE_PARAMS#" Append="Default">
+						<Switch Param="EVENT_TYPE">
+							<Case Value="XSTATES">
+								<PLOAD_STATES>#SPARAMS_STATES#</PLOAD_STATES>
+							</Case>
+						</Switch>
+						<PLOAD_INTERACTION_STATES>#SPARAMS_INTERACTION_STATES#</PLOAD_INTERACTION_STATES>
+						<PLOAD_EVENT_CONFIG>#SPARAMS_CONFIG#</PLOAD_STATES_CONFIG>
+					</SaveParameters>
+				</Case>
+				<Case Value="XSTATES">
+					<SaveParameters ID="#SPARAMS_STATES#" Append="Default">
+						<UseParametersFn Name="#GET_SPARAMS_STATES#"/>
+					</SaveParameters>
+					<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+						<LoadParameters ID="Temp_Interaction_Parameters"/>
+						<STATE_PREFIX>#BASE_IE_NAME_UC#_POS</STATE_PREFIX>
+					</SaveParameters>
+					<SaveParameters ID="#IE_PARAMS#" Append="Default">
+						<PLOAD_STATES>#SPARAMS_STATES#</PLOAD_STATES>
+						<PLOAD_STATES_CONFIG>#SPARAMS_CONFIG#</PLOAD_STATES_CONFIG>
+					</SaveParameters>
+				</Case>
+				<Default>
+					<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+						<LoadParameters ID="Temp_Interaction_Parameters"/>
+					</SaveParameters>
+					<SaveParameters ID="#IE_PARAMS#" Append="Default">
+						<PLOAD_CONFIG>#SPARAMS_CONFIG#</PLOAD_CONFIG>
+					</SaveParameters>
+				</Default>
+			</Switch>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<INTERACTION_VARIANT>#INTERACTION_VARIANT#</INTERACTION_VARIANT>
+			</SaveParameters>
+			<RemoveSavedParameters ID="Temp_Interaction_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Interaction_Tooltip_Action_Helper"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="AFTER_PRE_PROCESS_PFN">
+				<UseParametersFn Name="#AFTER_PRE_PROCESS_PFN#"/>
+			</Condition>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Process_One_Interaction_Parameters">
+		<Parameters Type="Override">
+			<IE_PARAMS>#SAVE_ID#</IE_PARAMS>
+			<Condition Check="INPUT_EVENT_ID" Match="0">
+				<False>
+					<IS_AN_ATTACHEMENT>True</IS_AN_ATTACHEMENT>
+					<ATTACHEMENT_ID>#INPUT_EVENT_ID#</ATTACHEMENT_ID>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="BEFORE_PROCESS_PFN">
+				<UseParametersFn Name="#BEFORE_PROCESS_PFN#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="SIMPLE">
+					<PFN_SETUP_INTERACTION>ASOBO_Setup_Simple_Parameters</PFN_SETUP_INTERACTION>
+				</Case>
+				<Case Value="EVENT">
+					<PFN_SETUP_INTERACTION>ASOBO_Setup_Event_Parameters</PFN_SETUP_INTERACTION>
+				</Case>
+				<Case Value="XSTATES">
+					<PFN_SETUP_INTERACTION>ASOBO_Setup_XStates_Parameters</PFN_SETUP_INTERACTION>
+				</Case>
+				<Case Value="DRAG_AXIS">
+					<PFN_SETUP_INTERACTION>ASOBO_Setup_Drag_Axis_Parameters</PFN_SETUP_INTERACTION>
+				</Case>
+			</Switch>
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<PFN_PROCESS_ATTACHEMENT>ASOBO_Setup_Attachement_Parameters</PFN_PROCESS_ATTACHEMENT>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<True>
+					<UseParametersFn Name="#PFN_PROCESS_ATTACHEMENT#"/>
+				</True>
+				<False>
+					<UseParametersFn Name="#PFN_SETUP_INTERACTION#"/>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="AFTER_PROCESS_PFN">
+				<UseParametersFn Name="#AFTER_PROCESS_PFN#"/>
+			</Condition>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- MR Helpers -->
+	<!-- Load events from Mouserect_Events saved parameters -->
+	<!-- IN (opt): ADDITIONAL_MOUSERECT_EVENTS (Let any outsider create additonnal bindings) -->
+	<ParametersFn Name="ASOBO_Get_Mouserect_Events">
+		<ReturnParameters>
+			<LoadParameters ID="Mouserect_Events"/>
+			<Condition NotEmpty="ADDITIONAL_MOUSERECT_EVENTS">
+				<LoadParameters ID="#ADDITIONAL_MOUSERECT_EVENTS#"/>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- You can create your own event specifications using this preset: -->
+	<!-- MR_EVENT_TEST (Check that should return true when your custom event should be executed) -->
+	<!-- MR_EVENT_FLAG (opt) (Additional Mouseflags the mouserect should listen for) -->
+	<!-- RETURN_ON_SUCCESSFUL_EVENT_CHECK (opt) (True by default, will exit event processing if this event check is successful) -->
+	<!-- <ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_MY_EVENT_NAME_Parameters"> -->
+		<!-- <ReturnParameters> -->
+			<!-- <MR_EVENT_TEST/> -->
+			<!-- <MR_EVENT_FLAG/> -->
+			<!-- <RETURN_ON_SUCCESSFUL_EVENT_CHECK/> -->
+		<!-- </ReturnParameters> -->
+	<!-- </ParametersFn> -->
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_PRIMARY_PRESSED_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsPrimaryPressed</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@PrimaryPressed</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_SECONDARY_PRESSED_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsSecondaryPressed</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@SecondaryPressed</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_TERTIARY_PRESSED_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsTertiaryPressed</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@TertiaryPressed</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_PRIMARY_DOWN_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsPrimaryDown</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@PrimaryDown</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_SECONDARY_DOWN_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsSecondaryDown</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@SecondaryDown</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_TERTIARY_DOWN_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsTertiaryDown</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@TertiaryDown</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_PRIMARY_RELEASED_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsPrimaryReleased</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@PrimaryReleased</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_SECONDARY_RELEASED_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsSecondaryReleased</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@SecondaryReleased</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_TERTIARY_RELEASED_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsTertiaryReleased</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@TertiaryReleased</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_INCREASE_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsIncreasing</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@Increase</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_DECREASE_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsDecreasing</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@Decrease</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_HOVER_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsHoveringMouserect</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@HoverMouserect</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_LEAVE_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsLeavingMouserect</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@LeftMouserect</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_ENTER_LOCK_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsEnteringLock</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@EnterLock</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_EXIT_LOCK_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsExitingLock</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@ExitLock</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_EXIT_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsExiting</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@Exit</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Mouserect_Ev_MR_ON_ENTER_Parameters">
+		<ReturnParameters>
+			<MR_EVENT_TEST>@IsEntering</MR_EVENT_TEST>
+			<MR_EVENT_FLAG>@Enter</MR_EVENT_FLAG>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN (opt): MR_ON_PRIMARY_PRESSED -->
+	<!-- IN (opt): MR_ON_SECONDARY_PRESSED -->
+	<!-- IN (opt): MR_ON_TERTIARY_PRESSED -->
+	<!-- IN (opt): MR_ON_PRIMARY_DOWN -->
+	<!-- IN (opt): MR_ON_SECONDARY_DOWN -->
+	<!-- IN (opt): MR_ON_TERTIARY_DOWN -->
+	<!-- IN (opt): MR_ON_PRIMARY_RELEASED -->
+	<!-- IN (opt): MR_ON_SECONDARY_RELEASED -->
+	<!-- IN (opt): MR_ON_TERTIARY_RELEASED -->
+	<!-- IN (opt): MR_ON_INCREASE -->
+	<!-- IN (opt): MR_ON_DECREASE -->
+	<!-- IN (opt): MR_ON_HOVER -->
+	<!-- IN (opt): MR_ON_LEAVE -->
+	<!-- IN (opt): MR_ON_ENTER_LOCK -->
+	<!-- IN (opt): MR_ON_EXIT_LOCK -->
+	<!-- IN (opt): MR_ON_ENTER -->
+	<!-- IN (opt): MR_ON_EXIT -->
+	<!-- IN (opt): INTERACTION_MODEL (IM_DRAG or IM_DEFAULT) -->
+	<!-- IN (opt): OUT_PARAM_NAME_CODE (Name of the parameters where to store the resulted code) -->
+	<!-- IN (opt): OUT_PARAM_NAME_FLAGS (IName of the parameters where to store the resulted code mouseflags) -->
+	<!-- OUT: formatted OUT_PARAM_NAME_CODE & OUT_PARAM_NAME_FLAGS -->
+	<ParametersFn Name="ASOBO_Get_Mouserect_Events_Callback_Code">
+		<Parameters Type="Default">
+			<Switch>
+				<Case NotEmpty="INTERACTION_MODEL">
+					<OUT_PARAM_NAME_CODE>CALLBACK_CODE_#INTERACTION_MODEL#</OUT_PARAM_NAME_CODE>
+					<OUT_PARAM_NAME_FLAGS>MOUSEFLAGS_#INTERACTION_MODEL#</OUT_PARAM_NAME_FLAGS>
+				</Case>
+				<Default>
+					<OUT_PARAM_NAME_CODE>CALLBACK_CODE</OUT_PARAM_NAME_CODE>
+					<OUT_PARAM_NAME_FLAGS>MOUSEFLAGS</OUT_PARAM_NAME_FLAGS>
+				</Default>
+			</Switch>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_AFTER_CODE_EVENTS</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<__CONCATENATED_EVENTS__/>
+			<__CONCATENATED_FLAGS__/>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>MR_EVENT_NAME</Param>
+					<Value>MR_EVENT_VALUE</Value>
+					<Parameters>
+						<UseParametersFn Name="ASOBO_Get_Mouserect_Events"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Default">
+						<RETURN_ON_SUCCESSFUL_EVENT_CHECK>True</RETURN_ON_SUCCESSFUL_EVENT_CHECK>
+					</Parameters>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Get_Mouserect_Ev_#MR_EVENT_NAME#_Parameters"/>
+						<!-- Load MR_EVENT_TEST & MR_EVENT_FLAG -->
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition NotEmpty="MR_EVENT_VALUE">
+							<Condition Valid="RETURN_ON_SUCCESSFUL_EVENT_CHECK">
+								<True>
+									<THIS_MR_EVENT_CODE>#MR_EVENT_TEST# if{ #MR_EVENT_VALUE# g#FL_AFTER_CODE_EVENTS# }</THIS_MR_EVENT_CODE>									
+								</True>
+								<False>
+									<THIS_MR_EVENT_CODE>#MR_EVENT_TEST# if{ #MR_EVENT_VALUE# }</THIS_MR_EVENT_CODE>	
+								</False>
+							</Condition>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition NotEmpty="THIS_MR_EVENT_CODE">
+							<Condition NotEmpty="__CONCATENATED_EVENTS__">
+								<True>
+									<__CONCATENATED_EVENTS__>#__CONCATENATED_EVENTS__# #THIS_MR_EVENT_CODE#</__CONCATENATED_EVENTS__>
+									<Condition NotEmpty="MR_EVENT_FLAG">
+										<__CONCATENATED_FLAGS__>#__CONCATENATED_FLAGS__#+#MR_EVENT_FLAG#</__CONCATENATED_FLAGS__>										
+									</Condition>
+								</True>
+								<False>
+									<__CONCATENATED_EVENTS__>#THIS_MR_EVENT_CODE#</__CONCATENATED_EVENTS__>
+									<__CONCATENATED_FLAGS__>#MR_EVENT_FLAG#</__CONCATENATED_FLAGS__>
+								</False>
+							</Condition>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<#OUT_PARAM_NAME_CODE#>#__CONCATENATED_EVENTS__# :#FL_AFTER_CODE_EVENTS#</#OUT_PARAM_NAME_CODE#>
+					<#OUT_PARAM_NAME_FLAGS#>#__CONCATENATED_FLAGS__#</#OUT_PARAM_NAME_FLAGS#>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: ALIAS_ID -->
+	<!-- IN: IE_PRESET_ID -->
+	<!-- IN (opt): OUT_PARAM_NAME -->
+	<ParametersFn Name="ASOBO_Get_IE_ALIAS_Code">
+		<Parameters Type="Default">
+			<OUT_PARAM_NAME>IE_ALIAS_CODE</OUT_PARAM_NAME>
+		</Parameters>
+		<ReturnParameters>
+			<#OUT_PARAM_NAME#>(&gt;B:#IE_PRESET_ID#_#ALIAS_ID#)</#OUT_PARAM_NAME#>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: VALUE -->
+	<!-- IN: IE_PRESET_ID -->
+	<!-- IN (opt): OUT_PARAM_NAME -->
+	<ParametersFn Name="ASOBO_Get_IE_VALUE_Check">
+		<Parameters Type="Default">
+			<OUT_PARAM_NAME>IE_ALIAS_CHECK</OUT_PARAM_NAME>
+		</Parameters>
+		<ReturnParameters>
+			<#OUT_PARAM_NAME#>(B:#IE_PRESET_ID#) #VALUE# ==</#OUT_PARAM_NAME#>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: TOOLTIP_ID -->
+	<!-- IN: IE_PRESET_ID -->
+	<!-- IN (opt): OUT_PARAM_NAME -->
+	<ParametersFn Name="ASOBO_Get_TOOLTIP_ID_Parameters">
+		<Parameters Type="Default">
+			<OUT_PARAM_NAME>TOOLTIP_ID_FORMATTED</OUT_PARAM_NAME>
+		</Parameters>
+		<ReturnParameters>
+			<#OUT_PARAM_NAME#>(R:1:#TOOLTIP_ID#)</#OUT_PARAM_NAME#>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Process ON_INCREASE & ON_DECREASE invertion -->
+	<ParametersFn Name="ASOBO_Process_Inc_Dec_Invertion">
+		<Parameters Type="Default">
+			<ON_INCREASE/>
+			<ON_DECREASE/>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Valid="MR_INVERT_INC_DEC_EVENTS">
+				<True>
+					<ON_INCREASE>#ON_DECREASE#</ON_INCREASE>
+					<ON_DECREASE>#ON_INCREASE#</ON_DECREASE>					
+				</True>
+				<False>
+					<ON_INCREASE>#ON_INCREASE#</ON_INCREASE>
+					<ON_DECREASE>#ON_DECREASE#</ON_DECREASE>
+				</False>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

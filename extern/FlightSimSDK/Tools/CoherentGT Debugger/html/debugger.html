@@ -1,0 +1,80 @@
+<html>
+<head>
+	<title>Coherent GT Development Tools</title>
+	<style>
+	body {
+		margin: 0px;
+	}
+
+	table {
+		border: 0px;
+		border-collapse: collapse;
+	}
+
+	td {
+		padding:0px;
+	}
+
+	label {
+		font-family:"Arial", Arial, sans-serif;
+		font-size:14px;
+	}
+
+	.addressbar {
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E9E9E9), to(#CFCFCF));
+	}
+	</style>
+	<script type="text/javascript">
+		function loadURL() {
+			var url = document.getElementById('url').value;
+			document.getElementById('devtools').src = url;
+		}
+		document.onload = function () {
+			loadURL();
+		}
+
+		function reloadAttachedOnF5(eventArgs) {
+			if (eventArgs.keyCode == 116 /*F5*/) {
+				var toolbar = document.querySelector("iframe#devtools").contentDocument.querySelector("div#toolbar");
+				var reload_btn = toolbar.querySelector(".item.reload.button");
+				reload_btn.click();
+			}
+		}
+		function addReloadEventListener() {
+			document.querySelector("iframe#devtools").contentDocument.addEventListener('keydown', function (eventArgs) {
+				reloadAttachedOnF5(eventArgs);
+			});
+		}
+		document.addEventListener('keydown', function (eventArgs) {
+			reloadAttachedOnF5(eventArgs);
+		});
+	</script>
+</head>
+<body>
+	<table style="width: 100%; height: 100%">
+	<tr style="height: 0px">
+		<td>
+		<div class="addressbar">
+		<table style="width: 100%">
+		<col width="190">
+		<col width="1*">
+		<col width="32">
+		<tr>
+		<td style="padding:2px;"><label for="url">Coherent GT debugger URL:</label></td>
+		<td><input id="url" type="text" style="width: 100%" onchange="loadURL()" value="http://127.0.0.1:19999"></input></td>
+		<td><button onclick="loadURL()">Go</button></td>
+		</tr>
+		</table>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<iframe id="devtools" width="100%" height="100%" style="border: none" src="http://127.0.0.1:19999" onload="addReloadEventListener()"/>
+		</td>
+	</tr>
+	</table>
+</body>
+
+
+</html>

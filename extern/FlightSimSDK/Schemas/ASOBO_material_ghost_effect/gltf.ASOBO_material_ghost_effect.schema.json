@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_ghost_effect glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "bias": {
+            "type": "number"
+        },
+        "scale": {
+            "type": "number"
+        },
+        "power": {
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

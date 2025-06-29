@@ -1,0 +1,254 @@
+<ModelBehaviors>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="Get_Procedure_Auto_Start_Shutdown_Parameters">
+		<Parameters Type="Default">
+			<AUTO_START_CODE/>
+			<AUTO_SHUTDOWN_CODE/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="PREVENT_KEY_PROPAGATION">
+				<False>
+					<AUTO_START_CODE>#AUTO_START_CODE# (&gt;K:ENGINE_AUTO_START)</AUTO_START_CODE>
+					<AUTO_SHUTDOWN_CODE>#AUTO_SHUTDOWN_CODE# (&gt;K:ENGINE_AUTO_SHUTDOWN)</AUTO_SHUTDOWN_CODE>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<AUTO_START_SHUTDOWN_CODE>
+				p0 if{ #AUTO_START_CODE# }
+				els{ #AUTO_SHUTDOWN_CODE# }
+			</AUTO_START_SHUTDOWN_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+				<SET_CODE>#AUTO_START_SHUTDOWN_CODE#</SET_CODE>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Override">
+				<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>ENGINE_AUTO_START</EVENT_ID>
+				<PARAM_0>1</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>ENGINE_AUTO_SHUTDOWN</EVENT_ID>
+				<PARAM_0>0</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Macro Name="None">0</Macro>
+	<Macro Name="Auto_Start">1</Macro>
+	<Macro Name="Auto_Shutdown">2</Macro>
+	<Macro Name="Stop_Auto_Start_Shutdown">@None (&gt;L:1:XMLVAR_AUTO_START_MODE)</Macro>
+	<ParametersFn Name="Get_Procedure_Standalone_Auto_Start_Shutdown_Parameters">
+		<Parameters Type="Default">
+			<ON_AUTO_START_BEGIN/>
+			<ON_AUTO_START_END/>
+			<ON_AUTO_SHUTDOWN_BEGIN/>
+			<ON_AUTO_SHUTDOWN_END/>
+			<ON_AUTO_START_TICK/>
+			<ON_AUTO_SHUTDOWN_TICK/>
+		</Parameters>
+		<Parameters Type="Override">
+			<TICK_ONCE>(L:1:XMLVAR_AUTO_START_SHUTDOWN_TICK) 1 + dnor (&gt;L:1:XMLVAR_AUTO_START_SHUTDOWN_TICK)</TICK_ONCE>
+			<ENABLE_AUTO_START>@Auto_Start (&gt;L:1:XMLVAR_AUTO_START_MODE)</ENABLE_AUTO_START>
+			<ENABLE_AUTO_SHUTDOWN>@Auto_Shutdown (&gt;L:1:XMLVAR_AUTO_START_MODE)</ENABLE_AUTO_SHUTDOWN>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>AFTER_AUTO_START_MODE_UPDATE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>AUTO_START_MODE_UPDATE</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<UPDATE_AUTO_START_SHUTDOWN>
+			   (L:1:XMLVAR_AUTO_START_MODE) sp0 (L:1:XMLVAR_AUTO_START_MODE_ACTIVE) sp1
+			   l0 l1 == if{ g#AUTO_START_MODE_UPDATE# }
+			   l0 (&gt;L:1:XMLVAR_AUTO_START_MODE_ACTIVE)
+			   l1 (&gt;O:XMLVAR_AUTO_START_MODE_ACTIVE_BEFORE)
+			   (L:1:XMLVAR_AUTO_START_MODE_ACTIVE) @Auto_Start == if{ (* auto start started *)
+				   #ON_AUTO_START_BEGIN#
+			   } 
+			   (L:1:XMLVAR_AUTO_START_MODE_ACTIVE) @Auto_Shutdown == if{ (* auto shutdown started *)
+				   #ON_AUTO_SHUTDOWN_BEGIN#
+			   }
+			   (O:XMLVAR_AUTO_START_MODE_ACTIVE_BEFORE) @Auto_Start == if{  (* auto start interrupted or ended *)
+				   #ON_AUTO_START_END#
+			   } 
+			   (O:XMLVAR_AUTO_START_MODE_ACTIVE_BEFORE) @Auto_Shutdown == if{ (* auto shutdown interrupted or ended *)
+				   #ON_AUTO_SHUTDOWN_END#
+			   }
+			   :#AUTO_START_MODE_UPDATE#
+			   (L:1:XMLVAR_AUTO_START_MODE) sp0
+			   l0 @Auto_Start == if{
+				   #ON_AUTO_START_TICK#
+				   g#AFTER_AUTO_START_MODE_UPDATE#
+			   } 
+			   l0 @Auto_Shutdown == if{
+				   #ON_AUTO_SHUTDOWN_TICK#
+				   g#AFTER_AUTO_START_MODE_UPDATE#
+			   }
+			   :#AFTER_AUTO_START_MODE_UPDATE#
+			   (L:1:XMLVAR_AUTO_START_MODE) @None != if{
+				   #TICK_ONCE#
+			   }
+			</UPDATE_AUTO_START_SHUTDOWN>
+		</Parameters>
+		<ReturnParameters>
+			<ON_VALUE_CHANGED>#UPDATE_AUTO_START_SHUTDOWN#</ON_VALUE_CHANGED>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>XMLVAR_AUTO_START_SHUTDOWN_TICK</LOCAL_VAR>
+				<VAR_SCOPE>L:1</VAR_SCOPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>XMLVAR_AUTO_START_MODE</LOCAL_VAR>
+				<VAR_SCOPE>L:1</VAR_SCOPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+				<SET_CODE>
+				   p0 if{ #ENABLE_AUTO_START# }
+				   els{ #ENABLE_AUTO_SHUTDOWN# }
+				</SET_CODE>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Override">
+				<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>ENGINE_AUTO_START</EVENT_ID>
+				<PARAM_0>1</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>ENGINE_AUTO_SHUTDOWN</EVENT_ID>
+				<PARAM_0>0</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Simple Procedure to bind a single key event to some parameterless code execution -->
+	<!-- Inputs Required : -->
+	<!-- EVENT_ID : Full name of the event to bind -->
+	<!-- CODE : Code to execute -->
+	<ParametersFn Name="Get_Procedure_Bind_Key_Event_Parameters">
+		<Parameters Type="Default">
+			<CODE/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+				<SET_CODE>#CODE#</SET_CODE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>#EVENT_ID#</EVENT_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Simple Procedure to bind a standard key event set (SET/TOGGLE/ON/OFF) to some code execution -->
+	<!-- Inputs Required : -->
+	<!-- EVENT_ID : Name of the events to bind, without their suffix -->
+	<!-- CODE : Code to execute. p0 can be used as the parameter -->
+	<!-- VALUE : Value as a boolean to base the toggle on -->
+	<!-- Inputs Optional : -->
+	<!-- ON_SUFFIX_NAME : Name of the suffix that corresponds to the Positive value being set (Default: ON) -->
+	<!-- OFF_SUFFIX_NAME : Name of the suffix that corresponds to the Negative value being set (Default: OFF) -->
+	<ParametersFn Name="Get_Procedure_Bind_Key_Events_Parameters">
+		<Parameters Type="Default">
+			<CODE/>
+			<ON_SUFFIX_NAME>ON</ON_SUFFIX_NAME>
+			<OFF_SUFFIX_NAME>OFF</OFF_SUFFIX_NAME>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+				<SET_CODE>#CODE#</SET_CODE>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Override">
+				<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>#EVENT_ID#_SET</EVENT_ID>
+				<PARAM_0>p0</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>#EVENT_ID#_TOGGLE</EVENT_ID>
+				<PARAM_0>#VALUE# !</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>#EVENT_ID#_#ON_SUFFIX_NAME#</EVENT_ID>
+				<PARAM_0>1</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>#EVENT_ID#_#OFF_SUFFIX_NAME#</EVENT_ID>
+				<PARAM_0>0</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="Get_Procedure_Intercept_Key_Events_Parameters">
+		<Parameters>
+			<SaveParameters ID="Intercept_Key_Events_IE_Params" Append="Default">
+				<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="GET_KEY_EVENTS_TO_INTERCEPT">
+				<Loop>
+					<Setup>
+						<Param>PFN_GET_KEY_EVENTS_TO_INTERCEPT</Param>
+						<Parameters>
+							<LoadParameters ID="GET_KEY_EVENTS_TO_INTERCEPT"/>
+							<RemoveSavedParameters ID="GET_KEY_EVENTS_TO_INTERCEPT"/>
+						</Parameters>
+					</Setup>
+					<Do>
+						<SaveParameters ID="Key_Events_To_Intercept" Append="Override">
+							<UseParametersFn Name="#PFN_GET_KEY_EVENTS_TO_INTERCEPT#" />
+						</SaveParameters>
+					</Do>
+				</Loop>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#IE_PARAMS#" Append="Override">
+				<LoadParameters ID="Intercept_Key_Events_IE_Params"/>
+				<RemoveSavedParameters ID="Intercept_Key_Events_IE_Params"/>
+			</SaveParameters>
+			<Loop>
+				<Setup>
+					<Param>EVENT_ID</Param>
+					<Value>EVENT_CODE</Value>
+					<Parameters>
+						<LoadParameters ID="Key_Events_To_Intercept"/>
+						<RemoveSavedParameters ID="Key_Events_To_Intercept"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+						<PARAM_0>#EVENT_CODE#</PARAM_0>
+						<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+					</UseParametersFn>
+				</Do>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

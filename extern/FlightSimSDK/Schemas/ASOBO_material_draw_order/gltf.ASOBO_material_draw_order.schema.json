@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_draw_order glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "drawOrderOffset": {
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

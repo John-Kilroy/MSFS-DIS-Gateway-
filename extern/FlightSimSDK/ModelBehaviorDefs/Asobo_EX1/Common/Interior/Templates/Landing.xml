@@ -1,0 +1,16 @@
+<ModelBehaviors>
+	<!-- ################################## LANDING ################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\Landing_Inputs.xml"/>
+	<Include RelativeFile="ParametersFn\\Landing_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\Landing_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_LANDING_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>LANDING</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

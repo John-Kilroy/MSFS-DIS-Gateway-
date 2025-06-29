@@ -1,0 +1,56 @@
+<ModelBehaviors>
+	<Template Name="ASOBO_IT_EFB_Visibility_Show_Template">
+		<UseTemplate Name="ASOBO_IT_Simple_Interaction_Template">
+			<IE_NAME>#IN_BASE_NAME#_EFB_Visibility_Show</IE_NAME>
+			<ON_EVENT>0 (&gt;L:1:XMLVAR_3D_EFB_Hidden)</ON_EVENT>
+			<TOOLTIPS_DISABLED>True</TOOLTIPS_DISABLED>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_IT_EFB_Visibility_Hide_Template">
+		<UseTemplate Name="ASOBO_IT_Simple_Interaction_Template">
+			<IE_NAME>#IN_BASE_NAME#_EFB_Visibility_Hide</IE_NAME>
+			<ON_EVENT>1 (&gt;L:1:XMLVAR_3D_EFB_Hidden)</ON_EVENT>
+			<TOOLTIPS_DISABLED>True</TOOLTIPS_DISABLED>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_IT_EFB_Visibility_Template">
+		<UseTemplate Name="ASOBO_GT_Component_Visibility_Template">
+			<VISIBILITY_CODE>(L:1:XMLVAR_3D_EFB_Hidden) !</VISIBILITY_CODE>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_IT_EFB_TABLET_Visibility_Template">
+		<UseTemplate Name="ASOBO_GT_Component_Visibility_Template">
+			<VISIBILITY_CODE>(L:1:XMLVAR_3D_EFB_TABLET_Hidden) (L:1:XMLVAR_3D_EFB_Hidden) or !</VISIBILITY_CODE>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_IT_EFB_Logic_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Light_Parameters">
+				<FACTOR_MIN>0.01</FACTOR_MIN>
+				<SCREEN_GAMMA>1.2</SCREEN_GAMMA>
+			</UseParametersFn>
+		</Parameters>
+		<UseTemplate Name="ASOBO_IT_EFB_TABLET_Visibility_Template">
+			<NODE_ID>#NODE_ID_TABLET#</NODE_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_GT_Anim_Template">
+			<ANIM_CODE>(L:1:XMLVAR_EFB_TABLET_HORIZONTAL) ! ! 100 *</ANIM_CODE>
+			<ANIM_NAME>#ANIM_NAME_ORIENTATION#</ANIM_NAME>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_GT_Component_Emissive_Template">
+			<NODE_ID>#NODE_ID_SCREEN#</NODE_ID>
+			<EMISSIVE_CODE>
+				#GET_AUTOMATIC_BRIGHTNESS_FACTOR# s0 (&gt;L:1:XMLVAR_EFB_AUTO_BRIGHTNESS_VALUE)
+				(E:EFB_BRIGHTNESS, percent over 100) 0 &gt;= if{
+					(E:EFB_BRIGHTNESS, percent over 100)
+				} els{
+					l0
+				} 
+			</EMISSIVE_CODE>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_IT_Ambient_Update_Template">
+			<POTENTIOMETER_ID>#AMBIENT_POTENTIOMETER#</POTENTIOMETER_ID>
+			<AMBIENT_FACTOR>(L:1:XMLVAR_3D_EFB_TABLET_Hidden) (L:1:XMLVAR_3D_EFB_Hidden) or ! 100 *</AMBIENT_FACTOR>
+		</UseTemplate>
+	</Template>
+</ModelBehaviors>

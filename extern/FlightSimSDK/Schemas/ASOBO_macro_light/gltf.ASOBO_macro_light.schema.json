@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_macro_light glTF extension",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "glTFProperty.schema.json"
+        }
+    ],
+    "properties": {
+        "color": {
+            "type": "array",
+            "items": {
+                "type": "number",
+                "minItems": 3,
+                "maxItems": 3,
+                "description": "Light color"
+            }
+        },
+        "intensity": {
+            "type": "number",
+            "description": "Light intensity"
+        },
+        "cone_angle": {
+            "type": "number",
+            "description": "Cone Angle"
+        },
+        "has_simmetry": {
+            "type": "boolean",
+            "description": "Has symmetry"
+        },
+        "flash_frequency": {
+            "type": "number",
+            "description": "Flash Frequency"
+        },
+        "flash_duration": {
+            "type": "number",
+            "description": "Flash Duration"
+        },
+        "flash_phase": {
+            "type": "number",
+            "description": "Flash Phase"
+        },
+        "rotation_speed": {
+            "type": "number",
+            "description": "Rotation Speed"
+        },
+        "day_night_cycle": {
+            "type": "boolean",
+            "description": "Use Day/Night Cycle"
+        },
+        "extensions": {},
+        "extras": {}
+    }
+}

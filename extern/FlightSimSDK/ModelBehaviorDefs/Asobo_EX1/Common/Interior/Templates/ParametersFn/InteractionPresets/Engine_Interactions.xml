@@ -1,0 +1,603 @@
+<ModelBehaviors>
+	<!-- ################################## ENGINE #################################### -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Throttle_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+			<THROTTLE_MIN_VALUE_16K>0</THROTTLE_MIN_VALUE_16K>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Throttle_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<IE_GET_STATE>#GET_THROTTLE_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_THROTTLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_THROTTLE#</SIMVAR>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<TT_ENGINE_CATEGORY>THROTTLE</TT_ENGINE_CATEGORY>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Throttle_With_Reverser_Settings_Config_Parameters">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+			<HAS_IDLE_GATE>True</HAS_IDLE_GATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Throttle_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<THROTTLE_MIN_VALUE_16K_PROCESSED Process="Float">#THROTTLE_MIN_VALUE_16K#</THROTTLE_MIN_VALUE_16K_PROCESSED>
+		</Parameters>
+		<Parameters Type="Override">
+			<FULL_RANGE Process="Float">#THROTTLE_MAX_VALUE_16K# #THROTTLE_MIN_VALUE_16K_PROCESSED# -</FULL_RANGE>
+			<MIN_DIST>#THROTTLE_MIN_VALUE_16K_PROCESSED# abs</MIN_DIST>
+		</Parameters>
+		<Condition Valid="HAS_IDLE_GATE">
+			<Parameters Type="Default">
+				<IDLE_IE_PERCENT_SET Process="Float">#MIN_DIST# #FULL_RANGE# / 100 *</IDLE_IE_PERCENT_SET>
+				<IDLE_ANIM_PERCENT>50</IDLE_ANIM_PERCENT>
+				<IDLE_GATE_DIRECTION>Both</IDLE_GATE_DIRECTION>	
+				<GET_GATES>Throttle_Gates</GET_GATES>
+				<GET_GATES_CONFIG>Throttle_Gates_Config</GET_GATES_CONFIG>
+				<GET_POSITION_PCT_OVER_100>(B:#IE_PRESET_ID_UC#, percent over 100)</GET_POSITION_PCT_OVER_100>
+			</Parameters>
+			<Parameters Type="Override">
+				<SaveParameters ID="#GET_GATES#" Append="Default">
+					<POINT_0>Idle</POINT_0>
+				</SaveParameters>
+				<SaveParameters ID="#GET_GATES_CONFIG#" Append="Default">
+					<IDLE_IE_PERCENT_SET>#IDLE_IE_PERCENT_SET#</IDLE_IE_PERCENT_SET>
+					<IDLE_ANIM_PERCENT>#IDLE_ANIM_PERCENT#</IDLE_ANIM_PERCENT>
+					<IDLE_GATE_DIRECTION>#IDLE_GATE_DIRECTION#</IDLE_GATE_DIRECTION>
+				</SaveParameters>
+				<UseParametersFn Name="ASOBO_Gates_Input_Handling">
+					<INPUT_NAME>#IE_PRESET_ID_UC#_DEC</INPUT_NAME>
+					<OUT_PARAM_NAME>ON_BEFORE_DEC_CODE_VALUE_SET</OUT_PARAM_NAME>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Gates_Input_Handling">
+					<INPUT_NAME>#IE_PRESET_ID_UC#_INC</INPUT_NAME>
+					<OUT_PARAM_NAME>ON_BEFORE_INC_CODE_VALUE_SET</OUT_PARAM_NAME>
+				</UseParametersFn>
+			</Parameters>
+		</Condition>
+		<ReturnParameters>
+			<VALUE_TYPE>M16K</VALUE_TYPE>
+			<MIN_VALUE>#THROTTLE_MIN_VALUE_16K_PROCESSED#</MIN_VALUE>
+			<IE_GET_STATE>#GET_THROTTLE_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_THROTTLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_THROTTLE#</SIMVAR>
+			</UseParametersFn>
+			<Condition Valid="HAS_IDLE_GATE">
+				<PLOAD_AXIS_CURVE>#GET_GATES#</PLOAD_AXIS_CURVE>
+				<PLOAD_AXIS_CURVE_CONFIG>#GET_GATES_CONFIG#</PLOAD_AXIS_CURVE_CONFIG>
+				<UseParametersFn Name="ASOBO_Add_Update_Helper">
+					<UPDATE_ONCE>True</UPDATE_ONCE>
+					<UPDATE_CODE>#GET_POSITION_PCT_OVER_100# sp0 #IS_AT_ANY_GATE_CHECK# if{ 1 #SET_CAN_BYPASS_GATE# }</UPDATE_CODE>
+				</UseParametersFn>
+				<ON_BEFORE_DEC_CODE_VALUE_SET>#ON_BEFORE_DEC_CODE_VALUE_SET#</ON_BEFORE_DEC_CODE_VALUE_SET>
+				<ON_BEFORE_INC_CODE_VALUE_SET>#ON_BEFORE_INC_CODE_VALUE_SET#</ON_BEFORE_INC_CODE_VALUE_SET>
+			</Condition>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<TT_ENGINE_CATEGORY>THROTTLE</TT_ENGINE_CATEGORY>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Throttle_Reverser_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Throttle_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_MIN_MAX_Ratios_Helper">
+				<MIN_VALUE>#THROTTLE_MIN_VALUE_16K#</MIN_VALUE>
+				<MAX_VALUE>#THROTTLE_MAX_VALUE_16K#</MAX_VALUE>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<MIN_VALUE>0</MIN_VALUE>
+			<MAX_VALUE>@16K</MAX_VALUE>
+			<IE_GET_STATE>#GET_THROTTLE_16K# #MIN_VALUE# / @16K *</IE_GET_STATE>
+			<IE_SET_STATE>@16K / #MIN_VALUE# * #SET_THROTTLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_THROTTLE#</SIMVAR>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<TT_ENGINE_CATEGORY>THROTTLE</TT_ENGINE_CATEGORY>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Helicopter_Throttle_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Helicopter_Throttle_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<IE_GET_STATE>#GET_THROTTLE_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_THROTTLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_THROTTLE#</SIMVAR>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<TT_ENGINE_CATEGORY>THROTTLE</TT_ENGINE_CATEGORY>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Ignition_On_Off_Settings_Config_Parameters">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Ignition_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+				<INIT_CODE>#GET_IGNITION_SWITCH# @Enum_Ignition_Auto == if{ @Enum_Ignition_On #SET_IGNITION_SWITCH# }</INIT_CODE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_IGNITION_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_IGNITION_SWITCH# @Enum_Ignition_Off ==</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_IGNITION_SWITCH# @Enum_Ignition_On ==</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>@Enum_Ignition_Off #SET_IGNITION_SWITCH#</POS_OFF_CODE>
+			<POS_ON_CODE>@Enum_Ignition_On #SET_IGNITION_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Ignition_Off_Auto_On_Settings_Config_Parameters">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Ignition_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_IGNITION_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_IGNITION_SWITCH# @Enum_Ignition_Off ==</POS_OFF_CHECK>
+			<POS_AUTO_CHECK>#GET_IGNITION_SWITCH# @Enum_Ignition_Auto ==</POS_AUTO_CHECK>
+			<POS_ON_CHECK>#GET_IGNITION_SWITCH# @Enum_Ignition_On ==</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>@Enum_Ignition_Off #SET_IGNITION_SWITCH#</POS_OFF_CODE>
+			<POS_AUTO_CODE>@Enum_Ignition_Auto #SET_IGNITION_SWITCH#</POS_AUTO_CODE>
+			<POS_ON_CODE>@Enum_Ignition_On #SET_IGNITION_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_APU_On_Off_Settings_Config_Parameters">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>APU SWITCH</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>(A:APU SWITCH, Bool) !</POS_OFF_CHECK>
+			<POS_ON_CHECK>(A:APU SWITCH, Bool)</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>(&gt;K:APU_OFF_SWITCH)</POS_OFF_CODE>
+			<POS_ON_CODE>(&gt;K:APU_STARTER)</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_APU_Off_On_Start_Settings_Config_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Enum_Parameters_Helper">
+				<SaveParameters ID="Enum_Values">
+					<POS_OFF>0</POS_OFF>
+					<POS_ON>1</POS_ON>
+					<POS_START>2</POS_START>
+				</SaveParameters>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<APU_GEN_STATE_TIED_TO_APU_SWITCH>True</APU_GEN_STATE_TIED_TO_APU_SWITCH>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+				<INIT_CODE>(A:APU SWITCH, Bool) ! #IS_POS_START# and (A:APU SWITCH, Bool) #IS_POS_OFF# and or if{ #SET_POS_ON# }</INIT_CODE>
+			</UseParametersFn>
+			<Condition Valid="APU_GEN_STATE_TIED_TO_APU_SWITCH">
+				<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+					<INIT_CODE>(A:APU SWITCH, Bool) s0 (A:APU GENERATOR SWITCH, Bool) != if{ 0 l0 (&gt;K:2:APU_GENERATOR_SWITCH_SET) }</INIT_CODE>
+				</UseParametersFn>
+			</Condition>
+			<UseParametersFn Name="ASOBO_Watch_Simvars_Helper">
+				<SaveParameters ID="Temp_Simvars_To_Watch">
+					<APU_SWITCH>APU SWITCH</APU_SWITCH>
+					<Condition Valid="APU_GEN_STATE_TIED_TO_APU_SWITCH">
+						<APU_GEN_SIMVAR>APU GENERATOR SWITCH</APU_GEN_SIMVAR>						
+					</Condition>
+				</SaveParameters>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>(A:APU SWITCH, Bool) ! #IS_POS_OFF# and</POS_OFF_CHECK>
+			<POS_ON_CHECK>#IS_POS_ON#</POS_ON_CHECK>
+			<POS_START_CHECK>(A:APU SWITCH, Bool) #IS_POS_START# and</POS_START_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>(&gt;K:APU_OFF_SWITCH) #SET_POS_OFF#</POS_OFF_CODE>
+			<POS_ON_CODE>#SET_POS_ON#</POS_ON_CODE>
+			<POS_START_CODE>(&gt;K:APU_STARTER) #SET_POS_START#</POS_START_CODE>
+			<POS_START_MOMENTARY_RELEASE_TARGET>On</POS_START_MOMENTARY_RELEASE_TARGET>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Starter_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Starter_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_STARTER_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_STARTER_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_STARTER_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_STARTER_SWITCH#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_STARTER_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Starter_Held_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Starter_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_STARTER_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_STARTER_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_STARTER_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_STARTER_SWITCH_HELD#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_STARTER_SWITCH_HELD#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Starter_Momentary_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Starter_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<ON_EVENT>1 #SET_STARTER_SWITCH_HELD#</ON_EVENT>
+			<ON_RELEASE>0 #SET_STARTER_SWITCH_HELD#</ON_RELEASE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_STARTER_SWITCH#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Master_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Engine_Master_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENGINE_MASTER_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ENGINE_MASTER_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ENGINE_MASTER_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ENGINE_MASTER_SWITCH#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ENGINE_MASTER_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Mixture_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Engine_Mixture_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<MIN_VALUE>0</MIN_VALUE>
+			<MAX_VALUE>@16K</MAX_VALUE>
+			<IE_GET_STATE>#GET_ENGINE_MIXTURE# @16K *</IE_GET_STATE>
+			<IE_SET_STATE>#SET_ENGINE_MIXTURE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENGINE_MIXTURE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Mixture_Cutoff_Settings_Config"> 
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Engine_Mixture_Parameters">
+				<UNITS_HANDLE_POSITION>position 16k</UNITS_HANDLE_POSITION>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<IDLE_IE_PERCENT_SET>1</IDLE_IE_PERCENT_SET>
+			<IDLE_ANIM_PERCENT>50</IDLE_ANIM_PERCENT>
+			<IDLE_GATE_DIRECTION>Both</IDLE_GATE_DIRECTION>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<IE_GET_STATE>#GET_ENGINE_MIXTURE#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_ENGINE_MIXTURE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENGINE_MIXTURE#</SIMVAR>
+			</UseParametersFn>
+			<PLOAD_AXIS_CURVE>Mixture_Gates</PLOAD_AXIS_CURVE>
+			<PLOAD_AXIS_CURVE_CONFIG>Mixture_Gates_Config</PLOAD_AXIS_CURVE_CONFIG>
+			<SaveParameters ID="Mixture_Gates" Append="Default">
+				<POINT_0>Idle</POINT_0>
+			</SaveParameters>
+			<SaveParameters ID="Mixture_Gates_Config" Append="Default">
+				<IDLE_IE_PERCENT_SET>#IDLE_IE_PERCENT_SET#</IDLE_IE_PERCENT_SET>
+				<IDLE_ANIM_PERCENT>#IDLE_ANIM_PERCENT#</IDLE_ANIM_PERCENT>
+				<IDLE_GATE_DIRECTION>#IDLE_GATE_DIRECTION#</IDLE_GATE_DIRECTION>
+			</SaveParameters>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<TT_ENGINE_CATEGORY>MIXTURE</TT_ENGINE_CATEGORY>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Propeller_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Propeller_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<MIN_VALUE>0</MIN_VALUE>
+			<MAX_VALUE>@16K</MAX_VALUE>
+			<IE_GET_STATE>#GET_PROPELLER# @16K *</IE_GET_STATE>
+			<IE_SET_STATE>#SET_PROPELLER_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_PROPELLER#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Propeller_Reverser_Settings_Config"> 
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<PROP_ID>#ID#</PROP_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Propeller_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<PROPELLER_MIN_VALUE_16K_PROCESSED Process="Float">#PROPELLER_MIN_VALUE_16K#</PROPELLER_MIN_VALUE_16K_PROCESSED>
+		</Parameters>
+		<Parameters Type="Override">
+			<FULL_RANGE Process="Float">#PROPELLER_MAX_VALUE_16K# #PROPELLER_MIN_VALUE_16K_PROCESSED# -</FULL_RANGE>
+			<MIN_DIST Process="Float">0 #PROPELLER_MIN_VALUE_16K_PROCESSED# - abs</MIN_DIST>
+		</Parameters>
+		<Parameters Type="Default">
+			<IDLE_IE_PERCENT_SET Process="Float">#MIN_DIST# #FULL_RANGE# / 100 *</IDLE_IE_PERCENT_SET>
+			<IDLE_ANIM_PERCENT>50</IDLE_ANIM_PERCENT>
+			<IDLE_GATE_DIRECTION>Both</IDLE_GATE_DIRECTION>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>M16K</VALUE_TYPE>
+			<MIN_VALUE>#PROPELLER_MIN_VALUE_16K_PROCESSED#</MIN_VALUE>
+			<IE_GET_STATE>#GET_PROPELLER_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_PROPELLER_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_PROPELLER#</SIMVAR>
+			</UseParametersFn>
+			<PLOAD_AXIS_CURVE>Propeller_Gates</PLOAD_AXIS_CURVE>
+			<PLOAD_AXIS_CURVE_CONFIG>Propeller_Gates_Config</PLOAD_AXIS_CURVE_CONFIG>
+			<SaveParameters ID="Propeller_Gates" Append="Default">
+				<POINT_0>Idle</POINT_0>
+			</SaveParameters>
+			<SaveParameters ID="Propeller_Gates_Config" Append="Default">
+				<IDLE_IE_PERCENT_SET>#IDLE_IE_PERCENT_SET#</IDLE_IE_PERCENT_SET>
+				<IDLE_ANIM_PERCENT>#IDLE_ANIM_PERCENT#</IDLE_ANIM_PERCENT>
+				<IDLE_GATE_DIRECTION>#IDLE_GATE_DIRECTION#</IDLE_GATE_DIRECTION>
+			</SaveParameters>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<TT_ENGINE_CATEGORY>PROPELLER</TT_ENGINE_CATEGORY>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Magneto_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Engine_Magneto_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENG_LEFT_MAGNETO_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENG_RIGHT_MAGNETO_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#IS_ENG_MAGNETO_SWITCH_OFF#</POS_OFF_CHECK>
+			<POS_RIGHT_CHECK>#IS_ENG_MAGNETO_SWITCH_RIGHT#</POS_RIGHT_CHECK>
+			<POS_LEFT_CHECK>#IS_ENG_MAGNETO_SWITCH_LEFT#</POS_LEFT_CHECK>
+			<POS_BOTH_CHECK>#IS_ENG_MAGNETO_SWITCH_BOTH#</POS_BOTH_CHECK>
+			<POS_START_CHECK>#IS_ENG_MAGNETO_SWITCH_START#</POS_START_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>#SET_ENG_MAGNETO_SWITCH_OFF#</POS_OFF_CODE>
+			<POS_RIGHT_CODE>#SET_ENG_MAGNETO_SWITCH_RIGHT#</POS_RIGHT_CODE>
+			<POS_LEFT_CODE>#SET_ENG_MAGNETO_SWITCH_LEFT#</POS_LEFT_CODE>
+			<POS_BOTH_CODE>#SET_ENG_MAGNETO_SWITCH_BOTH#</POS_BOTH_CODE>
+			<POS_START_CODE>#SET_ENG_MAGNETO_SWITCH_START#</POS_START_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Plasma_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Engine_Plasma_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENG_MAGNETO_PLASMA_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ENG_MAGNETO_PLASMA_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ENG_MAGNETO_PLASMA_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ENG_MAGNETO_PLASMA_SWITCH#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ENG_MAGNETO_PLASMA_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_ROTOR_Clutch_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_ROTOR_Clutch_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ROTOR_CLUTCH_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ROTOR_CLUTCH_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ROTOR_CLUTCH_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ROTOR_CLUTCH_SWITCH#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ROTOR_CLUTCH_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_ROTOR_Governor_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_ROTOR_Governor_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ROTOR_GOV_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ROTOR_GOV_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ROTOR_GOV_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ROTOR_GOV_SWITCH#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ROTOR_GOV_SWITCH#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_ROTOR_Collective_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_ROTOR_Collective_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<MIN_VALUE>0</MIN_VALUE>
+			<MAX_VALUE>@16K</MAX_VALUE>
+			<IE_GET_STATE>#GET_ROTOR_COLLECTIVE_HANDLE# @16K *</IE_GET_STATE>
+			<IE_SET_STATE>#SET_ROTOR_COLLECTIVE_HANDLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ROTOR_COLLECTIVE_HANDLE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_ROTOR_Brake_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_ROTOR_Brake_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<MIN_VALUE>0</MIN_VALUE>
+			<MAX_VALUE>@16K</MAX_VALUE>
+			<IE_GET_STATE>#GET_ROTOR_BRAKE_HANDLE# @16K *</IE_GET_STATE>
+			<IE_SET_STATE>#SET_ROTOR_BRAKE_HANDLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ROTOR_BRAKE_HANDLE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_ROTOR_Brake_Lock_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_ROTOR_Brake_Lock_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ROTOR_BRAKE_LOCK_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ROTOR_BRAKE_LOCK# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ROTOR_BRAKE_LOCK#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>#SET_ROTOR_BRAKE_LOCK_OFF#</POS_OFF_CODE>
+			<POS_ON_CODE>#SET_ROTOR_BRAKE_LOCK_ON#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

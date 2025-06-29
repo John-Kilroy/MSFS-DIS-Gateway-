@@ -1,0 +1,32 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_COMMON_Interactive_Point_Animation_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Interactive_Point_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+	</Template>
+	<Template Name="ASOBO_ET_COMMON_Interactive_Point_Visibility_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Interactive_Point_Visibility_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Component_Visibility_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_COMMON_Collection_Visibility_SubTemplate">
+		<Loop>
+			<Setup>
+				<Param>NODE_ID</Param>
+				<Parameters>
+					<LoadParameters ID="#SAVED_NODE_IDS#"/>
+					<RemoveSavedParameters ID="#SAVED_NODE_IDS#"/>
+				</Parameters>
+			</Setup>
+			<Do>
+				<UseTemplate Name="ASOBO_GT_Component_Visibility_Template"/>
+			</Do>
+		</Loop>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

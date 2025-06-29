@@ -1,0 +1,133 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_CLOSED_OPEN_Settings">
+		<Parameters Type="Default">
+			<POS_CLOSED>0</POS_CLOSED>
+			<POS_OPEN>1</POS_OPEN>
+			<GET_COVER_ACTION_PFN>ASOBO_Get_Cover_Action_Parameters</GET_COVER_ACTION_PFN>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#GET_COVER_ACTION_PFN#"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Cover_Action_Parameters">
+		<Parameters Type="Default">
+			<OPEN_ALIAS_ID>Open</OPEN_ALIAS_ID>
+			<CLOSED_ALIAS_ID>Closed</CLOSED_ALIAS_ID>
+			<POS_CLOSED_TOOLTIP_ID>@TT_Package.STATE.CLOSED</POS_CLOSED_TOOLTIP_ID>
+			<POS_OPEN_TOOLTIP_ID>@TT_Package.STATE.OPEN</POS_OPEN_TOOLTIP_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<OPEN_ALIAS_ID_UC Process="String">'#OPEN_ALIAS_ID#' uc</OPEN_ALIAS_ID_UC>
+			<CLOSED_ALIAS_ID_UC Process="String">'#CLOSED_ALIAS_ID#' uc</CLOSED_ALIAS_ID_UC>
+		</Parameters>
+		<ReturnParameters>
+			<#COVER_ID#_POS_#POS_OPEN#>#OPEN_ALIAS_ID#</#COVER_ID#_POS_#POS_OPEN#>
+			<#COVER_ID#_POS_#POS_CLOSED#>#CLOSED_ALIAS_ID#</#COVER_ID#_POS_#POS_CLOSED#>
+			<POS_CLOSED_TOOLTIP_ID>#POS_CLOSED_TOOLTIP_ID#</POS_CLOSED_TOOLTIP_ID>
+			<POS_CLOSED_ACTION_TYPE>DIGITAL</POS_CLOSED_ACTION_TYPE>
+			<Condition Valid="DEFAULT_ACTION_TT_NAME">
+				<UseParametersFn Name="ASOBO_Default_TT_Name_Helper">
+					<OUT_PARAM_NAME>POS_CLOSED_ACTION_TT_NAME</OUT_PARAM_NAME>
+					<ACTION_NAME>#IE_PRESET_ID_UC#_#CLOSED_ALIAS_ID_UC#</ACTION_NAME>
+				</UseParametersFn>
+			</Condition>
+			<Condition Valid="DEFAULT_ACTION_TT_DESCRIPTION">
+				<POS_CLOSED_ACTION_TT_DESCRIPTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_DESCRIPTION_PREFIX##IE_PRESET_ID_UC#_#CLOSED_ALIAS_ID_UC##ACTION_TT_DESCRIPTION_SUFFIX#</POS_CLOSED_ACTION_TT_DESCRIPTION>
+			</Condition>
+			<Condition Valid="DEFAULT_ACTION_TT_FUNCTION">
+				<Condition Valid="DEFAULT_ACTION_TT_FUNCTION_TO_BUILTIN_FUNC">
+					<True>
+						<POS_CLOSED_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.FUNCTION_#CLOSED_ALIAS_ID_UC#</POS_CLOSED_ACTION_TT_FUNCTION>
+					</True>
+					<False>
+						<POS_CLOSED_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_FUNCTION_PREFIX##IE_PRESET_ID_UC#_#CLOSED_ALIAS_ID_UC##ACTION_TT_FUNCTION_SUFFIX#</POS_CLOSED_ACTION_TT_FUNCTION>
+					</False>
+				</Condition>
+			</Condition>
+			<POS_OPEN_TOOLTIP_ID>#POS_OPEN_TOOLTIP_ID#</POS_OPEN_TOOLTIP_ID>
+			<POS_OPEN_ACTION_TYPE>DIGITAL</POS_OPEN_ACTION_TYPE>
+			<Condition Valid="DEFAULT_ACTION_TT_NAME">
+				<UseParametersFn Name="ASOBO_Default_TT_Name_Helper">
+					<OUT_PARAM_NAME>POS_OPEN_ACTION_TT_NAME</OUT_PARAM_NAME>
+					<ACTION_NAME>#IE_PRESET_ID_UC#_#OPEN_ALIAS_ID_UC#</ACTION_NAME>
+				</UseParametersFn>
+			</Condition>
+			<Condition Valid="DEFAULT_ACTION_TT_DESCRIPTION">
+				<POS_OPEN_ACTION_TT_DESCRIPTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_DESCRIPTION_PREFIX##IE_PRESET_ID_UC#_#OPEN_ALIAS_ID_UC##ACTION_TT_DESCRIPTION_SUFFIX#</POS_OPEN_ACTION_TT_DESCRIPTION>
+			</Condition>
+			<Condition Valid="DEFAULT_ACTION_TT_FUNCTION">
+				<Condition Valid="DEFAULT_ACTION_TT_FUNCTION_TO_BUILTIN_FUNC">
+					<True>
+						<POS_OPEN_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.FUNCTION_#OPEN_ALIAS_ID_UC#</POS_OPEN_ACTION_TT_FUNCTION>
+					</True>
+					<False>
+						<POS_OPEN_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_FUNCTION_PREFIX##IE_PRESET_ID_UC#_#OPEN_ALIAS_ID_UC##ACTION_TT_FUNCTION_SUFFIX#</POS_OPEN_ACTION_TT_FUNCTION>
+					</False>
+				</Condition>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Cover_Settings_Config_Parameters">
+		<Parameters Type="Default">
+			<ON_COVER_CLOSED/>
+			<ON_COVER_OPENED/>
+			<GET_#COVER_ID#_SETTINGS>ASOBO_CLOSED_OPEN_Settings</GET_#COVER_ID#_SETTINGS>
+		</Parameters>
+		<Parameters Type="Override">
+			<COVER_VAR>#COVER_VAR_SCOPE#:#COVER_VAR_NAME#</COVER_VAR>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<GET_#COVER_ID#_SETTINGS Process="Param">GET_#COVER_ID#_SETTINGS</GET_#COVER_ID#_SETTINGS>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#COVER_VAR_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#COVER_VAR_SCOPE#</VAR_SCOPE>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CLOSED_CHECK>(#COVER_VAR#) !</POS_CLOSED_CHECK>
+			<POS_OPEN_CHECK>(#COVER_VAR#)</POS_OPEN_CHECK>
+			<!-- Set position -->
+			<POS_CLOSED_CODE>0 (&gt;#COVER_VAR#) #ON_COVER_CLOSED#</POS_CLOSED_CODE>
+			<POS_OPEN_CODE>1 (&gt;#COVER_VAR#) #ON_COVER_OPENED#</POS_OPEN_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="Asobo_Infinite_Var_Config_Parameters">
+		<Parameters Type="Default">
+			<VAR_TYPE>L:1</VAR_TYPE>
+			<VAR_NAME>XMLVAR_#VAR_ID#</VAR_NAME>
+			<Condition>
+				<Test>
+					<And>
+						<Arg NotEmpty="MIN_VALUE"/>
+						<Arg NotEmpty="MAX_VALUE"/>
+					</And>
+				</Test>
+				<True>
+					<CLAMP_VALUE>#MIN_VALUE# max #MAX_VALUE# min</CLAMP_VALUE>
+				</True>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_GET_STATE>(#VAR_TYPE#:#VAR_NAME#)</IE_GET_STATE>
+			<IE_SET_STATE>(&gt;#VAR_TYPE#:#VAR_NAME#)</IE_SET_STATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="CLAMP_VALUE">
+				<IE_SET_STATE>#CLAMP_VALUE# #IE_SET_STATE#</IE_SET_STATE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="ON_VALUE_SET">
+				<IE_SET_STATE>#IE_SET_STATE# #ON_VALUE_SET#</IE_SET_STATE>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<IE_GET_STATE>#IE_GET_STATE#</IE_GET_STATE>
+			<IE_SET_STATE>#IE_SET_STATE#</IE_SET_STATE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

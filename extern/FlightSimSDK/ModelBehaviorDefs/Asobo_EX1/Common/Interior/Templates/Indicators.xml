@@ -1,0 +1,134 @@
+<ModelBehaviors>
+	<!-- ################################# INDICATORS ################################# -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="ParametersFn\\Indicators_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\Indicators_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Flaps_Position_Indicators_Template">
+		<Loop>
+			<Setup>
+				<Param>NODE_ID</Param>
+				<Value>FLAPS_SETTING</Value>
+				<Parameters>
+					<LoadParameters ID="LIGHTS_INDICES"/>
+					<RemoveSavedParameters ID="LIGHTS_INDICES"/>
+				</Parameters>
+			</Setup>
+			<Do>
+				<UseTemplate Name="ASOBO_IT_Emissive_Brightness_Template">
+					<UseParametersFn Name="ASOBO_Flaps_Position_Emissive_Parameters">
+					</UseParametersFn>
+				</UseTemplate>
+			</Do>
+		</Loop>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Gear_Position_Indicator_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_GearID_Parameters"/>		
+			<UseParametersFn Name="ASOBO_GearPosition_Parameters"/>		
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Gear_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<EMISSIVE_CODE>#GET_GEAR_POSITION# #GEAR_POSITION# ==</EMISSIVE_CODE>
+		</Parameters>
+		
+		<UseTemplate Name="ASOBO_IT_Emissive_Brightness_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Gear_Position_Indicators_Template">
+		<Loop>
+			<Setup>
+				<Param>NODE_ID</Param>
+				<Value>GEAR_ID</Value>
+				<Parameters>
+					<LoadParameters ID="GEAR_IDs"/>
+					<RemoveSavedParameters ID="GEAR_IDs"/>
+				</Parameters>
+			</Setup>
+			<Do>
+				<UseTemplate Name="ASOBO_Gear_Position_Indicator_Template"/>
+			</Do>
+		</Loop>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Gear_Unsafe_Position_Indicator_Template">
+		<Parameters Type="Default">
+			<EMISSIVE_CODE/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>GEAR_ID</Param>
+					<Parameters>
+						<LoadParameters ID="GEAR_IDs"/>
+						<RemoveSavedParameters ID="GEAR_IDs"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_GearID_Parameters"/>	
+					</Parameters>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Gear_Parameters">
+						</UseParametersFn>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition NotEmpty="EMISSIVE_CODE">
+							<True>
+								<EMISSIVE_CODE>#EMISSIVE_CODE# #GET_GEAR_POSITION# d 0 &gt; r 100 &lt; and or</EMISSIVE_CODE>
+							</True>
+							<False>
+								<EMISSIVE_CODE>#GET_GEAR_POSITION# d 0 &gt; r 100 &lt; and</EMISSIVE_CODE>
+							</False>
+						</Condition>
+					</Parameters>
+				</Do>
+			</Loop>
+		</Parameters>	
+		
+		<UseTemplate Name="ASOBO_IT_Emissive_Brightness_Template">
+		</UseTemplate>	
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Contact_Point_Unsafe_Position_Indicator_Template">
+		<Parameters Type="Default">
+			<EMISSIVE_CODE/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CONTACT_POINT_NAME</Param>
+					<Parameters>
+						<LoadParameters ID="CONTACT_POINT_NAMEs"/>
+						<RemoveSavedParameters ID="CONTACT_POINT_NAMEs"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Contact_Point_Parameters">
+							<CONTACT_POINT_ID>'#CONTACT_POINT_NAME#'_n</CONTACT_POINT_ID>
+						</UseParametersFn>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition NotEmpty="EMISSIVE_CODE">
+							<True>
+								<EMISSIVE_CODE>#EMISSIVE_CODE# #GET_CONTACT_POINT_POSITION# d 0 &gt; r 100 &lt; and or</EMISSIVE_CODE>
+							</True>
+							<False>
+								<EMISSIVE_CODE>#GET_CONTACT_POINT_POSITION# d 0 &gt; r 100 &lt; and</EMISSIVE_CODE>
+							</False>
+						</Condition>
+					</Parameters>
+				</Do>
+			</Loop>
+		</Parameters>	
+		
+		<UseTemplate Name="ASOBO_IT_Emissive_Brightness_Template">
+		</UseTemplate>	
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

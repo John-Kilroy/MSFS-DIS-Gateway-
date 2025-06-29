@@ -1,0 +1,1105 @@
+<ModelBehaviors>
+	<!-- ############################### PARAMETERS FN ################################ -->
+	<!-- ############################################################################## -->
+	<!-- Variants -->
+	<Include RelativeFile="Variants\\Interaction_Directional_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<!-- @DOC INPUT_EVENT UNKNOWN
+		@Brief With default configuration (ASOBO_Configure_Global_Parameters), all Input events defined without an IE_TYPE will end up in this category
+	-->
+	<InputEvent ID="UNKNOWN">
+		<Condition NotEmpty="TT_CATEGORY_MAIN">
+			<TT_Category_Main>TT:#TT_CATEGORY_MAIN#</TT_Category_Main>
+		</Condition>
+		<Condition NotEmpty="TT_CATEGORY_SUB">
+			<TT_Category_Sub>TT:#TT_CATEGORY_SUB#</TT_Category_Sub>
+		</Condition>
+		<Presets>
+			<Extend Target="#IE_BASE_TO_EXTEND_FROM#"/>
+		</Presets>
+	</InputEvent>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Configure_Global_Parameters
+		@Brief Save a global default configuration to be used throughout the API
+		@Save Global_Default_Interaction_Config Save ID of default parameters used for all interactions
+		@Save Global_Default_Tooltips_Config Save ID of default parameters used for all interaction tooltips
+		@Save Global_Default_Switch_Interaction_Config Save ID of default parameters used for switch interactions
+		@Save Global_Default_Lever_Interaction_Config Save ID of default parameters used for lever interactions
+		@Save Global_Default_Knob_Interaction_Config Save ID of default parameters used for knob interactions (discrete state)
+		@Save Global_Default_Knob_Finite_Interaction_Config Save ID of default parameters used for finite knob interactions (continuous state)
+		@Save Global_Default_Knob_Infinite_Interaction_Config Save ID of default parameters used for infinite knob interactions (continuous state)
+		@Save Global_Default_Wheel_Interaction_Config Save ID of default parameters used for wheel interactions
+		@Save Global_Default_Button_Interaction_Config Save ID of default parameters used for button interactions
+		@Save Global_Default_Button_Attachement_Config Save ID of default parameters used for button attachements
+		@Save Global_Default_Cover_Interaction_Config Save ID of default parameters used for cover attachements
+		@Save Global_Default_Simple_Config Save ID of default parameters used for simple interactions
+		@Save Global_Default_Event_Config Save ID of default parameters used for event configurations
+		@Save Global_Default_XState_Config Save ID of default parameters used for discrete state configurations
+		@Save ASOBO_XState_Configuration_Default_Parameters_Config Save ID of default parameters used by ASOBO_XState_Configuration_Helper
+		@Save Global_Default_Drag_Config Save ID of default parameters used for continuous state configurations
+		@Save ASOBO_Drag_Configuration_Default_Parameters_Config Save ID of default parameters used by ASOBO_Drag_Configuration_Helper
+		@Save Global_Default_Emissive_Indicators_Config Save ID of default parameters used for indicator emissives
+	-->
+	<ParametersFn Name="ASOBO_Configure_Global_Parameters">
+		<Parameters Type="Override">
+			<ACTION_TT_PREFIX>TT:</ACTION_TT_PREFIX>
+		</Parameters>
+		<Parameters Type="Override">
+			<!-- Interactions -->
+			<SaveParameters ID="Global_Default_Interaction_Config">
+				<IE_TYPE>UNKNOWN</IE_TYPE>
+				<GET_CONFIG_PARAMETERS_PFN>ASOBO_Get_Config_Parameters</GET_CONFIG_PARAMETERS_PFN>
+				<COPY_IE_TYPE_TO_IE_ID_SOURCE>True</COPY_IE_TYPE_TO_IE_ID_SOURCE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Actions_Config">
+				<DEFAULT_STATES_ACTION_TT_PACKAGE>#ACTION_TT_PREFIX#@TT_Package_Action</DEFAULT_STATES_ACTION_TT_PACKAGE>
+				<ACTION_TT_PREFIX>#ACTION_TT_PREFIX#</ACTION_TT_PREFIX>
+				<ACTION_TT_NAME_PREFIX />
+				<ACTION_TT_NAME_SUFFIX/>
+				<DEFAULT_ACTION_TT_NAME>True</DEFAULT_ACTION_TT_NAME>
+				<DEFAULT_ACTION_TT_NAME_TO_TOOLTIP_TITLE>False</DEFAULT_ACTION_TT_NAME_TO_TOOLTIP_TITLE>
+				<ACTION_TT_DESCRIPTION_PREFIX>KEY_</ACTION_TT_DESCRIPTION_PREFIX>
+				<ACTION_TT_DESCRIPTION_SUFFIX>_DESC</ACTION_TT_DESCRIPTION_SUFFIX>
+				<DEFAULT_ACTION_TT_DESCRIPTION>True</DEFAULT_ACTION_TT_DESCRIPTION>
+				<ACTION_TT_FUNCTION_PREFIX>KEY_</ACTION_TT_FUNCTION_PREFIX>
+				<ACTION_TT_FUNCTION_SUFFIX>_FUNC</ACTION_TT_FUNCTION_SUFFIX>
+				<DEFAULT_ACTION_TT_FUNCTION>True</DEFAULT_ACTION_TT_FUNCTION>
+				<DEFAULT_ACTION_TT_FUNCTION_TO_BUILTIN_FUNC>True</DEFAULT_ACTION_TT_FUNCTION_TO_BUILTIN_FUNC>
+				<TOGGLE_ACTION_PFN>ASOBO_Get_Toggle_Action_Parameters</TOGGLE_ACTION_PFN>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Tooltips_Config">
+				<DEFAULT_STATES_TOOLTIPS_PACKAGE>@TT_Package</DEFAULT_STATES_TOOLTIPS_PACKAGE>
+				<TOOLTIP_ACTION_PACKAGE>@TT_Package</TOOLTIP_ACTION_PACKAGE>
+				<TOOLTIPS_TITLE_PACKAGE>@TT_Package</TOOLTIPS_TITLE_PACKAGE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Knob_Infinite_Interaction_Config">
+				<INTERACTION_TYPE_VARIANT>Infinite</INTERACTION_TYPE_VARIANT>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Wheel_Interaction_Config">
+				<INTERACTION_TYPE_VARIANT>Wheel</INTERACTION_TYPE_VARIANT>
+				<WHEEL_INTERACTION_TEMPLATE>ASOBO_CT_Knob_Infinite_Template</WHEEL_INTERACTION_TEMPLATE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Joystick_Interaction_Config">
+				<PFN_SETUP_INTERACTION>ASOBO_Setup_Directional_Parameters</PFN_SETUP_INTERACTION>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Button_Interaction_Config">
+				<BUTTON_TYPE>Push</BUTTON_TYPE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Button_Attachement_Config">
+				<GET_BUTTON_CONFIG_PARAMETERS>ASOBO_Button_Configuration_Helper</GET_BUTTON_CONFIG_PARAMETERS>
+				<BUTTON_TYPE>Push</BUTTON_TYPE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Cover_Interaction_Config">
+				<GET_COVER_CONFIG_PARAMETERS>ASOBO_Cover_Configuration_Helper</GET_COVER_CONFIG_PARAMETERS>
+				<COVER_TOOLTIPS_TITLE_PACKAGE>@TT_Package</COVER_TOOLTIPS_TITLE_PACKAGE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Simple_Config">
+				<GET_SIMPLE_CONFIG_PARAMETERS>ASOBO_Simple_Configuration_Helper</GET_SIMPLE_CONFIG_PARAMETERS>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Event_Config">
+				<GET_EVENT_CONFIG_PARAMETERS>ASOBO_Event_Configuration_Helper</GET_EVENT_CONFIG_PARAMETERS>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Joystick_Config">
+				<GET_JOYSTICK_CONFIG_PARAMETERS>ASOBO_Joystick_Configuration_Helper</GET_JOYSTICK_CONFIG_PARAMETERS>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_XState_Config">
+				<GET_XSTATE_CONFIG_PARAMETERS>ASOBO_XState_Configuration_Helper</GET_XSTATE_CONFIG_PARAMETERS>
+			</SaveParameters>
+			<SaveParameters ID="ASOBO_XState_Configuration_Default_Parameters_Config">
+				<VAR_TYPE>O</VAR_TYPE>
+			</SaveParameters>
+			<SaveParameters ID="Global_Default_Drag_Config">
+				<GET_DRAG_CONFIG_PARAMETERS>ASOBO_Drag_Configuration_Helper</GET_DRAG_CONFIG_PARAMETERS>
+			</SaveParameters>
+			<SaveParameters ID="ASOBO_Drag_Configuration_Default_Parameters_Config">
+				<IE_INCREMENT>1</IE_INCREMENT>
+				<VAR_TYPE>O</VAR_TYPE>
+				<NB_INCREMENT_FOR_FULL_RANGE>500</NB_INCREMENT_FOR_FULL_RANGE>
+				<VALUE_TYPE>NUMBER</VALUE_TYPE>
+				<IE_VALUE_UNITS>Number</IE_VALUE_UNITS>
+			</SaveParameters>
+			<!-- Emissives -->
+			<SaveParameters ID="Global_Default_Emissive_Indicators_Config">
+				<INDICATOR_LIGHT_PROCESSOR>ASOBO_Indicator_Emissive_Parameters</INDICATOR_LIGHT_PROCESSOR>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Add_Button_Helper
+		@Brief Helper to add a button to an interaction
+		@Param APPEND_WITH_BUTTON ID of the save containing any data that should be added to the button config
+	-->
+	<ParametersFn Name="ASOBO_Add_Button_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Button_Attachement_Config">
+				<LoadParameters ID="Global_Default_Button_Attachement_Config"/>
+			</Condition>
+			<APPEND_WITH_BUTTON>Append_With_Button</APPEND_WITH_BUTTON>
+		</Parameters>
+		<Parameters Type="Override">
+			<LoadParameters ID="#APPEND_WITH_BUTTON#"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Add_Attachement_Helper">
+				<SaveParameters ID="Append_With_Attachement" Append="Default">
+					<UseParametersFn Name="#GET_BUTTON_CONFIG_PARAMETERS#"/>
+					<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+						<SAVED_PARAMETERS>APPEND_WITH_BUTTON</SAVED_PARAMETERS>
+					</UseParametersFn>
+				</SaveParameters>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Add_Cover_Helper
+		@Brief Helper to add a cover to an interaction
+		@Param COVER_SAVE_ID ID of the save where cover parameters will be saved
+		@Param APPEND_WITH_BUTTON ID of the save containing any data that should be added to the cover config
+	-->
+	<ParametersFn Name="ASOBO_Add_Cover_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Cover_Interaction_Config">
+				<LoadParameters ID="Global_Default_Cover_Interaction_Config"/>
+			</Condition>
+			<APPEND_WITH_COVER>Append_With_Cover</APPEND_WITH_COVER>
+		</Parameters>
+		<Parameters Type="Override">
+			<LoadParameters ID="#APPEND_WITH_COVER#"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<COVER_SAVE_ID>Cover_Interaction_Parameters</COVER_SAVE_ID>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#COVER_SAVE_ID#" Append="Default">
+				<UseParametersFn Name="#GET_COVER_CONFIG_PARAMETERS#"/>
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>APPEND_WITH_COVER</SAVED_PARAMETERS>
+				</UseParametersFn>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Make_Simple_Config_Helper
+		@Brief Pre-Processor for simple interactions config
+		@Param GET_CONFIG_PARAMETERS Function to call to get this interaction parameters (To be processed by GET_SIMPLE_CONFIG_PARAMETERS or returned using APPEND_WITH_CONFIG)
+		@Param GET_SIMPLE_CONFIG_PARAMETERS Function called last to get any interaction parameters, anything the function returns will be added to the config
+		@Param APPEND_WITH_CONFIG ID of the save containing any data that should be added to the config
+		@Return A ready to use config
+	-->
+	<ParametersFn Name="ASOBO_Make_Simple_Config_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Simple_Config">
+				<LoadParameters ID="Global_Default_Simple_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_CONFIG_PARAMETERS">
+				<UseParametersFn Name="#GET_CONFIG_PARAMETERS#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<APPEND_WITH_CONFIG>Append_With_Config</APPEND_WITH_CONFIG>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#SPARAMS_CONFIG#">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>APPEND_WITH_CONFIG</SAVED_PARAMETERS>
+				</UseParametersFn>
+			</SaveParameters>
+			<UseParametersFn Name="#GET_SIMPLE_CONFIG_PARAMETERS#">
+				<LoadParameters ID="#SPARAMS_CONFIG#"/>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Make_Event_Config_Helper
+		@Brief Pre-Processor for event interactions config
+		@Param GET_CONFIG_PARAMETERS Function to call to get this interaction parameters (To be processed by GET_EVENT_CONFIG_PARAMETERS or returned using APPEND_WITH_CONFIG)
+		@Param GET_EVENT_CONFIG_PARAMETERS Function called last to get any interaction parameters, anything the function returns will be added to the config
+		@Param APPEND_WITH_CONFIG ID of the save containing any data that should be added to the config
+		@Return A ready to use config
+	-->
+	<ParametersFn Name="ASOBO_Make_Event_Config_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Event_Config">
+				<LoadParameters ID="Global_Default_Event_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_CONFIG_PARAMETERS">
+				<UseParametersFn Name="#GET_CONFIG_PARAMETERS#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<APPEND_WITH_CONFIG>Append_With_Config</APPEND_WITH_CONFIG>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>APPEND_WITH_CONFIG</SAVED_PARAMETERS>
+				</UseParametersFn>
+			</SaveParameters>
+			<UseParametersFn Name="#GET_EVENT_CONFIG_PARAMETERS#">
+				<LoadParameters ID="#SPARAMS_CONFIG#"/>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Make_Joystick_Config_Helper
+		@Brief Pre-Processor for joystick interactions config
+		@Param GET_CONFIG_PARAMETERS Function to call to get this interaction parameters (To be processed by GET_EVENT_CONFIG_PARAMETERS or returned using APPEND_WITH_CONFIG)
+		@Param GET_JOYSTICK_CONFIG_PARAMETERS Function called last to get any interaction parameters, anything the function returns will be added to the config
+		@Param APPEND_WITH_CONFIG ID of the save containing any data that should be added to the config
+		@Return A ready to use config
+	-->
+	<ParametersFn Name="ASOBO_Make_Joystick_Config_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Joystick_Config">
+				<LoadParameters ID="Global_Default_Joystick_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_CONFIG_PARAMETERS">
+				<UseParametersFn Name="#GET_CONFIG_PARAMETERS#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<APPEND_WITH_CONFIG>Append_With_Config</APPEND_WITH_CONFIG>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>APPEND_WITH_CONFIG</SAVED_PARAMETERS>
+				</UseParametersFn>
+			</SaveParameters>
+			<UseParametersFn Name="#GET_JOYSTICK_CONFIG_PARAMETERS#">
+				<LoadParameters ID="#SPARAMS_CONFIG#"/>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Make_XState_Config_Helper
+		@Brief Pre-Processor for xstate interactions config (discrete state)
+		@Param GET_CONFIG_PARAMETERS Function to call to get this interaction parameters (To be processed by GET_XSTATE_CONFIG_PARAMETERS or returned using APPEND_WITH_CONFIG)
+		@Param GET_XSTATE_CONFIG_PARAMETERS Function called last to get any interaction parameters, anything the function returns will be added to the config
+		@Param APPEND_WITH_CONFIG ID of the save containing any data that should be added to the config
+		@Return A ready to use config
+	-->
+	<ParametersFn Name="ASOBO_Make_XState_Config_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_XState_Config">
+				<LoadParameters ID="Global_Default_XState_Config"/>
+			</Condition>
+			<GET_SETTINGS Process="Param">GET_#BASE_IE_NAME_UC#_SETTINGS</GET_SETTINGS>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_CONFIG_PARAMETERS">
+				<UseParametersFn Name="#GET_CONFIG_PARAMETERS#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<APPEND_WITH_CONFIG>Append_With_Config</APPEND_WITH_CONFIG>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>APPEND_WITH_CONFIG</SAVED_PARAMETERS>
+				</UseParametersFn>
+			</SaveParameters>
+			<UseParametersFn Name="#GET_XSTATE_CONFIG_PARAMETERS#">
+				<UseParametersFn Name="#GET_SETTINGS#"/>
+				<LoadParameters ID="#SPARAMS_CONFIG#"/>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Make_Drag_Config_Helper
+		@Brief Pre-Processor for drag interactions config (continuous state)
+		@Param GET_CONFIG_PARAMETERS Function to call to get this interaction parameters (To be processed by GET_DRAG_CONFIG_PARAMETERS or returned using APPEND_WITH_CONFIG)
+		@Param GET_DRAG_CONFIG_PARAMETERS Function called last to get any interaction parameters, anything the function returns will be added to the config
+		@Param APPEND_WITH_CONFIG ID of the save containing any data that should be added to the config
+		@Return A ready to use config
+	-->
+	<ParametersFn Name="ASOBO_Make_Drag_Config_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Drag_Config">
+				<LoadParameters ID="Global_Default_Drag_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_CONFIG_PARAMETERS">
+				<UseParametersFn Name="#GET_CONFIG_PARAMETERS#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<APPEND_WITH_CONFIG>Append_With_Config</APPEND_WITH_CONFIG>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#SPARAMS_CONFIG#" Append="Default">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>APPEND_WITH_CONFIG</SAVED_PARAMETERS>
+				</UseParametersFn>
+			</SaveParameters>
+			<UseParametersFn Name="#GET_DRAG_CONFIG_PARAMETERS#">
+				<LoadParameters ID="#SPARAMS_CONFIG#"/>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Auto_Define_Positions_Helper
+		@Brief Helper to create a set of positions when defining settings for a discrete state interaction
+		@Param POSITION_PREFIX Prefix given to the positions index the function is expected to parse
+		@Param #POSITION_PREFIX##NUMBER# list of positions names starting at 0
+		@Return A list of positions formatted to be handled by a discrete state configurator
+	-->
+	<ParametersFn Name="ASOBO_Auto_Define_Positions_Helper">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Do_For_Each_Position_Helper">
+				<DEFINE_PARAMETERS>ASOBO_Define_Position_Parameters_Helper</DEFINE_PARAMETERS>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- @DOC FUNCTION ASOBO_Auto_Define_Tooltips_Helper
+		@Brief Helper to create a set of tooltips when defining settings for a discrete state interaction
+		@Param POSITION_PREFIX Prefix given to the positions index the function is expected to parse
+		@Param #POSITION_PREFIX##NUMBER# list of positions names starting at 0
+		@Return A list of tooltips formatted to be handled by a discrete state configurator
+	-->
+	<ParametersFn Name="ASOBO_Auto_Define_Tooltips_Helper">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Do_For_Each_Position_Helper">
+				<DEFINE_PARAMETERS>ASOBO_Define_Tooltip_Parameters_Helper</DEFINE_PARAMETERS>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Auto_Define_Positions_And_Tooltips_Helper
+		@Brief Helper to create a set of positions and tooltips when defining settings for a discrete state interaction
+		@Param POSITION_PREFIX Prefix given to the positions index the function is expected to parse
+		@Param #POSITION_PREFIX##ID# list of positions names starting with ID=0
+		@Return A list of positions and tooltips formatted to be handled by a discrete state configurator
+	-->
+	<ParametersFn Name="ASOBO_Auto_Define_Positions_And_Tooltips_Helper">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Do_For_Each_Position_Helper">
+				<DEFINE_PARAMETERS>ASOBO_Define_Position_And_Tooltip_Parameters_Helper</DEFINE_PARAMETERS>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Do_For_Each_Position_Helper
+		@Brief execute the function DEFINE_PARAMETERS for each position (#POSITION_PREFIX##ID#)
+		@Param DEFINE_PARAMETERS Processor for each position
+		@Param POSITION_PREFIX¨Prefix given to each position index
+		@Param #POSITION_PREFIX##ID# list of positions to process
+		@Return Anything the DEFINE_PARAMETERS function returns
+	-->
+	<ParametersFn Name="ASOBO_Do_For_Each_Position_Helper">
+		<Parameters Type="Default">
+			<POSITION_PREFIX>POS_</POSITION_PREFIX>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="#POSITION_PREFIX##ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<POSITION_NAME Process="Param">#POSITION_PREFIX##ID#</POSITION_NAME>
+					</Parameters>
+					<UseParametersFn Name="#DEFINE_PARAMETERS#">
+						<POSITION_NAME_UC Process="String">'#POSITION_NAME#' uc</POSITION_NAME_UC>
+					</UseParametersFn>
+				</Do>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Define_Position_Parameters_Helper
+		@Brief Format a position parameter to be handled by a discrete state configurator
+		@Param POSITION_NAME_UC Position name in upper case
+		@Param BASE_IE_NAME_UC Input event name in upper case
+		@Param ID Index of the position (number)
+		@Return A position formatted for a discrete state configuration + ASOBO_Define_Action_Parameters_Helper result
+	-->
+	<ParametersFn Name="ASOBO_Define_Position_Parameters_Helper">
+		<ReturnParameters>
+			<#BASE_IE_NAME_UC#_POS_#ID#>#POSITION_NAME_UC#</#BASE_IE_NAME_UC#_POS_#ID#>
+			<UseParametersFn Name="ASOBO_Define_Action_Parameters_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- @DOC FUNCTION ASOBO_Define_Action_Parameters_Helper
+		@Brief Format an action parameter to be handled by a discrete state configurator
+		@Param POSITION_NAME_UC Position name in upper case
+		@Param POS_#POSITION_NAME_UC#_ACTION_TYPE action type for the given position
+		@Param POS_#POSITION_NAME_UC#_ACTION_TT_NAME action tt_name for the given position
+		@Param POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION action tt_description for the given position
+		@Param POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION action tt_function for the given position
+		@Param POS_#POSITION_NAME_UC#_ACTION_TT_TAG action tt_tag for the given position
+		@Param ID Index of the position (number)
+		@Return A position action formatted for a discrete state configuration
+	-->
+	<ParametersFn Name="ASOBO_Define_Action_Parameters_Helper">
+		<Parameters Type="Default">
+			<LoadParameters ID="Global_Default_Actions_Config"/>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Check="POS_#POSITION_NAME_UC#_ACTION_TYPE">
+				<True>
+					<POS_#POSITION_NAME_UC#_ACTION_TYPE Process="Param">POS_#POSITION_NAME_UC#_ACTION_TYPE</POS_#POSITION_NAME_UC#_ACTION_TYPE>
+				</True>
+				<False>
+					<POS_#POSITION_NAME_UC#_ACTION_TYPE>DIGITAL</POS_#POSITION_NAME_UC#_ACTION_TYPE>
+				</False>
+			</Condition>
+			<Condition Check="POS_#POSITION_NAME_UC#_ACTION_TT_NAME">
+				<True>
+					<POS_#POSITION_NAME_UC#_ACTION_TT_NAME Process="Param">POS_#POSITION_NAME_UC#_ACTION_TT_NAME</POS_#POSITION_NAME_UC#_ACTION_TT_NAME>
+				</True>
+				<False>
+					<Condition Valid="DEFAULT_ACTION_TT_NAME">
+						<UseParametersFn Name="ASOBO_Default_TT_Name_Helper">
+							<OUT_PARAM_NAME>POS_#POSITION_NAME_UC#_ACTION_TT_NAME</OUT_PARAM_NAME>
+							<ACTION_NAME>#IE_PRESET_ID_UC#_#POSITION_NAME_UC#</ACTION_NAME>
+						</UseParametersFn>
+					</Condition>
+				</False>
+			</Condition>
+			<Condition Check="POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION">
+				<True>
+					<POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION Process="Param">POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION</POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION>
+				</True>
+				<False>
+					<Condition Valid="DEFAULT_ACTION_TT_DESCRIPTION">
+						<POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_DESCRIPTION_PREFIX##IE_PRESET_ID_UC#_#POSITION_NAME_UC##ACTION_TT_DESCRIPTION_SUFFIX#</POS_#POSITION_NAME_UC#_ACTION_TT_DESCRIPTION>						
+					</Condition>
+				</False>
+			</Condition>
+			<Condition Check="POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION">
+				<True>
+					<POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION Process="Param">POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION</POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION>
+				</True>
+				<False>
+					<Condition Valid="DEFAULT_ACTION_TT_FUNCTION">
+						<Condition Valid="DEFAULT_ACTION_TT_FUNCTION_TO_BUILTIN_FUNC">
+							<True>
+								<POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.FUNCTION_#POSITION_NAME_UC#</POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION>
+							</True>
+							<False>
+								<POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_FUNCTION_PREFIX##IE_PRESET_ID_UC#_#POSITION_NAME_UC##ACTION_TT_FUNCTION_SUFFIX#</POS_#POSITION_NAME_UC#_ACTION_TT_FUNCTION>
+							</False>
+						</Condition>
+					</Condition>
+				</False>
+			</Condition>
+			<Condition Check="POS_#POSITION_NAME_UC#_ACTION_TT_TAG">
+				<POS_#POSITION_NAME_UC#_ACTION_TT_TAG Process="Param">POS_#POSITION_NAME_UC#_ACTION_TT_TAG</POS_#POSITION_NAME_UC#_ACTION_TT_TAG>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- @DOC FUNCTION ASOBO_Define_Tooltip_Parameters_Helper
+		@Brief Format a tooltip parameter to be handled by a discrete state configurator
+		@Param POSITION_NAME_UC Position name in upper case
+		@Param POS_#POSITION_NAME_UC#_TOOLTIP_ID tooltip identifier for the given position
+		@Param POS_#POSITION_NAME_UC#_TOOLTIP_CODE toltip code for the given position
+		@Param ID Index of the position (number)
+		@Return A position tooltip formatted for a discrete state configuration
+	-->
+	<ParametersFn Name="ASOBO_Define_Tooltip_Parameters_Helper">
+		<Parameters Type="Default">
+			<LoadParameters ID="Global_Default_Tooltips_Config"/>
+		</Parameters>
+		<ReturnParameters>
+			<Switch>
+				<Case Check="POS_#POSITION_NAME_UC#_TOOLTIP_ID">
+					<POS_#POSITION_NAME_UC#_TOOLTIP_ID Process="Param">POS_#POSITION_NAME_UC#_TOOLTIP_ID</POS_#POSITION_NAME_UC#_TOOLTIP_ID>
+				</Case>
+				<Case Check="POS_#POSITION_NAME_UC#_TOOLTIP_CODE">
+					<POS_#POSITION_NAME_UC#_TOOLTIP_CODE Process="Param">POS_#POSITION_NAME_UC#_TOOLTIP_CODE</POS_#POSITION_NAME_UC#_TOOLTIP_CODE>
+				</Case>
+				<Default>
+					<POS_#POSITION_NAME_UC#_TOOLTIP_ID>#DEFAULT_STATES_TOOLTIPS_PACKAGE#.STATE.#POSITION_NAME_UC#</POS_#POSITION_NAME_UC#_TOOLTIP_ID>
+				</Default>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- @DOC FUNCTION ASOBO_Define_Position_And_Tooltip_Parameters_Helper
+		@Brief Format a tooltip and position parameters to be handled by a discrete state configurator
+		@Return The result of ASOBO_Define_Position_Parameters_Helper and ASOBO_Define_Tooltip_Parameters_Helper
+	-->
+	<ParametersFn Name="ASOBO_Define_Position_And_Tooltip_Parameters_Helper">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Define_Position_Parameters_Helper"/>
+			<UseParametersFn Name="ASOBO_Define_Tooltip_Parameters_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Config_Parameters
+		@Brief Format GET_SETTINGS and GET_SETTINGS_CONFIG to the format expected by the interaction processor
+		@Param GET_SETTINGS Function returning a list of positions and optionally their configuration (discrete states configuration only)
+		@Param GET_SETTINGS_CONFIG Function generating the interaction configuration parameters
+		@Return GET_SETTINGS and GET_SETTINGS_CONFIG formatted to be hanlded by the interaction processor
+	-->
+	<ParametersFn Name="ASOBO_Get_Config_Parameters">
+		<Parameters Type="Default">
+			<GET_SETTINGS_CONFIG>ASOBO_#INTERACTION_TYPE#_Settings_Config</GET_SETTINGS_CONFIG>
+		</Parameters>
+		<ReturnParameters>
+			<Condition NotEmpty="GET_SETTINGS">
+				<GET_#IE_NAME#_SETTINGS>#GET_SETTINGS#</GET_#IE_NAME#_SETTINGS>
+			</Condition>
+			<Condition NotEmpty="GET_SETTINGS_CONFIG">
+				<GET_#IE_NAME#_SETTINGS_CONFIG>#GET_SETTINGS_CONFIG#</GET_#IE_NAME#_SETTINGS_CONFIG>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Track_Momentary_Value_Helper
+		@Brief used by button interactions to track the state of the button in a variable VAR_BUTTON_STATE_NAME
+		@Param VAR_BUTTON_STATE_NAME Name of the variable holding the button state value
+		@Param GET_MOMENTARY_SETTINGS Function returning a list of positions and optionally their configuration
+		@Param TOGGLEABLE If set, sets the flag MOMENTARY_BY_DEFAULT to false
+		@Return VAR_BUTTON_STATE_SCOPE & IE_TOOLTIP_VALUE and optionally MOMENTARY_BY_DEFAULT
+	-->
+	<ParametersFn Name="ASOBO_Track_Momentary_Value_Helper">
+		<Condition Check="GET_MOMENTARY_SETTINGS">
+			<Parameters Type="Default">
+				<UseParametersFn Name="#GET_MOMENTARY_SETTINGS#"/>
+				<VAR_BUTTON_STATE_NAME>XMLVAR_#IE_PRESET_ID#_Value</VAR_BUTTON_STATE_NAME>
+				<VAR_BUTTON_STATE_SCOPE>O</VAR_BUTTON_STATE_SCOPE>
+				<STATE_PREFIX>#BASE_IE_NAME_UC#_POS</STATE_PREFIX>
+			</Parameters>
+			<Parameters Type="Default">
+				<STATE_POS_NEUTRAL Process="Param">#STATE_PREFIX#_0</STATE_POS_NEUTRAL>
+				<STATE_POS_MOMENTARY Process="Param">#STATE_PREFIX#_1</STATE_POS_MOMENTARY>
+			</Parameters>
+			<Parameters Type="Default">
+				<UseParametersFn Name="ASOBO_Get_Position_Tooltip_As_RPN_Helper">
+					<IN_STATE_ID Process="String">'#STATE_POS_NEUTRAL#' uc</IN_STATE_ID>
+					<OUT_PARAM_ID>TOOLTIP_POS_NEUTRAL</OUT_PARAM_ID>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Get_Position_Tooltip_As_RPN_Helper">
+					<IN_STATE_ID Process="String">'#STATE_POS_MOMENTARY#' uc</IN_STATE_ID>
+					<OUT_PARAM_ID>TOOLTIP_POS_MOMENTARY</OUT_PARAM_ID>
+				</UseParametersFn>
+			</Parameters>
+		</Condition>
+		<ReturnParameters>
+			<Condition Check="GET_MOMENTARY_SETTINGS">
+				<IE_TOOLTIP_VALUE>(#VAR_BUTTON_STATE_SCOPE#:#VAR_BUTTON_STATE_NAME#) 0 == if{ #TOOLTIP_POS_NEUTRAL# } els{ #TOOLTIP_POS_MOMENTARY# }</IE_TOOLTIP_VALUE>
+				<VAR_BUTTON_STATE_NAME>#VAR_BUTTON_STATE_NAME#</VAR_BUTTON_STATE_NAME>
+				<VAR_BUTTON_STATE_SCOPE>#VAR_BUTTON_STATE_SCOPE#</VAR_BUTTON_STATE_SCOPE>
+			</Condition>
+			<Condition Check="TOGGLEABLE">
+				<MOMENTARY_BY_DEFAULT>False</MOMENTARY_BY_DEFAULT>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Position_Tooltip_As_RPN_Helper
+		@Brief Helper to format a position tooltip into an RPN snippet
+		@Param IN_STATE_ID ID of the state/position
+		@Param POS_#IN_STATE_ID#_TOOLTIP_ID tooltip identifier for the given state
+		@Param POS_#IN_STATE_ID#_TOOLTIP_CODE toltip code for the given state
+		@Return A position tooltip formatted to RPN (stored in the parameter specified by OUT_PARAM_ID)
+	-->
+	<ParametersFn Name="ASOBO_Get_Position_Tooltip_As_RPN_Helper">
+		<Parameters Type="Default">
+			<OUT_PARAM_ID>TOOLTIP_#IN_STATE_ID#_RPN</OUT_PARAM_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch>
+				<Case Check="POS_#IN_STATE_ID#_TOOLTIP_ID">
+					<CUR_TOOLTIP_ID Process="Param">POS_#IN_STATE_ID#_TOOLTIP_ID</CUR_TOOLTIP_ID>
+				</Case>
+				<Case Check="POS_#IN_STATE_ID#_TOOLTIP_CODE">
+					<CUR_TOOLTIP_CODE Process="Param">POS_#IN_STATE_ID#_TOOLTIP_CODE</CUR_TOOLTIP_CODE>
+				</Case>
+				<Default>
+					<CUR_TOOLTIP_ID>#DEFAULT_STATES_TOOLTIPS_PACKAGE#.STATE.#IN_STATE_ID#</CUR_TOOLTIP_ID>
+				</Default>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<Switch>
+				<Case Check="CUR_TOOLTIP_ID">
+					<#OUT_PARAM_ID#>(R:1:#CUR_TOOLTIP_ID#)</#OUT_PARAM_ID#>
+				</Case>
+				<Case Check="CUR_TOOLTIP_CODE">
+					<#OUT_PARAM_ID#>#CUR_TOOLTIP_CODE#</#OUT_PARAM_ID#>
+				</Case>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Simple_Configuration_Helper
+		@Brief Default configuration for a simple interaction
+		@Param ON_EVENT code executed ON_ENTER_LOCK
+		@Param ON_RELEASE code executed ON_EXIT_LOCK
+		@Param ON_EVENT_INC code executed ON_INCREASE
+		@Param ON_EVENT_DEC code executed ON_DECREASE
+		@Return Parameters to be interpreted by the simple config interaction processor
+	-->
+	<ParametersFn Name="ASOBO_Simple_Configuration_Helper">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Process_Bindings_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Process_Watchers_Saves_Helper"/>
+			<ON_ENTER_LOCK>1 (&gt;B:#IE_PRESET_ID#_Set)</ON_ENTER_LOCK>
+			<ON_EXIT_LOCK>0 (&gt;B:#IE_PRESET_ID#_Set)</ON_EXIT_LOCK>
+			<ON_INCREASE>1 (&gt;B:#IE_PRESET_ID#_Inc)</ON_INCREASE>
+			<ON_DECREASE>1 (&gt;B:#IE_PRESET_ID#_Dec)</ON_DECREASE>
+			<Condition Check="ON_EVENT">
+				<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+					<SET_CODE>p0 if{ #ON_EVENT# }</SET_CODE>
+				</UseParametersFn>
+			</Condition>
+			<Condition Check="ON_RELEASE">
+				<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+					<SET_CODE>p0 ! if{ #ON_RELEASE# }</SET_CODE>
+				</UseParametersFn>
+			</Condition>
+			<Condition Check="ON_EVENT_INC">
+				<UseParametersFn Name="ASOBO_Append_Inc_Code_Helper">
+					<SET_CODE>p0 if{ #ON_EVENT_INC# }</SET_CODE>
+				</UseParametersFn>
+			</Condition>
+			<Condition Check="ON_EVENT_DEC">
+				<UseParametersFn Name="ASOBO_Append_Dec_Code_Helper">
+					<SET_CODE>p0 if{ #ON_EVENT_DEC# }</SET_CODE>
+				</UseParametersFn>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Simple_Configuration_Helper
+		@Brief Default configuration for an event interaction
+		@Param ON_EVENT code executed when the button is pressed
+		@Param ON_RELEASE code executed when the button is released
+		@Param ON_BUTTON_DOWN code executed when the button is down (every frame)
+		@Param ON_LONG_PRESS_EVENT code executed when the button is down for more than the LONG_PRESS_DURATION specified
+		@Param GET_SETTINGS positions to cycle on button press
+		@Param GET_MOMENTARY_SETTINGS Same thing as GET_SETTINGS but with 2 settings. Instead of cycling the states, the state will depend on whether the button is up or down
+		@Param TOGGLEABLE if GET_SETTINGS is not empty, work similarly to GET_MOMENTARY_SETTINGS but the button state will not be momentary
+		@Return Parameters to be interpreted by the event config interaction processor
+	-->
+	<ParametersFn Name="ASOBO_Event_Configuration_Helper">
+		<Parameters Type="Default">
+			<Condition Check="TOGGLEABLE">
+				<TRACK_MOMENTARY_VALUE/>
+				<Condition Check="GET_#BASE_IE_NAME_UC#_SETTINGS">
+					<GET_MOMENTARY_SETTINGS Process="Param">GET_#BASE_IE_NAME_UC#_SETTINGS</GET_MOMENTARY_SETTINGS>
+				</Condition>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<ON_EVENT/>
+			<ON_RELEASE/>
+			<Condition Check="GET_MOMENTARY_SETTINGS">
+				<TRACK_MOMENTARY_VALUE/>
+			</Condition>
+		</Parameters>
+		<Condition Check="GET_EVENT_SETTINGS_CONFIG">
+			<Parameters Type="Override">
+				<UseParametersFn Name="#GET_EVENT_SETTINGS_CONFIG#"/>
+			</Parameters>
+		</Condition>
+		<Condition Check="GET_MOMENTARY_SETTINGS">			
+			<Condition Check="GET_MOMENTARY_SETTINGS_CONFIG">
+				<Parameters Type="Override">
+					<UseParametersFn Name="#GET_MOMENTARY_SETTINGS_CONFIG#"/>
+				</Parameters>
+			</Condition>
+		</Condition>
+		<Condition NotEmpty="ON_BUTTON_DOWN">
+			<Parameters Type="Override">
+				<UseParametersFn Name="ASOBO_Add_Button_Down_Event_Helper">
+					<OUT_EVENT_PARAM_NAME>ON_EVENT</OUT_EVENT_PARAM_NAME>
+				</UseParametersFn>
+			</Parameters>
+		</Condition>
+		<Condition NotEmpty="ON_LONG_PRESS_EVENT">
+			<Parameters Type="Override">
+				<UseParametersFn Name="ASOBO_Add_Button_Long_Press_Event_Helper">
+					<OUT_EVENT_PARAM_NAME>ON_EVENT</OUT_EVENT_PARAM_NAME>
+				</UseParametersFn>
+			</Parameters>
+		</Condition>
+		<Condition NotEmpty="ON_SHORT_PRESS_EVENT">
+			<Parameters Type="Override">
+				<UseParametersFn Name="ASOBO_Add_Button_Short_Click_Event_Helper">
+					<OUT_EVENT_PARAM_NAME>ON_EVENT</OUT_EVENT_PARAM_NAME>
+					<OUT_EVENT_SHORT_PRESS_PARAM_NAME>ON_RELEASE</OUT_EVENT_SHORT_PRESS_PARAM_NAME>
+					<Condition NotEmpty="ON_LONG_PRESS_EVENT">
+						<TRACK_TIME>False</TRACK_TIME>
+					</Condition>
+				</UseParametersFn>
+			</Parameters>
+		</Condition>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Process_Bindings_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Process_Watchers_Saves_Helper"/>
+			<Condition CheckSavedParameters="Append_With_Event_Config">
+				<LoadParameters ID="Append_With_Event_Config"/>
+				<RemoveSavedParameters ID="Append_With_Event_Config"/>
+			</Condition>
+			<Condition Check="GET_#BASE_IE_NAME_UC#_SETTINGS">
+				<True>
+					<UseParametersFn Name="ASOBO_Make_XState_Config_Helper"/>
+					<EVENT_TYPE>XSTATES</EVENT_TYPE>
+				</True>
+			</Condition>
+			<UseParametersFn Name="ASOBO_Auto_Define_Event_Param_Helper">
+				<ON_EVENT_SET>#ON_EVENT#</ON_EVENT_SET>
+				<ON_EVENT_RELEASE>#ON_RELEASE#</ON_EVENT_RELEASE>
+			</UseParametersFn>
+			<Condition Check="TRACK_MOMENTARY_VALUE">
+				<UseParametersFn Name="ASOBO_Track_Momentary_Value_Helper"/>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Simple_Configuration_Helper
+		@Brief Default configuration for an event interaction
+		@Param ON_ENTER_LOCK a lock event yep, you guessed it
+		@Return Parameters to be interpreted by the event config interaction processor
+	-->
+	<ParametersFn Name="ASOBO_Joystick_Configuration_Helper">
+		<Parameters Type="Default">
+			<SaveParameters ID="Append_With_Joystick_Config">
+				<Condition NotEmpty="GET_JOYSTICK_SETTINGS_CONFIG">
+					<UseParametersFn Name="#GET_JOYSTICK_SETTINGS_CONFIG#"/>
+				</Condition>				
+			</SaveParameters>
+			<LoadParameters ID="Append_With_Joystick_Config"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Process_Bindings_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Process_Watchers_Saves_Helper"/>
+			<Condition>
+				<Test>
+					<Or>						
+						<Or>
+							<Or>
+								<Or>
+									<Arg NotEmpty="POS_NEUTRAL_CODE"/>
+									<Arg NotEmpty="POS_L_CODE"/>
+								</Or>
+								<Arg NotEmpty="POS_R_CODE"/>
+							</Or>
+							<Arg NotEmpty="POS_DN_CODE"/>
+						</Or>
+						<Arg NotEmpty="POS_UP_CODE"/>
+					</Or>
+				</Test>
+				<True>
+					<INTERACTION_VARIANT>DIRECTIONAL_STATES</INTERACTION_VARIANT>
+				</True>
+				<False>
+					<INTERACTION_VARIANT>DRAG_AXIS</INTERACTION_VARIANT>
+				</False>
+			</Condition>
+			<Condition CheckSavedParameters="Append_With_Joystick_Config">
+				<LoadParameters ID="Append_With_Joystick_Config"/>
+				<RemoveSavedParameters ID="Append_With_Joystick_Config"/>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_XState_Configuration_Helper
+		@Brief Default configuration for a discrete state interaction
+		@Param VAR_TYPE Scope of the state variable
+		@Param VAR_NAME Name of the state variable
+		@Param STATE_PREFIX Prefix given to the positions definition
+		@Param POS_#STATE_NAME_UC#_CODE Code executed when entering the given position
+		@Param POS_#STATE_NAME_UC#_CHECK Condition checked to decide if the position should be selected. Can be combined with the already existing condition
+		@Return Parameters to be interpreted by the discrete state config interaction processor
+	-->
+	<ParametersFn Name="ASOBO_XState_Configuration_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="ASOBO_XState_Configuration_Default_Parameters_Config">
+				<LoadParameters ID="ASOBO_XState_Configuration_Default_Parameters_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_NAME>XMLVAR_#IE_PRESET_ID#_Value</VAR_NAME>
+			<STATE_PREFIX>#BASE_IE_NAME_UC#_POS</STATE_PREFIX>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Process_Bindings_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Process_Watchers_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#VAR_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#VAR_TYPE#</VAR_SCOPE>
+			</UseParametersFn>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="#STATE_PREFIX#_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<STATE_NAME Process="Param">#STATE_PREFIX#_#CUR_ID#</STATE_NAME>
+					</Parameters>
+					<Parameters Type="Override">
+						<STATE_NAME_UC Process="String">'#STATE_NAME#' uc</STATE_NAME_UC>
+					</Parameters>
+					<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+						<THIS_POS_CODE>#CUR_ID# (&gt;#VAR_TYPE#:#VAR_NAME#)</THIS_POS_CODE>
+						<PARAM>THIS_POS_CODE</PARAM>
+						<OUT_PARAM_NAME>POS_#STATE_NAME_UC#_CODE</OUT_PARAM_NAME>
+						<APPEND_BEFORE>True</APPEND_BEFORE>
+					</UseParametersFn>
+					<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+						<THIS_POS_CHECK>(#VAR_TYPE#:#VAR_NAME#) #CUR_ID# ==</THIS_POS_CHECK>
+						<PARAM>THIS_POS_CHECK</PARAM>
+						<OUT_PARAM_NAME>POS_#STATE_NAME_UC#_CHECK</OUT_PARAM_NAME>
+						<APPEND_BEFORE>True</APPEND_BEFORE>
+					</UseParametersFn>
+				</Do>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Drag_Configuration_Helper
+		@Brief Default configuration for a continuous state interaction
+		@Param VAR_TYPE Scope of the state variable
+		@Param VAR_NAME Name of the state variable
+		@Param ON_EVENT_INC Code executed when a the value is increased
+		@Param ON_EVENT_DEC Code executed when a the value is descreased
+		@Param ON_EVENT Code executed when a new value is set
+		@Param IE_INCREMENT Value sent to the Inc and Dec events
+		@Param INCREMENT_PER_THRESHOLD Value added to the current one per threshold crossed to the Set event
+		@Param PFN_DELTA_THRESHOLD_VALUES Getter function to get the desired drag sensitivity
+		@Param INFINITE_ANIM_SCALE_FACTOR Factor for relative animation rotation speed
+		@Param IE_GET_STATE Code snippet returning the current state value
+		@Param IE_SET_STATE Code snippet setting the new state value
+		@Return Parameters to be interpreted by the continuous state config interaction processor
+	-->
+	<ParametersFn Name="ASOBO_Drag_Configuration_Helper">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="ASOBO_Drag_Configuration_Default_Parameters_Config">
+				<LoadParameters ID="ASOBO_Drag_Configuration_Default_Parameters_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_NAME>XMLVAR_#IE_PRESET_ID#_Value</VAR_NAME>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="ON_EVENT_INC"/>
+						<Arg Check="ON_EVENT_DEC"/>
+					</And>
+				</Test>
+				<True>
+					<ON_EVENT>l0 0 &gt; if{ #ON_EVENT_INC# } els{ #ON_EVENT_DEC# }</ON_EVENT>
+					<INFINITE_ANIM_SCALE_FACTOR>10</INFINITE_ANIM_SCALE_FACTOR>
+				</True>
+				<False>
+					<Condition Check="CLAMP_VALUE">
+						<False>
+							<MIN_VALUE>0</MIN_VALUE>
+							<MAX_VALUE>100</MAX_VALUE>
+						</False>
+					</Condition>
+				</False>
+			</Condition>
+			<IE_GET_STATE>(#VAR_TYPE#:#VAR_NAME#)</IE_GET_STATE>
+			<IE_SET_STATE>(&gt;#VAR_TYPE#:#VAR_NAME#)</IE_SET_STATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="ON_EVENT">
+				<IE_SET_STATE>#IE_SET_STATE# #ON_EVENT#</IE_SET_STATE>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Process_Bindings_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Process_Watchers_Saves_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#VAR_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#VAR_TYPE#</VAR_SCOPE>
+			</UseParametersFn>
+			<NB_INCREMENT_FOR_FULL_RANGE>#NB_INCREMENT_FOR_FULL_RANGE#</NB_INCREMENT_FOR_FULL_RANGE>
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="MIN_VALUE"/>
+						<Arg Check="MAX_VALUE"/>
+					</And>
+				</Test>
+				<True>
+					<MIN_VALUE>#MIN_VALUE#</MIN_VALUE>
+					<MAX_VALUE>#MAX_VALUE#</MAX_VALUE>
+				</True>
+			</Condition>
+			<Condition Check="PFN_DELTA_THRESHOLD_VALUES">
+				<PFN_DELTA_THRESHOLD_VALUES>#PFN_DELTA_THRESHOLD_VALUES#</PFN_DELTA_THRESHOLD_VALUES>				
+			</Condition>
+			<Condition Check="INFINITE_ANIM_SCALE_FACTOR">
+				<INFINITE_ANIM_SCALE_FACTOR>#INFINITE_ANIM_SCALE_FACTOR#</INFINITE_ANIM_SCALE_FACTOR>
+			</Condition>
+			<VALUE_TYPE>#VALUE_TYPE#</VALUE_TYPE>
+			<IE_INCREMENT>#IE_INCREMENT#</IE_INCREMENT>
+			<IE_GET_STATE>#IE_GET_STATE#</IE_GET_STATE>
+			<IE_SET_STATE>#IE_SET_STATE#</IE_SET_STATE>
+			<IE_VALUE_UNITS>#IE_VALUE_UNITS#</IE_VALUE_UNITS>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Cover_Configuration_Helper
+		@Brief Configurate a cover interaction
+		@Param COVER_TOOLTIPS_TITLE_PACKAGE loc package looked up the cover tooltip title
+		@Param COVER_SOUND_EVENT_INTERACTION_TYPE Type of sound event interaction
+		@Param COVER_NODE_ID node id of the cover
+		@Param COVER_ANIM_NAME anim name of the cover
+		@Return Cover interaction parameters
+	-->
+	<ParametersFn Name="ASOBO_Cover_Configuration_Helper">
+		<Parameters Type="Default">
+			<COVER_TOOLTIPS_TITLE_PACKAGE>@TT_Package</COVER_TOOLTIPS_TITLE_PACKAGE>
+			<COVER_SOUND_EVENT_INTERACTION_TYPE>COVER</COVER_SOUND_EVENT_INTERACTION_TYPE>
+		</Parameters>
+		<ReturnParameters>
+			<TOOLTIPS_TITLE_PACKAGE>#COVER_TOOLTIPS_TITLE_PACKAGE#</TOOLTIPS_TITLE_PACKAGE>
+			<SOUND_EVENT_INTERACTION_TYPE>#COVER_SOUND_EVENT_INTERACTION_TYPE#</SOUND_EVENT_INTERACTION_TYPE>
+			<UseParametersFn Name="ASOBO_Get_Common_Parameters_Helper">
+				<OUT_NODE_ID_PARAM>COVER_NODE_ID</OUT_NODE_ID_PARAM>
+				<OUT_ANIM_NAME_PARAM>COVER_ANIM_NAME</OUT_ANIM_NAME_PARAM>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Button_Configuration_Helper
+		@Brief Configurate a button interaction
+		@Param BUTTON_TYPE Push or Pull
+		@Return Button interaction parameters
+	-->
+	<ParametersFn Name="ASOBO_Button_Configuration_Helper">
+		<Parameters Type="Default">
+			<GET_CONFIG_PARAMETERS_PFN>ASOBO_Get_Config_Parameters</GET_CONFIG_PARAMETERS_PFN>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_SETTINGS/>
+			<GET_SETTINGS_CONFIG>ASOBO_Button_Settings_Config</GET_SETTINGS_CONFIG>
+			<GET_CONFIG_PARAMETERS/>
+			<INTERACTION_TYPE>Button</INTERACTION_TYPE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#GET_CONFIG_PARAMETERS_PFN#"/>
+			<GET_CONFIG_PARAMETERS>#GET_CONFIG_PARAMETERS#</GET_CONFIG_PARAMETERS>
+			<INTERACTION_TYPE>#INTERACTION_TYPE#</INTERACTION_TYPE>
+			<Condition NotEmpty="BUTTON_TYPE">
+				<BUTTON_TYPE>#BUTTON_TYPE#</BUTTON_TYPE>				
+			</Condition>
+			<KEEP_ANIM_LAG_WHEN_INTERACTING>True</KEEP_ANIM_LAG_WHEN_INTERACTING>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Button_Configuration_Helper
+		@Brief Configurate a button interaction
+		@Param BUTTON_TYPE Push or Pull
+		@Return Button interaction parameters
+	-->
+	<ParametersFn Name="ASOBO_Simple_Settings_Config">
+		<Parameters Type="Default">
+			<MAKE_CONFIG_PFN>ASOBO_Make_Simple_Config_Helper</MAKE_CONFIG_PFN>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#MAKE_CONFIG_PFN#"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Button_Settings_Config
+		@Brief Use the function MAKE_CONFIG_PFN to create a button config
+		@Param MAKE_CONFIG_PFN Function used to make the config
+		@Return Button configuration
+	-->
+	<ParametersFn Name="ASOBO_Button_Settings_Config">
+		<Parameters Type="Default">
+			<MAKE_CONFIG_PFN>ASOBO_Make_Event_Config_Helper</MAKE_CONFIG_PFN>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#MAKE_CONFIG_PFN#"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Switch_Settings_Config
+		@Brief Use the function MAKE_CONFIG_PFN to create a switch config
+		@Param MAKE_CONFIG_PFN Function used to make the config (detected automatically based on the presence of GET_SETTINGS)
+		@Return Switch configuration
+	-->
+	<ParametersFn Name="ASOBO_Switch_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Detect_Config_For_Parameters_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Knob_Settings_Config
+		@Brief Use the function MAKE_CONFIG_PFN to create a knob config
+		@Param MAKE_CONFIG_PFN Function used to make the config (detected automatically based on the presence of GET_SETTINGS)
+		@Return Knob configuration
+	-->
+	<ParametersFn Name="ASOBO_Knob_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Detect_Config_For_Parameters_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Lever_Settings_Config
+		@Brief Use the function MAKE_CONFIG_PFN to create a lever config
+		@Param MAKE_CONFIG_PFN Function used to make the config (detected automatically based on the presence of GET_SETTINGS)
+		@Return Lever configuration
+	-->
+	<ParametersFn Name="ASOBO_Lever_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Detect_Config_For_Parameters_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Joystick_Settings_Config
+		@Brief Use the function MAKE_CONFIG_PFN to create a joystick config
+		@Param MAKE_CONFIG_PFN Function used to make the config
+		@Return Joystick configuration
+	-->
+	<ParametersFn Name="ASOBO_Joystick_Settings_Config">
+		<Parameters Type="Default">
+			<MAKE_CONFIG_PFN>ASOBO_Make_Joystick_Config_Helper</MAKE_CONFIG_PFN>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#MAKE_CONFIG_PFN#"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Auto_Detect_Config_For_Parameters_Helper
+		@Brief Use the function MAKE_CONFIG_PFN to create a config
+		@Param MAKE_CONFIG_PFN Function used to make the config (detected automatically based on the presence of GET_SETTINGS)
+		@Return The processed configuration
+	-->
+	<ParametersFn Name="ASOBO_Auto_Detect_Config_For_Parameters_Helper">
+		<Parameters Type="Default">
+			<Condition Check="GET_#BASE_IE_NAME_UC#_SETTINGS">
+				<True>
+					<MAKE_CONFIG_PFN>ASOBO_Make_XState_Config_Helper</MAKE_CONFIG_PFN>
+				</True>
+				<False>
+					<MAKE_CONFIG_PFN>ASOBO_Make_Drag_Config_Helper</MAKE_CONFIG_PFN>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="#MAKE_CONFIG_PFN#"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

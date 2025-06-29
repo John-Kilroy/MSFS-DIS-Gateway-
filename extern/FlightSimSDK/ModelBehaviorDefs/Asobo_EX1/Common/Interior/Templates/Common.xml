@@ -1,0 +1,15 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\COMMON_Inputs.xml"/>
+	<Include RelativeFile="ParametersFn\\COMMON_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\COMMON_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_COMMON_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>COMMON</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,60 @@
+<ModelBehaviors>
+	<!-- ################################## RADIO ##################################### -->
+	<!-- ############################################################################## -->
+	<InputEvent ID="RADIO">
+		<TT_Category_Main>TT:INPUT.CAT_1_RADIO</TT_Category_Main>
+		<Switch Param="TT_RADIO_CATEGORY">
+			<Case Value="ADF">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_ADF</TT_Category_Sub>
+			</Case>
+			<Case Value="COMMS">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_COMMS</TT_Category_Sub>
+			</Case>
+			<Case Value="DME">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_DME</TT_Category_Sub>
+			</Case>
+			<Case Value="KOHLSMANN">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_KOHLSMANN</TT_Category_Sub>
+			</Case>
+			<Case Value="NAV">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_NAV</TT_Category_Sub>
+			</Case>
+			<Case Value="OBI">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_OBI</TT_Category_Sub>
+			</Case>
+			<Case Value="TACAN">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_TACAN</TT_Category_Sub>
+			</Case>
+			<Case Value="VOR">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_VOR</TT_Category_Sub>
+			</Case>
+			<Case Value="XPNDR">
+				<TT_Category_Sub>TT:INPUT.CAT_2_RADIO_XPNDR</TT_Category_Sub>
+			</Case>
+		</Switch>
+		<Presets>
+			<Extend Target="#IE_BASE_TO_EXTEND_FROM#">
+				<Parameters Type="Override">
+					<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_No_Default_Helper">
+						<PFN_PARAM_NAME>RADIO_IE_PARAMETERS_FN</PFN_PARAM_NAME>
+					</UseParametersFn>
+				</Parameters>
+			</Extend>
+		</Presets>
+	</InputEvent>
+	<InputEvent ID="AUDIO">
+		<TT_Category_Main>TT:INPUT.CAT_1_AUDIO</TT_Category_Main>
+		<Condition NotEmpty="TT_CATEGORY_SUB">
+			<TT_Category_Sub>TT:#TT_CATEGORY_SUB#</TT_Category_Sub>
+		</Condition>
+		<Presets>
+			<Extend Target="#IE_BASE_TO_EXTEND_FROM#">
+				<Parameters Type="Override">
+					<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_No_Default_Helper">
+						<PFN_PARAM_NAME>AUDIO_IE_PARAMETERS_FN</PFN_PARAM_NAME>
+					</UseParametersFn>
+				</Parameters>
+			</Extend>
+		</Presets>
+	</InputEvent>
+</ModelBehaviors>

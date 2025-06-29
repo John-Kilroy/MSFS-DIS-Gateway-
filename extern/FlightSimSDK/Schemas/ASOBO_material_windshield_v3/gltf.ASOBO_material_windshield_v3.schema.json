@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_windshield_v3 glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "description": "Define a material use for the windshield of the flight. The result is a transparent material with multiple features.",
+    "properties": {
+        "detail1Rough": {
+            "type": "number",
+            "description": "Control the Roughness of the texture 'Detail 1 (R)' that contain a mask."
+        },
+        "detail2Rough": {
+            "type": "number",
+            "description": "Control the Roughness of the texture 'Detail 2 (B)' that contain a mask."
+        },
+        "detail1Opacity": {
+            "type": "number",
+            "description": "Control the Opacity of the texture 'Detail 1 (R)' that contain a mask."
+        },
+        "detail2Opacity": {
+            "type": "number",
+            "description": "Control the Opacity of the texture 'Detail 2 (B)' that contain a mask."
+        },
+        "microScratchesTiling": {
+            "type": "number",
+            "description": "Used to determine the tiling of the Micro-Scratches Normal Texture."
+        },
+        "microScratchesStrength": {
+            "type": "number",
+            "description": "Used to determine the strength of the Micro-Scratches normal."
+        },
+        "detailNormalRefractScale": {
+            "type": "number",
+            "description": "Used to determine the scale of the offset of the refraction by the normal."
+        },
+        "receiveRain": {
+            "type": "boolean",
+            "default": false,
+            "description": "Used to say if the windshield can have rain drops on it. This parameters is mandatory if the plane have wipers."
+        },
+        "wiperLines": {
+            "type": "boolean",
+            "default": false,
+            "description": "Used to determine if they're wipers-dust lines on the path of the wipers. A wiperMask texture is mandatory with this parameters."
+        },
+        "wiperLinesTiling": {
+            "type": "number",
+            "description": "Used to control the wipers lines count."
+        },
+        "wiperLinesStrength": {
+            "type": "number",
+            "description": "Used to control the wipers lines strength, visibility."
+        },
+        "rainDropScale": {
+            "type": "number",
+            "description": "Used to determine the tiling of the rain drops on the windshield."
+        },
+        "wiper1State": {
+            "type": "number",
+            "description": "Used to animate render of the wipers o,n the windshield. The duration of the wipers animation must be the same as the animation of physical wipers - between 0 (wiper close) and 1 (wiper open). More informations about how to use these parameters here."
+        },
+        "wiperMaskTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ],
+            "description": "Used for the wipers render on windshield. This texture is generate using the Wiper Mask Generator. (channel Red for animation In,channel Green for animation Out, channel Blue for wiper length and channel Alpha for wiper mask)"
+        },
+        "windshieldDetailNormalTexture": {
+            "allOf": [ { "$ref": "material.normalTextureInfo.schema.json" } ],
+            "description": "Used to add detail on the normal using the detail UV scale. This texture can also be use to refract background using the Refraction Scale parameters on this material."
+        },
+        "scratchesNormalTexture": {
+            "allOf": [ { "$ref": "material.normalTextureInfo.schema.json" } ],
+            "description": "Used to add micro-scratches on the windshield. This texture is sampled multiple times in differents rotations so it is needed to have the scratches aligned following the U coordinates of the UV (horizontal)."
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

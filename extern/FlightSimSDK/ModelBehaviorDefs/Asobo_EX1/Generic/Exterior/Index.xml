@@ -1,0 +1,3 @@
+<ModelBehaviors>
+	<Include RelativeFile="Templates\\Common.xml"/>
+</ModelBehaviors>

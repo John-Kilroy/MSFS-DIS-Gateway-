@@ -1,0 +1,346 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Double_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>2</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Triple_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>3</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Quadruple_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>4</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Quintuple_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>5</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Sextuple_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>6</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Septuple_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>7</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Octuple_Template_Helper">
+		<UseTemplate Name="ASOBO_X_Template_Helper">
+			<TEMPLATE_CALLS_COUNT>8</TEMPLATE_CALLS_COUNT>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Process_Use_Template_Helper">
+		<Parameters Type="Default">
+			<COMMON_PARAMETERS_PREFIX>Common_Parameters</COMMON_PARAMETERS_PREFIX>
+			<ID_PARAM_NAME>ID</ID_PARAM_NAME>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="COMMON_PARAMETERS_#CUR_ID#">
+				<True>
+					<OVERRIDE_ID Process="Param">COMMON_PARAMETERS_#CUR_ID#</OVERRIDE_ID>
+				</True>
+				<False>
+					<OVERRIDE_ID>#CUR_ID#</OVERRIDE_ID>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<Condition CheckSavedParameters="#COMMON_PARAMETERS_PREFIX#_#OVERRIDE_ID#">
+				<APPEND_COMMON_PARAMETERS>#COMMON_PARAMETERS_PREFIX#_#OVERRIDE_ID#</APPEND_COMMON_PARAMETERS>
+			</Condition>
+			<Condition Check="#ID_PARAM_NAME#_#CUR_ID#">
+				<True>
+					<#ID_PARAM_NAME# process="Param">#ID_PARAM_NAME#_#CUR_ID#</#ID_PARAM_NAME#>
+				</True>
+				<False>
+					<#ID_PARAM_NAME#>#CUR_ID#</#ID_PARAM_NAME#>
+				</False>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- IN: TEMPLATE_CALLS_COUNT (number of times to call the template) -->
+	<!-- IN (opt): COMMON_PARAMETERS_PREFIX (replace the saved parameters prefix name) -->
+	<!-- IN (opt): COMMON_PARAMETERS_N (replace the saved parameters suffix for a given ID number N) -->
+	<Template Name="ASOBO_X_Template_Helper">
+		<Parameters Type="Default">
+			<USE_TEMPLATE_PFN>ASOBO_Process_Use_Template_Helper</USE_TEMPLATE_PFN>
+		</Parameters>
+		<Loop>
+			<Setup>
+				<Param>CUR_ID</Param>
+				<From>1</From>
+				<Inc>1</Inc>
+				<To>#TEMPLATE_CALLS_COUNT#</To>
+			</Setup>
+			<Do>
+				<Parameters Type="Override">
+					<UseParametersFn Name="#USE_TEMPLATE_PFN#"/>
+				</Parameters>
+				<UseTemplate Name="#TEMPLATE#"/>
+			</Do>
+		</Loop>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- Process Saved elements (pop the saved parameetrs) -->
+	<!-- IN: ELEMENT_TYPE_NAME (Type of element, ex: Update) -->
+	<Template Name="ASOBO_Process_Saved_Elements_Template">
+		<Parameters Type="Default">
+			<GET_SAVED_ELEMENT_PREFIX>Saved_#ELEMENT_TYPE_NAME#</GET_SAVED_ELEMENT_PREFIX>
+			<GET_SAVED_INCREMENT_TO>Saved_#ELEMENT_TYPE_NAME#_Parameters</GET_SAVED_INCREMENT_TO>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="#GET_SAVED_INCREMENT_TO#">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>GET_SAVED_INCREMENT_TO</SAVED_PARAMETERS>
+				</UseParametersFn>	
+				<ELEMENT_TYPE_NAME_UC Process="String">'#ELEMENT_TYPE_NAME#' uc</ELEMENT_TYPE_NAME_UC>
+				<__PROCESS_ELEMENTS__>True</__PROCESS_ELEMENTS__>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="__PROCESS_ELEMENTS__">
+				<LAST_ID_USED Process="Param">#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED</LAST_ID_USED>
+			</Condition>
+		</Parameters>
+		<Condition Valid="__PROCESS_ELEMENTS__">
+			<Loop>
+				<Setup>
+					<Param>ELEMENT_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<To>#LAST_ID_USED#</To>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+							<PLOAD_#ELEMENT_TYPE_NAME_UC#_PARAMETERS>#GET_SAVED_ELEMENT_PREFIX#_#ELEMENT_ID#</PLOAD_#ELEMENT_TYPE_NAME_UC#_PARAMETERS>
+							<SAVED_PARAMETERS>PLOAD_#ELEMENT_TYPE_NAME_UC#_PARAMETERS</SAVED_PARAMETERS>
+						</UseParametersFn>
+						<#ELEMENT_TYPE_NAME_UC#_ID>#ELEMENT_ID#</#ELEMENT_TYPE_NAME_UC#_ID>
+					</Parameters>
+					<Parameters Type="Override">
+						<TEMPLATE_TO_USE Process="Param">#ELEMENT_TYPE_NAME_UC#_TEMPLATE</TEMPLATE_TO_USE>
+					</Parameters>
+					<UseTemplate Name="#TEMPLATE_TO_USE#"/>
+				</Do>
+			</Loop>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- For each Saved elements execute a given PFN (keep the saved parameetrs) -->
+	<!-- IN: ELEMENT_TYPE_NAME (Type of element, ex: Update) -->
+	<!-- IN: PFN_TO_EXECUTE -->
+	<ParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+		<Parameters Type="Default">
+			<GET_SAVED_ELEMENT_PREFIX>Saved_#ELEMENT_TYPE_NAME#</GET_SAVED_ELEMENT_PREFIX>
+			<GET_SAVED_INCREMENT_TO>Saved_#ELEMENT_TYPE_NAME#_Parameters</GET_SAVED_INCREMENT_TO>
+			<Condition NotEmpty="POP_SAVED_ELEMENTS_IN">
+				<True>
+					<POP_SAVED_ELEMENTS>True</POP_SAVED_ELEMENTS>
+				</True>
+				<False>
+					<POP_SAVED_ELEMENTS>False</POP_SAVED_ELEMENTS>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="#GET_SAVED_INCREMENT_TO#">
+				<LoadParameters ID="#GET_SAVED_INCREMENT_TO#"/>
+				<Condition Valid="POP_SAVED_ELEMENTS">
+					<RemoveSavedParameters ID="#GET_SAVED_INCREMENT_TO#"/>
+				</Condition>
+				<ELEMENT_TYPE_NAME_UC Process="String">'#ELEMENT_TYPE_NAME#' uc</ELEMENT_TYPE_NAME_UC>
+				<__PROCESS_ELEMENTS__>True</__PROCESS_ELEMENTS__>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="__PROCESS_ELEMENTS__">
+				<LAST_ID_USED Process="Param">#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED</LAST_ID_USED>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="__PROCESS_ELEMENTS__">
+				<NUMBER_OF_#ELEMENT_TYPE_NAME_UC# Process="Int">#LAST_ID_USED# 1 +</NUMBER_OF_#ELEMENT_TYPE_NAME_UC#>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="__PROCESS_ELEMENTS__">
+				<Loop>
+					<Setup>
+						<Param>ELEMENT_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<To>#LAST_ID_USED#</To>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<UseParametersFn Name="#PFN_TO_EXECUTE#">
+								<Condition NotEmpty="POP_SAVED_ELEMENTS_IN">
+									<True>
+										<SaveParameters ID="#POP_SAVED_ELEMENTS_IN#" Append="Default">
+											<LoadParameters ID="#GET_SAVED_ELEMENT_PREFIX#_#ELEMENT_ID#"/>											
+										</SaveParameters>
+									</True>
+									<False>
+										<LoadParameters ID="#GET_SAVED_ELEMENT_PREFIX#_#ELEMENT_ID#"/>
+									</False>
+								</Condition>
+								<Condition Valid="POP_SAVED_ELEMENTS">
+									<True>
+										<RemoveSavedParameters ID="#GET_SAVED_ELEMENT_PREFIX#_#ELEMENT_ID#"/>										
+									</True>
+									<False>
+										<SAVE_ID>#GET_SAVED_ELEMENT_PREFIX#_#ELEMENT_ID#</SAVE_ID>										
+									</False>
+								</Condition>
+								<#ELEMENT_TYPE_NAME_UC#_ID>#ELEMENT_ID#</#ELEMENT_TYPE_NAME_UC#_ID>
+							</UseParametersFn>
+						</Parameters>
+					</Do>
+				</Loop>
+			</Condition>
+		</Parameters>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- Process Saved update elements saved using ASOBO_Add_Update_Helper -->
+	<Template Name="ASOBO_Process_Saved_Updates_Template">
+		<Parameters Type="Override">
+			<Condition Check="ELEMENT_TYPE_NAME">
+				<GET_SAVED_ELEMENT_PREFIX>Saved_#ELEMENT_TYPE_NAME#_Update</GET_SAVED_ELEMENT_PREFIX>
+				<GET_SAVED_INCREMENT_TO>Saved_#ELEMENT_TYPE_NAME#_Update_Parameters</GET_SAVED_INCREMENT_TO>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Process_Saved_Elements_Template">
+			<ELEMENT_TYPE_NAME>Update</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+	</Template>
+	<ParametersFn Name="ASOBO_For_Each_Saved_Updates_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+				<ELEMENT_TYPE_NAME>Update</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Process Saved animation elements saved using ASOBO_Add_Animation_Helper -->
+	<Template Name="ASOBO_Process_Saved_Animations_Template">
+		<UseTemplate Name="ASOBO_Process_Saved_Elements_Template">
+			<ELEMENT_TYPE_NAME>Animation</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_Process_Saved_Updates_Template">
+			<ELEMENT_TYPE_NAME>Animation</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+	</Template>
+	<ParametersFn Name="ASOBO_For_Each_Saved_Animations_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+				<ELEMENT_TYPE_NAME>Animation</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Process Saved emissive elements saved using ASOBO_Add_Emissive_Helper -->
+	<Template Name="ASOBO_Process_Saved_Emissives_Template">
+		<UseTemplate Name="ASOBO_Process_Saved_Elements_Template">
+			<ELEMENT_TYPE_NAME>Emissive</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_Process_Saved_Updates_Template">
+			<ELEMENT_TYPE_NAME>Emissive</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+	</Template>
+	<ParametersFn Name="ASOBO_For_Each_Saved_Emissives_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+				<ELEMENT_TYPE_NAME>Emissive</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Process Saved visibility elements saved using ASOBO_Add_Visibility_Helper -->
+	<Template Name="ASOBO_Process_Saved_Visibility_Codes_Template">
+		<UseTemplate Name="ASOBO_Process_Saved_Elements_Template">
+			<ELEMENT_TYPE_NAME>Visibility</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_Process_Saved_Updates_Template">
+			<ELEMENT_TYPE_NAME>Visibility</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+	</Template>
+	<ParametersFn Name="ASOBO_For_Each_Saved_Visibility_Codes_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+				<ELEMENT_TYPE_NAME>Visibility</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Process Saved Input_Event elements saved using ASOBO_Add_Input_Event_Helper -->
+	<Template Name="ASOBO_Process_Saved_Input_Events_Template">
+		<UseTemplate Name="ASOBO_Process_Saved_Elements_Template">
+			<ELEMENT_TYPE_NAME>Input_Event</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+	</Template>
+	<ParametersFn Name="ASOBO_For_Each_Saved_Input_Events_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_For_Each_Saved_Elements_Helper">
+				<ELEMENT_TYPE_NAME>Input_Event</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_GT_Component_Visibility_And_Emissive_Template">
+		<Parameters Type="Default">
+			<CONCRETE_VISIBILITY_TEMPLATE>ASOBO_GT_Visibility_Template</CONCRETE_VISIBILITY_TEMPLATE>
+			<CONCRETE_EMISSIVE_TEMPLATE>ASOBO_GT_Emissive_Template</CONCRETE_EMISSIVE_TEMPLATE>
+			<VISIBILITY_CODE>#EMISSIVE_CODE#</VISIBILITY_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Component_Template">
+			<SaveParameters ID="TEMPLATES_TO_USE" Append="Default">
+				<#CONCRETE_VISIBILITY_TEMPLATE#/>
+				<#CONCRETE_EMISSIVE_TEMPLATE#/>										
+			</SaveParameters>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_GT_Component_Template">
+		<Parameters Type="Default">
+			<Condition Check="NODE_ID">
+				<True>
+					<COMPONENT_ID>#NODE_ID#</COMPONENT_ID>				
+				</True>
+				<False>
+					<NODE_ID/>
+				</False>
+			</Condition>
+		</Parameters>
+		<Component ID="#COMPONENT_ID#" Node="#NODE_ID#">
+			<Condition CheckSavedParameters="TEMPLATES_TO_USE">
+				<True>
+					<Loop>
+						<Setup>
+							<Param>TEMPLATE_TO_USE</Param>
+							<Parameters>
+								<LoadParameters ID="TEMPLATES_TO_USE"/>
+								<RemoveSavedParameters ID="TEMPLATES_TO_USE"/>
+							</Parameters>
+						</Setup>
+						<Do>
+							<UseTemplate Name="#TEMPLATE_TO_USE#"/>
+						</Do>
+					</Loop>
+				</True>
+				<False>
+					<UseTemplate Name="#TEMPLATE_TO_USE#"/>
+				</False>
+			</Condition>
+		</Component>
+	</Template>
+</ModelBehaviors>

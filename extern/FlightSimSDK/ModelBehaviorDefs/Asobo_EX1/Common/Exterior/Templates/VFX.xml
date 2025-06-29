@@ -1,0 +1,1502 @@
+<ModelBehaviors>
+	<!-- ############################################################################## -->
+	<!-- Template groups -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING">
+		<Parameters Type="Default">
+			<GEAR_ID_CENTER>0</GEAR_ID_CENTER>
+			<GEAR_ID_LEFT>1</GEAR_ID_LEFT>
+			<GEAR_ID_RIGHT>2</GEAR_ID_RIGHT>
+		</Parameters>
+		<UseTemplate Name="ASOBO_ET_FX_LANDING_Common"/>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_ET_FX_LANDING_MD">
+		<Parameters Type="Default">
+			<GEAR_ID_CENTER>0</GEAR_ID_CENTER>
+			<GEAR_ID_LEFT>1</GEAR_ID_LEFT>
+			<GEAR_ID_RIGHT>2</GEAR_ID_RIGHT>
+		</Parameters>
+		<UseTemplate Name="ASOBO_ET_FX_LANDING_Common"/>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING_MD">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING_MD">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING_MD">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING_MD">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING_MD">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING_MD">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_ET_FX_LANDING_LG">
+		<Parameters Type="Default">
+			<GEAR_ID_CENTER>0</GEAR_ID_CENTER>
+			<GEAR_ID_LEFT>1</GEAR_ID_LEFT>
+			<GEAR_ID_RIGHT>2</GEAR_ID_RIGHT>
+		</Parameters>
+		<UseTemplate Name="ASOBO_ET_FX_LANDING_Common"/>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WET_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+	</Template>
+	<!-- FXs Common to the normal, _MD and _LG version of FXs -->
+	<Template Name="ASOBO_ET_FX_LANDING_Common">
+		<Parameters Type="Default">
+			<GEAR_ID_CENTER>0</GEAR_ID_CENTER>
+			<GEAR_ID_LEFT>1</GEAR_ID_LEFT>
+			<GEAR_ID_RIGHT>2</GEAR_ID_RIGHT>
+		</Parameters>
+		<UseTemplate Name="ASOBO_ET_FX_DUST_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_DUST_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_DUST_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_GRASS_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_GRASS_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_GRASS_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WATER_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_CENTER#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WATER_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_LEFT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+		<UseTemplate Name="ASOBO_ET_FX_WATER_GR_LANDING">
+			<FX_CONTACT_POINT_ID>#GEAR_ID_RIGHT#</FX_CONTACT_POINT_ID>
+		</UseTemplate>
+	</Template>
+	<!-- New Landing FXs for FS2024 -->
+	<Template Name="ASOBO_ET_FX_LANDING_CP">
+		<Loop>
+            <Setup>
+                <Param>CUR_ID_CP</Param>
+                <From>0</From>
+                <Inc>1</Inc>
+                <While>
+                    <Arg NotEmpty="FX_CONTACT_POINT_ID_#CUR_ID_CP#"/>
+                </While>
+            </Setup>
+            <Do>
+                <Loop>
+                    <Setup>
+                        <Param>CUR_ID_TEMPLATE</Param>
+                        <From>0</From>
+                        <Inc>1</Inc>
+                        <While>
+                            <Arg NotEmpty="TEMPLATE_#CUR_ID_TEMPLATE#"/>
+                        </While>
+                    </Setup>
+                    <Do>
+                        <Parameters Type="Override">
+                          <CURRENT_TEMPLATE Process="Param">TEMPLATE_#CUR_ID_TEMPLATE#</CURRENT_TEMPLATE>
+                        </Parameters>
+                        <UseTemplate Name="#CURRENT_TEMPLATE#">
+                          <FX_CONTACT_POINT_ID Process="Param">FX_CONTACT_POINT_ID_#CUR_ID_CP#</FX_CONTACT_POINT_ID>
+                        </UseTemplate>
+                    </Do>
+                </Loop>
+            </Do>
+        </Loop>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Component_VFX_Template">
+		<Parameters Type="Default">
+			<FX_CONTACT_POINT_ID>-1</FX_CONTACT_POINT_ID>
+			<FX_NODE>__NO_NODE__</FX_NODE>
+			<AUTO_GENERATE_FX_COMPONENT_ID>True</AUTO_GENERATE_FX_COMPONENT_ID>
+		</Parameters>
+		<Condition Valid="AUTO_GENERATE_FX_COMPONENT_ID">
+			<Parameters Type="Override">
+				<LoadParameters ID="#FX_NAME#_Parameters"/>
+			</Parameters>
+			<Parameters Type="Override">
+				<SaveParameters ID="#FX_NAME#_Parameters">
+					<Condition Check="FX_COMPONENT_COUNT">
+						<True>
+							<FX_COMPONENT_COUNT Process="Int">#FX_COMPONENT_COUNT# 1 +</FX_COMPONENT_COUNT>
+						</True>
+						<False>
+							<FX_COMPONENT_COUNT>0</FX_COMPONENT_COUNT>
+						</False>
+					</Condition>
+				</SaveParameters>
+				<LoadParameters ID="#FX_NAME#_Parameters"/>
+			</Parameters>
+			<Parameters Type="Default">
+				<FX_COMPONENT_ID>FX_#FX_NAME#_#FX_COMPONENT_COUNT#</FX_COMPONENT_ID>
+			</Parameters>
+		</Condition>
+		<Component ID="#FX_COMPONENT_ID#" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template"/>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->	
+	<!-- Light template -->
+	<!-- To control a light by a RPN Code in the Behavior.xml of an aircraft -->
+	<Template Name="ASOBO_LIGHTING_Ambient_FX_Template">
+		<Parameters Type="Default">
+			<COMPONENT_ID>FX_Ambient</COMPONENT_ID>
+			<FX_CODE/>
+		</Parameters>
+		<Component ID="#COMPONENT_ID#">
+		     <UseTemplate Name="ASOBO_Update_Template">
+                    <UPDATE_FREQUENCY>20</UPDATE_FREQUENCY>
+                    <UPDATE_CODE>#FX_CODE# 100 * #POTENTIOMETER# (&gt;K:2:LIGHT_POTENTIOMETER_SET)</UPDATE_CODE>
+                </UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- Gear-based triggers -->
+	<!-- Only to be used with aircraft where the contact point numbers in flight_model.cfg match the STANDARD_GEAR enum -->
+	<!-- i.e. 0 = center, 1 = left, 2 = right -->
+	<!-- in all other cases, use CP-based triggers below -->
+	<Template Name="ASOBO_ET_FX_WET_GR_LANDING">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B2C7B9A6-8F3D-49CE-8418-64086E23C5CB}</FX_GUID>
+			<FX_NAME>LANDING_GR_WET</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WET_GR_LANDING_MD">
+		<DefaultTemplateParameters>
+			<FX_GUID>{25736E7E-6F36-4046-91BC-9AFFCE737F28}</FX_GUID>
+			<FX_NAME>LANDING_GR_MD_WET</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WET_GR_LANDING_LG">
+		<DefaultTemplateParameters>
+			<FX_GUID>{0915D0C5-F0B3-4EAD-8D96-08FF2F6F0057}</FX_GUID>
+			<FX_NAME>LANDING_GR_LG_WET</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SMOKE_GR_LANDING">
+		<DefaultTemplateParameters>
+			<FX_GUID>{2F82889A-E550-40FC-8847-1E1A2B538C74}</FX_GUID>
+			<FX_NAME>LANDING_GR_SMOKE</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GEAR SKIDDING FACTOR:#FX_CONTACT_POINT_ID#, Percent over 100) 0 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SMOKE_GR_LANDING_MD">
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING"></UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SMOKE_GR_LANDING_LG">
+		<UseTemplate Name="ASOBO_ET_FX_SMOKE_GR_LANDING"></UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_DUST_GR_LANDING">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B563B75A-F2F0-4F09-8617-BE9F173BC8FB}</FX_GUID>
+			<FX_NAME>LANDING_GR_DUST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SAND</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>DIRT</ENABLE_SURFACE_TYPE_1>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_GRASS_GR_LANDING">
+		<DefaultTemplateParameters>
+			<FX_GUID>{F3BD2906-EF27-406B-BB55-02FF0BBCEF01}</FX_GUID>
+			<FX_NAME>LANDING_GR_GRASS</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SNOW_GR_LANDING">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B9EEB6C8-D2F1-45C3-951D-033D973E18C8}</FX_GUID>
+			<FX_NAME>LANDING_GR_SNOW</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SNOW_GR_LANDING_LG">
+		<DefaultTemplateParameters>
+			<FX_GUID>{883A007E-4DEE-4D3D-8081-55CC462986CA}</FX_GUID>
+			<FX_NAME>LANDING_GR_LG_SNOW</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+			<UseTemplate Name="ASOBO_VFX_Template">
+				<FX_CODE>(A:GEAR IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+			</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATER_GR_LANDING">
+		<DefaultTemplateParameters>
+			<FX_GUID>{BA223A84-9E83-4A58-B7D7-0C9CBA4E1627}</FX_GUID>
+			<FX_NAME>LANDING_GR_WATER</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GEAR WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_AIRCRAFT_CARRIER_WAKE">
+		<DefaultTemplateParameters>
+			<FX_GUID>{62B8CED1-7510-4FCF-A356-AD19C7C92C6A}</FX_GUID>
+			<FX_NAME>LANDING_GR_WATER</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GROUND VELOCITY, knot) 5 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATER_NODE_FRIGATEWAKE">
+		<DefaultTemplateParameters>
+			<FX_GUID>{43962C0A-B1C7-448C-9268-1DFD020623F0}</FX_GUID>
+			<FX_NAME>LANDING_GR_WATER</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GROUND VELOCITY, knot) 5 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATER_NODE_BOATWAKE">
+		<DefaultTemplateParameters>
+			<FX_GUID>{4D375088-1A82-48C5-BD7F-09D28186C9B6}</FX_GUID>
+			<FX_NAME>BOATWAKE_FX</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GROUND VELOCITY, knot) 5 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- CP-based triggers -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WET_CP_LANDING"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{B2C7B9A6-8F3D-49CE-8418-64086E23C5CB}</FX_GUID>
+			<FX_NAME>LANDING_CP_WET</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WET_CP_LANDING_MD"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{25736E7E-6F36-4046-91BC-9AFFCE737F28}</FX_GUID>
+			<FX_NAME>LANDING_CP_MD_WET</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WET_CP_LANDING_LG"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{0915D0C5-F0B3-4EAD-8D96-08FF2F6F0057}</FX_GUID>
+			<FX_NAME>LANDING_CP_LG_WET</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+		<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_TARMAC_WET_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{89294226-E3A1-4DC6-B9EF-C127B2C2B6EC}</FX_GUID>
+			<FX_NAME>LANDING_TARMAC_WET_CP</FX_NAME>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_TARMAC_WET_BLAST">
+		<DefaultTemplateParameters>
+			<FX_GUID>{27ED6022-48AA-4BDC-895B-B662EB8ACE5F}</FX_GUID>
+			<FX_NAME>LANDING_TARMAC_WET_BLAST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_TARMAC_WET_VORTEX">
+		<DefaultTemplateParameters>
+			<FX_GUID>{89294226-E3A1-4DC6-B9EF-C127B2C2B6EC}</FX_GUID>
+			<FX_NAME>LANDING_TARMAC_WET_VORTEX</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SMOKE_CP_LANDING"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{7E68323C-E75D-4F5B-988E-65DD4956F6BA}</FX_GUID>
+			<FX_NAME>LANDING_CP_SMOKE</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:CONTACT POINT SKIDDING FACTOR:#FX_CONTACT_POINT_ID#, knot) 0 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SMOKE_CP_LANDING_MD">
+		<DefaultTemplateParameters>
+			<FX_GUID>{38428600-D14A-41A8-9FED-A7C815F89AEE}</FX_GUID>
+			<FX_NAME>LANDING_CP_MD_SMOKE</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:CONTACT POINT SKIDDING FACTOR:#FX_CONTACT_POINT_ID#, knot) 0 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SMOKE_CP_LANDING_LG">
+		<DefaultTemplateParameters>
+			<FX_GUID>{C9747EAE-5970-477A-81D7-2FC96CE0C3EA}</FX_GUID>
+			<FX_NAME>LANDING_CP_LG_SMOKE</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:CONTACT POINT SKIDDING FACTOR:#FX_CONTACT_POINT_ID#, knot) 0 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_TARMAC_DRY_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{2F82889A-E550-40FC-8847-1E1A2B538C74}</FX_GUID>
+			<FX_NAME>LANDING_TARMAC_DRY_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:CONTACT POINT SKIDDING FACTOR:#FX_CONTACT_POINT_ID#, knot) 0 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_DUST_CP_LANDING"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{B563B75A-F2F0-4F09-8617-BE9F173BC8FB}</FX_GUID>
+			<FX_NAME>LANDING_CP_DUST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>DIRT</ENABLE_SURFACE_TYPE_1>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_DUST_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{756E084A-360D-4783-940F-496AA3862452}</FX_GUID>
+			<FX_NAME>LANDING_DUST_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>GRAVEL</ENABLE_SURFACE_TYPE_2>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_DUST_BLAST">
+		<Parameters Type="Default">
+			<FX_GUID>{4ECCFB30-736D-4944-8AA1-FCFCB74BBE84}</FX_GUID>
+			<FX_NAME>LANDING_DUST_BLAST</FX_NAME>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and</FX_CODE>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>GRAVEL</ENABLE_SURFACE_TYPE_2>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_DUST_VORTEX">
+		<Parameters Type="Default">
+			<FX_GUID>{16BE47D4-BECF-4712-BEFA-B149D77726F0}</FX_GUID>
+			<FX_NAME>LANDING_DUST_VORTEX</FX_NAME>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and</FX_CODE>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>GRAVEL</ENABLE_SURFACE_TYPE_2>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_GRASS_CP_LANDING"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{F3BD2906-EF27-406B-BB55-02FF0BBCEF01}</FX_GUID>
+			<FX_NAME>LANDING_CP_GRASS</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_GRASS_DRY_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{BE654FE0-2D6E-4966-8E91-45DC9ECF4197}</FX_GUID>
+			<FX_NAME>LANDING_GRASS_DRY_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>DIRT</ENABLE_SURFACE_TYPE_1>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_GRASS_WET_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{78429911-DBDA-45A5-80E6-6AA2DB824AC9}</FX_GUID>
+			<FX_NAME>LANDING_GRASS_WET_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>DIRT</ENABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SNOW_CP_LANDING"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{B9EEB6C8-D2F1-45C3-951D-033D973E18C8}</FX_GUID>
+			<FX_NAME>LANDING_CP_SNOW</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SNOW_CP_LANDING_LG"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{883A007E-4DEE-4D3D-8081-55CC462986CA}</FX_GUID>
+			<FX_NAME>LANDING_CP_LG_SNOW</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_SNOW_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{0DE69D37-4416-41DA-94FB-E738CC6F6970}</FX_GUID>
+			<FX_NAME>LANDING_SNOW_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and (A:SURFACE CONDITION, enum) 1 != and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_SNOW_BLAST">
+		<Parameters Type="Default">
+			<FX_GUID>{FE43D145-7ABF-4BB2-A3A6-C52161C4824A}</FX_GUID>
+			<FX_NAME>LANDING_SNOW_BLAST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">	
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_SNOW_VORTEX">
+		<Parameters Type="Default">
+			<FX_GUID>{E9EAFE99-29AC-4215-9C9A-B69872FA9FFB}</FX_GUID>
+			<FX_NAME>LANDING_SNOW_VORTEX</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt;  and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATER_CP_LANDING"> <!-- MSFS 2020 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{BA223A84-9E83-4A58-B7D7-0C9CBA4E1627}</FX_GUID>
+			<FX_NAME>LANDING_CP_WATER</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_FLOAT_CP"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{1F0BFA72-798B-4C45-831C-3202D3BF2CE9}</FX_GUID>
+			<FX_NAME>LANDING_WATER_FLOAT_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_FLOAT_SPLASH_LEFT_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{76EC1606-72A4-40E9-AE91-D6FFC7EB332C}</FX_GUID>
+			<FX_NAME>LANDING_WATER_FLOAT_SPLASH_LEFT_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_FLOAT_SPLASH_RIGHT_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{5BDF798D-F079-4359-A64D-26D6D196A50F}</FX_GUID>
+			<FX_NAME>LANDING_WATER_FLOAT_SPLASH_RIGHT_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_RUDDER_SPLASH_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{77046D72-F58F-4311-9AC0-0CB792B09DBE}</FX_GUID>
+			<FX_NAME>LANDING_WATER_RUDDER_SPLASH_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_WAVETRAIL_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{836C10BE-04B1-48C9-A925-04D6CE63FBBC}</FX_GUID>
+			<FX_NAME>LANDING_WATER_WAVETRAIL_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_LEFT#, Keyframe) 0 &gt; (A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_RIGHT#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_FLOAT_BLAST">
+		<DefaultTemplateParameters>
+			<FX_GUID>{3C071D60-B15E-4D9B-AB2E-CA0FD819B447}</FX_GUID>
+			<FX_NAME>LANDING_WATER_FLOAT_BLAST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 10 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ########-->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_FLOAT_VORTEX">
+		<DefaultTemplateParameters>
+			<FX_GUID>{21326ADE-B0BB-40F6-9693-A37077517833}</FX_GUID>
+			<FX_NAME>LANDING_WATER_FLOAT_VORTEX</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND, Feet) 10 &lt; (A:GENERAL ENG PCT MAX RPM:1, Percent) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->	
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_BELLY">
+		<DefaultTemplateParameters>
+			<FX_GUID>{EEDC5F0A-B4D9-468F-B6DE-5F894E1C8E9C}</FX_GUID>
+			<FX_NAME>LANDING_WATER_BELLY</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+				<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and if{ 0.3 (&gt;O:XMLVAR_FX_Remaining_Time) } els{ 
+							(O:XMLVAR_FX_Remaining_Time) 0 &gt; if{
+								(O:XMLVAR_FX_Remaining_Time) (A:ANIMATION DELTA TIME, seconds) - (&gt;O:XMLVAR_FX_Remaining_Time)
+							}
+						}
+						(O:XMLVAR_FX_Remaining_Time) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_WHEEL_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{94084DE7-4EFF-494A-B3AB-4424C908FFC9}</FX_GUID>
+			<FX_NAME>LANDING_WATER_WHEEL_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 5 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_REVERSEENGINE_DUST">
+		<Parameters Type="Default">
+			<FX_GUID>{579B82A3-E5A7-4282-8245-9AD8354BE22E}</FX_GUID>
+			<FX_NAME>LANDING_REVERSEENGINE_DUST</FX_NAME>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 15 &lt; (A:TURB ENG REVERSE NOZZLE PERCENT:1, Percent) 0.01 &gt; and</FX_CODE>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>GRAVEL</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>DIRT</ENABLE_SURFACE_TYPE_3>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_REVERSEENGINE_TARMAC_WET">
+		<Parameters Type="Default">
+			<FX_GUID>{60853A39-AE17-4F3D-9A1F-F9150A76F7CB}</FX_GUID>
+			<FX_NAME>LANDING_REVERSEENGINE_TARMAC_WET</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>CONCRETE</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>ASPHALT</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>BITUMINUS</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>MACADAM</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>TARMAC</ENABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_0>RIVER</DISABLE_SURFACE_TYPE_0>
+			<DISABLE_SURFACE_TYPE_1>WASTE_WATER</DISABLE_SURFACE_TYPE_1>
+			<DISABLE_SURFACE_TYPE_2>WATER</DISABLE_SURFACE_TYPE_2>
+			<DISABLE_SURFACE_TYPE_3>POND</DISABLE_SURFACE_TYPE_3>
+			<DISABLE_SURFACE_TYPE_4>LAKE</DISABLE_SURFACE_TYPE_4>
+			<DISABLE_SURFACE_TYPE_5>OCEAN</DISABLE_SURFACE_TYPE_5>
+			<DISABLE_SURFACE_TYPE_6>WATER_FSX</DISABLE_SURFACE_TYPE_6>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 15 &lt; (A:TURB ENG REVERSE NOZZLE PERCENT:1, Percent) 0.01 &gt; and (A:SURFACE CONDITION, enum) 1 == and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_DUST_HOTAIRBALLOON_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B67829C5-6A6C-478C-9AF1-73ADB958487F}</FX_GUID>
+			<FX_NAME>LANDING_DUST_HOTAIRBALLOON_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>GRAVEL</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>DIRT</ENABLE_SURFACE_TYPE_3>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Bool) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and if{ 0.3 (&gt;O:XMLVAR_FX_Remaining_Time) } els{ 
+							(O:XMLVAR_FX_Remaining_Time) 0 &gt; if{
+								(O:XMLVAR_FX_Remaining_Time) (A:ANIMATION DELTA TIME, seconds) - (&gt;O:XMLVAR_FX_Remaining_Time)
+							}
+						}
+						(O:XMLVAR_FX_Remaining_Time) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_GRASS_DRY_HOTAIRBALLOON_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{037478CC-74A5-4BA0-BE43-4DDFB9EA88BB}</FX_GUID>
+			<FX_NAME>LANDING_GRASS_DRY_HOTAIRBALLOON_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>DIRT</ENABLE_SURFACE_TYPE_1>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Bool) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and if{ 0.3 (&gt;O:XMLVAR_FX_Remaining_Time) } els{ 
+							(O:XMLVAR_FX_Remaining_Time) 0 &gt; if{
+								(O:XMLVAR_FX_Remaining_Time) (A:ANIMATION DELTA TIME, seconds) - (&gt;O:XMLVAR_FX_Remaining_Time)
+							}
+						}
+						(O:XMLVAR_FX_Remaining_Time) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_SNOW_HOTAIRBALLOON_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{2D1E5432-0663-4878-A000-6D1571C3D753}</FX_GUID>
+			<FX_NAME>LANDING_SNOW_HOTAIRBALLOON_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT IS ON GROUND:#FX_CONTACT_POINT_ID#, Bool) 0 &gt; (A:GROUND VELOCITY, knot) 0.1 &gt; and (A:SURFACE CONDITION, enum) 1 != and if{ 0.3 (&gt;O:XMLVAR_FX_Remaining_Time) } els{ 
+							(O:XMLVAR_FX_Remaining_Time) 0 &gt; if{
+								(O:XMLVAR_FX_Remaining_Time) (A:ANIMATION DELTA TIME, seconds) - (&gt;O:XMLVAR_FX_Remaining_Time)
+							}
+						}
+						(O:XMLVAR_FX_Remaining_Time) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LANDING_WATER_HOTAIRBALLOON_CP">
+		<DefaultTemplateParameters>
+			<FX_GUID>{856BC388-4BA4-4D41-8A24-86A9B5BE23BD}</FX_GUID>
+			<FX_NAME>LANDING_WATER_HOTAIRBALLOON_CP</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:CONTACT POINT WATER DEPTH:#FX_CONTACT_POINT_ID#, Keyframe) 0 &gt; (A:GROUND VELOCITY, knot) 1 &gt; and</FX_CODE>	
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- Failures triggers -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Fuel_Leak_Fast_Template">
+		<Parameters Type="Default">
+			<ID>1</ID>
+			<FX_OFFSET_X>0</FX_OFFSET_X>
+			<FX_OFFSET_Y>0</FX_OFFSET_Y>
+			<FX_OFFSET_Z>0</FX_OFFSET_Z>
+			<MIN_SPEED>40</MIN_SPEED>
+		</Parameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_NAME>FX_FUEL_TANK_#ID#_LEAK</FX_NAME>
+			<FX_GUID>{65D83A8F-3436-4161-90E4-DD7883247A1D}</FX_GUID>
+			<FX_CODE>#ID# (A:2:FAILURE ACTIVE:0, bool) (A:FUELSYSTEM TANK LEVEL:#ID#,percent) 1 &gt; and (A:AIRSPEED TRUE,knots) #MIN_SPEED# >= and</FX_CODE>
+			<FX_GRAPH_PARAM_0>FuelLeak_Active, #ID# (A:2:FAILURE ACTIVE:0, bool) (A:FUELSYSTEM TANK LEVEL:#ID#,percent) 0.1 &gt; and (A:AIRSPEED TRUE,knots) #MIN_SPEED# >= and</FX_GRAPH_PARAM_0>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Fuel_Leak_Slow_Template">
+		<Parameters Type="Default">
+			<ID>1</ID>
+			<FX_OFFSET_X>0</FX_OFFSET_X>
+			<FX_OFFSET_Y>0</FX_OFFSET_Y>
+			<FX_OFFSET_Z>0</FX_OFFSET_Z>
+			<MIN_SPEED>40</MIN_SPEED>
+		</Parameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_NAME>FX_FUEL_TANK_#ID#_LEAK</FX_NAME>
+			<FX_GUID>{21C38E31-40D2-4477-8118-2E78DC130D17}</FX_GUID>
+			<FX_CODE>#ID# (A:2:FAILURE ACTIVE:0, bool) (A:FUELSYSTEM TANK LEVEL:#ID#,percent) 1 &gt; and (A:AIRSPEED TRUE,knots) #MIN_SPEED# &lt; and</FX_CODE>
+			<FX_GRAPH_PARAM_0>FuelLeak_Active, #ID# (A:2:FAILURE ACTIVE:0, bool) (A:FUELSYSTEM TANK LEVEL:#ID#,percent) 0.1 &gt; and (A:AIRSPEED TRUE,knots) #MIN_SPEED# &lt; and</FX_GRAPH_PARAM_0>
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_Hydraulic_Leak_Fast_Template">
+		<Parameters Type="Default">
+			<ID>1</ID>
+			<FX_OFFSET_X>1.55</FX_OFFSET_X>
+			<FX_OFFSET_Y>-0.2</FX_OFFSET_Y>
+			<FX_OFFSET_Z>-0.275</FX_OFFSET_Z>
+			<MIN_SPEED>40</MIN_SPEED>
+		</Parameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_NAME>FX_HYDRAULIC_#ID#_LEAK</FX_NAME>
+			<FX_GUID>{8703AFD6-EF16-4E61-880A-F2F03F8E5043}</FX_GUID>
+			<FX_CODE>#ID# (A:2:FAILURE ACTIVE:6, bool) (A:HYDRAULIC RESERVOIR QUANTITY:#ID#,Liters) 1 &gt; and (A:AIRSPEED TRUE,knots) #MIN_SPEED# >= and</FX_CODE>
+			<FX_GRAPH_PARAM_0>FuelLeak_Active, #ID# (A:2:FAILURE ACTIVE:6, bool) (A:HYDRAULIC RESERVOIR QUANTITY:#ID#, Liters) 0.1 &gt; and (A:AIRSPEED TRUE,knots) #MIN_SPEED# >= and</FX_GRAPH_PARAM_0>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- Misc triggers -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_EXHAUST_MD">
+		<DefaultTemplateParameters>
+			<FX_GUID>{35943419-2F02-41B4-BB27-37811ADC32CE}</FX_GUID>
+			<FX_NAME>FX_EXHAUST_MD</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GENERAL ENG STARTER ACTIVE:1, Bool) 0 &gt; (A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_PRESSURETRAIL">
+		<DefaultTemplateParameters>
+			<FX_GUID>{E78D8109-DFFC-4DF1-9A72-94982EF10629}</FX_GUID>
+			<FX_NAME>FX_FX_PRESSURETRAIL</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GROUND VELOCITY, knot) 100 &gt; (A:G FORCE, GForce) 2 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SKY_ROOT_COCKPITPLASMA">
+		<DefaultTemplateParameters>
+			<FX_GUID>{055DF13A-3311-4E2C-BAD9-3B869C10F3DF}</FX_GUID>
+			<FX_NAME>FX_COCKPITPLASMA</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:AIRSPEED MACH, mach) 7 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATER_NODE_LOWALTWATER">
+		<DefaultTemplateParameters>
+			<FX_GUID>{422C6BE8-A423-48BA-835B-982E0C2FB32E}</FX_GUID>
+			<FX_NAME>FX_LOWALTWATER</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>RIVER</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>WASTE_WATER</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>WATER</ENABLE_SURFACE_TYPE_2>
+			<ENABLE_SURFACE_TYPE_3>POND</ENABLE_SURFACE_TYPE_3>
+			<ENABLE_SURFACE_TYPE_4>LAKE</ENABLE_SURFACE_TYPE_4>
+			<ENABLE_SURFACE_TYPE_5>OCEAN</ENABLE_SURFACE_TYPE_5>
+			<ENABLE_SURFACE_TYPE_6>WATER_FSX</ENABLE_SURFACE_TYPE_6>
+		</DefaultTemplateParameters>
+		<Component ID="FX_LOWALTWATER_#FX_NODE#" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_SKY_NODE_VAPOURCONE">
+		<DefaultTemplateParameters>
+			<FX_GUID>{8264917A-F2AB-4759-AF91-4E0C4BFBF849}</FX_GUID>
+			<FX_NAME>FX_VAPOURCONE</FX_NAME>
+		</DefaultTemplateParameters>
+		<Component ID="FX_VAPOURCONE_#FX_NODE#" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WINGVAPOUR">
+		<DefaultTemplateParameters>
+			<FX_GUID>{0C2D2FFE-536B-44F7-BF26-5F205A72E283}</FX_GUID>
+			<FX_NAME>FX_WINGVAPOUR</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GROUND VELOCITY, knot) 100 &gt; (A:G FORCE, GForce) 2 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_DRAGTRAIL">
+		<DefaultTemplateParameters>
+			<FX_GUID>{F938513E-7D81-4D40-9057-762F8017EB1F}</FX_GUID>
+			<FX_NAME>FX_DRAGTRAIL</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GROUND VELOCITY, knot) 100 &gt; (A:G FORCE, GForce) 2 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOW_ALTITUDE_DUST">
+		<DefaultTemplateParameters>
+			<FX_GUID>{C8FB3147-D775-4CD1-AC8F-AEB717924F86}</FX_GUID>
+			<FX_NAME>FX_LOW_ALTITUDE_DUST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SNOW</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>DIRT</ENABLE_SURFACE_TYPE_2>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND, Feet) 100 &lt; (A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_GROUND_CP_LOWALTITUDEDUSTFX2">
+		<DefaultTemplateParameters>
+			<FX_GUID>{E0C80975-7057-4DFA-9DC1-18008B7E591C}</FX_GUID>
+			<FX_NAME>FX_LOW_ALTITUDE_DUST_FX2</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SNOW</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>DIRT</ENABLE_SURFACE_TYPE_2>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND, Feet) 400 &lt; (A:AIRSPEED INDICATED, knot) 120 &gt; and (A:PLANE PITCH DEGREES, degrees) -5 &lt; and (A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_GROUND_CP_LOWALTITUDEDUST_SUPERSONIC">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B46DEBE7-86DD-4E13-91E7-9EB419697E56}</FX_GUID>
+			<FX_NAME>FX_LOW_ALTITUDE_DUST_FX2</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SNOW</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>DIRT</ENABLE_SURFACE_TYPE_2>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:AIRSPEED MACH, mach) 0.9 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOWALTITUDE_PLANE_DUST">
+		 <Parameters Type="Default">
+			<FX_GUID>{97630F23-623F-40B8-99E2-8D2D5CF13DFE}</FX_GUID>
+			<FX_NAME>FX_LOWALTITUDE_PLANE_DUST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND, Feet) 25 &lt; (A:GROUND VELOCITY, knot) 100 &gt; and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOWALTITUDE_PLANE_GRASS_DRY">
+		 <Parameters Type="Default">
+			<FX_GUID>{DE599BC0-56F4-4F94-92D5-EEEF052971B8}</FX_GUID>
+			<FX_NAME>FX_LOWALTITUDE_PLANE_DUST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>DIRT</ENABLE_SURFACE_TYPE_1>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GROUND VELOCITY, knot) 100 &gt; and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOWALTITUDE_PLANE_SNOW">
+		<Parameters Type="Default">
+			<FX_GUID>{627EEACE-D6E5-45A5-AB23-B0A27545E712}</FX_GUID>
+			<FX_NAME>FX_LOWALTITUDE_PLANE_SNOW</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 25 &lt; (A:GROUND VELOCITY, knot) 100 &gt; and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOWALTITUDE_HELICOPTER_DUST">
+		<DefaultTemplateParameters>
+			<FX_GUID>{37A1F756-62D5-464D-8AF2-C4D8DE3DCAD0}</FX_GUID>
+			<FX_NAME>FX_LOWALTITUDE_HELICOPTER_DUST</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>DUST</ENABLE_SURFACE_TYPE_0>
+			<ENABLE_SURFACE_TYPE_1>SAND</ENABLE_SURFACE_TYPE_1>
+			<ENABLE_SURFACE_TYPE_2>DIRT</ENABLE_SURFACE_TYPE_2>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND MINUS CG, Feet) 100 &lt; (A:ROTOR RPM PCT, Percent over 100) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOWALTITUDE_HELICOPTER_SNOW">
+		<DefaultTemplateParameters>
+			<FX_GUID>{241ABF84-C814-4616-99CE-D3D313C04B9B}</FX_GUID>
+			<FX_NAME>FX_LOWALTITUDE_HELICOPTER_SNOW</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>SNOW</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND, Feet) 100 &lt; (A:ROTOR RPM PCT, Percent over 100) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_LOWALTITUDE_HELICOPTER_GRASS">
+		<DefaultTemplateParameters>
+			<FX_GUID>{BC25FEA0-9648-4C86-8061-8679FF452F63}</FX_GUID>
+			<FX_NAME>FX_LOWALTITUDE_HELICOPTER_GRASS</FX_NAME>
+			<ENABLE_SURFACE_TYPE_0>GRASS</ENABLE_SURFACE_TYPE_0>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:PLANE ALT ABOVE GROUND, Feet) 100 &lt; (A:ROTOR RPM PCT, Percent over 100) 0 &gt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_EXHAUST_HEAT"> <!-- MSFS 2024 VERSION -->
+		<DefaultTemplateParameters>
+			<FX_GUID>{605EBB42-DA6B-4965-9199-9AE59BF7FD83}</FX_GUID>
+			<FX_NAME>FX_EXHAUST_HEAT</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	  <Template Name="ASOBO_ET_FX_HEAT_EXHAUST">
+        <Parameters Type="Default">
+            <FX_GUID>{7DDA99CF-9C86-4A01-BDAC-0BC5AB101605}</FX_GUID>
+            <FX_NAME>FX_HEAT_EXHAUST</FX_NAME>
+            <FX_CODE>(A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt;</FX_CODE>
+        </Parameters>
+        <UseTemplate Name="ASOBO_Component_VFX_Template"/>
+    </Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_HEAT_ENGINE">
+		<DefaultTemplateParameters>
+			<FX_GUID>{15832245-10FD-4A13-8D3B-41AB7ECA70C3}</FX_GUID>
+			<FX_NAME>FX_HEAT_ENGINE</FX_NAME>
+			<FX_CODE>(A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt;</FX_CODE>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_HEAT_ENGINE_JET">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B0A8FEDA-7988-4B35-A971-401F55ED0F29}</FX_GUID>
+			<FX_NAME>FX_HEAT_ENGINE_JET</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:GENERAL ENG COMBUSTION:1, Bool) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_AFTERBURNER">
+		<Parameters Type="Default">
+			<FX_GUID>{4586DE45-3381-448F-937A-DF0A70DA1CB1}</FX_GUID>
+			<FX_NAME>FX_AFTERBURNER</FX_NAME>
+		</Parameters>
+		<Component ID="FX_AFTERBURNER" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_AFTERBURNER2">
+		<Parameters Type="Default">
+			<FX_GUID>{76EB2C5C-0331-431D-86C0-E12A0CC39A5F}</FX_GUID>
+			<FX_NAME>FX_AFTERBURNER2</FX_NAME>
+		</Parameters>
+		<Component ID="FX_AFTERBURNER" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_AFTERBURNER_HEAT">
+		<Parameters Type="Default">
+			<FX_GUID>{3F443329-D4EF-4CF5-B71D-BEA3E3EBF5BA}</FX_GUID>
+			<FX_NAME>FX_AFTERBURNER_HEAT</FX_NAME>
+		</Parameters>
+		<Component ID="FX_AFTERBURNER_HEAT" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_BURNER_MAIN_HOTAIRBALLOON">
+		<DefaultTemplateParameters>
+			<FX_GUID>{B99E24FD-A1E7-4E45-825C-FAA89C42A4C1}</FX_GUID>
+			<FX_NAME>FX_BURNER_WHISPER_HOTAIRBALLOON</FX_NAME>
+			<FX_CODE>(A:BURNER VALVE OPEN VALUE:1, number) 0 &gt; (A:BURNER HEATING POWER:1, number) 0 &gt; and</FX_CODE>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_BURNER_WHISPER_HOTAIRBALLOON">
+		<DefaultTemplateParameters>
+			<FX_GUID>{4406FDB2-3D36-42FF-B45A-596D128FB704}</FX_GUID>
+			<FX_NAME>FX_BURNER_WHISPER_HOTAIRBALLOON</FX_NAME>
+			<FX_CODE>(A:BURNER VALVE OPEN VALUE:1, number) 0 &gt; (A:BURNER HEATING POWER:1, number) 0 &gt; and</FX_CODE>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_BURNER_FLAME_HOTAIRBALLOON">
+		<DefaultTemplateParameters>
+			<FX_GUID>{36829246-C37E-44E9-8F3A-D96512473B55}</FX_GUID>
+			<FX_NAME>FX_BURNER_FLAME_HOTAIRBALLOON</FX_NAME>
+			<FX_CODE>(A:BURNER PILOT LIGHT ON:1, number) 0 &gt; (A:BURNER HEATING POWER:1, number) 0 == and</FX_CODE>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_GLIDER_BALAST_LOW_SPEED">
+		<Parameters Type="Default">
+			<FX_GUID>{CAF32131-A4D7-4FC8-9831-83F3283C2575}</FX_GUID>
+			<FX_NAME>FX_GLIDER_BALAST_LOW_SPEED</FX_NAME>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:WATER BALLAST VALVE FLOW RATE:1, gph) 0 &gt; (A:WATER BALLAST VALVE FLOW RATE:2, gph) 0 &gt; or (A:SIM ON GROUND, Bool) 0 &gt; and (A:AIRSPEED TRUE, knots) 40 &lt; and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_GLIDER_BALAST_HIGH_SPEED">
+		<Parameters Type="Default">
+			<FX_GUID>{AA642D83-552F-46F5-992A-6A6AB82CBF18}</FX_GUID>
+			<FX_NAME>FX_GLIDER_BALAST_HIGH_SPEED</FX_NAME>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(A:WATER BALLAST VALVE FLOW RATE:1, gph) 0 &gt; (A:WATER BALLAST VALVE FLOW RATE:2, gph) 0 &gt; or (A:AIRSPEED TRUE, knots) 40 >= and</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_CROPDUSTING_SINGLE">
+		<Parameters Type="Default"/>
+		<Component ID="FX_CROPDUSTING_#NOZZLE_INDEX#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+				<FX_NAME>CROPDUSTING_SINGLE_FX</FX_NAME>
+				<FX_CODE>(A:LIQUID DROPPING TANK PCT FULL VOLUME:1, Percent over 100) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+				<FX_GUID>{692DE956-273F-4EE8-A502-31955393477B}</FX_GUID>
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_CROPDUSTING_SINGLE_LOWSPEED">
+		<Parameters Type="Default"/>
+		<Component ID="FX_CROPDUSTING_#NOZZLE_INDEX#">
+			<UseTemplate Name="ASOBO_VFX_Template">
+				<FX_NAME>CROPDUSTING_SINGLE_LOWSPEED_FX</FX_NAME>
+				<FX_CODE>(A:LIQUID DROPPING TANK PCT FULL VOLUME:1, Percent over 100) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+				<FX_GUID>{70B406FA-46E8-4135-B61F-D536D0EC2B86}</FX_GUID>
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_CROPDUSTING_VORTEX">
+		<Parameters Type="Default"/>
+		<Component ID="FX_CROPDUSTING_VORTEX">
+			<UseTemplate Name="ASOBO_VFX_Template">
+				<FX_NAME>CROPDUSTING_VORTEX_FX</FX_NAME>
+				<FX_CODE>(A:LIQUID DROPPING DOOR FLOW:1, Pounds per hour) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+				<FX_GUID>{666448A6-5261-41E0-BDFF-5E7B451B0257}</FX_GUID>
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_CROPDUSTING_DROP_PLANE">
+		<Parameters Type="Default">
+			<FX_CODE>(A:LIQUID DROPPING DOOR FLOW:1, Pounds per hour) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_NAME>FX_CROPDUSTING_DROP_PLANE</FX_NAME>
+			<FX_GUID>{37D98BAB-92D4-46EC-A27A-20873BD98F9B}</FX_GUID>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_CROPDUSTING_DROP_HELICOPTER">
+		<Parameters Type="Default">
+			<FX_CODE>(A:LIQUID DROPPING DOOR FLOW:1, Pounds per hour) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_VFX_Template">
+			<FX_NAME>FX_CROPDUSTING_DROP_HELICOPTER</FX_NAME>
+			<FX_GUID>{069857DA-0596-4FE5-A399-AE47B0B73AC8}</FX_GUID>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATERDROP_SMALL">
+		<Parameters Type="Default"/>
+		<Component ID="FX_WATERDROP_SMALL">
+			<UseTemplate Name="ASOBO_VFX_Template">
+				<FX_NAME>WATERDROP_SMALL_FX</FX_NAME>
+				<FX_GUID>{9D68EAA2-4490-43CF-A5B1-88D20B6348AB}</FX_GUID>
+				<FX_CODE>(A:LIQUID DROPPING DOOR FLOW:1, Pounds per hour) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_WATERDROP_LARGE">
+		<Parameters Type="Default"/>
+		<Component ID="FX_WATERDROP_LARGE">
+			<UseTemplate Name="ASOBO_VFX_Template">
+				<FX_NAME>WATERDROP_LARGE_FX</FX_NAME>
+				<FX_GUID>{84B25601-F170-4694-97FB-E2F4957BC6C2}</FX_GUID>
+				<FX_CODE>(A:LIQUID DROPPING DOOR FLOW:1, Pounds per hour) 0 &gt; (A:LIQUID DROPPING DOOR OPEN VALUE:1, Percent over 100) 0 &gt; and</FX_CODE>
+			</UseTemplate>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- Contrails -->
+	<Template Name="ASOBO_ET_FX_CONTRAIL_QUAD">
+		<Parameters Type="Default">
+			<FX_GUID>{F42CE638-11EB-4FC8-B9B0-111A220D681F}</FX_GUID>
+			<FX_CONTACT_POINT_ID>-1</FX_CONTACT_POINT_ID>
+			<FX_ENGINE_ID>0</FX_ENGINE_ID>
+			<FX_OFFSET_X>0</FX_OFFSET_X>
+			<FX_OFFSET_Y>0</FX_OFFSET_Y>
+			<FX_OFFSET_Z>0</FX_OFFSET_Z>
+		</Parameters>
+		<Parameters Type="Default">
+			<FX_CODE>(A:CONTRAILS CONDITIONS MET:#FX_ENGINE_ID#, Bool) (A:GENERAL ENG COMBUSTION:#FX_ENGINE_ID#, Bool) and</FX_CODE>
+		</Parameters>
+		<Component ID="FX_CONTRAIL_QUAD_#FX_NODE#" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template" />
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_CONTRAIL_RIBBON">
+		<Parameters Type="Default">
+			<FX_GUID>{904EC2CE-F8DD-4480-99E7-B33F7CF6E114}</FX_GUID>
+			<FX_CONTACT_POINT_ID>-1</FX_CONTACT_POINT_ID>
+			<FX_ENGINE_ID>0</FX_ENGINE_ID>
+			<FX_OFFSET_X>0</FX_OFFSET_X>
+			<FX_OFFSET_Y>0</FX_OFFSET_Y>
+			<FX_OFFSET_Z>0</FX_OFFSET_Z>
+		</Parameters>
+		<Parameters Type="Default">
+			<FX_CODE>(A:CONTRAILS CONDITIONS MET:#FX_ENGINE_ID#, Bool) (A:GENERAL ENG COMBUSTION:#FX_ENGINE_ID#, Bool) and</FX_CODE>
+		</Parameters>
+		<Component ID="FX_CONTRAIL_RIBBON_#FX_NODE#" Node="#FX_NODE#">
+			<UseTemplate Name="ASOBO_VFX_Template" />
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_FX_RACETRAIL">
+		<DefaultTemplateParameters>
+			<FX_GUID>{A0E50D0A-70A2-4E03-B3ED-BFB04DCD4276}</FX_GUID>
+			<FX_NAME>FX_RACETRAIL</FX_NAME>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_Component_VFX_Template">
+			<FX_CODE>(L:1:XMLVAR_SMOKE_ACTIVE) 0 &gt;</FX_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>
+
+					
+					

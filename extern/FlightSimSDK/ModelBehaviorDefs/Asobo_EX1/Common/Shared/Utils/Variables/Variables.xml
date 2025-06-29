@@ -1,0 +1,337 @@
+<ModelBehaviors>
+	<!-- ################################## VARIABLES ################################# -->
+	<!-- ############################################################################## -->
+	<!-- @DOC INPUT_EVENT VARIABLE
+		@Brief Base input event for all variables created using ASOBO_Get_Variable_Parameters
+	-->
+	<InputEvent ID="VARIABLE">
+		<Condition NotEmpty="TT_CATEGORY_MAIN">
+			<TT_Category_Main>TT:#TT_CATEGORY_MAIN#</TT_Category_Main>
+		</Condition>
+		<Condition NotEmpty="TT_CATEGORY_SUB">
+			<TT_Category_Sub>TT:#TT_CATEGORY_SUB#</TT_Category_Sub>
+		</Condition>
+		<Presets>
+			<Extend Target="@BaseInputEvent"/>
+		</Presets>
+	</InputEvent>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Variable_Dummy_IE_Data
+		@Brief Defaults tooltip related parameters & a default single number value setup of the variable input event
+		@Return Defaulted input event parameters
+	-->
+	<ParametersFn Name="ASOBO_Variable_Dummy_IE_Data">
+		<Parameters Type="Override">
+			<SaveParameters ID="Event_Parameters_Config" Append="Default">
+				<INC_PARAM_0>p0</INC_PARAM_0>
+				<INC_PARAM_0_TYPE>Float</INC_PARAM_0_TYPE>
+				<INC_PARAM_0_IS_DYNAMIC>True</INC_PARAM_0_IS_DYNAMIC>
+				<DEC_PARAM_0>p0</DEC_PARAM_0>
+				<DEC_PARAM_0_TYPE>Float</DEC_PARAM_0_TYPE>
+				<DEC_PARAM_0_IS_DYNAMIC>True</DEC_PARAM_0_IS_DYNAMIC>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_TOOLTIP_DESCRIPTION>@TT_Package.STATE.NA</IE_TOOLTIP_DESCRIPTION>
+			<IE_TOOLTIP_DESCRIPTION_IS_DYNAMIC>False</IE_TOOLTIP_DESCRIPTION_IS_DYNAMIC>
+			<IE_TOOLTIP_VALUE>@TT_Package.STATE.NA</IE_TOOLTIP_VALUE>
+			<IE_TOOLTIP_VALUE_IS_DYNAMIC>False</IE_TOOLTIP_VALUE_IS_DYNAMIC>
+			<IE_TOOLTIP_IS_INOP>True</IE_TOOLTIP_IS_INOP>
+			<IE_INC_ARG_COUNT>1</IE_INC_ARG_COUNT>
+			<IE_DEC_ARG_COUNT>1</IE_DEC_ARG_COUNT>
+			<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+		</Parameters>
+		<ReturnParameters>
+			<LoadParameters ID="Event_Parameters_Config"/>
+			<RemoveSavedParameters ID="Event_Parameters_Config"/>
+			<UseParametersFn Name="ASOBO_InputEvent_Base_Default_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Variable_Next_Safe_Jump_Flag_Helper
+		@Brief Increment the tracked last safe jump flag id and returns it
+		@Param TEMP_RPN_DATA_STORAGE Save ID where we keep track of the variable data
+		@Param OUT_PARAM_NAME Name of the parameter to store the ID in
+		@Return The next safe jump flag id to use
+	-->
+	<ParametersFn Name="ASOBO_Variable_Next_Safe_Jump_Flag_Helper">
+		<Parameters Type="Default">
+			<TEMP_RPN_DATA_STORAGE>Variable_Init_Data</TEMP_RPN_DATA_STORAGE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Variable_Get_Next_Safe_Var_Helper
+		@Brief Increment the tracked last safe var id and returns it
+		@Param TEMP_RPN_DATA_STORAGE Save ID where we keep track of the variable data
+		@Param OUT_PARAM_NAME Name of the parameter to store the ID in
+		@Return The next safe var id to use
+	-->
+	<ParametersFn Name="ASOBO_Variable_Get_Next_Safe_Var_Helper">
+		<Parameters Type="Default">
+			<TEMP_RPN_DATA_STORAGE>Variable_Init_Data</TEMP_RPN_DATA_STORAGE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Var_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Variable_Clear_Data_Helper
+		@Brief Clear the saved variable data
+		@Param TEMP_RPN_DATA_STORAGE Save ID where we keep track of the variable data
+	-->
+	<ParametersFn Name="ASOBO_Variable_Clear_Data_Helper">
+		<Parameters Type="Default">
+			<TEMP_RPN_DATA_STORAGE>Variable_Init_Data</TEMP_RPN_DATA_STORAGE>
+		</Parameters>
+		<Parameters Type="Override">
+			<RemoveSavedParameters ID="#TEMP_RPN_DATA_STORAGE#"/>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Set_Variable_In_Units_Helper
+		@Brief provide a simple interface for defining a getter and setter for a given variable VARIABLE_SCOPE and VARIABLE_NAME
+		@Param VARIABLE_SCOPE Scope of the variable
+		@Param VARIABLE_NAME Name of the variable
+		@Param UNITS units of the variable
+		@Param NO_UNITS_IN_GET_SET If true, the getter and setter won't include the units
+		@Return a getter and setter for the given variable data
+	-->
+	<ParametersFn Name="ASOBO_Get_Set_Variable_In_Units_Helper">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Valid="NO_UNITS_IN_GET_SET">
+				<True>
+					<GET_VARIABLE>(#VARIABLE_SCOPE#:#VARIABLE_NAME#, #UNITS#)</GET_VARIABLE>
+					<SET_VARIABLE>(&gt;#VARIABLE_SCOPE#:#VARIABLE_NAME#, #UNITS#)</SET_VARIABLE>
+				</True>
+				<False>
+					<GET_VARIABLE>(#VARIABLE_SCOPE#:#VARIABLE_NAME#)</GET_VARIABLE>
+					<SET_VARIABLE>(&gt;#VARIABLE_SCOPE#:#VARIABLE_NAME#)</SET_VARIABLE>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<GET_VARIABLE#OUT_PARAM_SUFFIX#>#GET_VARIABLE#</GET_VARIABLE#OUT_PARAM_SUFFIX#>
+			<SET_VARIABLE#OUT_PARAM_SUFFIX#>#SET_VARIABLE#</SET_VARIABLE#OUT_PARAM_SUFFIX#>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Variable_Base_Parameters
+		@Brief provide a simple interface for defining a variable given a VARIABLE_ID
+		@Param VARIABLE_SCOPE Scope of the variable
+		@Param VARIABLE_NAME Name of the variable
+		@Param VALUE_UNITS units of the variable
+		@Param VALUE_CODE Code evaluated to compute the variable value
+		@Param GET_VARIABLE_PARAMETERS_CONFIG Function executed after ASOBO_Get_Set_Variable_In_Units_Helper and before actually creating anything
+		@Return a variable interface (and some additional data if anything else is returned by GET_VARIABLE_PARAMETERS_CONFIG)
+	-->
+	<ParametersFn Name="ASOBO_Get_Variable_Base_Parameters">
+		<Parameters Type="Default">
+			<VARIABLE_NAME>XMLVAR_#VARIABLE_ID#</VARIABLE_NAME>
+			<VARIABLE_SCOPE>O</VARIABLE_SCOPE>
+			<VALUE_UNITS>Number</VALUE_UNITS>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Set_Variable_In_Units_Helper">
+				<UNITS>#VALUE_UNITS#</UNITS>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="Temp_Variable_Parameters">
+				<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_No_Default_Helper">
+					<PFN_PARAM_NAME>GET_VARIABLE_PARAMETERS_CONFIG</PFN_PARAM_NAME>
+				</UseParametersFn>				
+			</SaveParameters>
+			<LoadParameters ID="Temp_Variable_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<VALUE_CODE>#GET_VARIABLE#</VALUE_CODE>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#VARIABLE_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#VARIABLE_SCOPE#</VAR_SCOPE>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<GET_VARIABLE>#GET_VARIABLE#</GET_VARIABLE>
+			<SET_VARIABLE>#SET_VARIABLE#</SET_VARIABLE>
+			<VARIABLE_NAME>#VARIABLE_NAME#</VARIABLE_NAME>
+			<VARIABLE_SCOPE>#VARIABLE_SCOPE#</VARIABLE_SCOPE>
+			<VALUE_CODE>#VALUE_CODE#</VALUE_CODE>
+			<VALUE_UNITS>#VALUE_UNITS#</VALUE_UNITS>
+			<LoadParameters ID="Temp_Variable_Parameters"/>
+			<RemoveSavedParameters ID="Temp_Variable_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Variable_Parameters
+		@Brief Computes a variable interface and uses it to create the input event interface and returns it
+		@Param SET_VALUE Value sent to the Set event (dynamic by default)
+		@Param INC_VALUE Value sent to the Inc event (dynamic by default)
+		@Param DEC_VALUE Value sent to the Dec event (dynamic by default)
+		@Param SET_CODE Code evaluated when receiving the Set event
+		@Param INC_CODE Code evaluated when receiving the inc event
+		@Param DEC_CODE Code evaluated when receiving the Dec event
+		@Param VALUE_UNITS Variable value units
+		@Param VALUE_CODE Code evaluated to compute the variable value
+		@Save Append_With_Variable Save ID of default parameters return to the ASOBO_Variable_Parameters processor
+		@Return The computed variable input event parameters
+	-->
+	<ParametersFn Name="ASOBO_Get_Variable_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Variable_Base_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_VALUE>p0</SET_VALUE>
+			<INC_VALUE>p0</INC_VALUE>
+			<DEC_VALUE>p0</DEC_VALUE>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_CODE>#SET_VALUE# #SET_VARIABLE#</SET_CODE>
+			<INC_CODE>#GET_VARIABLE# #INC_VALUE# + (&gt;B:#IE_PRESET_ID#_Set)</INC_CODE>
+			<DEC_CODE>#GET_VARIABLE# #DEC_VALUE# - (&gt;B:#IE_PRESET_ID#_Set)</DEC_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_UNITS>#VALUE_UNITS#</VALUE_UNITS>
+			<VALUE_CODE>#VALUE_CODE#</VALUE_CODE>
+			<SET_CODE>#SET_CODE#</SET_CODE>
+			<INC_CODE>#INC_CODE#</INC_CODE>
+			<DEC_CODE>#DEC_CODE#</DEC_CODE>
+			<Condition CheckSavedParameters="Append_With_Variable">
+				<LoadParameters ID="Append_With_Variable"/>
+				<RemoveSavedParameters ID="Append_With_Variable"/>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Bool_Variable_Parameters_Config
+		@Brief Configure a variable as a boolean (lookup GET_VARIABLE_PARAMETERS_CONFIG)
+		@Param TOGGLE_CHECK Value Condition evaluated by the toggle binding to return the opposite value of the one currently stored
+		@Param SET_CODE Code evaluated when receiving the Set event
+		@Param INC_CODE Code evaluated when receiving the inc event
+		@Param DEC_CODE Code evaluated when receiving the Dec event
+		@Save Append_With_Variable Save ID of default parameters return to the ASOBO_Variable_Parameters processor
+		@Return The computed variable input event parameters
+	-->
+	<ParametersFn Name="ASOBO_Get_Bool_Variable_Parameters_Config">
+		<Parameters Type="Default">
+			<VALUE_UNITS>Bool</VALUE_UNITS>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_CHECK>(B:#IE_PRESET_ID#, #VALUE_UNITS#) 0 ==</TOGGLE_CHECK>
+			<SET_CODE>p0 0 != #SET_VARIABLE#</SET_CODE>
+			<INC_CODE>1 #SET_VARIABLE#</INC_CODE>
+			<DEC_CODE>0 #SET_VARIABLE#</DEC_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>Toggle</ALIAS_ID>
+				<PARAM_0>#TOGGLE_CHECK#</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<SET_CODE>#SET_CODE#</SET_CODE>
+			<INC_CODE>#INC_CODE#</INC_CODE>
+			<DEC_CODE>#DEC_CODE#</DEC_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_Variable_Template
+		@Brief Create a variable
+		@Param VARIABLE_ID name of the variable
+		@Param GET_VARIABLE_PARAMETERS Function to call to retrieve the variable configuration
+		@Param IE_PARAMS save ID used for the variable input event data
+		@Param COMPONENT_ID Name of the component the variable input event will be created in
+		@Param ON_VALUE_CHANGED init code executed when a watch var value changes, or on tick
+		@Param VALUE_CODE code executed to compute the variable value
+		@Param INC_CODE code executed when on an INC event
+		@Param DEC_CODE code executed when on an DEC event
+		@Param SET_CODE code executed when on an SET event
+		@Param TICK_EVERY_FRAME If true, the variable init code will be executed every frame
+	-->
+	<Template Name="ASOBO_Variable_Template">
+		<Parameters Type="Default">
+			<IE_NAME>#VARIABLE_ID#</IE_NAME>
+			<GET_VARIABLE_PARAMETERS>Get_Variable_#VARIABLE_ID#_Parameters</GET_VARIABLE_PARAMETERS>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_IE_Preset_ID_Parameters_Helper">
+				<IE_BASE_NAME>VARIABLE</IE_BASE_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_PARAMS>Variable_#IE_NAME#_Parameters</IE_PARAMS>
+			<COMPONENT_ID>Variable_#IE_NAME#</COMPONENT_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#GET_VARIABLE_PARAMETERS#"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<UseParametersFn Name="ASOBO_Variable_Dummy_IE_Data"/>
+			</SaveParameters>
+			<Condition Check="ON_VALUE_CHANGED">
+				<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+					<INIT_CODE>#ON_VALUE_CHANGED#</INIT_CODE>
+				</UseParametersFn>
+			</Condition>
+			<Condition Check="VALUE_CODE">
+				<UseParametersFn Name="ASOBO_Append_Value_Code_Helper"/>
+			</Condition>
+			<Condition Check="INC_CODE">
+				<UseParametersFn Name="ASOBO_Append_Inc_Code_Helper"/>
+			</Condition>
+			<Condition Check="DEC_CODE">
+				<UseParametersFn Name="ASOBO_Append_Dec_Code_Helper"/>
+			</Condition>
+			<Condition Check="SET_CODE">
+				<UseParametersFn Name="ASOBO_Append_Set_Code_Helper"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="TICK_EVERY_FRAME">
+				<UseParametersFn Name="ASOBO_Tick_Every_Frame_Helper"/>
+			</Condition>
+			<UseParametersFn Name="ASOBO_Variable_Clear_Data_Helper"/>
+		</Parameters>
+		<Component ID="#COMPONENT_ID#">
+			<UseTemplate Name="ASOBO_InputEvent_Template">
+				<LoadParameters ID="#IE_PARAMS#"/>		
+			</UseTemplate>
+			<UseTemplate Name="ASOBO_Process_Saved_Updates_Template"/>
+		</Component>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_Number_Variable_Template
+		@Brief Uses ASOBO_Variable_Template with ASOBO_Get_Variable_Parameters
+		@Param GET_VARIABLE_PARAMETERS Function to call to retrieve the variable configuration
+	-->
+	<Template Name="ASOBO_Number_Variable_Template">
+		<Parameters Type="Default">
+			<GET_VARIABLE_PARAMETERS>ASOBO_Get_Variable_Parameters</GET_VARIABLE_PARAMETERS>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Variable_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_Bool_Variable_Template
+		@Brief Uses ASOBO_Variable_Template with ASOBO_Get_Variable_Parameters and a VALUE_UNITS preset to Bool instead of Number
+		@Param GET_VARIABLE_PARAMETERS Function to call to retrieve the variable configuration
+		@Param GET_VARIABLE_PARAMETERS_CONFIG Function called before finilizing the variable creation inside ASOBO_Get_Variable_Parameters
+	-->
+	<Template Name="ASOBO_Bool_Variable_Template">
+		<Parameters Type="Default">
+			<GET_VARIABLE_PARAMETERS>ASOBO_Get_Variable_Parameters</GET_VARIABLE_PARAMETERS>
+			<GET_VARIABLE_PARAMETERS_CONFIG>ASOBO_Get_Bool_Variable_Parameters_Config</GET_VARIABLE_PARAMETERS_CONFIG>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Variable_Template">
+			<VALUE_UNITS>Bool</VALUE_UNITS>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

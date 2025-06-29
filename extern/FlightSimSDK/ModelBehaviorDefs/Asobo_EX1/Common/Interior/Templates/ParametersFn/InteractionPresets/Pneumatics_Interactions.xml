@@ -1,0 +1,226 @@
+<ModelBehaviors>
+	<!-- #################################### PNEUMATICS ############################## -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_APU_Bleed_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_APU_Bleed_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_APU_BLEED_AIR#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_APU_BLEED_AIR# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_APU_BLEED_AIR#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_APU_BLEED_AIR#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_APU_BLEED_AIR#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Engine_Bleed_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Engine_Bleed_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENGINE_BLEED_AIR#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ENGINE_BLEED_AIR# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ENGINE_BLEED_AIR#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ENGINE_BLEED_AIR#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ENGINE_BLEED_AIR#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Pneumatics_APU_Bleed_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_APU_Bleed_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_APU_BLEED_AIR#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_APU_BLEED_AIR# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_APU_BLEED_AIR#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_APU_BLEED_AIR#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_APU_BLEED_AIR#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Pneumatics_Engine_Bleed_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>#ID#</ENG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_Engine_Bleed_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ENGINE_BLEED_AIR#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ENGINE_BLEED_AIR# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ENGINE_BLEED_AIR#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ENGINE_BLEED_AIR#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ENGINE_BLEED_AIR#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Pneumatics_Valve_Switch_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<VALVE_ID>#ID#</VALVE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_Valve_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_VALVE_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CLOSED_CHECK>#GET_VALVE_SWITCH# !</POS_CLOSED_CHECK>
+			<POS_OPEN_CHECK>#GET_VALVE_SWITCH#</POS_OPEN_CHECK>
+			<!-- Set position -->
+			<POS_CLOSED_CODE>0 #SET_VALVE#</POS_CLOSED_CODE>
+			<POS_OPEN_CODE>100 #SET_VALVE#</POS_OPEN_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Pneumatics_Valve_Mode_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<VALVE_ID>#ID#</VALVE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_Valve_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_VALVE_MODE#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_AUTO_CHECK>#GET_VALVE_MODE# 0 ==</POS_AUTO_CHECK>
+			<POS_MANUAL_CHECK>#GET_VALVE_MODE# 1 ==</POS_MANUAL_CHECK>
+			<POS_OPEN_CHECK>#GET_VALVE_MODE# 2 ==</POS_OPEN_CHECK>
+			<POS_CLOSED_CHECK>#GET_VALVE_MODE# 3 ==</POS_CLOSED_CHECK>
+			<!-- Set position -->
+			<POS_AUTO_CODE>0 #SET_VALVE_MODE#</POS_AUTO_CODE>
+			<POS_MANUAL_CODE>1 #SET_VALVE_MODE#</POS_MANUAL_CODE>
+			<POS_OPEN_CODE>2 #SET_VALVE_MODE#</POS_OPEN_CODE>
+			<POS_CLOSED_CODE>3 #SET_VALVE_MODE#</POS_CLOSED_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Pneumatics_Valve_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+			<ENFORCE_MANUAL_MODE>True</ENFORCE_MANUAL_MODE>
+		</Parameters>
+		<Parameters Type="Default">
+			<VALVE_ID>#ID#</VALVE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_Valve_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Valid="ENFORCE_MANUAL_MODE">
+				<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+					<INIT_CODE>#IS_VALVE_MODE_MANUAL# ! if{ #SET_VALVE_MODE_MANUAL# }</INIT_CODE>
+				</UseParametersFn>
+			</Condition>
+			<VALUE_TYPE>PERCENT</VALUE_TYPE>
+			<IE_GET_STATE>#GET_VALVE_STATUS#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_VALVE# </IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_VALVE_STATUS#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Pneumatics_Alternate_Static_Source_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_Alternate_Static_Source_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ALTERNATE_STATIC_SOURCE_STATE#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CLOSED_CHECK>#GET_ALTERNATE_STATIC_SOURCE_STATE# !</POS_CLOSED_CHECK>
+			<POS_OPEN_CHECK>#GET_ALTERNATE_STATIC_SOURCE_STATE#</POS_OPEN_CHECK>
+			<!-- Set position -->
+			<POS_CLOSED_CODE>#SET_ALTERNATE_STATIC_SOURCE_CLOSED#</POS_CLOSED_CODE>
+			<POS_OPEN_CODE>#SET_ALTERNATE_STATIC_SOURCE_OPEN#</POS_OPEN_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ###################################################################### -->
+	<ParametersFn Name="ASOBO_PNEUMATICS_AREA_TEMPERATURE_SELECT_Settings_Config">
+		<Parameters Type="Default">
+			<AREA_ID>1</AREA_ID>
+		</Parameters>
+		<Condition NotEmpty="AREA_NAME">
+			<Parameters Type="Override">
+				<AREA_ID>'#AREA_NAME#'_n</AREA_ID>
+			</Parameters>
+		</Condition>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Pneumatics_Area_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_AREA_TARGET_TEMPERATURE_PCT#</SIMVAR>
+			</UseParametersFn>
+			<VALUE_TYPE>PERCENT</VALUE_TYPE>
+			<IE_GET_STATE>#GET_AREA_TARGET_TEMPERATURE_PCT#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_AREA_TARGET_TEMPERATURE_PCT#</IE_SET_STATE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_PNEUMATICS_PACK_SWITCH_Settings_Config">
+		<Parameters Type="Default">
+			<PACK_ID>1</PACK_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Pneumatics_Pack_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_PACK_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_ON_CHECK>#GET_PACK_SWITCH#</POS_ON_CHECK>
+			<POS_OFF_CHECK>#GET_PACK_SWITCH# !</POS_OFF_CHECK>
+			<!-- Set position -->
+			<POS_ON_CODE>#SET_PACK_ON#</POS_ON_CODE>
+			<POS_OFF_CODE>#SET_PACK_OFF#</POS_OFF_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

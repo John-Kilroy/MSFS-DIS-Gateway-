@@ -1,0 +1,127 @@
+<ModelBehaviors>
+	<!-- ParametersFn Definitions -->
+	<ParametersFn Name="ASOBO_VFX_Base_Parameters">
+		<Parameters Type="Default">
+			<FX_GUID/>
+			<FX_CODE/>
+			<FX_CONTACT_POINT_ID>-1</FX_CONTACT_POINT_ID>
+			<FX_OFFSET_X>0.0</FX_OFFSET_X>
+			<FX_OFFSET_Y>0.0</FX_OFFSET_Y>
+			<FX_OFFSET_Z>0.0</FX_OFFSET_Z>
+			<FX_ROTATION_OFFSET_P>0.0</FX_ROTATION_OFFSET_P>
+			<FX_ROTATION_OFFSET_B>0.0</FX_ROTATION_OFFSET_B>
+			<FX_ROTATION_OFFSET_H>0.0</FX_ROTATION_OFFSET_H>
+			<FX_MIN_EMISSION_TIME>-1</FX_MIN_EMISSION_TIME>
+		</Parameters>
+		<ReturnParameters>
+			<GUID>#FX_GUID#</GUID>
+			<CODE>#FX_CODE#</CODE>
+			<CONTACT_POINT_ID>#FX_CONTACT_POINT_ID#</CONTACT_POINT_ID>
+			<OFFSET_X>#FX_OFFSET_X#</OFFSET_X>
+			<OFFSET_Y>#FX_OFFSET_Y#</OFFSET_Y>
+			<OFFSET_Z>#FX_OFFSET_Z#</OFFSET_Z>
+			<ROTATION_OFFSET_P>#FX_ROTATION_OFFSET_P#</ROTATION_OFFSET_P>
+			<ROTATION_OFFSET_B>#FX_ROTATION_OFFSET_B#</ROTATION_OFFSET_B>
+			<ROTATION_OFFSET_H>#FX_ROTATION_OFFSET_H#</ROTATION_OFFSET_H>
+			<MIN_EMISSION_TIME>#FX_MIN_EMISSION_TIME#</MIN_EMISSION_TIME>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Template Definitions -->
+	<Template Name="ASOBO_VFX_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_VFX_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>VFX_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<FX GUID="#GUID#">
+			<Offset>
+				<X>#OFFSET_X#</X>
+				<Y>#OFFSET_Y#</Y>
+				<Z>#OFFSET_Z#</Z>
+				<P>#ROTATION_OFFSET_P#</P>
+				<B>#ROTATION_OFFSET_B#</B>
+				<H>#ROTATION_OFFSET_H#</H>
+			</Offset>
+			<ContactPoint>#CONTACT_POINT_ID#</ContactPoint>
+			<Code>#CODE#</Code>
+			<MinEmissionTime>#MIN_EMISSION_TIME#</MinEmissionTime>
+			<EnableEntries>
+				<Loop>
+					<Setup>
+						<Param>CUR_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg NotEmpty="ENABLE_SURFACE_TYPE_#CUR_ID#"/>
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<SURFACE_TYPE_LABEL Process="Param">ENABLE_SURFACE_TYPE_#CUR_ID#</SURFACE_TYPE_LABEL>
+						</Parameters>
+						<SurfaceTypeEntry SurfaceType="#SURFACE_TYPE_LABEL#"/>
+					</Do>
+				</Loop>
+			</EnableEntries>
+			<DisableEntries>
+				<Loop>
+					<Setup>
+						<Param>CUR_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg NotEmpty="DISABLE_SURFACE_TYPE_#CUR_ID#"/>
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<SURFACE_TYPE_LABEL Process="Param">DISABLE_SURFACE_TYPE_#CUR_ID#</SURFACE_TYPE_LABEL>
+						</Parameters>
+						<SurfaceTypeEntry SurfaceType="#SURFACE_TYPE_LABEL#"/>
+					</Do>
+				</Loop>
+			</DisableEntries>
+			<OverrideEntries>
+				<Loop>
+					<Setup>
+						<Param>CUR_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<While>
+							<And>
+								<Arg NotEmpty="OVERRIDE_SURFACE_TYPE_#CUR_ID#"/>
+								<Arg NotEmpty="OVERRIDE_FX_SURFACE_TYPE_GUID_#CUR_ID#"/>
+							</And>
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<SURFACE_TYPE_LABEL Process="Param">OVERRIDE_SURFACE_TYPE_#CUR_ID#</SURFACE_TYPE_LABEL>
+							<SURFACE_TYPE_FX_GUID Process="Param">OVERRIDE_FX_SURFACE_TYPE_GUID_#CUR_ID#</SURFACE_TYPE_FX_GUID>
+						</Parameters>
+						<SurfaceTypeFXEntry SurfaceType="#SURFACE_TYPE_LABEL#" FXGuid="#SURFACE_TYPE_FX_GUID#"/>
+					</Do>
+				</Loop>
+			</OverrideEntries>
+			<GraphParameters>
+				<Loop>
+					<Setup>
+						<Param>CUR_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg NotEmpty="FX_GRAPH_PARAM_#CUR_ID#"/>
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<GRAPH_PARAM_LABEL Process="Param">FX_GRAPH_PARAM_#CUR_ID#</GRAPH_PARAM_LABEL>
+						</Parameters>
+						<GraphParam>#GRAPH_PARAM_LABEL#</GraphParam>
+					</Do>
+				</Loop>
+			</GraphParameters>
+		</FX>
+	</Template>
+</ModelBehaviors>

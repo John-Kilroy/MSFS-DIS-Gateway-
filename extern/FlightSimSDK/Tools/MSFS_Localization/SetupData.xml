@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SetupData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RegisteredLanguages>
+    <Language Name="Japanese"               IsoCode="ja-JP" />
+    <Language Name="English(US)"            IsoCode="en-US" />
+    <Language Name="French(France)"         IsoCode="fr-FR" />
+    <Language Name="Spanish(Spain)"         IsoCode="es-ES" />
+    <Language Name="German"                 IsoCode="de-DE" />
+    <Language Name="Italian"                IsoCode="it-IT" />
+    <Language Name="Dutch"                  IsoCode="nl-NL" />
+    <Language Name="Norwegian"              IsoCode="nb-NO" />
+    <Language Name="Polish"                 IsoCode="pl-PL" />
+    <Language Name="Korean"                 IsoCode="ko-KR" />
+    <Language Name="Danish"                 IsoCode="da-DK" />
+    <Language Name="Swedish"                IsoCode="sv-SE" />
+    <Language Name="Portuguese(Brazil)"     IsoCode="pt-BR" />
+    <Language Name="Portuguese(Portugal)"   IsoCode="pt-PT" />
+    <Language Name="Finnish"                IsoCode="fi-FI" />
+	  <Language Name="Russian"                IsoCode="ru-RU" />
+    <Language Name="Spanish(Latin America)" IsoCode="es-MX" />
+    <Language Name="Chinese(Simplified)"    IsoCode="zh-CN" />
+    <Language Name="Turkish(Turkey)"        IsoCode="tr-TR" />
+    <Language Name="Chinese(Traditional)"   IsoCode="zh-TW" />
+    <Language Name="Czech"                  IsoCode="cs-CZ" />
+    <Language Name="Greek"                  IsoCode="el-GR" />
+    <Language Name="Hindi"                  IsoCode="hi-IN" />
+    <Language Name="Hungarian"              IsoCode="hu-HU" />
+    <Language Name="Indonesian"             IsoCode="id-ID" />
+    <Language Name="Malay"                  IsoCode="ms-MY" />
+    <Language Name="Thai"                   IsoCode="th-TH" />
+    <Language Name="Vietnamese"             IsoCode="vi-VN" />
+    <Language Name="Hebrew"                 IsoCode="he-IL" />
+    <Language Name="Arabic(Saudi Arabia)"   IsoCode="ar-SA" />
+
+  </RegisteredLanguages>
+  <OutputBuses>
+    <OutputBus>VO_GPWS</OutputBus>
+    <OutputBus>VO_ATC</OutputBus>
+    <OutputBus>VO_DEFAULT</OutputBus>
+    <OutputBus>VO_COPILOT</OutputBus>
+    <OutputBus>VO_NARRATOR</OutputBus>
+    <OutputBus>VO_ATC_LEGACY</OutputBus>
+    <OutputBus>VO_COMMENTATOR</OutputBus>
+    <OutputBus>VO_PILOT</OutputBus>
+  </OutputBuses>
+</SetupData>

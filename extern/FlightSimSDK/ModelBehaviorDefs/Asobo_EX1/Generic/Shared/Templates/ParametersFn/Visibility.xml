@@ -1,0 +1,110 @@
+<ModelBehaviors>
+	<!-- IN: VISIBILITY_SIMVAR name of the simvar used to drive the animation -->
+	<!-- IN: VISIBILITY_SIMVAR_UNITS name of the simvar used to drive the animation -->
+	<!-- IN (opt): VISIBILITY_SIMVAR_BIAS value added to the simvar value returned -->
+	<!-- IN (opt): VISIBILITY_SIMVAR_SCALE value multiplied to the simvar value returned (w/ bias already applied) -->
+	<!-- IN (opt): OUT_VISIBILITY_CODE_PARAM_NAME Name given to the parameter out, VISIBILITY_CODE by default -->
+	<!-- OUT: VISIBILITY_CODE code for this simvar -->
+	<ParametersFn Name="ASOBO_Visibility_Simvar_Code_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Visibility_Sim_Default_Parameters"/>
+			<OUT_VISIBILITY_CODE_PARAM_NAME>VISIBILITY_CODE</OUT_VISIBILITY_CODE_PARAM_NAME>
+			<FORMAT_SIMVAR>True</FORMAT_SIMVAR>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Transform_Simvar_Helper">
+				<IN_SIMVAR>#VISIBILITY_SIMVAR#</IN_SIMVAR>
+				<IN_SIMVAR_UNITS>#VISIBILITY_SIMVAR_UNITS#</IN_SIMVAR_UNITS>
+				<Condition NotEmpty="VISIBILITY_SIMVAR_BIAS">
+					<OUT_SIMVAR_BIAS>#VISIBILITY_SIMVAR_BIAS#</OUT_SIMVAR_BIAS>					
+				</Condition>
+				<Condition NotEmpty="VISIBILITY_SIMVAR_SCALE">
+					<OUT_SIMVAR_SCALE>#VISIBILITY_SIMVAR_SCALE#</OUT_SIMVAR_SCALE>
+				</Condition>
+				<IN_PARAM_NAME>VISIBILITY_CODE</IN_PARAM_NAME>
+				<OUT_PARAM_NAME>#OUT_VISIBILITY_CODE_PARAM_NAME#</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: VISIBILITY_CODE (RPN snippet) -->
+	<!-- IN: VISIBILITY_TEST_NO_FAILURE_CODE (RPN snippet, return false to trigger the failure) -->
+	<!-- IN (opt): OUT_VISIBILITY_CODE_PARAM_NAME Name given to the parameter out, VISIBILITY_CODE by default -->
+	<!-- OUT: VISIBILITY_CODE code for this simvar -->
+	<ParametersFn Name="ASOBO_Visibility_Failure_Parameters">
+		<Parameters Type="Default">
+			<OUT_VISIBILITY_CODE_PARAM_NAME>VISIBILITY_CODE</OUT_VISIBILITY_CODE_PARAM_NAME>
+			<CODE_WHEN_NO_FAILURE_ACTIVE>#VISIBILITY_CODE#</CODE_WHEN_NO_FAILURE_ACTIVE>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Failure_Helper">
+				<TEST_NO_FAILURE>#VISIBILITY_TEST_NO_FAILURE_CODE#</TEST_NO_FAILURE>
+				<OUT_PARAM_NAME>#OUT_VISIBILITY_CODE_PARAM_NAME#</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: VISIBILITY_CODE (RPN snippet) -->
+	<!-- OUT: VISIBILITY_CODE code inverted -->
+	<ParametersFn Name="ASOBO_Visibility_Invert_Parameters">
+		<ReturnParameters>
+			<VISIBILITY_CODE>1 #VISIBILITY_CODE# -</VISIBILITY_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Save transforms into Visibility_Code_Transform_Stack depending on some parameters -->
+	<ParametersFn Name="ASOBO_Process_Visibility_Transforms_Parameters">
+		<Parameters Type="Default">
+			<USE_ASOBO_VISIBILITY_TRANSFORMS>True</USE_ASOBO_VISIBILITY_TRANSFORMS>
+		</Parameters>
+		<Parameters Type="Default">
+			<!-- Order of definition decides which will be applied first -->
+			<Condition NotEmpty="PFN_REGISTER_VISIBILITY_TRANSFORM_APPLIED_FIRST">
+				<UseParametersFn Name="#PFN_REGISTER_VISIBILITY_TRANSFORM_APPLIED_FIRST#"/>
+			</Condition>
+			<Condition Valid="USE_ASOBO_VISIBILITY_TRANSFORMS">
+				<Condition NotEmpty="VISIBILITY_TEST_NO_FAILURE_CODE">
+					<UseParametersFn Name="ASOBO_Visibility_Add_Transform_Helper">
+						<TRANSFORM_PFN>ASOBO_Visibility_Failure_Parameters</TRANSFORM_PFN>
+					</UseParametersFn>
+				</Condition>
+				<Condition Valid="INVERT_VISIBILITY">
+					<UseParametersFn Name="ASOBO_Visibility_Add_Transform_Helper">
+						<TRANSFORM_PFN>ASOBO_Visibility_Invert_Parameters</TRANSFORM_PFN>
+					</UseParametersFn>
+				</Condition>
+			</Condition>
+			<Condition NotEmpty="PFN_REGISTER_VISIBILITY_TRANSFORM_APPLIED_LAST">
+				<UseParametersFn Name="#PFN_REGISTER_VISIBILITY_TRANSFORM_APPLIED_LAST#"/>
+			</Condition>
+		</Parameters>
+	</ParametersFn>
+	<!-- IN (opt): OUT_PARAM_NAME (Name of the param to receive the transform index value) -->
+	<!-- OUT: Next safe transform index to use -->
+	<ParametersFn Name="ASOBO_Visibility_Get_Next_Safe_Transform_Index">
+		<Parameters Type="Override">
+			<LoadParameters ID="Visibility_Code_Transform_Stack"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<OUT_PARAM_NAME>NEXT_SAFE_TRANSFORM_INDEX</OUT_PARAM_NAME>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Increment_ID_Helper">
+				<OUT_PARAM_ID_NAME>NEXT_SAFE_TRANSFORM_INDEX</OUT_PARAM_ID_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="Visibility_Code_Transform_Stack" Append="Override">
+				<NEXT_SAFE_TRANSFORM_INDEX>#NEXT_SAFE_TRANSFORM_INDEX#</NEXT_SAFE_TRANSFORM_INDEX>
+			</SaveParameters>
+			<#OUT_PARAM_NAME#>#NEXT_SAFE_TRANSFORM_INDEX#</#OUT_PARAM_NAME#>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Visibility_Add_Transform_Helper">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Visibility_Get_Next_Safe_Transform_Index"/>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="Visibility_Code_Transform_Stack" Append="Default">
+				<VISIBILITY_CODE_TRANSFORM_PFN_#NEXT_SAFE_TRANSFORM_INDEX#>#TRANSFORM_PFN#</VISIBILITY_CODE_TRANSFORM_PFN_#NEXT_SAFE_TRANSFORM_INDEX#>
+			</SaveParameters>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

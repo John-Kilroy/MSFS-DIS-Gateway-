@@ -1,0 +1,55 @@
+<ModelBehaviors>
+	<!-- ################################# TEMPLATES ################################## -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Visibility_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Swapable_Mesh_Template
+		@Brief Make two visibility components using the provided IS_VISIBLE condition or GET_VISIBILITY_CODE processor outputing a IS_VISIBLE condition
+		@Param MESH_VISIBLE_WHEN_TRUE GLTF Node shown when the IS_VISIBLE condition is true
+		@Param MESH_VISIBLE_WHEN_FALSE GLTF Node shown when the IS_VISIBLE condition is false
+		@Param IS_VISIBLE Condition driving the swapable mesh visibility
+		@Param FINAL_VISIBILITY_TEMPLATE Visibility template used to create the component
+		@Param GET_VISIBILITY_CODE Function called generating parameters for the FINAL_VISIBILITY_TEMPLATE used
+	-->
+	<Template Name="ASOBO_CT_Swapable_Mesh_Template">
+		<Parameters Type="Default">
+			<FINAL_VISIBILITY_TEMPLATE>ASOBO_GT_Component_Visibility_Template</FINAL_VISIBILITY_TEMPLATE>
+			<GET_VISIBILITY_CODE>ASOBO_Bool_Visibility_Parameters</GET_VISIBILITY_CODE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#GET_VISIBILITY_CODE#"/>
+		</Parameters>
+		<UseTemplate Name="#FINAL_VISIBILITY_TEMPLATE#">
+			<NODE_ID>#MESH_VISIBLE_WHEN_TRUE#</NODE_ID>
+			<VISIBILITY_CODE>#IS_VISIBLE#</VISIBILITY_CODE>
+		</UseTemplate>
+		<UseTemplate Name="#FINAL_VISIBILITY_TEMPLATE#">
+			<NODE_ID>#MESH_VISIBLE_WHEN_FALSE#</NODE_ID>
+			<VISIBILITY_CODE>#IS_VISIBLE# !</VISIBILITY_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_CT_Show_Mesh_From_Asset_State_Template
+		@Brief Controls the visibility of a node based on the state of some other element of the Asset (Animation, Emissive or Visibility)
+		@Param NODE_ID GLTF Node shown when condition is true
+		@Param OP_TYPE Controls the operation to check on the asset position. Defaults to GREATER_THAN
+		@Param ANIM_NAME Name of the Animation to check. One of ANIM_NAME, EMISSIVE_NAME or VISIBILITY_NAME is required.
+		@Param EMISSIVE_NAME Name of the Animation to check. One of ANIM_NAME, EMISSIVE_NAME or VISIBILITY_NAME is required.
+		@Param VISIBILITY_NAME Name of the Animation to check. One of ANIM_NAME, EMISSIVE_NAME or VISIBILITY_NAME is required.
+		@Param VISIBILITY_THRESHOLD Required. Position (between 0 and 100) beyond which the node will be shown. 
+		@Param ATTACHMENT_ALIAS Optional. If the target asset name is in a different attachment, this needs to be specified to indicate the attachment to look in. It corresponds to the alias given to the sim_attachment in attached_object.cfg. 
+		@Param FINAL_VISIBILITY_TEMPLATE Visibility template used to create the component
+	-->
+	<Template Name="ASOBO_CT_Show_Mesh_From_Asset_State_Template">
+		<Parameters Type="Default">
+			<FINAL_VISIBILITY_TEMPLATE>ASOBO_GT_Component_Visibility_Template</FINAL_VISIBILITY_TEMPLATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Asset_Based_Visibility_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="#FINAL_VISIBILITY_TEMPLATE#">
+			<VISIBILITY_CODE>#IS_VISIBLE#</VISIBILITY_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,921 @@
+<ModelBehaviors>
+	<!-- ################################# INTERACTION ################################ -->
+	<!-- ############################################################################## -->
+	<!-- IN: AXIS (X, Y or TRAJECTORY) -->
+	<!-- STATE_N_ID: all positions ID -->
+	<!-- OUT: Get ANIM_CODE & CALLBACK_CODE for an XStates interaction -->
+	<ParametersFn Name="ASOBO_Get_Interaction_XStates_Parameters">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Cover_Interaction_Parameters">
+				<IS_COVERED>True</IS_COVERED>
+			</Condition>
+			<AUTO_CREATE_SOUND_EVENTS>True</AUTO_CREATE_SOUND_EVENTS>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+				<SOUND_EVENT_COUNT>#LAST_STATE_INDEX#</SOUND_EVENT_COUNT>
+				<Condition NotEmpty="SOUND_EVENT_TYPE_ID">
+					<True>
+						<SOUND_EVENT_NAME>TYPE_#SOUND_EVENT_TYPE_ID#</SOUND_EVENT_NAME>	
+					</True>
+					<False>
+						<SOUND_EVENT_NAME>#IE_PRESET_ID#</SOUND_EVENT_NAME>						
+					</False>
+				</Condition>
+				<SOUND_EVENT_INTERACTION_TYPE>#INTERACTION_TYPE#</SOUND_EVENT_INTERACTION_TYPE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+				<Condition NotEmpty="SOUND_EVENT_SUFFIX">
+					<SOUND_EVENT_NAME>#SOUND_EVENT_NAME#_#SOUND_EVENT_SUFFIX#</SOUND_EVENT_NAME>
+				</Condition>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+				<FULL_SOUND_EVENT_NAME>#SOUND_EVENT_INTERACTION_TYPE#_#SOUND_EVENT_NAME#</FULL_SOUND_EVENT_NAME>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+				<Condition NotEmpty="SOUND_EVENT_GROUP">
+					<FULL_SOUND_EVENT_NAME>#SOUND_EVENT_GROUP#_#FULL_SOUND_EVENT_NAME#</FULL_SOUND_EVENT_NAME>
+				</Condition>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="AUTO_CREATE_SOUND_EVENTS">
+				<UseParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+					<WWISE_EVENT_DIRECTION>Both</WWISE_EVENT_DIRECTION>
+					<WWISE_EVENT_NAME>#FULL_SOUND_EVENT_NAME#</WWISE_EVENT_NAME>
+					<WWISE_EVENT_COUNT>#SOUND_EVENT_COUNT#</WWISE_EVENT_COUNT>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+					<WWISE_EVENT_DIRECTION>Forward</WWISE_EVENT_DIRECTION>
+					<WWISE_EVENT_NAME>#FULL_SOUND_EVENT_NAME#_Forward</WWISE_EVENT_NAME>
+					<WWISE_EVENT_COUNT>#SOUND_EVENT_COUNT#</WWISE_EVENT_COUNT>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Add_Sound_Event_Helper">
+					<WWISE_EVENT_DIRECTION>Backward</WWISE_EVENT_DIRECTION>
+					<WWISE_EVENT_NAME>#FULL_SOUND_EVENT_NAME#_Backward</WWISE_EVENT_NAME>
+					<WWISE_EVENT_COUNT>#SOUND_EVENT_COUNT#</WWISE_EVENT_COUNT>
+				</UseParametersFn>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="IS_COVERED">
+				<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Covered_Parameters"/>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<To>#LAST_STATE_INDEX#</To>
+				</Setup>
+				<Do>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="ASOBO_Get_Interaction_XState_Parameters">
+							<IN_STATE_ID Process="Param">IE_STATE_#CUR_ID#</IN_STATE_ID>
+							<IN_STATE_INDEX>#CUR_ID#</IN_STATE_INDEX>
+						</UseParametersFn>
+					</Parameters>
+				</Do>
+				<Then>
+					<Switch>
+						<Case Valid="USE_SIMPLE_TOGGLE_INTERACTION">
+							<UseParametersFn Name="ASOBO_Get_Interaction_2States_Parameters"/>
+						</Case>
+						<Default>
+							<UseParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Parameters"/>							
+						</Default>
+					</Switch>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Setup a simplfied interaction for a toggle -->
+	<ParametersFn Name="ASOBO_Get_Interaction_2States_Parameters">
+		<Parameters Type="Default">
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<True>
+					<FORWARD_INC_DEC_TO_IE>False</FORWARD_INC_DEC_TO_IE>
+				</True>
+				<False>
+					<FORWARD_INC_DEC_TO_IE>True</FORWARD_INC_DEC_TO_IE>	
+				</False>
+			</Condition>
+			<MOUSERECT_LOCK_ENABLED>False</MOUSERECT_LOCK_ENABLED>
+			<Condition Check="STATE_0_MOMENTARY_RELEASE_TARGET">
+				<MOMENTARY_RELEASE>(&gt;B:#IE_PRESET_ID#_#STATE_0_MOMENTARY_RELEASE_TARGET#)</MOMENTARY_RELEASE>
+				<MOMENTARY_CONDITION>#STATE_0_CHECK#</MOMENTARY_CONDITION>
+				<MOMENTARY_MIN_DURATION>#STATE_0_MOMENTARY_MIN_DURATION#</MOMENTARY_MIN_DURATION>
+				<STATE_ID Process="Param">STATE_0_ID</STATE_ID>
+			</Condition>
+			<Condition Check="STATE_1_MOMENTARY_RELEASE_TARGET">
+				<MOMENTARY_RELEASE>(&gt;B:#IE_PRESET_ID#_#STATE_1_MOMENTARY_RELEASE_TARGET#)</MOMENTARY_RELEASE>
+				<MOMENTARY_CONDITION>#STATE_1_CHECK#</MOMENTARY_CONDITION>
+				<MOMENTARY_MIN_DURATION>#STATE_1_MOMENTARY_MIN_DURATION#</MOMENTARY_MIN_DURATION>
+				<STATE_ID Process="Param">STATE_1_ID</STATE_ID>
+			</Condition>
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Lever">
+					<AXIS>TRAJECTORY</AXIS>
+				</Case>
+				<Case Value="Knob">
+					<AXIS>X</AXIS>
+				</Case>
+				<Default>
+					<AXIS>Y</AXIS>
+				</Default>
+			</Switch>
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<True>
+					<VAR_IS_INTERACTING>O:_Sub_Interaction_#ATTACHEMENT_ID#_Is_Locked</VAR_IS_INTERACTING>
+				</True>
+				<False>
+					<VAR_IS_INTERACTING>O:_Interaction_Is_Locked</VAR_IS_INTERACTING>					
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="MOMENTARY_RELEASE">
+				<PROCESS_MOMENTARY_RELEASE_TARGETS>
+					#MOMENTARY_CONDITION# if{
+						@E_SimulationTime (O:XMLVAR_#IE_PRESET_ID#_Pos_#STATE_ID#_Hold_Timeout) &gt; if{ 
+							#MOMENTARY_RELEASE# 
+						} els{ 
+							(O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) 1 + (&gt;O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) 
+						}
+					}
+				</PROCESS_MOMENTARY_RELEASE_TARGETS>
+				<UPDATE_MOMENTARY_RELEASE_TIMEOUTS>@E_SimulationTime #MOMENTARY_MIN_DURATION# + (&gt;O:XMLVAR_#IE_PRESET_ID#_Pos_#STATE_ID#_Hold_Timeout) (O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) 1 + (&gt;O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick)</UPDATE_MOMENTARY_RELEASE_TIMEOUTS>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="MOMENTARY_RELEASE">
+				<Condition Valid="ENFORCE_MOMENTARY_MIN_DURATION">
+					<MOMENTARY_RELEASE>#PROCESS_MOMENTARY_RELEASE_TARGETS#</MOMENTARY_RELEASE>
+				</Condition>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="AXIS">
+				<Case Value="TRAJECTORY">
+					<INTERACTION_AXIS>Y</INTERACTION_AXIS>
+				</Case>
+				<Default>
+					<INTERACTION_AXIS>#AXIS#</INTERACTION_AXIS>
+				</Default>
+			</Switch>
+			<ANIM_LAG>300</ANIM_LAG>
+			<ANIM_CODE>(B:#IE_PRESET_ID#, percent)</ANIM_CODE>
+			<ON_ENTER_LOCK_INTERACTION>(&gt;B:#IE_PRESET_ID#_Toggle)</ON_ENTER_LOCK_INTERACTION>
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<MR_TO_IE_INC_VALUE>1</MR_TO_IE_INC_VALUE>
+				<MR_TO_IE_DEC_VALUE>1</MR_TO_IE_DEC_VALUE>
+			</Condition>
+			<Condition NotEmpty="INVERT_DRAG_SCALAR">
+				<MR_INVERT_INC_DEC_EVENTS>#INVERT_DRAG_SCALAR#</MR_INVERT_INC_DEC_EVENTS>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition>
+				<Test>
+					<And>
+						<Arg NotEmpty="STATE_0_TOOLTIP"/>
+						<Arg NotEmpty="STATE_1_TOOLTIP"/>
+					</And>
+				</Test>
+				<True>
+					<IE_TOOLTIP_VALUE>#STATE_0_CHECK# if{ #STATE_0_TOOLTIP# } els{ #STATE_1_TOOLTIP# }</IE_TOOLTIP_VALUE>					
+				</True>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<True>
+					<SaveParameters ID="Temp_MR_Events">
+						<UseParametersFn Name="ASOBO_Get_Code_For_MR_Binding_Type_Helper">
+							<CODE_ON_PRESS>#ON_ENTER_LOCK_INTERACTION# 1 (&gt;#VAR_IS_INTERACTING#)</CODE_ON_PRESS>
+							<Condition Check="MOMENTARY_RELEASE">
+								<CODE_ON_RELEASE>#MOMENTARY_RELEASE# 0 (&gt;#VAR_IS_INTERACTING#)</CODE_ON_RELEASE>
+							</Condition>
+						</UseParametersFn>
+					</SaveParameters>
+				</True>
+				<False>
+					<Condition Valid="FORWARD_INC_DEC_TO_IE">
+						<ON_INCREASE>#MR_TO_IE_INC_VALUE# (&gt;B:#IE_PRESET_ID#_Inc)</ON_INCREASE>
+						<ON_DECREASE>#MR_TO_IE_DEC_VALUE# (&gt;B:#IE_PRESET_ID#_Dec)</ON_DECREASE>
+					</Condition>
+					<Condition Check="PROCESS_MOMENTARY_RELEASE_TARGETS">
+						<True>
+							<ON_ENTER_LOCK>1 (&gt;#VAR_IS_INTERACTING#) #ON_ENTER_LOCK_INTERACTION#</ON_ENTER_LOCK>
+							<ON_EXIT_LOCK>0 (&gt;#VAR_IS_INTERACTING#) #MOMENTARY_RELEASE#</ON_EXIT_LOCK>
+						</True>
+						<False>
+							<ON_ENTER_LOCK>#ON_ENTER_LOCK_INTERACTION#</ON_ENTER_LOCK>
+						</False>
+					</Condition>
+				</False>
+			</Condition>
+			<Condition Check="PROCESS_MOMENTARY_RELEASE_TARGETS">
+				<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Momentary_Parameters"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<UseParametersFn Name="ASOBO_Process_Inc_Dec_Invertion"/>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<True>
+					<Loop>
+						<Setup>
+							<Param>EV_PARAM</Param>
+							<Value>EV_VALUE</Value>
+							<Parameters>
+								<LoadParameters ID="Temp_MR_Events"/>
+								<RemoveSavedParameters ID="Temp_MR_Events"/>
+							</Parameters>
+						</Setup>
+						<Do>
+							<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+								<#EV_PARAM#>#EV_VALUE#</#EV_PARAM#>
+							</UseParametersFn>
+						</Do>
+					</Loop>
+				</True>
+				<False>
+					<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+						<EV_PARAM>ON_ENTER_LOCK</EV_PARAM>
+					</UseParametersFn>
+					<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+						<EV_PARAM>ON_EXIT_LOCK</EV_PARAM>
+					</UseParametersFn>
+				</False>
+			</Condition>
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+					<EV_PARAM>ON_INCREASE</EV_PARAM>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+					<EV_PARAM>ON_DECREASE</EV_PARAM>
+				</UseParametersFn>
+			</Condition>
+			<UseParametersFn Name="ASOBO_Add_Animation_Helper"/>
+			<Condition Valid="IS_AN_ATTACHEMENT">
+				<False>					
+					<SaveParameters ID="Mouserect_Parameters" Append="Default">
+						<CURSOR>Hand</CURSOR>
+						<MOUSERECT_LOCK_ENABLED>#MOUSERECT_LOCK_ENABLED#</MOUSERECT_LOCK_ENABLED>
+					</SaveParameters>
+				</False>
+			</Condition>
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Button">
+					<Switch Param="BUTTON_TYPE">
+						<Case Value="Push">
+							<IE_TOOLTIP_ICON>PUSH</IE_TOOLTIP_ICON>
+						</Case>
+						<Case Value="Pull">
+							<IE_TOOLTIP_ICON>PULL</IE_TOOLTIP_ICON>
+						</Case>
+						<Default>
+							<IE_TOOLTIP_ICON>MOVE_#INTERACTION_AXIS#</IE_TOOLTIP_ICON>
+						</Default>
+					</Switch>
+				</Case>
+				<Case Value="Knob">
+					<IE_TOOLTIP_ICON>ROTATE</IE_TOOLTIP_ICON>
+				</Case>
+				<Case Value="Lever">
+					<IE_TOOLTIP_ICON>MOVE_AXIS_#INTERACTION_AXIS#</IE_TOOLTIP_ICON>	
+				</Case>
+				<Default>
+					<IE_TOOLTIP_ICON>MOVE_#INTERACTION_AXIS#</IE_TOOLTIP_ICON>					
+				</Default>
+			</Switch>
+			<UseParametersFn Name="ASOBO_Get_Interaction_For_MR_Binding_Type_Helper"/>
+			<UseParametersFn Name="ASOBO_Format_Tooltip_Value_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN: IN_STATE_ID ID of the state -->
+	<!-- IN: STATE_#IN_STATE_ID#_CODE/IE_ALIAS (code or ie alias for this state) -->
+	<!-- IN: STATE_#IN_STATE_ID#_CONDITION/IE_VALUE (code or ie value for checking if this state is active) -->
+	<!-- IN: STATE_#IN_STATE_ID#_TOOLTIP_CODE/_TOOLTIP_ID (code or tooltip id for this state) -->
+	<ParametersFn Name="ASOBO_Get_Interaction_XState_Parameters">
+		<Parameters Type="Default">
+			<Condition Check="POS_#IN_STATE_ID#_MOMENTARY_RELEASE_TARGET">
+				<DEFAULT_MOMENTARY_MIN_DURATION>0.75</DEFAULT_MOMENTARY_MIN_DURATION>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="POS_#IN_STATE_ID#_GATE_DIRECTION">
+				<LoadParameters ID="MR_Gates_Temp_Data"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="POS_#IN_STATE_ID#_GATE_DIRECTION">
+				<Condition Check="LAST_USED_GATE_ID">
+					<True>
+						<GATE_ID Process="Int">#LAST_USED_GATE_ID# 1 +</GATE_ID>
+					</True>
+					<False>
+						<GATE_ID>0</GATE_ID>
+					</False>
+				</Condition>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="POS_#IN_STATE_ID#_GATE_DIRECTION">
+				<SaveParameters ID="MR_Gates_Config" Append="Override">
+					<GATE_#GATE_ID#>POS_#IN_STATE_ID#</GATE_#GATE_ID#>
+				</SaveParameters>
+				<SaveParameters ID="MR_Gates_Temp_Data" Append="Override">
+					<LAST_USED_GATE_ID>#GATE_ID#</LAST_USED_GATE_ID>
+				</SaveParameters>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch>
+				<Case NotEmpty="POS_#IN_STATE_ID#_CODE">
+					<IN_STATE_CODE Process="Param">POS_#IN_STATE_ID#_CODE</IN_STATE_CODE>
+				</Case>
+				<Case NotEmpty="POS_#IN_STATE_ID#_IE_ALIAS">
+					<UseParametersFn Name="ASOBO_Get_IE_ALIAS_Code">
+						<OUT_PARAM_NAME>IN_STATE_CODE</OUT_PARAM_NAME>
+						<ALIAS_ID Process="Param">POS_#IN_STATE_ID#_IE_ALIAS</ALIAS_ID>
+					</UseParametersFn>
+				</Case>
+			</Switch>
+			<Switch>
+				<Case NotEmpty="POS_#IN_STATE_ID#_CHECK">
+					<IN_STATE_CHECK Process="Param">POS_#IN_STATE_ID#_CHECK</IN_STATE_CHECK>
+				</Case>
+				<Case NotEmpty="POS_#IN_STATE_ID#_IE_VALUE">
+					<UseParametersFn Name="ASOBO_Get_IE_VALUE_Check">
+						<OUT_PARAM_NAME>IN_STATE_CHECK</OUT_PARAM_NAME>
+						<VALUE Process="Param">POS_#IN_STATE_ID#_IE_VALUE</VALUE>
+					</UseParametersFn>
+				</Case>
+			</Switch>
+			<Switch>
+				<Case NotEmpty="POS_#IN_STATE_ID#_TOOLTIP_CODE">
+					<IN_STATE_TOOLTIP Process="Param">POS_#IN_STATE_ID#_TOOLTIP_CODE</IN_STATE_TOOLTIP>
+				</Case>
+				<Case NotEmpty="POS_#IN_STATE_ID#_TOOLTIP_ID">
+					<UseParametersFn Name="ASOBO_Get_TOOLTIP_ID_Parameters">
+						<OUT_PARAM_NAME>IN_STATE_TOOLTIP</OUT_PARAM_NAME>
+						<TOOLTIP_ID Process="Param">POS_#IN_STATE_ID#_TOOLTIP_ID</TOOLTIP_ID>
+					</UseParametersFn>
+				</Case>
+			</Switch>
+			<Condition NotEmpty="POS_#IN_STATE_ID#_ANIM_PERCENT">
+				<True>
+					<IN_STATE_PERCENT Process="Param">POS_#IN_STATE_ID#_ANIM_PERCENT</IN_STATE_PERCENT>					
+				</True>
+				<False>
+					<IN_STATE_PERCENT Process="Int">#IN_STATE_INDEX# #LAST_STATE_INDEX# / 100 * near</IN_STATE_PERCENT>
+				</False>
+			</Condition>
+			<Condition NotEmpty="POS_#IN_STATE_ID#_MOMENTARY_RELEASE_TARGET">
+				<IN_STATE_MOMENTARY_TARGET Process="Param">POS_#IN_STATE_ID#_MOMENTARY_RELEASE_TARGET</IN_STATE_MOMENTARY_TARGET>
+				<Condition NotEmpty="POS_#IN_STATE_ID#_MOMENTARY_MIN_DURATION">
+					<True>
+						<IN_STATE_MOMENTARY_MIN_DURATION Process="Param">POS_#IN_STATE_ID#_MOMENTARY_MIN_DURATION</IN_STATE_MOMENTARY_MIN_DURATION>
+					</True>
+					<False>
+						<IN_STATE_MOMENTARY_MIN_DURATION>#DEFAULT_MOMENTARY_MIN_DURATION#</IN_STATE_MOMENTARY_MIN_DURATION>
+					</False>
+				</Condition>
+				<Condition NotEmpty="POS_#IN_STATE_ID#_MOMENTARY_CONDITION">
+					<True>
+						<IN_STATE_MOMENTARY_MOMENTARY_CONDITION Process="Param">POS_#IN_STATE_ID#_MOMENTARY_CONDITION</IN_STATE_MOMENTARY_MOMENTARY_CONDITION>
+					</True>
+					<False>
+						<IN_STATE_MOMENTARY_MOMENTARY_CONDITION/>
+					</False>
+				</Condition>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<STATE_#IN_STATE_INDEX#_ID>#IN_STATE_ID#</STATE_#IN_STATE_INDEX#_ID>
+			<STATE_#IN_STATE_INDEX#_CODE>#IN_STATE_CODE#</STATE_#IN_STATE_INDEX#_CODE>
+			<Condition NotEmpty="IN_STATE_TOOLTIP">
+				<STATE_#IN_STATE_INDEX#_TOOLTIP>#IN_STATE_TOOLTIP#</STATE_#IN_STATE_INDEX#_TOOLTIP>				
+			</Condition>
+			<Condition NotEmpty="IN_STATE_CHECK">
+				<STATE_#IN_STATE_INDEX#_CHECK>#IN_STATE_CHECK#</STATE_#IN_STATE_INDEX#_CHECK>				
+			</Condition>
+			<STATE_#IN_STATE_INDEX#_ANIM_PERCENT>#IN_STATE_PERCENT#</STATE_#IN_STATE_INDEX#_ANIM_PERCENT>
+			<Condition NotEmpty="IN_STATE_MOMENTARY_TARGET">
+				<IS_MOMENTARY>True</IS_MOMENTARY>
+				<STATE_#IN_STATE_INDEX#_MOMENTARY_RELEASE_TARGET>#IN_STATE_MOMENTARY_TARGET#</STATE_#IN_STATE_INDEX#_MOMENTARY_RELEASE_TARGET>
+				<STATE_#IN_STATE_INDEX#_MOMENTARY_MIN_DURATION>#IN_STATE_MOMENTARY_MIN_DURATION#</STATE_#IN_STATE_INDEX#_MOMENTARY_MIN_DURATION>
+				<STATE_#IN_STATE_INDEX#_MOMENTARY_CONDITION>#IN_STATE_MOMENTARY_MOMENTARY_CONDITION#</STATE_#IN_STATE_INDEX#_MOMENTARY_CONDITION>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Parameters">
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Lever">
+					<AXIS>TRAJECTORY</AXIS>
+				</Case>
+				<Case Value="Knob">
+					<AXIS>X</AXIS>
+				</Case>
+				<Default>
+					<AXIS>Y</AXIS>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="AXIS">
+				<Case Value="TRAJECTORY">
+					<INTERACTION_AXIS>Y</INTERACTION_AXIS>
+				</Case>
+				<Default>
+					<INTERACTION_AXIS>#AXIS#</INTERACTION_AXIS>
+				</Default>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<Switch Param="AXIS">
+				<Case Value="TRAJECTORY">
+					<UseParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Trajectory_Parameters"/>
+				</Case>
+				<Default>
+					<UseParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Axis_Parameters"/>
+				</Default>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- AXIS -->
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Axis_Parameters">
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="MR_Gates_Config">
+				<True>
+					<UseParametersFn Name="ASOBO_Drag_Threshold_States"/>
+				</True>
+				<False>
+					<UseParametersFn Name="ASOBO_Drag_Threshold_States_No_Gates"/>
+				</False>
+			</Condition>
+			<AXIS_THRESHOLD_COUNT_VAR>O:_#AXIS#AxisThresholdCount</AXIS_THRESHOLD_COUNT_VAR>
+			<CALLBACK_DRAG_USE_ANIM_LAG>True</CALLBACK_DRAG_USE_ANIM_LAG>
+			<Condition NotEmpty="MR_INVERT_MOUSE_DRAG_INTERACTION">
+				<MR_INVERT_DRAG_POSITIVE_CONDITION>#MR_INVERT_MOUSE_DRAG_INTERACTION#</MR_INVERT_DRAG_POSITIVE_CONDITION>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="Mouserect_Parameters" Append="Default">
+				<CALLBACK_DRAG_USE_ANIM_LAG>#CALLBACK_DRAG_USE_ANIM_LAG#</CALLBACK_DRAG_USE_ANIM_LAG>
+			</SaveParameters>
+			<UseParametersFn Name="ASOBO_Get_Delta_Value_Threshold_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<MR_TO_IE_SET_VALUE>#DELTA_VALUE# (B:#IE_PRESET_ID#, Number) (#AXIS_THRESHOLD_COUNT_VAR#) + #LAST_STATE_INDEX# / 100 * 0 max 100 min</MR_TO_IE_SET_VALUE>
+			<GATES_TYPE>XSTATES</GATES_TYPE>
+			<GATES_XTATES_GET_VALUE>(B:#IE_PRESET_ID#, Number) #LAST_STATE_INDEX# / 100 *</GATES_XTATES_GET_VALUE>
+			<ON_ENTER_LOCK>#DELTA_VALUE_INIT#</ON_ENTER_LOCK>
+			<VALUE_CHANGED_CHECK>(#AXIS_THRESHOLD_COUNT_VAR#) 0 !=</VALUE_CHANGED_CHECK>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Base_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- TRAJECTORY -->
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Trajectory_Parameters">
+		<Parameters Type="Default">	
+			<MR_TO_IE_SET_VALUE>@MR_DragPercent 100 *</MR_TO_IE_SET_VALUE>
+			<CALLBACK_DRAG_ANIM_NAME>#ANIM_NAME#</CALLBACK_DRAG_ANIM_NAME>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="Mouserect_Parameters" Append="Default">
+				<CALLBACK_DRAG_ANIM_NAME>#CALLBACK_DRAG_ANIM_NAME#</CALLBACK_DRAG_ANIM_NAME>
+			</SaveParameters>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Base_Parameters"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- generate callback code, anim code & tooltip value for a trajectory XStates interaction -->
+	<!-- IN (opt): SHOW_INTERMEDIARY_POS_WHEN_INTERACTING (If true intermediary drag position will be used) -->
+	<!-- IN (opt): FORWARD_INC_DEC_TO_IE (If true Increase and Decrease MR events will be forwarded to Inc & Dec of the associated input_event) -->
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_XStates_Base_Parameters">
+		<Parameters Type="Default">
+			<FORWARD_INC_DEC_TO_IE>True</FORWARD_INC_DEC_TO_IE>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<MR_TO_IE_INC_VALUE>1</MR_TO_IE_INC_VALUE>
+				<MR_TO_IE_DEC_VALUE>1</MR_TO_IE_DEC_VALUE>
+			</Condition>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_JUMP_TT_VALUE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_JUMP_CODE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_JUMP_ANIM_CODE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<VAR_LAST_DRAG_VALUE>O:_Interaction_Last_Drag_Percent</VAR_LAST_DRAG_VALUE>
+			<VAR_UPDATE_LAST_DRAG_VALUE>O:_Interaction_Last_Drag_Needs_Update</VAR_UPDATE_LAST_DRAG_VALUE>
+			<VAR_IS_INTERACTING>O:_Interaction_Is_Locked</VAR_IS_INTERACTING>
+			<FORMAT_TOOLTIP_VALUE/>
+			<Condition NotEmpty="ANIM_CODE">
+				<False>
+					<ANIM_CODE>(B:#IE_PRESET_ID#, percent)</ANIM_CODE>
+					<CAN_OVERRIDE_ANIM_CODE>True</CAN_OVERRIDE_ANIM_CODE>
+					<SHOW_INTERMEDIARY_POS_WHEN_INTERACTING>True</SHOW_INTERMEDIARY_POS_WHEN_INTERACTING>
+				</False>
+			</Condition>
+			<CALLBACK_DRAG_SCALAR>0.01</CALLBACK_DRAG_SCALAR>
+			<ANIM_LAG>300</ANIM_LAG>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<To>#LAST_STATE_INDEX#</To>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<PREV_ID Process="Int">#CUR_ID# 1 -</PREV_ID>
+						<NEXT_ID Process="Int">#CUR_ID# 1 +</NEXT_ID>
+					</Parameters>
+					<Parameters Type="Override">
+						<STATE_CODE Process="Param">STATE_#CUR_ID#_CODE</STATE_CODE>
+						<Condition Check="STATE_#CUR_ID#_CHECK">
+							<STATE_CHECK Process="Param">STATE_#CUR_ID#_CHECK</STATE_CHECK>
+						</Condition>
+						<Condition Check="STATE_#CUR_ID#_TOOLTIP">
+							<STATE_TOOLTIP Process="Param">STATE_#CUR_ID#_TOOLTIP</STATE_TOOLTIP>
+						</Condition>
+						<Condition Check="STATE_#CUR_ID#_ANIM_PERCENT">
+							<True>
+								<STATE_PERCENT Process="Param">STATE_#CUR_ID#_ANIM_PERCENT</STATE_PERCENT>
+							</True>
+							<False>
+								<STATE_PERCENT Process="Float">#CUR_ID# #LAST_STATE_INDEX# / 100 *</STATE_PERCENT>
+							</False>
+						</Condition>
+						<Condition Check="STATE_#PREV_ID#_ANIM_PERCENT">
+							<True>
+								<STATE_BEFORE_PERCENT Process="Param">STATE_#PREV_ID#_ANIM_PERCENT</STATE_BEFORE_PERCENT>								
+							</True>
+							<False>
+								<STATE_BEFORE_PERCENT Process="Float">#PREV_ID# 0 max #LAST_STATE_INDEX# / 100 *</STATE_BEFORE_PERCENT>
+							</False>
+						</Condition>
+						<Condition Check="STATE_#NEXT_ID#_ANIM_PERCENT">
+							<True>
+								<STATE_AFTER_PERCENT Process="Param">STATE_#NEXT_ID#_ANIM_PERCENT</STATE_AFTER_PERCENT>
+							</True>
+							<False>
+								<STATE_AFTER_PERCENT Process="Float">#NEXT_ID# #LAST_STATE_INDEX# min #LAST_STATE_INDEX# / 100 *</STATE_AFTER_PERCENT>
+							</False>
+						</Condition>
+						<Condition Check="STATE_#CUR_ID#_MOMENTARY_RELEASE_TARGET">
+							<STATE_MOMENTARY_RELEASE_TARGET Process="Param">STATE_#CUR_ID#_MOMENTARY_RELEASE_TARGET</STATE_MOMENTARY_RELEASE_TARGET>
+							<MOMENTARY_MIN_DURATION Process="Param">STATE_#CUR_ID#_MOMENTARY_MIN_DURATION</MOMENTARY_MIN_DURATION>
+							<MOMENTARY_CONDITION Process="Param">STATE_#CUR_ID#_MOMENTARY_CONDITION</MOMENTARY_CONDITION>
+							<STATE_ID Process="Param">STATE_#CUR_ID#_ID</STATE_ID>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<STATE_PERCENT_MID_TO_BEFORE Process="Float">#STATE_PERCENT# #STATE_BEFORE_PERCENT# + 2 /</STATE_PERCENT_MID_TO_BEFORE>
+						<STATE_PERCENT_MID_TO_AFTER Process="Float">#STATE_PERCENT# #STATE_AFTER_PERCENT# + 2 /</STATE_PERCENT_MID_TO_AFTER>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition NotEmpty="STATE_CHECK">
+							<True>
+								<STATE_CHECK_POS>#STATE_CHECK#</STATE_CHECK_POS>								
+							</True>
+							<False>
+								<STATE_CHECK_POS>#STATE_PERCENT_MID_TO_BEFORE# #STATE_PERCENT_MID_TO_AFTER# l0 rng</STATE_CHECK_POS>
+							</False>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<THIS_POS_CODE>#STATE_PERCENT_MID_TO_BEFORE# #STATE_PERCENT_MID_TO_AFTER# l0 rng if{ #STATE_CODE# g#FL_JUMP_CODE# }</THIS_POS_CODE>
+						<Condition NotEmpty="STATE_CHECK">
+							<Condition NotEmpty="STATE_TOOLTIP">
+								<THIS_POS_TOOLTIP>#STATE_CHECK# if{ #STATE_TOOLTIP# g#FL_JUMP_TT_VALUE# }</THIS_POS_TOOLTIP>
+							</Condition>
+							<Condition Valid="CAN_OVERRIDE_ANIM_CODE">
+								<THIS_POS_ANIM_CODE>#STATE_CHECK# if{ #STATE_PERCENT# g#FL_JUMP_ANIM_CODE# }</THIS_POS_ANIM_CODE>
+							</Condition>
+						</Condition>
+						<Condition Check="STATE_MOMENTARY_RELEASE_TARGET">
+							<THIS_POS_MOMENTARY_RELEASE_TARGET>#STATE_CHECK_POS# if{ (&gt;B:#IE_PRESET_ID#_#STATE_MOMENTARY_RELEASE_TARGET#) }</THIS_POS_MOMENTARY_RELEASE_TARGET>
+							<THIS_POS_MOMENTARY_RELEASE_TARGET_WITH_TIMEOUT>#STATE_CHECK_POS# if{ l0 (O:XMLVAR_#IE_PRESET_ID#_Pos_#STATE_ID#_Hold_Timeout) &gt; if{ (&gt;B:#IE_PRESET_ID#_#STATE_MOMENTARY_RELEASE_TARGET#) } els{ 1 sp1 } }</THIS_POS_MOMENTARY_RELEASE_TARGET_WITH_TIMEOUT>
+							<THIS_POS_MOMENTARY_RELEASE_TIMEOUT>l0 #CUR_ID# == if{ @E_SimulationTime #MOMENTARY_MIN_DURATION# + (&gt;O:XMLVAR_#IE_PRESET_ID#_Pos_#STATE_ID#_Hold_Timeout) (O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) 1 + (&gt;O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) }</THIS_POS_MOMENTARY_RELEASE_TIMEOUT>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Check="STATE_MOMENTARY_RELEASE_TARGET">
+							<Condition Valid="ENFORCE_MOMENTARY_MIN_DURATION">
+								<THIS_POS_MOMENTARY_RELEASE_TARGET>
+									@E_SimulationTime (O:XMLVAR_#IE_PRESET_ID#_Pos_#STATE_ID#_Hold_Timeout) &gt; if{ 
+										#THIS_POS_MOMENTARY_RELEASE_TARGET# 
+									} els{
+										(O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) 1 + (&gt;O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick)
+									}
+								</THIS_POS_MOMENTARY_RELEASE_TARGET>
+							</Condition>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Check="STATE_MOMENTARY_RELEASE_TARGET">
+							<Condition NotEmpty="MOMENTARY_CONDITION">
+								<THIS_POS_MOMENTARY_RELEASE_TARGET>#MOMENTARY_CONDITION# if{ #THIS_POS_MOMENTARY_RELEASE_TARGET# }</THIS_POS_MOMENTARY_RELEASE_TARGET>
+								<THIS_POS_MOMENTARY_RELEASE_TARGET_WITH_TIMEOUT>#MOMENTARY_CONDITION# if{ #THIS_POS_MOMENTARY_RELEASE_TARGET_WITH_TIMEOUT# }</THIS_POS_MOMENTARY_RELEASE_TARGET_WITH_TIMEOUT>
+								<THIS_POS_MOMENTARY_RELEASE_TIMEOUT>#MOMENTARY_CONDITION# if{ #THIS_POS_MOMENTARY_RELEASE_TIMEOUT# }</THIS_POS_MOMENTARY_RELEASE_TIMEOUT>
+							</Condition>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_POS_CODE</PARAM>
+							<OUT_PARAM_NAME>ON_PRIMARY_DOWN_T</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_POS_TOOLTIP</PARAM>
+							<OUT_PARAM_NAME>TOOLTIP_VALUE_T</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_POS_ANIM_CODE</PARAM>
+							<OUT_PARAM_NAME>ANIM_CODE_T</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<Condition Check="STATE_MOMENTARY_RELEASE_TARGET">
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_POS_MOMENTARY_RELEASE_TARGET</PARAM>
+								<OUT_PARAM_NAME>ON_MOMENTARY_RELEASE_T</OUT_PARAM_NAME>
+							</UseParametersFn>	
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_POS_MOMENTARY_RELEASE_TARGET_WITH_TIMEOUT</PARAM>
+								<OUT_PARAM_NAME>ON_MOMENTARY_RELEASE_WITH_TIMEOUT_T</OUT_PARAM_NAME>
+							</UseParametersFn>	
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_POS_MOMENTARY_RELEASE_TIMEOUT</PARAM>
+								<OUT_PARAM_NAME>UPDATE_MOMENTARY_RELEASE_TIMEOUTS_T</OUT_PARAM_NAME>
+							</UseParametersFn>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<ON_PRIMARY_DOWN>s0 (&gt;#VAR_LAST_DRAG_VALUE#) #ON_PRIMARY_DOWN_T# :#FL_JUMP_CODE#</ON_PRIMARY_DOWN>
+					<Condition Check="TOOLTIP_VALUE_T">
+						<Condition Check="IE_TOOLTIP_VALUE">
+							<False>
+								<IE_TOOLTIP_VALUE>#TOOLTIP_VALUE_T# :#FL_JUMP_TT_VALUE# #FORMAT_TOOLTIP_VALUE#</IE_TOOLTIP_VALUE>								
+							</False>
+						</Condition>
+					</Condition>
+					<Condition Check="ANIM_CODE_T">
+						<ANIM_CODE>#ANIM_CODE_T# :#FL_JUMP_ANIM_CODE# s0 (&gt;#VAR_LAST_DRAG_VALUE#) l0</ANIM_CODE>
+					</Condition>
+					<Condition Check="ON_MOMENTARY_RELEASE_T">
+						<MOMENTARY_RELEASE>#ON_MOMENTARY_RELEASE_T#</MOMENTARY_RELEASE>
+						<PROCESS_MOMENTARY_RELEASE_TARGETS>@E_SimulationTime sp0 #ON_MOMENTARY_RELEASE_WITH_TIMEOUT_T# l1 if{ (O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) 1 + (&gt;O:XMLVAR_#IE_PRESET_ID#_Momentary_Tick) }</PROCESS_MOMENTARY_RELEASE_TARGETS>
+						<UPDATE_MOMENTARY_RELEASE_TIMEOUTS>#UPDATE_MOMENTARY_RELEASE_TIMEOUTS_T#</UPDATE_MOMENTARY_RELEASE_TIMEOUTS>
+					</Condition>
+				</Then>
+			</Loop>
+		</Parameters>
+		<Condition Check="MOMENTARY_RELEASE">
+			<Parameters Type="Default">
+				<HOLD_TO_STAY_IN_MOMENTARY_POSITION>False</HOLD_TO_STAY_IN_MOMENTARY_POSITION>
+			</Parameters>
+			<Condition Valid="HOLD_TO_STAY_IN_MOMENTARY_POSITION">
+				<Parameters Type="Override">
+					<Condition Valid="SHOW_INTERMEDIARY_POS_WHEN_INTERACTING">
+						<True>
+							<UPDATE_MOMENTARY_RELEASE>#MOMENTARY_RELEASE# 1 (&gt;#VAR_UPDATE_LAST_DRAG_VALUE#)</UPDATE_MOMENTARY_RELEASE>
+						</True>
+						<False>
+							<UPDATE_MOMENTARY_RELEASE>#MOMENTARY_RELEASE#</UPDATE_MOMENTARY_RELEASE>
+						</False>
+					</Condition>
+				</Parameters>
+			</Condition>
+			<Parameters Type="Override">
+				<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+					<PARAM>MOMENTARY_RELEASE</PARAM>
+					<OUT_PARAM_NAME>ON_EXIT_LOCK</OUT_PARAM_NAME>
+				</UseParametersFn>
+				<Condition Valid="HOLD_TO_STAY_IN_MOMENTARY_POSITION">
+					<UseParametersFn Name="ASOBO_Add_Update_Helper">
+						<UPDATE_CODE>(#VAR_IS_INTERACTING#) if{ @MR_IsUsingRelativePos @MR_Abs_X 0 == @MR_Abs_Y 0 == and and if{ #UPDATE_MOMENTARY_RELEASE# } }</UPDATE_CODE>
+						<UPDATE_FREQUENCY>20</UPDATE_FREQUENCY>
+					</UseParametersFn>
+				</Condition>
+			</Parameters>
+		</Condition>
+		<Parameters Type="Default">
+			<Condition NotEmpty="INVERT_DRAG_SCALAR">
+				<MR_INVERT_INC_DEC_EVENTS>#INVERT_DRAG_SCALAR#</MR_INVERT_INC_DEC_EVENTS>
+			</Condition>
+			<Condition Valid="FORWARD_INC_DEC_TO_IE">
+				<True>					
+					<ON_INCREASE>#MR_TO_IE_INC_VALUE# (&gt;B:#IE_PRESET_ID#_Inc)</ON_INCREASE>
+					<ON_DECREASE>#MR_TO_IE_DEC_VALUE# (&gt;B:#IE_PRESET_ID#_Dec)</ON_DECREASE>
+				</True>
+				<False>
+					<ON_INCREASE/>
+					<ON_DECREASE/>
+				</False>
+			</Condition>
+			<ON_AFTER_PRIMARY_DOWN/>
+			<ON_ENTER_LOCK/>
+			<ON_EXIT_LOCK/>
+			<Condition Valid="SHOW_INTERMEDIARY_POS_WHEN_INTERACTING">
+				<SHOW_INTERMEDIARY_POS_CONDITION/>
+				<SHOW_INTERMEDIARY_POS_CODE/>
+			</Condition>
+			<Condition Check="PROCESS_MOMENTARY_RELEASE_TARGETS">
+				<UseParametersFn Name="ASOBO_Get_Processed_Interaction_Momentary_Parameters"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<ON_ENTER_LOCK>#ON_ENTER_LOCK# 1 (&gt;#VAR_IS_INTERACTING#)</ON_ENTER_LOCK>
+			<ON_EXIT_LOCK>#ON_EXIT_LOCK# 0 (&gt;#VAR_IS_INTERACTING#)</ON_EXIT_LOCK>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Process_Gates_Parameters_Helper">
+				<UPDATE_VAR_LAST_DRAG_VALUE>False</UPDATE_VAR_LAST_DRAG_VALUE>
+				<PLOAD_GATES_CONFIG>MR_Gates_Config</PLOAD_GATES_CONFIG>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="ON_POSITION_CHANGED">
+				<ON_AFTER_PRIMARY_DOWN>#ON_POSITION_CHANGED#</ON_AFTER_PRIMARY_DOWN>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="VALUE_CHANGED_CHECK">
+				<True>
+					<ON_PRIMARY_DOWN>#MR_TO_IE_SET_VALUE# #VALUE_CHANGED_CHECK# if{ #ON_PRIMARY_DOWN# #ON_AFTER_PRIMARY_DOWN# }</ON_PRIMARY_DOWN>
+				</True>
+				<False>
+					<ON_PRIMARY_DOWN>#MR_TO_IE_SET_VALUE# #ON_PRIMARY_DOWN# #ON_AFTER_PRIMARY_DOWN#</ON_PRIMARY_DOWN>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_PRIMARY_DOWN</EV_PARAM>
+			</UseParametersFn>
+			<Condition Valid="SHOW_INTERMEDIARY_POS_WHEN_INTERACTING">
+				<ANIM_CODE>
+					(#VAR_IS_INTERACTING#) (#VAR_UPDATE_LAST_DRAG_VALUE#) ! and #SHOW_INTERMEDIARY_POS_CONDITION# if{ 
+						(#VAR_LAST_DRAG_VALUE#) #SHOW_INTERMEDIARY_POS_CODE#
+					} els{ 
+						(#VAR_UPDATE_LAST_DRAG_VALUE#) if{ 0 (&gt;#VAR_UPDATE_LAST_DRAG_VALUE#) } #ANIM_CODE# 
+					}
+				</ANIM_CODE>
+				<ON_INCREASE>#ON_INCREASE# 1 (&gt;#VAR_UPDATE_LAST_DRAG_VALUE#)</ON_INCREASE>
+				<ON_DECREASE>#ON_DECREASE# 1 (&gt;#VAR_UPDATE_LAST_DRAG_VALUE#)</ON_DECREASE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Process_Inc_Dec_Invertion"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_ENTER_LOCK</EV_PARAM>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_EXIT_LOCK</EV_PARAM>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_INCREASE</EV_PARAM>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+				<EV_PARAM>ON_DECREASE</EV_PARAM>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<ANIM_CODE>#ANIM_CODE# s0 (&gt;#VAR_LAST_DRAG_VALUE#) l0</ANIM_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="Mouserect_Parameters" Append="Default">
+				<UseParametersFn Name="ASOBO_Add_Animation_Helper"/>
+				<CURSOR>Grab</CURSOR>
+				<CALLBACK_DRAG_SCALAR>#CALLBACK_DRAG_SCALAR#</CALLBACK_DRAG_SCALAR>
+				<CALLBACK_DRAG_AXIS>#INTERACTION_AXIS#</CALLBACK_DRAG_AXIS>
+				<AXIS>#AXIS#</AXIS>
+			</SaveParameters>
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Knob">
+					<IE_TOOLTIP_ICON>ROTATE</IE_TOOLTIP_ICON>	
+				</Case>
+				<Case Value="Switch">
+					<IE_TOOLTIP_ICON>MOVE_#INTERACTION_AXIS#</IE_TOOLTIP_ICON>	
+				</Case>
+				<Default>
+					<IE_TOOLTIP_ICON>MOVE_AXIS_#INTERACTION_AXIS#</IE_TOOLTIP_ICON>					
+				</Default>
+			</Switch>
+			<IE_TOOLTIP_INTERACTION>PRIMARY_DOWN+#INTERACTION_AXIS#_AXIS</IE_TOOLTIP_INTERACTION>
+			<IE_TOOLTIP_INTERACTION_LOCKABLE>#INTERACTION_AXIS#_AXIS</IE_TOOLTIP_INTERACTION_LOCKABLE>
+			<UseParametersFn Name="ASOBO_Format_Tooltip_Value_Helper"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_Momentary_Parameters">
+		<Parameters Type="Default">
+			<Condition Check="VAR_IS_INTERACTING">
+				<SHOULD_UPDATE_MOMENTARY_RELEASE_TARGETS>(#VAR_IS_INTERACTING#) !</SHOULD_UPDATE_MOMENTARY_RELEASE_TARGETS>				
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>XMLVAR_#IE_PRESET_ID#_Momentary_Tick</LOCAL_VAR>
+				<VAR_SCOPE>O</VAR_SCOPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+				<SET_CODE>#UPDATE_MOMENTARY_RELEASE_TIMEOUTS#</SET_CODE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+				<INIT_CODE>#SHOULD_UPDATE_MOMENTARY_RELEASE_TARGETS# if{ #PROCESS_MOMENTARY_RELEASE_TARGETS# }</INIT_CODE>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_Processed_Interaction_Covered_Parameters">
+		<Parameters Type="Override">
+			<LoadParameters ID="Cover_Interaction_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<COVER_ID>#IE_PRESET_ID#_Cover</COVER_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<COVER_VAR_NAME>XMLVAR_#COVER_ID#_Open</COVER_VAR_NAME>
+			<COVER_VAR_SCOPE>L:1</COVER_VAR_SCOPE>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Check="FORCE_POSITION_WHEN_COVER_CLOSED">
+				<ON_COVER_CLOSED_SET_POSITION>#FORCE_POSITION_WHEN_COVER_CLOSED#</ON_COVER_CLOSED_SET_POSITION>
+				<COVER_VAR>#COVER_VAR_SCOPE#:#COVER_VAR_NAME#</COVER_VAR>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="ON_COVER_CLOSED_SET_POSITION">
+				<ON_COVER_CLOSED_SET_POSITION>(&gt;B:#IE_PRESET_ID#_#ON_COVER_CLOSED_SET_POSITION#)</ON_COVER_CLOSED_SET_POSITION>
+			</Condition>
+			<Condition Check="ON_COVER_OPENED_SET_POSITION">
+				<ON_COVER_OPENED_SET_POSITION>(&gt;B:#IE_PRESET_ID#_#ON_COVER_OPENED_SET_POSITION#)</ON_COVER_OPENED_SET_POSITION>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="FORCE_POSITION_WHEN_COVER_CLOSED">
+				<INIT_CODE_WHEN_COVER_CLOSED>(#COVER_VAR#) ! if{ #ON_COVER_CLOSED_SET_POSITION# }</INIT_CODE_WHEN_COVER_CLOSED>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="ON_COVER_CLOSED_SET_POSITION_CONDITION">
+				<ON_COVER_CLOSED_SET_POSITION>#ON_COVER_CLOSED_SET_POSITION_CONDITION# if{ #ON_COVER_CLOSED_SET_POSITION# }</ON_COVER_CLOSED_SET_POSITION>
+			</Condition>
+			<Condition Check="ON_COVER_OPENED_SET_POSITION_CONDITION">
+				<ON_COVER_OPENED_SET_POSITION>#ON_COVER_OPENED_SET_POSITION_CONDITION# if{ #ON_COVER_OPENED_SET_POSITION# }</ON_COVER_OPENED_SET_POSITION>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="Cover_Interaction_Parameters" Append="Override">
+				<Condition Check="ON_COVER_CLOSED_SET_POSITION">
+					<ON_COVER_CLOSED>#ON_COVER_CLOSED_SET_POSITION#</ON_COVER_CLOSED>
+				</Condition>
+				<Condition Check="ON_COVER_OPENED_SET_POSITION">
+					<ON_COVER_OPENED>#ON_COVER_OPENED_SET_POSITION#</ON_COVER_OPENED>
+				</Condition>
+			</SaveParameters>
+			<SaveParameters ID="Cover_Interaction_Parameters" Append="Default">
+				<COVER_VAR_NAME>#COVER_VAR_NAME#</COVER_VAR_NAME>
+				<COVER_VAR_SCOPE>#COVER_VAR_SCOPE#</COVER_VAR_SCOPE>
+				<COVER_ID>#COVER_ID#</COVER_ID>
+			</SaveParameters>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Check="FORCE_POSITION_WHEN_COVER_CLOSED">
+				<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+					<APPEND_BEFORE>True</APPEND_BEFORE>
+					<INIT_CODE>#INIT_CODE_WHEN_COVER_CLOSED#</INIT_CODE>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+					<LOCAL_VAR>#COVER_VAR_NAME#</LOCAL_VAR>
+					<VAR_SCOPE>#COVER_VAR_SCOPE#</VAR_SCOPE>
+				</UseParametersFn>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

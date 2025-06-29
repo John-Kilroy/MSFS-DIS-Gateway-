@@ -1,0 +1,110 @@
+<ModelBehaviors>
+	<!-- ############################### PARAMETERS FN ################################ -->
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Power_Dependant_Emissive_Parameters
+		@Brief Return a failure check based on the aircraft electrical state
+		@Param CIRCUIT_ID if not empty, will configure EMISSIVE_TEST_NO_FAILURE_CODE to check the corresponding circuit for power
+		@Param EMISSIVE_TEST_NO_FAILURE_CODE returned as it is if not empty
+		@Return EMISSIVE_TEST_NO_FAILURE_CODE Emissive code checking if no failure are currently active
+	-->
+	<ParametersFn Name="ASOBO_Power_Dependant_Emissive_Parameters">
+		<Parameters Type="Default">
+			<Switch>
+				<Case NotEmpty="CIRCUIT_ID">
+					<EMISSIVE_TEST_NO_FAILURE_CODE>(A:CIRCUIT ON:#CIRCUIT_ID#, Bool)</EMISSIVE_TEST_NO_FAILURE_CODE>
+				</Case>
+				<Default>
+					<EMISSIVE_TEST_NO_FAILURE_CODE>(A:CIRCUIT GENERAL PANEL ON, Bool)</EMISSIVE_TEST_NO_FAILURE_CODE>
+				</Default>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_TEST_NO_FAILURE_CODE>#EMISSIVE_TEST_NO_FAILURE_CODE#</EMISSIVE_TEST_NO_FAILURE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Indicator_Emissive_Parameters
+		@Brief Checks for value change and sends an event to the specified indicator logger, register all created emissives of the given type in the save INDICATOR_SAVE_ID
+		@Param INDICATOR_ID ID of this indicator
+		@Param INDICATOR_TYPE type of the indicator either LOCAL_VAR or INPUT_EVENT (which requires more setup)
+		@Param INDICATOR_SAVE_ID Save ID where to save this indicator ID and light setter
+		@Param BYPASS_LIGHT_ON_VALUE Take the current emissive code value as input and should output a value to be compared with this input. The 'max' operation is then evaluated
+		@Param INDICATOR_LOGGER_SET RPN snippet handing a string parameter with the name of the indicator
+		@Param ON_STATE_CHANGED RPN snippet executed when the indicator state changed
+		@Param INDICATOR_LIGHT_ON_FACTOR Factor multiplied with the final emissive value (generally a global light test condition or factor for dimming)
+	-->
+	<ParametersFn Name="ASOBO_Indicator_Emissive_Parameters">
+		<Parameters Type="Default">
+			<INDICATOR_ID>#LOG_ID#</INDICATOR_ID>
+			<INDICATOR_TYPE>LOCAL_VAR</INDICATOR_TYPE>
+			<INDICATOR_SAVE_ID>GLOBAL_#LOG_LVL#_Variables</INDICATOR_SAVE_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INDICATOR_TYPE">
+				<Case Value="LOCAL_VAR">
+					<GET_INDICATOR_LIGHT>(L:1:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active)</GET_INDICATOR_LIGHT>
+					<SET_INDICATOR_LIGHT>(&gt;L:1:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active)</SET_INDICATOR_LIGHT>
+					<GET_INDICATOR_LIGHT_ON>(L:1:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#)</GET_INDICATOR_LIGHT_ON>
+					<SET_INDICATOR_LIGHT_ON>(&gt;L:1:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#)</SET_INDICATOR_LIGHT_ON>
+					<Condition Valid="TRACK_ACTIVATION_TIME">
+						<GET_INDICATOR_ACTIVATION_TIME>(L:1:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Activation_Time)</GET_INDICATOR_ACTIVATION_TIME>
+						<SET_INDICATOR_ACTIVATION_TIME>(&gt;L:1:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Activation_Time)</SET_INDICATOR_ACTIVATION_TIME>
+					</Condition>
+				</Case>
+				<Case Value="INPUT_EVENT">
+					<GET_INDICATOR_LIGHT>(B:VARIABLE_#INDICATOR_ID#, Bool)</GET_INDICATOR_LIGHT>
+					<SET_INDICATOR_LIGHT>(B:VARIABLE_#INDICATOR_ID#_Set)</SET_INDICATOR_LIGHT>
+				</Case>
+			</Switch>
+			<INDICATOR_LOGGER_SET>(&gt;B:PROCEDURE_#LOG_LVL#_Logger_Set)</INDICATOR_LOGGER_SET>
+		</Parameters>
+		<Parameters Type="Default">
+			<REAL_EMISSIVE_CODE>#GET_INDICATOR_LIGHT_ON#</REAL_EMISSIVE_CODE>
+		</Parameters>
+		<Parameters Type="Default">
+			<DO_ON_STATE_CHANGED>'#INDICATOR_ID#' #INDICATOR_LOGGER_SET#</DO_ON_STATE_CHANGED>
+		</Parameters>
+		<Parameters Type="Override">
+			<CHECK_STATE_CHANGED>(O:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active) &gt; l0 ! (O:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active) and or</CHECK_STATE_CHANGED>
+			<DO_ON_AFTER_STATE_CHECK>l0 (O:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active) != if{ l0 (&gt;O:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active) }</DO_ON_AFTER_STATE_CHECK>
+			<Condition Valid="TRACK_ACTIVATION_TIME">
+				<DO_ON_STATE_CHANGED>#DO_ON_STATE_CHANGED# l0 if{ @E_SimulationTime #SET_INDICATOR_ACTIVATION_TIME# }</DO_ON_STATE_CHANGED>
+			</Condition>
+			<Condition Check="BYPASS_LIGHT_ON_VALUE">
+				<REAL_EMISSIVE_CODE>#REAL_EMISSIVE_CODE# #BYPASS_LIGHT_ON_VALUE# max</REAL_EMISSIVE_CODE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="INDICATOR_LIGHT_ON_FACTOR">
+				<REAL_EMISSIVE_CODE>#REAL_EMISSIVE_CODE# #INDICATOR_LIGHT_ON_FACTOR# *</REAL_EMISSIVE_CODE>
+			</Condition>
+			<Condition Check="ON_STATE_CHANGED">
+				<DO_ON_STATE_CHANGED>#DO_ON_STATE_CHANGED# (O:XMLVAR_INDICATOR_#LOG_LVL#_#INDICATOR_ID#_Active) #ON_STATE_CHANGED#</DO_ON_STATE_CHANGED>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<UPDATE_LOGGER>#CHECK_STATE_CHANGED# if{ #DO_ON_STATE_CHANGED# } #DO_ON_AFTER_STATE_CHECK#</UPDATE_LOGGER>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="EMISSIVE_CODE">
+				<True>
+					<EMISSIVE_CODE>#EMISSIVE_CODE# s0 0 &gt; #SET_INDICATOR_LIGHT# l0 #UPDATE_LOGGER# #REAL_EMISSIVE_CODE#</EMISSIVE_CODE>
+				</True>
+				<False>
+					<EMISSIVE_CODE>#GET_INDICATOR_LIGHT# s0 #UPDATE_LOGGER# #REAL_EMISSIVE_CODE#</EMISSIVE_CODE>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<BASE_EMISSIVE_TEMPLATE>ASOBO_IT_Power_Dependant_Emissive_Template</BASE_EMISSIVE_TEMPLATE>
+		</Parameters>
+		<ReturnParameters>
+			<SaveParameters ID="#INDICATOR_SAVE_ID#" Append="Override">
+				<#INDICATOR_ID#>#SET_INDICATOR_LIGHT_ON#</#INDICATOR_ID#>
+			</SaveParameters>
+			<EMISSIVE_CODE>#EMISSIVE_CODE#</EMISSIVE_CODE>
+			<BASE_EMISSIVE_TEMPLATE>#BASE_EMISSIVE_TEMPLATE#</BASE_EMISSIVE_TEMPLATE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

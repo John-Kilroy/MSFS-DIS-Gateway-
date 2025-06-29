@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_gizmo_object glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFProperty.schema.json" } ],
+    "properties": {
+        "gizmo_objects": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$ref": "gizmo.schema.json"
+            },
+            "minItems": 1
+        },
+        "extensions": { },
+        "extras": { }
+    },
+    "required": [ "gizmo_objects" ]
+}

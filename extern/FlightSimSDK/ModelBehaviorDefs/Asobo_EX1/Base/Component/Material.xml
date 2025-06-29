@@ -1,0 +1,146 @@
+<ModelBehaviors>
+	<!-- ParametersFn Definitions -->
+	<ParametersFn Name="ASOBO_Material_Base_Default_Parameters">
+		<ReturnParameters>
+			<!-- Force the scale of the emissive factor to be between 0 and 1 instead of being based on the texture -->
+			<OVERRIDE_BASE_EMISSIVE>True</OVERRIDE_BASE_EMISSIVE>
+			<EMISSIVE_FACTOR>1</EMISSIVE_FACTOR>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Material_Sim_Default_Parameters">
+		<ReturnParameters>
+			<EMISSIVE_SIMVAR/>
+			<EMISSIVE_SIMVAR_UNITS/>
+			<EMISSIVE_SIMVAR_SCALE>1</EMISSIVE_SIMVAR_SCALE>
+			<EMISSIVE_SIMVAR_BIAS>0</EMISSIVE_SIMVAR_BIAS>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Material_Base_Parameters">
+		<ReturnParameters>
+			<OVERRIDE>#OVERRIDE_BASE_EMISSIVE#</OVERRIDE>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Material_Sim_Base_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Material_Sim_Default_Parameters"/>
+			<UseParametersFn Name="ASOBO_Material_Base_Default_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Material_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>MATERIAL_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+			<SIMVAR>#EMISSIVE_SIMVAR#</SIMVAR>
+			<UNITS>#EMISSIVE_SIMVAR_UNITS#</UNITS>
+			<SCALE>#EMISSIVE_SIMVAR_SCALE#</SCALE>
+			<BIAS>#EMISSIVE_SIMVAR_BIAS#</BIAS>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Material_Code_Base_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Material_Base_Default_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="Emissive_Code_Transform_Stack">
+				<UseParametersFn Name="ASOBO_Emissive_Code_Transform_Value">
+					<PLOAD_EMISSIVE_CODE_TRANSFORMS>Emissive_Code_Transform_Stack</PLOAD_EMISSIVE_CODE_TRANSFORMS>
+				</UseParametersFn>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Material_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>MATERIAL_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+			<CODE>#EMISSIVE_CODE#</CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Emissive_Code_Transform_Value">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_EMISSIVE_CODE_TRANSFORMS</SAVED_PARAMETERS>
+			</UseParametersFn>	
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Valid="EMISSIVE_CODE_TRANSFORM_PFN_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<EMISSIVE_CODE_TRANSFORM_PFN Process="Param">EMISSIVE_CODE_TRANSFORM_PFN_#CUR_ID#</EMISSIVE_CODE_TRANSFORM_PFN>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="#EMISSIVE_CODE_TRANSFORM_PFN#"/>
+					</Parameters>
+				</Do>
+				<Then>
+					<Condition Check="EMISSIVE_CODE_TRANSFORM_PFN_RETURN">
+						<True>
+							<UseParametersFn Name="#EMISSIVE_CODE_TRANSFORM_PFN_RETURN#"/>
+						</True>
+						<False>
+							<EMISSIVE_CODE>#EMISSIVE_CODE#</EMISSIVE_CODE>							
+						</False>
+					</Condition>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Template Definitions -->
+	<Template Name="ASOBO_Material_Template">
+		<Switch>
+			<Case NotEmpty="EMISSIVE_SIMVAR">
+				<UseTemplate Name="ASOBO_Material_Sim_Base_Template"/>
+			</Case>
+			<Case NotEmpty="EMISSIVE_CODE">
+				<UseTemplate Name="ASOBO_Material_Code_Base_Template"/>
+			</Case>
+		</Switch>
+	</Template>
+	<Template Name="ASOBO_Material_Sim_Base_Template">
+		<Parameters Type="Default">
+			<LoadParameters ID="ASOBO_Material_Sim_Default_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Material_Sim_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>MATERIAL_SIM_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Material>
+			<EmissiveFactor>
+				<Parameter>
+					<Sim>
+						<Variable>#SIMVAR#</Variable>
+						<Units>#SIMVAR_UNITS#</Units>
+						<Scale>#SIMVAR_SCALE#</Scale>
+						<Bias>#SIMVAR_BIAS#</Bias>
+					</Sim>
+				</Parameter>
+				<OverrideBaseEmissive>#OVERRIDE#</OverrideBaseEmissive>
+			</EmissiveFactor>
+		</Material>
+	</Template>
+	<Template Name="ASOBO_Material_Code_Base_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Material_Code_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>MATERIAL_CODE_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Material>
+			<EmissiveFactor>
+				<Parameter>
+					<Code>#CODE#</Code>
+				</Parameter>
+				<OverrideBaseEmissive>#OVERRIDE#</OverrideBaseEmissive>
+			</EmissiveFactor>
+		</Material>
+	</Template>
+</ModelBehaviors>

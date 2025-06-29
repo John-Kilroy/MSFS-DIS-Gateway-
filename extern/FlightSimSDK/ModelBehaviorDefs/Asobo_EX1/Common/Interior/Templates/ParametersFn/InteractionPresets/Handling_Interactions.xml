@@ -1,0 +1,562 @@
+<ModelBehaviors>
+	<!-- ################################## HANDLING ################################## -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Flaps_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Flaps_Lever_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<XSTATES_TYPE>NUMERICAL</XSTATES_TYPE>
+			<FORMAT_POSITION_TO_STR>'%d°'</FORMAT_POSITION_TO_STR>
+			<BINDING_PREFIX>Deg_</BINDING_PREFIX>
+			<IE_GET_STATE>#GET_FLAPS_HANDLE#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_FLAPS_HANDLE#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_FLAPS_HANDLE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Flaps_States_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Flaps_Lever_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<IE_GET_STATE>#GET_FLAPS_HANDLE#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_FLAPS_HANDLE#</IE_SET_STATE>
+			<IE_INC_CODE>#GET_FLAPS_HANDLE# p0 + #SET_FLAPS_HANDLE#</IE_INC_CODE>
+			<IE_DEC_CODE>#GET_FLAPS_HANDLE# p0 - #SET_FLAPS_HANDLE#</IE_DEC_CODE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_FLAPS_HANDLE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Flaps_Switch_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Flaps_Lever_Parameters">
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Enum_Parameters_Helper">
+				<SaveParameters ID="Enum_Values">
+					<POS_NEUTRAL>0</POS_NEUTRAL>
+					<POS_INC>1</POS_INC>
+					<POS_DEC>2</POS_DEC>
+				</SaveParameters>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_NEUTRAL_CHECK>#IS_POS_NEUTRAL#</POS_NEUTRAL_CHECK>
+			<POS_INCR_CHECK>#IS_POS_INC#</POS_INCR_CHECK>
+			<POS_DECR_CHECK>#IS_POS_DEC#</POS_DECR_CHECK>
+			<!-- Set position -->
+			<POS_NEUTRAL_CODE>#SET_POS_NEUTRAL# (&gt;B:PROCEDURE_FLAPS_Neutral)</POS_NEUTRAL_CODE>
+			<POS_INCR_CODE>#SET_POS_INC# (&gt;B:PROCEDURE_FLAPS_Increment)</POS_INCR_CODE>
+			<POS_DECR_CODE>#SET_POS_DEC# (&gt;B:PROCEDURE_FLAPS_Decrement)</POS_DECR_CODE>
+			<!-- Tooltip -->
+			<IE_TOOLTIP_VALUE>#GET_FLAPS_HANDLE_CONTINUOUS# '%.1f%%' @sprintf</IE_TOOLTIP_VALUE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Spoilers_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Spoilers_Lever_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>U16K</VALUE_TYPE>
+			<IE_GET_STATE>#GET_SPOILERS_HANDLE_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_SPOILERS_HANDLE_16K#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_SPOILERS_HANDLE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Trim_Settings_Config_Base">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Process_Trim_Limits_Parameters_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<DEGREE_INCREMENT_PER_THRESHOLD>0.01</DEGREE_INCREMENT_PER_THRESHOLD>
+			<DEGREE_INCREMENT_PER_INC_DEC_EVENT>0.5</DEGREE_INCREMENT_PER_INC_DEC_EVENT>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>S16K</VALUE_TYPE>
+			<IE_GET_STATE>#GET_TRIM_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_TRIM_16K#</IE_SET_STATE>
+			<IE_INCREMENT>#DEGREE_INCREMENT_PER_INC_DEC_EVENT# #TRIM_RANGE# 2 / / @16K *</IE_INCREMENT>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#TRIM_AXIS_VAR#</SIMVAR>
+			</UseParametersFn>
+			<INCREMENT_PER_THRESHOLD>#DEGREE_INCREMENT_PER_THRESHOLD# #TRIM_RANGE# /</INCREMENT_PER_THRESHOLD>			<!-- Process="Float" -->
+			<IE_TOOLTIP_VALUE>#GET_TRIM_DEGREES# '%.1f°' @sprintf</IE_TOOLTIP_VALUE>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Elevator_Trim_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Trim_Settings_Config_Base">
+				<TRIM_TYPE>ELEVATOR</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Aileron_Trim_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Trim_Settings_Config_Base">
+				<TRIM_TYPE>AILERON</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Rudder_Trim_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Trim_Settings_Config_Base">
+				<TRIM_TYPE>RUDDER</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Trim_Axis_Settings_Config_Base">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Process_Trim_Limits_Parameters_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<DEGREE_INCREMENT_PER_THRESHOLD>0.01</DEGREE_INCREMENT_PER_THRESHOLD>
+			<DEGREE_INCREMENT_PER_INC_DEC_EVENT>0.5</DEGREE_INCREMENT_PER_INC_DEC_EVENT>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>M16K</VALUE_TYPE>
+			<IE_GET_STATE>#GET_TRIM_16K#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_TRIM_16K#</IE_SET_STATE>
+			<IE_INCREMENT>#DEGREE_INCREMENT_PER_INC_DEC_EVENT# #TRIM_RANGE# 2 / / 100 *</IE_INCREMENT>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#TRIM_AXIS_VAR#</SIMVAR>
+			</UseParametersFn>
+			<INCREMENT_PER_THRESHOLD>#DEGREE_INCREMENT_PER_THRESHOLD# #TRIM_RANGE# /</INCREMENT_PER_THRESHOLD>			<!-- Process="Float" -->
+			<IE_TOOLTIP_VALUE>#GET_TRIM_DEGREES# '%.1f°' @sprintf</IE_TOOLTIP_VALUE>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Elevator_Trim_Axis_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Trim_Axis_Settings_Config_Base">
+				<TRIM_TYPE>ELEVATOR</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Aileron_Trim_Axis_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Trim_Axis_Settings_Config_Base">
+				<TRIM_TYPE>AILERON</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Rudder_Trim_Axis_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Trim_Axis_Settings_Config_Base">
+				<TRIM_TYPE>RUDDER</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Macro Name="Incremental_Switch_Pos_Neutral">0</Macro>
+	<Macro Name="Incremental_Switch_Pos_Incr">1</Macro>
+	<Macro Name="Incremental_Switch_Pos_Decr">2</Macro>
+	<Macro Name="Incremental_Switch_Var">XMLVAR_#SURFACE_TYPE#_Incremental_Switch</Macro>
+	<Macro Name="Get_Incremental_Switch_State">(L:1:@Incremental_Switch_Var)</Macro>
+	<Macro Name="Set_Incremental_Switch_State">(&gt;L:1:@Incremental_Switch_Var)</Macro>
+	<ParametersFn Name="ASOBO_ELEVATOR_Incremental_TRIM_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Incremental_TRIM_Settings_Positions">
+				<TRIM_TYPE>ELEVATOR</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_AILERON_Incremental_TRIM_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Incremental_TRIM_Settings_Positions">
+				<TRIM_TYPE>AILERON</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_RUDDER_Incremental_TRIM_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Incremental_TRIM_Settings_Positions">
+				<TRIM_TYPE>RUDDER</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_LONGITUDINAL_Incremental_TRIM_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Incremental_TRIM_Settings_Positions">
+				<TRIM_TYPE>LONGITUDINAL</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_LATERAL_Incremental_TRIM_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Incremental_TRIM_Settings_Positions">
+				<TRIM_TYPE>LATERAL</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Incremental_TRIM_Settings_Positions">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Process_Trim_Limits_Parameters_Helper"/>
+			<UseParametersFn Name="ASOBO_Get_Enum_Parameters_Helper">
+				<SaveParameters ID="Enum_Values">
+					<POS_NEUTRAL>0</POS_NEUTRAL>
+					<POS_INC>1</POS_INC>
+					<POS_DEC>2</POS_DEC>
+				</SaveParameters>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_NEUTRAL_CHECK>#IS_POS_NEUTRAL#</POS_NEUTRAL_CHECK>
+			<POS_INCR_CHECK>#IS_POS_INC#</POS_INCR_CHECK>
+			<POS_DECR_CHECK>#IS_POS_DEC#</POS_DECR_CHECK>
+			<!-- Set position -->
+			<POS_NEUTRAL_CODE>#SET_POS_NEUTRAL# (&gt;B:PROCEDURE_#TRIM_TYPE#_Trim_Neutral)</POS_NEUTRAL_CODE>
+			<POS_INCR_CODE>#SET_POS_INC# (&gt;B:PROCEDURE_#TRIM_TYPE#_Trim_Increment)</POS_INCR_CODE>
+			<POS_DECR_CODE>#SET_POS_DEC# (&gt;B:PROCEDURE_#TRIM_TYPE#_Trim_Decrement)</POS_DECR_CODE>
+			<!-- Tooltip -->
+			<Condition Valid="TRIM_HAS_NO_ANGLE_INFORMATION">
+				<True>
+					<IE_TOOLTIP_VALUE>#GET_TRIM_PERCENT# '%.1f%%' @sprintf</IE_TOOLTIP_VALUE>
+				</True>
+				<False>
+					<IE_TOOLTIP_VALUE>#GET_TRIM_DEGREES# '%.1f°' @sprintf</IE_TOOLTIP_VALUE>
+				</False>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_LONGITUDINAL_LATERAL_Incremental_TRIM_Settings_Config">
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Increment_TRIM_Axis_Settings_Positions">
+				<TRIM_Y_AXIS_TYPE>LONGITUDINAL</TRIM_Y_AXIS_TYPE>
+				<TRIM_X_AXIS_TYPE>LATERAL</TRIM_X_AXIS_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Increment_TRIM_Axis_Settings_Positions">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Process_Trim_Limits_Parameters_Helper">
+				<OUT_PARAM_ID>X_AXIS</OUT_PARAM_ID>
+				<TRIM_TYPE>#TRIM_X_AXIS_TYPE#</TRIM_TYPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Process_Trim_Limits_Parameters_Helper">
+				<OUT_PARAM_ID>Y_AXIS</OUT_PARAM_ID>
+				<TRIM_TYPE>#TRIM_Y_AXIS_TYPE#</TRIM_TYPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Enum_Parameters_Helper">
+				<SaveParameters ID="Enum_Values">
+					<POS_NEUTRAL>0</POS_NEUTRAL>
+					<POS_DN>1</POS_DN>
+					<POS_UP>2</POS_UP>
+					<POS_L>3</POS_L>
+					<POS_R>4</POS_R>
+				</SaveParameters>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_IE_Directional_Variables_Parameters"/>
+			<Condition Valid="TRIM_X_AXIS_HAS_NO_ANGLE_INFORMATION">
+				<True>
+					<FORMAT_IE_TOOLTIP_X_AXIS>#GET_TRIM_X_AXIS_PERCENT# '%.1f%%' @sprintf</FORMAT_IE_TOOLTIP_X_AXIS>
+				</True>
+				<False>
+					<FORMAT_IE_TOOLTIP_X_AXIS>#GET_TRIM_X_AXIS_DEGREES# '%.1f°' @sprintf</FORMAT_IE_TOOLTIP_X_AXIS>
+				</False>
+			</Condition>
+			<Condition Valid="TRIM_Y_AXIS_HAS_NO_ANGLE_INFORMATION">
+				<True>
+					<FORMAT_IE_TOOLTIP_Y_AXIS>#GET_TRIM_Y_AXIS_PERCENT# '%.1f%%' @sprintf</FORMAT_IE_TOOLTIP_Y_AXIS>
+				</True>
+				<False>
+					<FORMAT_IE_TOOLTIP_Y_AXIS>#GET_TRIM_Y_AXIS_DEGREES# '%.1f°' @sprintf</FORMAT_IE_TOOLTIP_Y_AXIS>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>#TRIM_X_AXIS_TYPE#_Set</ALIAS_ID>
+				<PARAM_0>p0</PARAM_0>
+				<PARAM_1>#GET_Y_AXIS_POSITION#</PARAM_1>
+				<PARAM_1_IS_DYNAMIC>True</PARAM_1_IS_DYNAMIC>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>#TRIM_Y_AXIS_TYPE#_Set</ALIAS_ID>
+				<PARAM_0>#GET_X_AXIS_POSITION#</PARAM_0>
+				<PARAM_1>p0</PARAM_1>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+				<PARAM_1_IS_DYNAMIC>True</PARAM_1_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_NEUTRAL_CHECK>#IS_POS_NEUTRAL#</POS_NEUTRAL_CHECK>
+			<POS_UP_CHECK>#IS_POS_UP#</POS_UP_CHECK>
+			<POS_DN_CHECK>#IS_POS_DN#</POS_DN_CHECK>
+			<POS_L_CHECK>#IS_POS_L#</POS_L_CHECK>
+			<POS_R_CHECK>#IS_POS_R#</POS_R_CHECK>
+			<!-- Set position -->
+			<POS_NEUTRAL_CODE>#SET_POS_NEUTRAL# (&gt;B:PROCEDURE_#TRIM_X_AXIS_TYPE#_Trim_Neutral) (&gt;B:PROCEDURE_#TRIM_Y_AXIS_TYPE#_Trim_Neutral)</POS_NEUTRAL_CODE>
+			<POS_UP_CODE>#SET_POS_UP# (&gt;B:PROCEDURE_#TRIM_Y_AXIS_TYPE#_Trim_Decrement) (&gt;B:PROCEDURE_#TRIM_X_AXIS_TYPE#_Trim_Neutral)</POS_UP_CODE>
+			<POS_DN_CODE>#SET_POS_DN# (&gt;B:PROCEDURE_#TRIM_Y_AXIS_TYPE#_Trim_Increment) (&gt;B:PROCEDURE_#TRIM_X_AXIS_TYPE#_Trim_Neutral)</POS_DN_CODE>
+			<POS_L_CODE>#SET_POS_L# (&gt;B:PROCEDURE_#TRIM_X_AXIS_TYPE#_Trim_Decrement) (&gt;B:PROCEDURE_#TRIM_Y_AXIS_TYPE#_Trim_Neutral)</POS_L_CODE>
+			<POS_R_CODE>#SET_POS_R# (&gt;B:PROCEDURE_#TRIM_X_AXIS_TYPE#_Trim_Increment) (&gt;B:PROCEDURE_#TRIM_Y_AXIS_TYPE#_Trim_Neutral)</POS_R_CODE>
+			<!-- Tooltip -->
+			<IE_TOOLTIP_VALUE>#FORMAT_IE_TOOLTIP_X_AXIS# #FORMAT_IE_TOOLTIP_Y_AXIS# '%s / %s' @Sprintf</IE_TOOLTIP_VALUE>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Trim_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Process_Trim_Limits_Parameters_Helper"/>
+		</Parameters>
+		<Condition Valid="TRIM_HAS_NO_ANGLE_INFORMATION">
+			<True>
+				<Parameters Type="Default">
+					<INCREMENT_PER_SECOND_PCT>10</INCREMENT_PER_SECOND_PCT>
+				</Parameters>
+				<Parameters Type="Override">
+					<INCREMENT_PER_SECOND_16K Process="Float">#INCREMENT_PER_SECOND_PCT# #TRIM_RANGE# / #TRIM_RANGE_16K# *</INCREMENT_PER_SECOND_16K>
+				</Parameters>
+			</True>
+			<False>
+				<Parameters Type="Default">
+					<INCREMENT_PER_SECOND_DEGREES>1</INCREMENT_PER_SECOND_DEGREES>
+				</Parameters>
+				<Parameters Type="Override">
+					<INCREMENT_PER_SECOND_16K Process="Float">#INCREMENT_PER_SECOND_DEGREES# #TRIM_RANGE# / #TRIM_RANGE_16K# *</INCREMENT_PER_SECOND_16K>
+				</Parameters>
+			</False>
+		</Condition>
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Incremental_Switch_Parameters">
+				<SURFACE_TYPE>#TRIM_TYPE#</SURFACE_TYPE>
+				<GET_SURFACE_VALUE_16K>#GET_TRIM_16K#</GET_SURFACE_VALUE_16K>
+				<SET_SURFACE_VALUE_16K>#SET_TRIM_16K#</SET_SURFACE_VALUE_16K>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Incremental_Switch_Parameters">
+		<Parameters Type="Default">
+			<Set_Incremental_Switch_State>@Set_Incremental_Switch_State</Set_Incremental_Switch_State>
+			<Get_Incremental_Switch_State>@Get_Incremental_Switch_State</Get_Incremental_Switch_State>
+		</Parameters>
+		<Parameters Type="Default">
+			<INCREMENT_PER_SECOND_PCT>10</INCREMENT_PER_SECOND_PCT>
+		</Parameters>
+		<Parameters Type="Default">
+			<INCREMENT_PER_SECOND_16K Process="Float">#INCREMENT_PER_SECOND_PCT# 100 / @16K *</INCREMENT_PER_SECOND_16K>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Move_Interpolation_Helper">
+				<START_VALUE>#GET_SURFACE_VALUE_16K#</START_VALUE>
+				<SET_NEW_VALUE>#SET_SURFACE_VALUE_16K#</SET_NEW_VALUE>
+				<END_VALUE>(O:_Target_Position, position 16k)</END_VALUE>
+				<COEFFICIENT>#INCREMENT_PER_SECOND_16K# @TICK_Get_Delta_Time *</COEFFICIENT>
+				<OUT_PARAM_NAME>UPDATE_SURFACE_VALUE</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<UPDATE_SURFACE_CODE>
+				#Get_Incremental_Switch_State# @Incremental_Switch_Pos_Incr == if{ @16K sp0 g0 }
+				#Get_Incremental_Switch_State# @Incremental_Switch_Pos_Decr == if{ -@16K sp0 g0 } els{ g1 }
+				:0 l0 (&gt;O:_Target_Position, position 16k) #UPDATE_SURFACE_VALUE# :1
+			</UPDATE_SURFACE_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<TICK_EVERY_FRAME>True</TICK_EVERY_FRAME>
+			<ON_VALUE_CHANGED>#UPDATE_SURFACE_CODE#</ON_VALUE_CHANGED>
+			<UseParametersFn Name="ASOBO_Append_Set_Code_Helper">
+				<SET_CODE>p0 #Set_Incremental_Switch_State#</SET_CODE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_Value_Code_Helper">
+				<VALUE_CODE>#Get_Incremental_Switch_State#</VALUE_CODE>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Override">
+				<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>Neutral</ALIAS_ID>
+				<PARAM_0>@Incremental_Switch_Pos_Neutral</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>Increment</ALIAS_ID>
+				<PARAM_0>@Incremental_Switch_Pos_Incr</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<ALIAS_ID>Decrement</ALIAS_ID>
+				<PARAM_0>@Incremental_Switch_Pos_Decr</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>False</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Rudder_Trim_Parameters">
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Trim_Parameters">
+				<TRIM_TYPE>RUDDER</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Aileron_Trim_Parameters">
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Trim_Parameters">
+				<TRIM_TYPE>AILERON</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Elevator_Trim_Parameters">
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Trim_Parameters">
+				<TRIM_TYPE>ELEVATOR</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Longitudinal_Trim_Parameters">
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Trim_Parameters">
+				<TRIM_TYPE>LONGITUDINAL</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Lateral_Trim_Parameters">
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Trim_Parameters">
+				<TRIM_TYPE>LATERAL</TRIM_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="Get_Procedure_Flaps_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Flaps_Lever_Parameters">
+				<SIMVAR_FLAPS_HANDLE_CONTINUOUS_UNIT>Position 16K</SIMVAR_FLAPS_HANDLE_CONTINUOUS_UNIT>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="Get_Procedure_Incremental_Switch_Parameters">
+				<INCREMENT_PER_SECOND_PCT>#GET_FLAPS_EXTENSION_PERCENT_PER_SECOND#</INCREMENT_PER_SECOND_PCT>
+				<GET_SURFACE_VALUE_16K>#GET_FLAPS_HANDLE_CONTINUOUS#</GET_SURFACE_VALUE_16K>
+				<SET_SURFACE_VALUE_16K>#SET_FLAPS_HANDLE_CONTINUOUS#</SET_SURFACE_VALUE_16K>
+				<SURFACE_TYPE>FLAPS</SURFACE_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Macro Name="Tow_Release_None">0</Macro>
+	<Macro Name="Tow_Release_Other">1</Macro>
+	<Macro Name="Tow_Release_User_Input">2</Macro>
+	<Macro Name="Tow_Release_Winch_Max_Angle">3</Macro>
+	<Macro Name="Tow_Release_TowPlane_Crash">4</Macro>
+	<Macro Name="Tow_Release_TowPlane_Unsafe_Position">5</Macro>
+	<Macro Name="Tow_Release_TowPlane_End_Climb">6</Macro>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Tow_Release_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Tow_Release_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_TOW_RELEASE#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_PULLED_CHECK>(L:1:XMLVAR_Tow_Release_Lever_Position) !</POS_PULLED_CHECK>
+			<POS_RELEASED_CHECK>(L:1:XMLVAR_Tow_Release_Lever_Position)</POS_RELEASED_CHECK>
+			<!-- Set position -->
+			<POS_PULLED_CODE>0 (&gt;L:1:XMLVAR_Tow_Release_Lever_Position)</POS_PULLED_CODE>
+			<POS_RELEASED_CODE>1 (&gt;L:1:XMLVAR_Tow_Release_Lever_Position) 1 #SET_TOW_RELEASE#</POS_RELEASED_CODE>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>TOW_PLANE_RELEASE</EVENT_ID>
+				<PARAM_0>1</PARAM_0>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Water_Rudder_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Water_Rudder_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_WATER_RUDDER#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_UP_CHECK>#GET_WATER_RUDDER# !</POS_UP_CHECK>
+			<POS_DOWN_CHECK>#GET_WATER_RUDDER#</POS_DOWN_CHECK>
+			<!-- Set position -->
+			<POS_UP_CODE>0 #SET_WATER_RUDDER#</POS_UP_CODE>
+			<POS_DOWN_CODE>1 #SET_WATER_RUDDER#</POS_DOWN_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Water_Ballast_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Water_Ballast_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_WATER_BALLAST#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CLOSED_CHECK>#GET_WATER_BALLAST# !</POS_CLOSED_CHECK>
+			<POS_OPEN_CHECK>#GET_WATER_BALLAST#</POS_OPEN_CHECK>
+			<!-- Set position -->
+			<POS_CLOSED_CODE>0 #SET_WATER_BALLAST#</POS_CLOSED_CODE>
+			<POS_OPEN_CODE>1 #SET_WATER_BALLAST#</POS_OPEN_CODE>
+			<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+				<EVENT_ID>TOGGLE_WATER_BALLAST_VALVE</EVENT_ID>
+				<PARAM_0>#GET_WATER_BALLAST# !</PARAM_0>
+				<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Yoke_Lock_Settings_Config">
+		<Parameters Type="Default">
+			<LOCK_MODE>@LockCenter</LOCK_MODE>
+			<LOCK/>
+			<IS_LOCKED/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_YOKE_LOCK_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="LOCK_MODE">
+				<Case Value="@LockCenter">
+					<LOCK>#LOCK_CENTER#</LOCK>
+					<IS_LOCKED>#IS_LOCK_CENTER#</IS_LOCKED>
+				</Case>
+				<Case Value="@LockFreeze">
+					<LOCK>#LOCK_FREEZE#</LOCK>
+					<IS_LOCKED>#IS_LOCK_FREEZE#</IS_LOCKED>
+				</Case>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_YOKE_LOCK#</SIMVAR>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_LOCK_CHECK>#IS_LOCKED#</POS_LOCK_CHECK>
+			<POS_UNLOCK_CHECK>#IS_LOCKED# !</POS_UNLOCK_CHECK>
+			<!-- Set position -->
+			<POS_LOCK_CODE>#LOCK#</POS_LOCK_CODE>
+			<POS_UNLOCK_CODE>#UNLOCK#</POS_UNLOCK_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

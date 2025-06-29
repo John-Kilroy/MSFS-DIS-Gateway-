@@ -1,0 +1,14 @@
+{
+    "$schema" : "http://json-schema.org/draft-04/schema",
+    "title" : "gizmo/sphere",
+    "type" : "object",
+    "allOf": [ { "$ref": "glTFProperty.schema.json" } ],
+    "properties" : {
+        "radius" : {
+            "type" : "number",
+            "description" : "Sphere radius"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

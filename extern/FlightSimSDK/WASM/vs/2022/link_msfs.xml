@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<Rule Name="Link" PageTemplate="tool" DisplayName="Linker" SwitchPrefix="/" Order="20" xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule.Categories>
+    <Category Name="General" DisplayName="General" />
+    <Category Name="Input" DisplayName="Input" />
+    <Category Name="Debugging" DisplayName="Debugging" />
+    <Category Name="Advanced" DisplayName="Advanced" />
+    <Category Name="All Options" DisplayName="All Options" Subtype="Search" />
+    <Category Name="Command Line" DisplayName="Command Line" Subtype="CommandLine" />
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" ItemType="Link" Label="" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+  <StringProperty Subtype="file" Name="OutputFile" DisplayName="Output File" Description="The /OUT option overrides the default name and location of the program that the linker creates." Category="General" Switch="OUT" Separator=":" F1Keyword="VC.Project.VCLinkerTool.OutputFile">
+  </StringProperty>
+  <StringListProperty Subtype="folder" Name="AdditionalLibraryDirectories" DisplayName="Additional Library Directories" Description="Allows the user to override the environmental library path. (/LIBPATH:folder)" Category="General" Switch="LIBPATH:" F1Keyword="VC.Project.VCLinkerTool.AdditionalLibraryDirectories">
+  </StringListProperty>
+  <StringListProperty Subtype="file" Name="AdditionalDependencies" DisplayName="Additional Dependencies" Description="Specifies additional items to add to the link command line. [i.e. kernel32.lib] " Category="Input" F1Keyword="VC.Project.VCLinkerTool.AdditionalDependencies">
+  </StringListProperty>
+  <BoolProperty Name="IgnoreAllDefaultLibraries" DisplayName="Ignore All Default Libraries" Description="The /NODEFAULTLIB option tells the linker to remove one or more default libraries from the list of libraries it searches when resolving external references. " Category="Input" Switch="NODEFAULTLIB" F1Keyword="VC.Project.VCLinkerTool.IgnoreAllDefaultLibraries">
+  </BoolProperty>
+  <StringListProperty Subtype="file" Name="IgnoreSpecificDefaultLibraries" DisplayName="Ignore Specific Default Libraries" Description="Specifies one or more names of default libraries to ignore; separate multiple libraries with semi-colons.     (/NODEFAULTLIB:[name, name, ...])" Category="Input" Switch="NODEFAULTLIB:" F1Keyword="VC.Project.VCLinkerTool.IgnoreDefaultLibraryNames">
+  </StringListProperty>
+  <EnumProperty Name="GenerateDebugInformation" DisplayName="Generate Debug Info" Description="This option enables creation of debugging information for the .exe file or the DLL." Category="Debugging" F1Keyword="VC.Project.VCLinkerTool.GenerateDebugInformation">
+    <EnumValue Name="false" Switch="" DisplayName="No" Description="Produces no debugging information.">
+    </EnumValue>
+    <EnumValue Name="true" Switch="DEBUG" DisplayName="Generate Debug Information" Description="Create a complete Program Database (PDB) ideal for distribution to Microsoft Symbol Server.">
+    </EnumValue>
+  </EnumProperty>
+  <StringProperty Name="EntryPointSymbol" DisplayName="Entry Point" Description="The /ENTRY option specifies an entry point function as the starting address for an .exe file or DLL." Category="Advanced" Switch="ENTRY" Separator=":" F1Keyword="VC.Project.VCLinkerTool.EntryPointSymbol">
+  </StringProperty>
+  <BoolProperty Name="NoEntryPoint" DisplayName="No Entry Point" Description="Don’t search for the entry point symbol (by default _start)." Category="Advanced" Switch="--no-entry" F1Keyword="VC.Project.VCLinkerTool.ResourceOnlyDLL">
+  </BoolProperty>
+  <StringProperty Name="AdditionalOptions" DisplayName="Additional Options" Description="Additional Options." Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+  </StringProperty>
+</Rule>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LodSimplificationConfig version="1.0">
+	<LODS>
+		<!--
+			WARNING: values set in common lod are NOT automatically inherited
+			
+			inheritance can be added using attribute:
+				inheritFromCommon="true"
+			inheritance from previous lods can also be added using attribute:
+				inheritFromPreviousLod="true"
+			ProcessingParams cannot be inherited
+		-->
+		<LOD id="Common">
+			<TriangleReduction>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold value="0.0"/> <!-- float percent ; 0.0 disable ; -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+
+		<LOD id="0">
+			<ProcessingParams>
+				<GenerateFromLod id="0"/>
+				<MinSize value="4.0" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+		</LOD>
+		<LOD id="1">
+			<ProcessingParams>
+				<GenerateFromLod id="1" id="0"/>
+				<MinSize value="3.5" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxDeviation value="0.1"/> <!-- float 0.0 to 10.0 ; -1.0 disable -->
+				<OnScreenSize value="80.0"/> <!-- float percent ; 0.0 disable -->
+				<GeometryImportance value="10.0"/>
+				<CullOccludedGeometry value="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+		<LOD id="2">
+			<ProcessingParams>
+				<GenerateFromLod id="2" id="1" id="0"/>
+				<MinSize value="3.0" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxDeviation value="0.2"/> <!-- float 0.0 to 10.0 ; -1.0 disable -->
+				<OnScreenSize value="40.0"/> <!-- float percent ; 0.0 disable -->
+				<VerticesWeldThreshold value="0.0005" /> <!-- float (in meters) ; 0.0 disable -->
+				<GeometryImportance value="10.0"/>
+				<MaterialImportance value="2.0"/>
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle value="170.0"/>
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle inheritFromPreviousLod="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+		<LOD id="3">
+			<ProcessingParams>
+				<GenerateFromLod id="3" id="2" id="1" id="0"/>
+				<MinSize value="2.5" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxDeviation value="0.4"/> <!-- float 0.0 to 10.0 ; -1.0 disable -->
+				<OnScreenSize value="15.0"/> <!-- float percent ; 0.0 disable -->
+				<VerticesWeldThreshold value="0.001" /> <!-- float (in meters) ; 0.0 disable -->
+				<GeometryImportance value="6.0"/>
+				<MaterialImportance value="4.0"/>
+				<VertexColorImportance value="3.0"/>
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle inheritFromPreviousLod="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+		<LOD id="4">
+			<ProcessingParams>
+				<GenerateFromLod id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="2.0" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxDeviation value="1.0"/> <!-- float 0.0 to 10.0 ; -1.0 disable -->
+				<OnScreenSize value="8.0"/> <!-- float percent ; 0.0 disable -->
+				<VerticesWeldThreshold value="0.005" /> <!-- float (in meters) ; 0.0 disable -->
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle inheritFromPreviousLod="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+		<LOD id="5">
+			<ProcessingParams>
+				<GenerateFromLod id="5" id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="1.5" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxDeviation value="3.0"/> <!-- float 0.0 to 10.0 ; -1.0 disable -->
+				<OnScreenSize value="5.0"/> <!-- float percent ; 0.0 disable -->
+				<VerticesWeldThreshold value="0.05" /> <!-- float (in meters) ; 0.0 disable -->
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle inheritFromPreviousLod="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+		<LOD id="6">
+			<ProcessingParams>
+				<GenerateFromLod id="6" id="5" id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="1.0" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="130"/> <!-- integer greater than 0 ; -1 disable -->
+				<MaxDeviation value="3.0"/> <!-- float 0.0 to 10.0 ; -1.0 disable -->
+				<OnScreenSize value="5.0"/> <!-- float percent ; 0.0 disable -->
+				<VerticesWeldThreshold value="0.1" /> <!-- float (in meters) ; 0.0 disable -->
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle inheritFromPreviousLod="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+		<LOD id="7">
+			<ProcessingParams>
+				<GenerateFromLod id="9" id="8" id="7" id="6" id="5" id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="0.5" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="65"/> <!-- integer greater than 0 ; -1 disable -->
+				<OnScreenSize value="1.0"/> <!-- float percent ; 0.0 disable -->
+				<VerticesWeldThreshold value="0.2" /> <!-- float (in meters) ; 0.0 disable -->
+				<CullOccludedGeometry inheritFromPreviousLod="true"/>
+				<CullingTopViewHemisphereAngle inheritFromPreviousLod="true"/>
+				<SmallPartsRemoval>
+					<PartOnScreenSizeThreshold inheritFromCommon="true"/> <!-- float percent ; 0.0 disable -->
+				</SmallPartsRemoval>
+			</TriangleReduction>
+		</LOD>
+	</LODS>	
+</LodSimplificationConfig>

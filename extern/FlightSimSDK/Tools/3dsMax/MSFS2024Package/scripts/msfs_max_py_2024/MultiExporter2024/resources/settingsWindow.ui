@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>settingsWindow</class>
+ <widget class="QWidget" name="settingsWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>780</width>
+    <height>430</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>780</width>
+    <height>430</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Export Options</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Options preset:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboOptionPreset">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>570</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Set the &quot;Option Preset&quot; which will receive the options applied to.</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="currentText">
+        <string/>
+       </property>
+       <property name="insertPolicy">
+        <enum>QComboBox::InsertAtCurrent</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="btnAddOptionPreset">
+       <property name="minimumSize">
+        <size>
+         <width>26</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Add new option preset</string>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="btnRemoveOptionPreset">
+       <property name="minimumSize">
+        <size>
+         <width>26</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Remove selected option preset</string>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabSettings">
+      <attribute name="title">
+       <string>Settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="leftMargin">
+        <number>7</number>
+       </property>
+       <property name="topMargin">
+        <number>7</number>
+       </property>
+       <property name="rightMargin">
+        <number>7</number>
+       </property>
+       <property name="bottomMargin">
+        <number>7</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QCheckBox" name="cbAutosave">
+           <property name="toolTip">
+            <string>When you export, it will automatically save the scene.</string>
+           </property>
+           <property name="text">
+            <string>Autosave 3ds Max file</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="cbExportHidden">
+           <property name="toolTip">
+            <string>If you have hidden object(s) in the layer(s) that should be exported they will be exported anyway.</string>
+           </property>
+           <property name="text">
+            <string>Export hidden objects</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="cbSelectionAsSubmodel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>This option is to be set if you are using the merge model methods, without it, you will not be able to merge any model in the game. Make sure to have all your hierarchy under the same dummy object named &quot;Root&quot;.</string>
+           </property>
+           <property name="text">
+            <string>Export as submodel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <layout class="QGridLayout" name="glGroupBox">
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="gbExtensions">
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>MSFS2024 extensions</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <property name="topMargin">
+                 <number>7</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>7</number>
+                </property>
+                <item>
+                 <widget class="QCheckBox" name="cbAsoboUniqueID">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="toolTip">
+                   <string>The GLTF format is calling node(s), several node(s) with the same node name will cause issue. This option will prevent this kind of blocker.</string>
+                  </property>
+                  <property name="text">
+                   <string>ASOBO_uniqueID</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="gbObjects">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Objects</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="QCheckBox" name="cbExportMaterials">
+                  <property name="text">
+                   <string>Export Materials</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="Line" name="line_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <widget class="QCheckBox" name="cbRemoveLODPrefix">
+                  <property name="toolTip">
+                   <string>It cleans the names of all the meshes so this way if we refer in the xml code for example to animate the push_button_01 it will work on all the LODS by removing the xX_.</string>
+                  </property>
+                  <property name="text">
+                   <string>Remove LOD prefix</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="Line" name="line_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QCheckBox" name="cbFlattenNodes">
+                  <property name="toolTip">
+                   <string>Collapse hierarchy during export.
+Note: gizmos and lights will be kept as independant nodes.</string>
+                  </property>
+                  <property name="text">
+                   <string>Flatten nodes</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cbKeepInstances">
+                  <property name="toolTip">
+                   <string>If you have instances in the max file(s), these instances will be kept in the GLTF (it can be important for performance optimization in the game). Be cautious, too many instances can also have a negative impact on performances.</string>
+                  </property>
+                  <property name="text">
+                   <string>Keep instances</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="glGroupBox1">
+           <item row="3" column="0">
+            <widget class="QGroupBox" name="gbUsePreExport">
+             <property name="toolTip">
+              <string>Apply pre-export settings</string>
+             </property>
+             <property name="title">
+              <string>Use pre-export process</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QCheckBox" name="cbMergeContainers">
+                <property name="toolTip">
+                 <string>For all the elements that are shared between several max files, the best example is the containers of instruments that will be merged before the export</string>
+                </property>
+                <property name="text">
+                 <string>Merge containers and XRef</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbApplyPreprocessToScene">
+                <property name="toolTip">
+                 <string>If you want the options above to be permanent no way back from there. It may break your scene if you don’t pay attention to this option</string>
+                </property>
+                <property name="text">
+                 <string>Apply preprocess to scene</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <widget class="QLabel" name="label">
+                  <property name="toolTip">
+                   <string/>
+                  </property>
+                  <property name="text">
+                   <string>Bake animation options:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBakeAnimationOptions">
+                  <property name="minimumSize">
+                   <size>
+                    <width>140</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>To avoid some animation issues, the animation will be baked on every key of the timeline. Also, some of the meshes with constraints will work in the game only if their animation has been baked.</string>
+                  </property>
+                  <property name="currentText">
+                   <string>Dont bake animations</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Dont bake animations</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Bake all animations</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Selective bake</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QGroupBox" name="gbTextures">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Textures</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="leftMargin">
+               <number>7</number>
+              </property>
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="rightMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="lbTexturePath">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string>Texture path</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineTexturePath">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="toolTip">
+                 <string>Folder where to export the textures (if empty will be exported next to gltf)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnBrowseTexture">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>26</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="gbAnimations">
+             <property name="title">
+              <string>Animations</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QComboBox" name="comboAnimationExport">
+                <property name="toolTip">
+                 <string>Choose the export type for the animation(s)</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Export meshes and animations</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Export meshes only (no animation)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Export animations only (no mesh)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSave">
+       <property name="toolTip">
+        <string>Save settings for the selected &quot;Option Preset&quot;</string>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="text">
+        <string>Exit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

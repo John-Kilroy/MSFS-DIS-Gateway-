@@ -1,0 +1,55 @@
+<ModelBehaviors>
+	<!-- ################################## VISIBILITY ################################ -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="ParametersFn\\Visibility.xml"/>
+	<!-- ############################################################################## -->
+	<!-- IN: VISIBILITY_CODE (RPN snippet) -->
+	<Template Name="ASOBO_GT_Visibility_Code_Template">
+		<UseTemplate Name="ASOBO_GT_Visibility_Template"/>
+	</Template>
+	<!-- IN: See ASOBO_Material_Sim_Default_Parameters -->
+	<Template Name="ASOBO_GT_Visibility_Sim_Template">
+		<UseTemplate Name="ASOBO_GT_Visibility_Template">
+			<UseParametersFn Name="ASOBO_Material_Sim_Default_Parameters"/>
+		</UseTemplate>
+	</Template>
+	<!-- IN: See ASOBO_Visibility_Simvar_Code_Parameters -->
+	<Template Name="ASOBO_GT_Visibility_Simvar_Code_Template">
+		<UseTemplate Name="ASOBO_GT_Visibility_Template">
+			<UseParametersFn Name="ASOBO_Visibility_Simvar_Code_Parameters"/>
+		</UseTemplate>
+	</Template>
+	<!-- IN: VISIBILITY_PFN (ParametersFn to use) -->
+	<Template Name="ASOBO_GT_Visibility_Template">
+		<Parameters Type="Override">
+			<Condition Valid="DISABLE_VISIBILITY">
+				<False>
+					<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+						<PFN_PARAM_DEFAULT>ASOBO_Process_Visibility_Transforms_Parameters</PFN_PARAM_DEFAULT>
+						<PFN_PARAM_NAME>VISIBILITY_PARAMETERS_TRANSFORMS_FN</PFN_PARAM_NAME>
+					</UseParametersFn>
+				</False>
+			</Condition>
+		</Parameters>
+		<Condition Valid="DISABLE_VISIBILITY">
+			<False>
+				<UseTemplate Name="@BaseVisibilityTemplate">
+					<Condition NotEmpty="VISIBILITY_PFN">
+						<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+							<PFN_PARAM_DEFAULT>#VISIBILITY_PFN#</PFN_PARAM_DEFAULT>
+							<PFN_PARAM_NAME>VISIBILITY_PARAMETERS_FN</PFN_PARAM_NAME>
+						</UseParametersFn>				
+					</Condition>
+				</UseTemplate>
+			</False>
+		</Condition>
+	</Template>
+	<Template Name="ASOBO_GT_Component_Visibility_Template">
+		<Parameters Type="Default">
+			<CONCRETE_VISIBILITY_TEMPLATE>ASOBO_GT_Visibility_Template</CONCRETE_VISIBILITY_TEMPLATE>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Component_Template">
+			<TEMPLATE_TO_USE>#CONCRETE_VISIBILITY_TEMPLATE#</TEMPLATE_TO_USE>
+		</UseTemplate>
+	</Template>
+</ModelBehaviors>

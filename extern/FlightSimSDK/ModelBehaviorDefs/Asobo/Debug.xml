@@ -1,0 +1,70 @@
+<!-- Should only contain templates that are meant to be used as debug tools to build a plane and should not be left in the final versions of planes -->
+
+<ModelBehaviors>
+	<Include ModelBehaviorFile="ASOBO\Inputs\Templates.xml"/>
+	
+	<Template Name="ASOBO_DEBUG_Loop_Animation_Template">
+		<Parameters Type="Default">
+			<LOOP_PER_SECOND>1</LOOP_PER_SECOND>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim">
+			<ANIM_CODE>(A:ANIMATION DELTA TIME, seconds) 100 * #LOOP_PER_SECOND# *</ANIM_CODE>
+			<ANIM_LENGTH>100</ANIM_LENGTH>
+			<ANIM_WRAP>1</ANIM_WRAP>
+			<ANIM_DELTA>1</ANIM_DELTA>
+		</UseTemplate>
+	</Template>
+	
+	<Template Name="ASOBO_DEBUG_Toggle_Visibility_Template">
+		<Parameters Type="Default">
+			<DISABLE_ANIMATION>True</DISABLE_ANIMATION>
+		</Parameters>
+		<UseTemplate Name="ASOBO_DEBUG_Base_Template">
+			<MOUSE_FLAGS>Lock+LeftAll+Move</MOUSE_FLAGS>
+			<IE_NAME>Toggle_#NODE_ID#</IE_NAME>
+			<INTERACTION_TYPE>Push</INTERACTION_TYPE>
+			<CREATE_COMPONENT>True</CREATE_COMPONENT>
+			<SET_STATE_EXTERNAL>(L:XMLVAR_Toggle_#NODE_ID#) ! (&gt;L:XMLVAR_Toggle_#NODE_ID#)</SET_STATE_EXTERNAL>
+		</UseTemplate>
+		<Loop>
+			<Setup>
+				<Param>CUR_ID</Param>
+				<From>1</From>
+				<Inc>1</Inc>
+				<While>
+					<Arg Valid="NODE_TO_HIDE_#CUR_ID#"/>
+				</While>
+			</Setup>
+			<Do>
+				<Parameters Type="Override">
+					<CURRENT_NODE Process="Param">NODE_TO_HIDE_#CUR_ID#</CURRENT_NODE>
+				</Parameters>
+				<Component ID="#CURRENT_NODE#" Node="#CURRENT_NODE#">
+					<UseTemplate Name="ASOBO_GT_Visibility_Code">
+						<VISIBILITY_CODE>(L:XMLVAR_Toggle_#NODE_ID#)</VISIBILITY_CODE>
+					</UseTemplate>
+				</Component>
+			</Do>
+		</Loop>
+	</Template>
+	
+	<Template Name="ASOBO_DEBUG_Base_Template">
+		<Parameters Type="Default">
+			<INPUT_EVENT_ID_SOURCE>DEBUG</INPUT_EVENT_ID_SOURCE>
+			<WWISE_PREFIX>DEBUG</WWISE_PREFIX>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Interaction_Base_Template">
+			<USE_INPUT_EVENT_ID>DEBUG</USE_INPUT_EVENT_ID>
+		</UseTemplate>
+	</Template>
+	
+	<InputEvent ID="DEBUG">
+		<Presets>
+			<Extend Target="ASOBO_GIE_Anim_Handling">
+				<Parameters Type="Default">
+					<INPUT_EVENT_ID_SOURCE>DEBUG</INPUT_EVENT_ID_SOURCE>
+				</Parameters>
+			</Extend>
+		</Presets>
+	</InputEvent>
+</ModelBehaviors>

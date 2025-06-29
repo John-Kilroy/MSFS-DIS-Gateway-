@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_fresnel_fade glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "fresnelFactor": {
+            "type": "number"
+        },
+        "fresnelOpacityOffset": {
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

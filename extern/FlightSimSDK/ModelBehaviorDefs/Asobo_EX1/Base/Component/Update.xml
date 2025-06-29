@@ -1,0 +1,44 @@
+<ModelBehaviors>
+	<!-- ParametersFn Definitions -->
+	<ParametersFn Name="ASOBO_Update_Base_Parameters_Defaults">
+		<ReturnParameters>
+			<UPDATE_CODE/>
+			<UPDATE_INTERACTION_MODEL>All</UPDATE_INTERACTION_MODEL>
+			<UPDATE_FREQUENCY>1</UPDATE_FREQUENCY>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Update_Base_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Update_Base_Parameters_Defaults"/>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Valid="UPDATE_ONCE">
+				<True>
+					<ONCE>#UPDATE_ONCE#</ONCE>
+				</True>
+				<False>
+					<FREQUENCY>#UPDATE_FREQUENCY#</FREQUENCY>
+				</False>
+			</Condition>
+			<CODE>#UPDATE_CODE#</CODE>
+			<INTERACTION_MODEL>#UPDATE_INTERACTION_MODEL#</INTERACTION_MODEL>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Template Definitions -->
+	<Template Name="ASOBO_Update_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Update_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>UPDATE_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Condition Valid="ONCE">
+			<True>
+				<Update Once="True" InteractionModel="#INTERACTION_MODEL#">#CODE#</Update>
+			</True>
+			<False>
+				<Update Frequency="#FREQUENCY#" InteractionModel="#INTERACTION_MODEL#">#CODE#</Update>
+			</False>
+		</Condition>
+	</Template>
+</ModelBehaviors>

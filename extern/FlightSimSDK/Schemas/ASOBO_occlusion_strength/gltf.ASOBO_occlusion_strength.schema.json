@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_occlusion_strength glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {  
+        "strength": {
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

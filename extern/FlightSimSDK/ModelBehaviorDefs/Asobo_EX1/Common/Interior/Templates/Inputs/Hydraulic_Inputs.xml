@@ -1,0 +1,17 @@
+<ModelBehaviors>
+	<!-- ################################## HYDRAULIC ################################# -->
+	<!-- ############################################################################## -->
+	<InputEvent ID="HYDRAULIC">
+		<TT_Category_Main>TT:INPUT.CAT_1_INSTR_SYS</TT_Category_Main>
+		<TT_Category_Sub>TT:INPUT.CAT_2_INSTR_SYS_HYDRAULICS</TT_Category_Sub>
+		<Presets>
+			<Extend Target="#IE_BASE_TO_EXTEND_FROM#">
+				<Parameters Type="Override">
+					<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_No_Default_Helper">
+						<PFN_PARAM_NAME>HYDRAULIC_IE_PARAMETERS_FN</PFN_PARAM_NAME>
+					</UseParametersFn>
+				</Parameters>
+			</Extend>
+		</Presets>
+	</InputEvent>
+</ModelBehaviors>

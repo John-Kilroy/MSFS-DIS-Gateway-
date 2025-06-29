@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_clear_coat glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "dirtTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

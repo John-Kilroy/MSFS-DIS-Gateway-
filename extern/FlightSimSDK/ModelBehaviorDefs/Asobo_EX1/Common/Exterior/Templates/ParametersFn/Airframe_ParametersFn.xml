@@ -1,0 +1,30 @@
+<ModelBehaviors>
+	<!-- ################################### AIRFRAME ################################# -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Angle_Of_Attack_Parameters">
+		<Parameters Type="Default">
+			<INCIDENCE_ALPHA_SIMVAR>INCIDENCE ALPHA</INCIDENCE_ALPHA_SIMVAR>
+			<INCIDENCE_ALPHA_SIMVAR_UNIT>degrees</INCIDENCE_ALPHA_SIMVAR_UNIT>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_INCIDENCE_ALPHA>(A:#INCIDENCE_ALPHA_SIMVAR#, #INCIDENCE_ALPHA_SIMVAR_UNIT#)</GET_INCIDENCE_ALPHA>
+		</Parameters>
+		<ReturnParameters>
+			<GET_INCIDENCE_ALPHA>#GET_INCIDENCE_ALPHA#</GET_INCIDENCE_ALPHA>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Wing_Fold_Animation_Parameters">
+		<Parameters Type="Default">
+			<WING_FOLD_SIMVAR>FOLDING WING LEFT PERCENT</WING_FOLD_SIMVAR>
+			<WING_FOLD_SIMVAR_UNIT>Percent</WING_FOLD_SIMVAR_UNIT>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_WING_FOLD_POSITION>(A:#WING_FOLD_SIMVAR#, #WING_FOLD_SIMVAR_UNIT#)</GET_WING_FOLD_POSITION>
+		</Parameters>
+		<ReturnParameters>
+			<ANIM_CODE>#GET_WING_FOLD_POSITION#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

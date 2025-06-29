@@ -1,0 +1,18 @@
+{
+    "$schema" : "http://json-schema.org/draft-04/schema",
+    "title" : "collision/cylinder",
+    "type" : "object",
+    "allOf": [ { "$ref": "glTFProperty.schema.json" } ],
+    "properties" : {
+        "radius" : {
+            "type" : "number",
+            "description" : "Cylinder radius"
+        },
+        "height" : {
+            "type" : "number",
+            "description" : "Cylinder height"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

@@ -1,0 +1,1228 @@
+<ModelBehaviors>
+	<!-- ################################# INTERACTION ################################ -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Setup_Simple_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_CONFIG</SAVED_PARAMETERS>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+			<IE_INC_ARG_COUNT>1</IE_INC_ARG_COUNT>
+			<IE_DEC_ARG_COUNT>1</IE_DEC_ARG_COUNT>
+			<IE_SET_CODE/>
+			<IE_INC_CODE/>
+			<IE_DEC_CODE/>
+			<Condition Check="IE_TOOLTIP_VALUE">
+				<False>
+					<IE_TOOLTIP_VALUE_ID>@TT_Package.STATE.NA</IE_TOOLTIP_VALUE_ID>
+				</False>
+			</Condition>
+			<IE_VALUE_UNITS/>
+			<IE_TOOLTIP_ICON>Push</IE_TOOLTIP_ICON>
+			<MOUSERECT_LOCK_ENABLED>False</MOUSERECT_LOCK_ENABLED>
+			<FORWARD_INC_DEC_TO_IE>True</FORWARD_INC_DEC_TO_IE>
+		</Parameters>
+		<Condition NotEmpty="ON_BEFORE_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#ON_BEFORE_SET_CODE# #IE_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Condition NotEmpty="ON_AFTER_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#IE_SET_CODE# #ON_AFTER_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Parameters Type="Override">
+			<SaveParameters ID="Temp_IE_Save">
+				<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+					<EV_PARAM>ON_ENTER_LOCK</EV_PARAM>
+				</UseParametersFn>
+				<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+					<EV_PARAM>ON_EXIT_LOCK</EV_PARAM>
+				</UseParametersFn>
+				<Condition Valid="FORWARD_INC_DEC_TO_IE">
+					<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+						<EV_PARAM>ON_INCREASE</EV_PARAM>
+					</UseParametersFn>
+					<UseParametersFn Name="ASOBO_Append_To_Mouserect_Events_Helper">
+						<EV_PARAM>ON_DECREASE</EV_PARAM>
+					</UseParametersFn>
+				</Condition>
+				<SaveParameters ID="Mouserect_Parameters" Append="Default">
+					<CURSOR>Hand</CURSOR>
+					<MOUSERECT_LOCK_ENABLED>#MOUSERECT_LOCK_ENABLED#</MOUSERECT_LOCK_ENABLED>
+				</SaveParameters>
+				<IE_TOOLTIP_ICON>#IE_TOOLTIP_ICON#</IE_TOOLTIP_ICON>
+				<UseParametersFn Name="ASOBO_Get_Interaction_For_MR_Binding_Type_Helper"/>
+				<UseParametersFn Name="ASOBO_Format_Tooltip_Value_Helper"/>
+			</SaveParameters>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<LoadParameters ID="Temp_IE_Save"/>
+				<IE_SET_ARG_COUNT>#IE_SET_ARG_COUNT#</IE_SET_ARG_COUNT>
+				<IE_INC_ARG_COUNT>#IE_INC_ARG_COUNT#</IE_INC_ARG_COUNT>
+				<IE_DEC_ARG_COUNT>#IE_DEC_ARG_COUNT#</IE_DEC_ARG_COUNT>
+				<IE_SET_CODE>#IE_SET_CODE#</IE_SET_CODE>
+				<IE_INC_CODE>#IE_INC_CODE#</IE_INC_CODE>
+				<IE_DEC_CODE>#IE_DEC_CODE#</IE_DEC_CODE>
+				<IE_VALUE_UNITS>#IE_VALUE_UNITS#</IE_VALUE_UNITS>
+				<INC_PARAM_0>p0</INC_PARAM_0>
+				<INC_PARAM_0_TYPE>Float</INC_PARAM_0_TYPE>
+				<INC_PARAM_0_IS_DYNAMIC>True</INC_PARAM_0_IS_DYNAMIC>
+				<DEC_PARAM_0>p0</DEC_PARAM_0>
+				<DEC_PARAM_0_TYPE>Float</DEC_PARAM_0_TYPE>
+				<DEC_PARAM_0_IS_DYNAMIC>True</DEC_PARAM_0_IS_DYNAMIC>
+				<SET_PARAM_0>p0</SET_PARAM_0>
+				<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+				<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Setup_Attachement_Parameters">
+		<Parameters Type="Override">
+			<Condition NotEmpty="BEFORE_ATTACHEMENT_PFN">
+				<UseParametersFn Name="#BEFORE_ATTACHEMENT_PFN#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="EVENT">
+					<PFN_SETUP_INTERACTION_ATTACHEMENT>ASOBO_Setup_Event_Parameters</PFN_SETUP_INTERACTION_ATTACHEMENT>
+				</Case>
+				<Case Value="XSTATES">
+					<PFN_SETUP_INTERACTION_ATTACHEMENT>ASOBO_Setup_Event_Parameters</PFN_SETUP_INTERACTION_ATTACHEMENT>
+					<EVENT_TYPE>XSTATES</EVENT_TYPE>
+				</Case>
+				<Default>
+					<PFN_SETUP_INTERACTION_ATTACHEMENT>#PFN_SETUP_INTERACTION#</PFN_SETUP_INTERACTION_ATTACHEMENT>
+				</Default>
+			</Switch>
+			<PFN_GET_MR_BINDING_TYPE>ASOBO_Get_Attachement_MR_Binding_Type_Helper</PFN_GET_MR_BINDING_TYPE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#PFN_GET_MR_BINDING_TYPE#"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#PFN_SETUP_INTERACTION_ATTACHEMENT#"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="AFTER_ATTACHEMENT_PFN">
+				<UseParametersFn Name="#AFTER_ATTACHEMENT_PFN#"/>
+			</Condition>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Setup_Event_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_INTERACTION_STATES</SAVED_PARAMETERS>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_EVENT_CONFIG</SAVED_PARAMETERS>
+			</UseParametersFn>
+			<Condition Check="GET_EVENT_INTERACTION_SETTINGS">
+				<UseParametersFn Name="#GET_EVENT_INTERACTION_SETTINGS#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="EVENT_TYPE">
+				<Case Value="XSTATES">
+					<UseParametersFn Name="ASOBO_Setup_Button_XStates_Parameters"/>
+				</Case>
+				<Default>
+					<UseParametersFn Name="ASOBO_Setup_Button_Event_Parameters"/>
+				</Default>
+			</Switch>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Setup_Button_XStates_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_STATES</SAVED_PARAMETERS>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_CHECK_XSTATES_JP</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_CODE_XSTATES_JP</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_TOOLTIP_XSTATES_JP</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<XTATES_VAR_GET_STATE_NAME>XMLVAR_#IE_PRESET_ID#_XStates_Value</XTATES_VAR_GET_STATE_NAME>
+			<XTATES_VAR_GET_STATE_SCOPE>O</XTATES_VAR_GET_STATE_SCOPE>
+		</Parameters>
+		<Parameters Type="Default">
+			<FORMAT_TOOLTIP_VALUE/>
+			<PFN_FORMAT_EVENT_POS>ASOBO_Process_Button_XStates_Parameters</PFN_FORMAT_EVENT_POS>
+			<PRE_PROCESS_XSTATES>True</PRE_PROCESS_XSTATES>
+			<XTATES_VAR_GET_STATE>#XTATES_VAR_GET_STATE_SCOPE#:#XTATES_VAR_GET_STATE_NAME#</XTATES_VAR_GET_STATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#XTATES_VAR_GET_STATE_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#XTATES_VAR_GET_STATE_SCOPE#</VAR_SCOPE>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="PRE_PROCESS_XSTATES">
+				<Loop>
+					<Setup>
+						<Param>CUR_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg Check="#STATE_PREFIX#_#CUR_ID#"/>
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<CUR_STATE Process="Param">#STATE_PREFIX#_#CUR_ID#</CUR_STATE>
+						</Parameters>
+						<Parameters Type="Override">
+							<Condition Check="POS_#CUR_STATE#_CHECK">
+								<THIS_STATE_CHECK Process="Param">POS_#CUR_STATE#_CHECK</THIS_STATE_CHECK>
+							</Condition>
+							<Condition Check="POS_#CUR_STATE#_CODE">
+								<THIS_STATE_CODE Process="Param">POS_#CUR_STATE#_CODE</THIS_STATE_CODE>
+							</Condition>
+							<Switch>
+								<Case NotEmpty="POS_#CUR_STATE#_TOOLTIP_CODE">
+									<THIS_STATE_TOOLTIP Process="Param">POS_#CUR_STATE#_TOOLTIP_CODE</THIS_STATE_TOOLTIP>
+								</Case>
+								<Case NotEmpty="POS_#CUR_STATE#_TOOLTIP_ID">
+									<UseParametersFn Name="ASOBO_Get_TOOLTIP_ID_Parameters">
+										<OUT_PARAM_NAME>THIS_STATE_TOOLTIP</OUT_PARAM_NAME>
+										<TOOLTIP_ID Process="Param">POS_#CUR_STATE#_TOOLTIP_ID</TOOLTIP_ID>
+									</UseParametersFn>
+								</Case>
+							</Switch>
+						</Parameters>
+						<Parameters Type="Override">
+							<Condition Check="THIS_STATE_CHECK">
+								<THIS_STATE_CHECK>#THIS_STATE_CHECK# if{ #CUR_ID# sp0 g#FL_CHECK_XSTATES_JP# }</THIS_STATE_CHECK>
+								<Condition NotEmpty="THIS_STATE_TOOLTIP">
+									<THIS_STATE_TOOLTIP>#THIS_STATE_CHECK# if{ #THIS_STATE_TOOLTIP# g#FL_TOOLTIP_XSTATES_JP# }</THIS_STATE_TOOLTIP>
+								</Condition>
+							</Condition>
+							<Condition Check="THIS_STATE_CODE">
+								<THIS_STATE_CODE>l0 #CUR_ID# == if{ #THIS_STATE_CODE# g#FL_CODE_XSTATES_JP# }</THIS_STATE_CODE>
+							</Condition>
+						</Parameters>
+						<Parameters Type="Override" Lifetime="Loop">
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_STATE_CODE</PARAM>
+								<OUT_PARAM_NAME>XSTATES_CODE_T</OUT_PARAM_NAME>
+							</UseParametersFn>
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_STATE_CHECK</PARAM>
+								<OUT_PARAM_NAME>XSTATES_CHECK_T</OUT_PARAM_NAME>
+							</UseParametersFn>
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_STATE_TOOLTIP</PARAM>
+								<OUT_PARAM_NAME>XSTATES_TOOLTIP_T</OUT_PARAM_NAME>
+							</UseParametersFn>
+						</Parameters>
+					</Do>
+					<Then>
+						<Condition NotEmpty="XSTATES_CHECK_T">
+							<XSTATES_GET_STATE>(#XTATES_VAR_GET_STATE#)</XSTATES_GET_STATE>
+							<UseParametersFn Name="ASOBO_Append_Value_Code_Helper">
+								<APPEND_BEFORE>True</APPEND_BEFORE>
+								<VALUE_CODE>#XSTATES_CHECK_T# :#FL_CHECK_XSTATES_JP# l0 (&gt;#XTATES_VAR_GET_STATE#)</VALUE_CODE>
+							</UseParametersFn>
+						</Condition>
+						<Condition NotEmpty="XSTATES_CODE_T">
+							<XSTATES_SET_STATE>s0 (#XTATES_VAR_GET_STATE#) != if{ #XSTATES_CODE_T# } :#FL_CODE_XSTATES_JP#</XSTATES_SET_STATE>
+						</Condition>
+						<Condition NotEmpty="XSTATES_TOOLTIP_T">
+							<Condition Check="IE_TOOLTIP_VALUE">
+								<False>
+									<IE_TOOLTIP_VALUE>#XSTATES_TOOLTIP_T# :#FL_TOOLTIP_XSTATES_JP# #FORMAT_TOOLTIP_VALUE#</IE_TOOLTIP_VALUE>
+								</False>
+							</Condition>
+						</Condition>
+						<LAST_STATE_INDEX Process="Int">#CUR_ID# 1 -</LAST_STATE_INDEX>
+						<NUM_STATES>#CUR_ID#</NUM_STATES>
+					</Then>
+				</Loop>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#PFN_FORMAT_EVENT_POS#"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Setup_Button_Base_Parameters"/>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Process_Button_XStates_Parameters">
+		<Parameters Type="Default">
+			<PROCESS_STEPS_ORDER>INC</PROCESS_STEPS_ORDER>
+		</Parameters>
+		<Parameters Type="Override">
+			<POS_EVENT_NAME Process="String">'#BUTTON_TYPE#' uc</POS_EVENT_NAME>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="PROCESS_STEPS_ORDER">
+				<Case Value="INC">
+					<BUTTON_EVENT_STEP_ONCE>1 +</BUTTON_EVENT_STEP_ONCE>
+				</Case>
+				<Case Value="DEC">
+					<BUTTON_EVENT_STEP_ONCE>1 -</BUTTON_EVENT_STEP_ONCE>
+				</Case>
+			</Switch>
+			<BUTTON_EVENT_FIX_INDEX>#LAST_STATE_INDEX# &gt; if{ 0 sp0 } l0 0 &lt; if{ #LAST_STATE_INDEX# sp0 } </BUTTON_EVENT_FIX_INDEX>
+		</Parameters>
+		<Parameters Type="Default">
+			<XSTATES_SET_STATE_CODE>#XSTATES_GET_STATE# #BUTTON_EVENT_STEP_ONCE# s0 #BUTTON_EVENT_FIX_INDEX# l0 #XSTATES_SET_STATE#</XSTATES_SET_STATE_CODE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+				<PARAM>XSTATES_SET_STATE_CODE</PARAM>
+				<OUT_PARAM_NAME>ON_BUTTON_#POS_EVENT_NAME#_SET</OUT_PARAM_NAME>
+				<APPEND_BEFORE>True</APPEND_BEFORE>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Append_To_Button_Event_Helper">
+				<Condition Check="ON_BUTTON_#POS_EVENT_NAME#_SET">
+					<ON_BUTTON_EVENT_SET Process="Param">ON_BUTTON_#POS_EVENT_NAME#_SET</ON_BUTTON_EVENT_SET>
+				</Condition>
+				<Condition Check="ON_BUTTON_#POS_EVENT_NAME#_RELEASED">
+					<ON_BUTTON_EVENT_RELEASED Process="Param">ON_BUTTON_#POS_EVENT_NAME#_RELEASED</ON_BUTTON_EVENT_RELEASED>							
+				</Condition>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Setup_Button_Event_Parameters">
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="#EVENT_STATE_PREFIX#_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<CUR_STATE Process="Param">#EVENT_STATE_PREFIX#_#CUR_ID#</CUR_STATE>
+						<DO_PROCESS>True</DO_PROCESS>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Check="CUR_STATE" Match="@ASOBO_Button_Pos_Neutral">
+							<DO_PROCESS>False</DO_PROCESS>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Valid="DO_PROCESS">
+							<POS_EVENT_NAME Process="String">'#CUR_STATE#' uc</POS_EVENT_NAME>
+						</Condition>
+					</Parameters>
+					<Condition Valid="DO_PROCESS">
+						<UseParametersFn Name="ASOBO_Append_To_Button_Event_Helper">
+							<Condition Check="ON_BUTTON_#POS_EVENT_NAME#_SET">
+								<ON_BUTTON_EVENT_SET Process="Param">ON_BUTTON_#POS_EVENT_NAME#_SET</ON_BUTTON_EVENT_SET>
+							</Condition>
+							<Condition Check="ON_BUTTON_#POS_EVENT_NAME#_RELEASED">
+								<ON_BUTTON_EVENT_RELEASED Process="Param">ON_BUTTON_#POS_EVENT_NAME#_RELEASED</ON_BUTTON_EVENT_RELEASED>								
+							</Condition>
+						</UseParametersFn>
+					</Condition>
+				</Do>
+			</Loop>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Setup_Button_Base_Parameters"/>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Append_To_Button_Event_Helper">
+		<Parameters Type="Default">
+			<POS_NEUTRAL_NAME>@ASOBO_Button_Pos_Neutral</POS_NEUTRAL_NAME>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+				<PARAM>ON_BUTTON_EVENT_SET</PARAM>
+				<OUT_PARAM_NAME>POS_#POS_EVENT_NAME#_CODE</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+				<PARAM>ON_BUTTON_EVENT_RELEASED</PARAM>
+				<OUT_PARAM_NAME>POS_#POS_NEUTRAL_NAME#_CODE</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Setup_Button_Base_Parameters">
+		<Parameters Type="Default">
+			<VAR_GET_STATE_SUFFIX>Button_State</VAR_GET_STATE_SUFFIX>
+			<VAR_BUTTON_STATE_SUFFIX>Value</VAR_BUTTON_STATE_SUFFIX>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_GET_STATE_NAME>XMLVAR_#IE_PRESET_ID#_#VAR_GET_STATE_SUFFIX#</VAR_GET_STATE_NAME>
+			<VAR_GET_STATE_SCOPE>O</VAR_GET_STATE_SCOPE>
+			<VAR_BUTTON_STATE_NAME>XMLVAR_#IE_PRESET_ID#_#VAR_BUTTON_STATE_SUFFIX#</VAR_BUTTON_STATE_NAME>
+			<VAR_BUTTON_STATE_SCOPE>O</VAR_BUTTON_STATE_SCOPE>
+			<Condition Check="IE_TOOLTIP_VALUE">
+				<False>
+					<IE_TOOLTIP_VALUE_ID>@TT_Package.STATE.NA</IE_TOOLTIP_VALUE_ID>
+				</False>
+			</Condition>
+			<MOMENTARY_BY_DEFAULT>True</MOMENTARY_BY_DEFAULT>
+			<ENFORCE_MOMENTARY_MIN_DURATION>True</ENFORCE_MOMENTARY_MIN_DURATION>
+			<DEFAULT_MOMENTARY_MIN_DURATION>0.15</DEFAULT_MOMENTARY_MIN_DURATION>
+			<ANIM_LAG>1000</ANIM_LAG>
+		</Parameters>
+		<Parameters Type="Override">
+			<VAR_BUTTON_STATE>#VAR_BUTTON_STATE_SCOPE#:#VAR_BUTTON_STATE_NAME#</VAR_BUTTON_STATE>
+			<VAR_GET_STATE>#VAR_GET_STATE_SCOPE#:#VAR_GET_STATE_NAME#</VAR_GET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#VAR_BUTTON_STATE_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#VAR_BUTTON_STATE_SCOPE#</VAR_SCOPE>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_Init_Code_Helper">
+				<INIT_CODE>(#VAR_BUTTON_STATE#) (&gt;#VAR_GET_STATE#)</INIT_CODE>
+			</UseParametersFn>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="#EVENT_STATE_PREFIX#_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<CUR_STATE Process="Param">#EVENT_STATE_PREFIX#_#CUR_ID#</CUR_STATE>
+					</Parameters>
+					<Parameters Type="Override">
+						<POS_EVENT_NAME Process="String">'#CUR_STATE#' uc</POS_EVENT_NAME>
+					</Parameters>
+					<Parameters Type="Default">
+						<Condition Check="CUR_STATE" Match="@ASOBO_Button_Pos_Neutral">
+							<False>
+								<POS_#POS_EVENT_NAME#_IS_MOMENTARY>#MOMENTARY_BY_DEFAULT#</POS_#POS_EVENT_NAME#_IS_MOMENTARY>								
+							</False>
+						</Condition>
+					</Parameters>
+					<Condition Valid="POS_#POS_EVENT_NAME#_IS_MOMENTARY">
+						<POS_#POS_EVENT_NAME#_MOMENTARY_RELEASE_TARGET>@ASOBO_Button_Pos_Neutral</POS_#POS_EVENT_NAME#_MOMENTARY_RELEASE_TARGET>
+					</Condition>
+					<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+						<THIS_STATE_CODE>#CUR_ID# (&gt;#VAR_BUTTON_STATE#)</THIS_STATE_CODE>
+						<PARAM>THIS_STATE_CODE</PARAM>
+						<OUT_PARAM_NAME>POS_#POS_EVENT_NAME#_CODE</OUT_PARAM_NAME>
+						<APPEND_BEFORE>True</APPEND_BEFORE>
+					</UseParametersFn>
+					<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+						<THIS_STATE_CHECK>(#VAR_BUTTON_STATE#) #CUR_ID# ==</THIS_STATE_CHECK>
+						<PARAM>THIS_STATE_CHECK</PARAM>
+						<OUT_PARAM_NAME>POS_#POS_EVENT_NAME#_CHECK</OUT_PARAM_NAME>
+						<APPEND_BEFORE>True</APPEND_BEFORE>
+					</UseParametersFn>
+					<POS_#POS_EVENT_NAME#_ACTION_TYPE Process="Param">BUTTON_#POS_EVENT_NAME#_ACTION_TYPE</POS_#POS_EVENT_NAME#_ACTION_TYPE>
+					<POS_#POS_EVENT_NAME#_ACTION_TT_TAG Process="Param">BUTTON_#POS_EVENT_NAME#_ACTION_TT_TAG</POS_#POS_EVENT_NAME#_ACTION_TT_TAG>
+					<POS_#POS_EVENT_NAME#_ACTION_TT_NAME Process="Param">BUTTON_#POS_EVENT_NAME#_ACTION_TT_NAME</POS_#POS_EVENT_NAME#_ACTION_TT_NAME>
+					<POS_#POS_EVENT_NAME#_ACTION_TT_DESCRIPTION Process="Param">BUTTON_#POS_EVENT_NAME#_ACTION_TT_DESCRIPTION</POS_#POS_EVENT_NAME#_ACTION_TT_DESCRIPTION>
+					<POS_#POS_EVENT_NAME#_ACTION_TT_FUNCTION Process="Param">BUTTON_#POS_EVENT_NAME#_ACTION_TT_FUNCTION</POS_#POS_EVENT_NAME#_ACTION_TT_FUNCTION>
+				</Do>
+			</Loop>
+		</Parameters>
+		<Parameters Type="Default">
+			<BINDING_PREFIX/>
+			<BINDING_SUFFIX/>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Setup_Custom_XStates_Parameters">
+				<STATE_PREFIX>#EVENT_STATE_PREFIX#</STATE_PREFIX>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- IN: PLOAD_STATES (All states (indexed) with their corresponding value) -->
+	<!-- IN: PLOAD_STATES_CONFIG (Data to parse the states: STATE_PREFIX (prefix given to your states, default to STATE) ) -->
+	<!-- IN: IE_PARAMS (Where to save the data) -->
+	<!-- IN: IE_SET_STATE (Set the state position index) -->
+	<!-- IN: IE_GET_STATE (Get the state position index) -->
+	<ParametersFn Name="ASOBO_Setup_XStates_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_STATES</SAVED_PARAMETERS>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_STATES_CONFIG</SAVED_PARAMETERS>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<BINDING_PREFIX/>
+			<BINDING_SUFFIX/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="XSTATES_TYPE">
+				<Case Value="NUMERICAL">
+					<UseParametersFn Name="ASOBO_Setup_Numerical_XStates_Parameters"/>
+				</Case>
+				<Default>
+					<UseParametersFn Name="ASOBO_Setup_Custom_XStates_Parameters"/>
+				</Default>
+			</Switch>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Get_IE_XStates_Parameters">
+		<Parameters Type="Default">
+			<Condition Check="NUM_STATES" Match="2">
+				<USE_SIMPLE_TOGGLE_INTERACTION>True</USE_SIMPLE_TOGGLE_INTERACTION>
+				<Condition Check="IE_TOGGLE_CHECK_CODE">
+					<Condition Check="TOGGLE_ACTION_PFN">
+						<UseParametersFn Name="#TOGGLE_ACTION_PFN#"/>
+					</Condition>
+				</Condition>
+			</Condition>
+			<Switch Param="MOMENTARY">
+				<Case Value="BOTH">
+					<MOMENTARY_FIRST_RELEASE_TARGET_ID>1</MOMENTARY_FIRST_RELEASE_TARGET_ID>
+					<MOMENTARY_LAST_RELEASE_TARGET_ID Process="Int">#LAST_STATE_INDEX# 1 -</MOMENTARY_LAST_RELEASE_TARGET_ID>
+					<FIRST_POS_ID Process="Param">IE_STATE_0</FIRST_POS_ID>
+					<LAST_POS_ID Process="Param">IE_STATE_#LAST_STATE_INDEX#</LAST_POS_ID>
+				</Case>
+				<Case Value="FIRST">
+					<MOMENTARY_FIRST_RELEASE_TARGET_ID>1</MOMENTARY_FIRST_RELEASE_TARGET_ID>
+					<FIRST_POS_ID Process="Param">IE_STATE_0</FIRST_POS_ID>
+				</Case>
+				<Case Value="LAST">
+					<MOMENTARY_LAST_RELEASE_TARGET_ID Process="Int">#LAST_STATE_INDEX# 1 -</MOMENTARY_LAST_RELEASE_TARGET_ID>
+					<LAST_POS_ID Process="Param">IE_STATE_#LAST_STATE_INDEX#</LAST_POS_ID>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="MOMENTARY">
+				<Case Value="BOTH">
+					<POS_#FIRST_POS_ID#_MOMENTARY_RELEASE_TARGET Process="Param">IE_STATE_#MOMENTARY_FIRST_RELEASE_TARGET_ID#</POS_#FIRST_POS_ID#_MOMENTARY_RELEASE_TARGET>
+					<POS_#LAST_POS_ID#_MOMENTARY_RELEASE_TARGET Process="Param">IE_STATE_#MOMENTARY_LAST_RELEASE_TARGET_ID#</POS_#LAST_POS_ID#_MOMENTARY_RELEASE_TARGET>
+				</Case>
+				<Case Value="FIRST">
+					<POS_#FIRST_POS_ID#_MOMENTARY_RELEASE_TARGET Process="Param">IE_STATE_#MOMENTARY_FIRST_RELEASE_TARGET_ID#</POS_#FIRST_POS_ID#_MOMENTARY_RELEASE_TARGET>
+				</Case>
+				<Case Value="LAST">
+					<POS_#LAST_POS_ID#_MOMENTARY_RELEASE_TARGET Process="Param">IE_STATE_#MOMENTARY_LAST_RELEASE_TARGET_ID#</POS_#LAST_POS_ID#_MOMENTARY_RELEASE_TARGET>
+				</Case>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<To>#LAST_STATE_INDEX#</To>
+				</Setup>
+				<Do>
+					<Parameters Type="Override" Lifetime="Loop">
+						<CUR_STATE_ID Process="Param">IE_STATE_#CUR_ID#</CUR_STATE_ID>
+					</Parameters>
+					<Parameters Type="Default" Lifetime="Loop">
+						<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+							<PFN_PARAM_DEFAULT>ASOBO_Get_IE_XStates_Parameter</PFN_PARAM_DEFAULT>
+							<PFN_PARAM_NAME>PFN_GET_XSTATES_PARAMETER</PFN_PARAM_NAME>
+						</UseParametersFn>
+					</Parameters>
+					<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+						<ALIAS_ID>#CUR_STATE_ID#</ALIAS_ID>
+						<ACTION_TYPE Process="Param">POS_#CUR_STATE_ID#_ACTION_TYPE</ACTION_TYPE>
+						<ACTION_TT_NAME Process="Param">POS_#CUR_STATE_ID#_ACTION_TT_NAME</ACTION_TT_NAME>
+						<ACTION_TT_DESCRIPTION Process="Param">POS_#CUR_STATE_ID#_ACTION_TT_DESCRIPTION</ACTION_TT_DESCRIPTION>
+						<ACTION_TT_FUNCTION Process="Param">POS_#CUR_STATE_ID#_ACTION_TT_FUNCTION</ACTION_TT_FUNCTION>
+						<ACTION_TT_TAG Process="Param">POS_#CUR_STATE_ID#_ACTION_TT_TAG</ACTION_TT_TAG>
+						<Loop>
+							<Setup>
+								<Param>PARAM_ID</Param>
+								<From>0</From>
+								<Inc>1</Inc>
+								<While>
+									<Arg Check="IE_STATE_#CUR_ID#_PARAM_#PARAM_ID#"/>
+								</While>
+							</Setup>
+							<Do>
+								<PARAM_#PARAM_ID# Process="Param">IE_STATE_#CUR_ID#_PARAM_#PARAM_ID#</PARAM_#PARAM_ID#>
+								<Condition Check="IE_STATE_#CUR_ID#_PARAM_#PARAM_ID#_IS_DYNAMIC">
+									<PARAM_#PARAM_ID#_IS_DYNAMIC Process="Param">IE_STATE_#CUR_ID#_PARAM_#PARAM_ID#_IS_DYNAMIC</PARAM_#PARAM_ID#_IS_DYNAMIC>
+								</Condition>
+							</Do>
+						</Loop>
+					</UseParametersFn>
+				</Do>
+				<Then>
+					<Condition Check="IE_TOGGLE_CHECK_CODE">
+						<UseParametersFn Name="ASOBO_Add_Set_Binding_Helper">
+							<ALIAS_ID>#TOGGLE_ALIAS_ID#</ALIAS_ID>
+							<ACTION_TYPE Process="Param">TOGGLE_ACTION_TYPE</ACTION_TYPE>
+							<ACTION_TT_NAME Process="Param">TOGGLE_ACTION_TT_NAME</ACTION_TT_NAME>
+							<ACTION_TT_DESCRIPTION Process="Param">TOGGLE_ACTION_TT_DESCRIPTION</ACTION_TT_DESCRIPTION>
+							<ACTION_TT_FUNCTION Process="Param">TOGGLE_ACTION_TT_FUNCTION</ACTION_TT_FUNCTION>
+							<ACTION_TT_TAG Process="Param">TOGGLE_ACTION_TT_TAG</ACTION_TT_TAG>
+							<PARAM_0>#IE_TOGGLE_CHECK_CODE#</PARAM_0>
+							<PARAM_0_IS_DYNAMIC>True</PARAM_0_IS_DYNAMIC>
+						</UseParametersFn>						
+					</Condition>
+					<UseParametersFn Name="ASOBO_Get_Interaction_XStates_Parameters"/>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Return parameters for ASOBO_Get_Interaction_XStates_Parameters -->
+	<ParametersFn Name="ASOBO_Get_IE_XStates_Parameter">
+		<Parameters Type="Override">
+			<Condition Check="USE_SIMPLE_TOGGLE_INTERACTION">
+				<AUTO_DEFINE_GATE>False</AUTO_DEFINE_GATE><!-- Force false, no gates handling, it's a simple toggle -->
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="INTERACTION_TYPE">
+				<Case Value="Switch">
+					<AUTO_DEFINE_GATE>True</AUTO_DEFINE_GATE>
+				</Case>
+				<Case Value="Knob">
+					<AUTO_DEFINE_GATE>True</AUTO_DEFINE_GATE>
+				</Case>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<POS_#CUR_STATE_ID#_IE_ALIAS>#CUR_STATE_ID#</POS_#CUR_STATE_ID#_IE_ALIAS>
+			<Condition Valid="AUTO_DEFINE_GATE">
+				<POS_#CUR_STATE_ID#_GATE_DIRECTION>Both</POS_#CUR_STATE_ID#_GATE_DIRECTION>
+				<POS_#CUR_STATE_ID#_ANIM_PERCENT Process="Int">#CUR_ID# #LAST_STATE_INDEX# / 100 * near</POS_#CUR_STATE_ID#_ANIM_PERCENT>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Expect each state to hold a numerical value -->
+	<ParametersFn Name="ASOBO_Setup_Numerical_XStates_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Find_Min_Max_Helper">
+				<TOKEN_PREFIX>#STATE_PREFIX#_</TOKEN_PREFIX>
+				<OUT_PARAM_NAME_LAST_ID>LAST_STATE_INDEX</OUT_PARAM_NAME_LAST_ID>
+				<OUT_PARAM_NAME_COUNT>NUM_STATES</OUT_PARAM_NAME_COUNT>
+				<OUT_PARAM_NAME_MIN>MIN_STATE_SETTING</OUT_PARAM_NAME_MIN>
+				<OUT_PARAM_NAME_MAX>MAX_STATE_SETTING</OUT_PARAM_NAME_MAX>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<To>#LAST_STATE_INDEX#</To>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<STATE_SETTING Process="Param">#STATE_PREFIX#_#CUR_ID#</STATE_SETTING>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition NotEmpty="STATE_SETTINGS_T">
+							<True>
+								<STATE_SETTINGS_T>#STATE_SETTING# #STATE_SETTINGS_T#</STATE_SETTINGS_T>
+							</True>
+							<False>
+								<STATE_SETTINGS_T>#STATE_SETTING#</STATE_SETTINGS_T>
+							</False>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<STATE_SETTINGS>#STATE_SETTINGS_T#</STATE_SETTINGS>
+				</Then>
+			</Loop>
+			<STATES_SETTING_POS_TO_PERCENT Process="Float">1 #LAST_STATE_INDEX# /</STATES_SETTING_POS_TO_PERCENT>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+			<IE_INC_ARG_COUNT>1</IE_INC_ARG_COUNT>
+			<IE_DEC_ARG_COUNT>1</IE_DEC_ARG_COUNT>
+			<XSTATE_VALUE_CODE>#IE_GET_STATE# #LAST_STATE_INDEX# /</XSTATE_VALUE_CODE>
+			<IE_SET_CODE>p0 #LAST_STATE_INDEX# * near 0 max #LAST_STATE_INDEX# min #IE_SET_STATE#</IE_SET_CODE>
+			<IE_INC_CODE>#IE_GET_STATE# #LAST_STATE_INDEX# / p0 #STATES_SETTING_POS_TO_PERCENT# * + (&gt;B:#IE_PRESET_ID#_Set)</IE_INC_CODE>
+			<IE_DEC_CODE>#IE_GET_STATE# #LAST_STATE_INDEX# / p0 #STATES_SETTING_POS_TO_PERCENT# * - (&gt;B:#IE_PRESET_ID#_Set)</IE_DEC_CODE>
+			<IE_VALUE_UNITS>Percent over 100</IE_VALUE_UNITS>
+			<Condition Check="NUM_STATES" Match="2">
+				<IE_TOGGLE_CHECK_CODE>(B:#IE_PRESET_ID#, #IE_VALUE_UNITS#) 0 ==</IE_TOGGLE_CHECK_CODE>				
+			</Condition>
+		</Parameters>
+		<Condition NotEmpty="ON_BEFORE_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#ON_BEFORE_SET_CODE# #IE_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Condition NotEmpty="ON_AFTER_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#IE_SET_CODE# #ON_AFTER_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Parameters Type="Default">
+			<SaveParameters ID="Temp_IE_Save">
+				<UseParametersFn Name="ASOBO_Get_IE_XStates_Parameters">
+					<Loop>
+						<Setup>
+							<Param>CUR_ID</Param>
+							<From>0</From>
+							<Inc>1</Inc>
+							<To>#LAST_STATE_INDEX#</To>
+						</Setup>
+						<Do>
+							<Parameters Type="Override">
+								<STATE_SETTING Process="Param">#STATE_PREFIX#_#CUR_ID#</STATE_SETTING>
+							</Parameters>
+							<IE_STATE_#CUR_ID#>#BINDING_PREFIX##STATE_SETTING##BINDING_SUFFIX#</IE_STATE_#CUR_ID#>
+							<IE_STATE_#CUR_ID#_PARAM_0 Process="Float">#CUR_ID# #STATES_SETTING_POS_TO_PERCENT# *</IE_STATE_#CUR_ID#_PARAM_0>
+							<POS_#BINDING_PREFIX##STATE_SETTING##BINDING_SUFFIX#_CHECK>#IE_GET_STATE# #CUR_ID# ==</POS_#BINDING_PREFIX##STATE_SETTING##BINDING_SUFFIX#_CHECK>
+						</Do>
+					</Loop>
+					<IE_TOOLTIP_VALUE>#STATE_SETTINGS# #NUM_STATES# #IE_GET_STATE# case #FORMAT_POSITION_TO_STR# @sprintf</IE_TOOLTIP_VALUE>
+				</UseParametersFn>
+			</SaveParameters>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_Value_Code_Helper">
+				<VALUE_CODE>#XSTATE_VALUE_CODE#</VALUE_CODE>
+			</UseParametersFn>
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<LoadParameters ID="Temp_IE_Save"/>
+				<IE_SET_ARG_COUNT>#IE_SET_ARG_COUNT#</IE_SET_ARG_COUNT>
+				<IE_INC_ARG_COUNT>#IE_INC_ARG_COUNT#</IE_INC_ARG_COUNT>
+				<IE_DEC_ARG_COUNT>#IE_DEC_ARG_COUNT#</IE_DEC_ARG_COUNT>
+				<IE_SET_CODE>#IE_SET_CODE#</IE_SET_CODE>
+				<IE_INC_CODE>#IE_INC_CODE#</IE_INC_CODE>
+				<IE_DEC_CODE>#IE_DEC_CODE#</IE_DEC_CODE>
+				<IE_VALUE_UNITS>#IE_VALUE_UNITS#</IE_VALUE_UNITS>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Setup_Custom_XStates_Parameters">
+		<Parameters Type="Default">
+			<VAR_GET_STATE_SUFFIX>Value</VAR_GET_STATE_SUFFIX>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_GET_STATE_NAME>XMLVAR_#IE_PRESET_ID#_#VAR_GET_STATE_SUFFIX#</VAR_GET_STATE_NAME>
+			<VAR_GET_STATE_SCOPE>O</VAR_GET_STATE_SCOPE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_CHECK_JP</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Get_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>FL_CODE_JP</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<VAR_GET_STATE>#VAR_GET_STATE_SCOPE#:#VAR_GET_STATE_NAME#</VAR_GET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#VAR_GET_STATE_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#VAR_GET_STATE_SCOPE#</VAR_SCOPE>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="#STATE_PREFIX#_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<CUR_STATE Process="Param">#STATE_PREFIX#_#CUR_ID#</CUR_STATE>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Check="POS_#CUR_STATE#_CHECK">
+							<THIS_STATE_CHECK Process="Param">POS_#CUR_STATE#_CHECK</THIS_STATE_CHECK>
+						</Condition>
+						<Condition Check="POS_#CUR_STATE#_CODE">
+							<THIS_STATE_CODE Process="Param">POS_#CUR_STATE#_CODE</THIS_STATE_CODE>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<Condition Check="THIS_STATE_CHECK">
+							<THIS_STATE_CHECK>#THIS_STATE_CHECK# if{ #CUR_ID# sp0 g#FL_CHECK_JP# }</THIS_STATE_CHECK>
+						</Condition>
+						<Condition Check="THIS_STATE_CODE">
+							<THIS_STATE_CODE>l0 #CUR_ID# == if{ #THIS_STATE_CODE# g#FL_CODE_JP# }</THIS_STATE_CODE>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition Check="THIS_STATE_CHECK">
+							<Condition Check="IE_GET_STATE_T">
+								<True>
+									<IE_GET_STATE_T>#IE_GET_STATE_T# #THIS_STATE_CHECK#</IE_GET_STATE_T>
+								</True>
+								<False>
+									<IE_GET_STATE_T>#THIS_STATE_CHECK#</IE_GET_STATE_T>
+								</False>
+							</Condition>
+						</Condition>
+						<Condition Check="THIS_STATE_CODE">
+							<Condition Check="IE_SET_STATE_T">
+								<True>
+									<IE_SET_STATE_T>#IE_SET_STATE_T# #THIS_STATE_CODE#</IE_SET_STATE_T>
+								</True>
+								<False>
+									<IE_SET_STATE_T>#THIS_STATE_CODE#</IE_SET_STATE_T>
+								</False>
+							</Condition>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<Condition NotEmpty="IE_GET_STATE_T">
+						<IE_GET_STATE>#IE_GET_STATE_T# :#FL_CHECK_JP# l0 (&gt;#VAR_GET_STATE#) (#VAR_GET_STATE#)</IE_GET_STATE>
+					</Condition>
+					<Condition NotEmpty="IE_SET_STATE_T">
+						<IE_SET_STATE>s0 (#VAR_GET_STATE#) != if{ #IE_SET_STATE_T# } :#FL_CODE_JP#</IE_SET_STATE>						
+					</Condition>
+					<LAST_STATE_INDEX Process="Int">#CUR_ID# 1 -</LAST_STATE_INDEX>
+					<NUM_STATES>#CUR_ID#</NUM_STATES>
+				</Then>
+			</Loop>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+			<IE_INC_ARG_COUNT>1</IE_INC_ARG_COUNT>
+			<IE_DEC_ARG_COUNT>1</IE_DEC_ARG_COUNT>
+			<IE_SET_CODE>p0 0 max #LAST_STATE_INDEX# min #IE_SET_STATE#</IE_SET_CODE>
+			<IE_INC_CODE>(#VAR_GET_STATE#) p0 + (&gt;B:#IE_PRESET_ID#_Set)</IE_INC_CODE>
+			<IE_DEC_CODE>(#VAR_GET_STATE#) p0 - (&gt;B:#IE_PRESET_ID#_Set)</IE_DEC_CODE>
+			<IE_GET_STATE_AS_VALUE>#IE_GET_STATE#</IE_GET_STATE_AS_VALUE>
+			<Condition Check="NUM_STATES" Match="2">
+				<True>
+					<IE_VALUE_UNITS>Bool</IE_VALUE_UNITS>		
+				</True>
+				<False>
+					<IE_VALUE_UNITS>Number</IE_VALUE_UNITS>					
+				</False>
+			</Condition>
+		</Parameters>
+		<Condition NotEmpty="ON_BEFORE_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#ON_BEFORE_SET_CODE# #IE_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Condition NotEmpty="ON_AFTER_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#IE_SET_CODE# #ON_AFTER_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Append_Value_Code_Helper">
+				<VALUE_CODE>#IE_GET_STATE_AS_VALUE#</VALUE_CODE>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Check="NUM_STATES" Match="2">
+				<IE_TOGGLE_CHECK_CODE>(B:#IE_PRESET_ID#, #IE_VALUE_UNITS#) !</IE_TOGGLE_CHECK_CODE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="Temp_IE_Save">
+				<UseParametersFn Name="ASOBO_Get_IE_XStates_Parameters">
+					<Loop>
+						<Setup>
+							<Param>CUR_ID</Param>
+							<From>0</From>
+							<Inc>1</Inc>
+							<To>#LAST_STATE_INDEX#</To>
+						</Setup>
+						<Do>
+							<Parameters Type="Override">
+								<CUR_STATE Process="Param">#STATE_PREFIX#_#CUR_ID#</CUR_STATE>
+							</Parameters>
+							<IE_STATE_#CUR_ID#>#BINDING_PREFIX##CUR_STATE##BINDING_SUFFIX#</IE_STATE_#CUR_ID#>
+							<IE_STATE_#CUR_ID#_PARAM_0>#CUR_ID#</IE_STATE_#CUR_ID#_PARAM_0>
+							<POS_#CUR_STATE#_CHECK>(B:#IE_PRESET_ID#, #IE_VALUE_UNITS#) #CUR_ID# ==</POS_#CUR_STATE#_CHECK>
+							<POS_#CUR_STATE#_CODE/>
+						</Do>
+					</Loop>
+				</UseParametersFn>
+			</SaveParameters>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<LoadParameters ID="Temp_IE_Save"/>
+				<IE_SET_ARG_COUNT>#IE_SET_ARG_COUNT#</IE_SET_ARG_COUNT>
+				<IE_INC_ARG_COUNT>#IE_INC_ARG_COUNT#</IE_INC_ARG_COUNT>
+				<IE_DEC_ARG_COUNT>#IE_DEC_ARG_COUNT#</IE_DEC_ARG_COUNT>
+				<IE_SET_CODE>#IE_SET_CODE#</IE_SET_CODE>
+				<IE_INC_CODE>#IE_INC_CODE#</IE_INC_CODE>
+				<IE_DEC_CODE>#IE_DEC_CODE#</IE_DEC_CODE>
+				<IE_VALUE_UNITS>#IE_VALUE_UNITS#</IE_VALUE_UNITS>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- IN: PLOAD_CONFIG : the PFN creating the configuration -->
+	<!-- IN: IE_PARAMS (Where to save the data) -->
+	<ParametersFn Name="ASOBO_Setup_Drag_Axis_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_CONFIG</SAVED_PARAMETERS>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="VALUE_TYPE">
+				<Case Value="PERCENT">
+					<MIN_VALUE>0</MIN_VALUE>
+					<MAX_VALUE>100</MAX_VALUE>
+					<IE_INCREMENT>5</IE_INCREMENT>
+					<IE_VALUE_UNITS>percent</IE_VALUE_UNITS>
+				</Case>
+				<Case Value="U16K">
+					<MIN_VALUE>0</MIN_VALUE>
+					<MAX_VALUE>@16k</MAX_VALUE>
+					<IE_INCREMENT Process="Int">@16k 20 /</IE_INCREMENT>
+					<IE_VALUE_UNITS>position 16k</IE_VALUE_UNITS>
+				</Case>
+				<Case Value="S16K">
+					<MIN_VALUE>-@16k</MIN_VALUE>
+					<MAX_VALUE>@16k</MAX_VALUE>
+					<IE_INCREMENT Process="Int">@16k 20 /</IE_INCREMENT>
+					<IE_VALUE_UNITS>position 16k</IE_VALUE_UNITS>
+				</Case>
+				<Case Value="M16K">
+					<!-- When you have a value in S16k but not occupying the full range on both sides -->
+					<MIN_VALUE>-@16k</MIN_VALUE>
+					<MAX_VALUE>@16k</MAX_VALUE>
+					<IE_INCREMENT>5</IE_INCREMENT><!-- in percent -->
+					<IE_VALUE_UNITS>position 16k</IE_VALUE_UNITS>
+				</Case>
+				<Default>
+					<IE_INCREMENT>1</IE_INCREMENT>
+					<IE_VALUE_UNITS/>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="MIN_VALUE"/>
+						<Arg Check="MAX_VALUE"/>
+					</And>
+				</Test>
+				<True>
+					<CLAMP_VALUE>#MIN_VALUE# max #MAX_VALUE# min</CLAMP_VALUE>
+					<UseParametersFn Name="ASOBO_Get_MIN_MAX_Ratios_Helper"/>
+				</True>
+				<False>
+					<NO_MIN_MAX_VALUE/>
+				</False>
+			</Condition>
+		</Parameters>
+		<Switch Param="INTERACTION_TYPE_VARIANT">
+			<Case Value="Infinite">
+				<Parameters Type="Default">
+					<INFINITE_ANIM_VAR_NAME>XMLVAR_#IE_PRESET_ID#_Infinite_Anim_Var</INFINITE_ANIM_VAR_NAME>
+					<INFINITE_ANIM_VAR_SCOPE>O</INFINITE_ANIM_VAR_SCOPE>
+					<Condition Check="NO_MIN_MAX_VALUE">
+						<True>
+							<DEG_ROTATION_PER_IE_INCREMENT>10</DEG_ROTATION_PER_IE_INCREMENT>
+						</True>
+						<False>
+							<FULL_ROTATION_FOR_FULL_RANGE>5</FULL_ROTATION_FOR_FULL_RANGE>
+						</False>
+					</Condition>
+				</Parameters>
+				<Parameters Type="Default">
+					<INFINITE_ANIM_VAR>#INFINITE_ANIM_VAR_SCOPE#:#INFINITE_ANIM_VAR_NAME#</INFINITE_ANIM_VAR>
+					<Condition Check="NO_MIN_MAX_VALUE">
+						<True>
+							<INFINITE_ANIM_SCALE_FACTOR Process="Float">#DEG_ROTATION_PER_IE_INCREMENT# #IE_INCREMENT# /</INFINITE_ANIM_SCALE_FACTOR>
+						</True>
+						<False>
+							<INFINITE_ANIM_SCALE_FACTOR Process="Float">#FULL_ROTATION_FOR_FULL_RANGE# 360 *</INFINITE_ANIM_SCALE_FACTOR>							
+						</False>
+					</Condition>
+				</Parameters>
+				<Parameters Type="Default">
+					<GET_INFINITE_ANIM_VAR_VALUE_DEG>(#INFINITE_ANIM_VAR#)</GET_INFINITE_ANIM_VAR_VALUE_DEG>
+					<INC_INFINITE_ANIM_VAR_VALUE_DEG>sp0 (#INFINITE_ANIM_VAR#) l0 #INFINITE_ANIM_SCALE_FACTOR# * + dnor (&gt;#INFINITE_ANIM_VAR#)</INC_INFINITE_ANIM_VAR_VALUE_DEG>
+				</Parameters>
+			</Case>
+		</Switch>
+		<Switch Param="VALUE_TYPE">
+			<Case Value="M16K">
+				<Parameters Type="Override">
+					<IE_INCREMENT Process="Float">#IE_INCREMENT# #RATIO_POSITIVE# *</IE_INCREMENT>
+				</Parameters>
+			</Case>
+		</Switch>
+		<Parameters Type="Default">
+			<IE_INCREMENT_INC>#IE_INCREMENT#</IE_INCREMENT_INC>
+			<IE_INCREMENT_DEC>#IE_INCREMENT#</IE_INCREMENT_DEC>
+		</Parameters>
+		<Parameters Type="Default">
+			<SCALED_IE_INCREMENT_INC>p0 #IE_INCREMENT_INC# *</SCALED_IE_INCREMENT_INC>
+			<SCALED_IE_INCREMENT_DEC>p0 #IE_INCREMENT_DEC# *</SCALED_IE_INCREMENT_DEC>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_SET_ARG_COUNT>1</IE_SET_ARG_COUNT>
+			<IE_INC_ARG_COUNT>1</IE_INC_ARG_COUNT>
+			<IE_DEC_ARG_COUNT>1</IE_DEC_ARG_COUNT>
+			<Condition>
+				<Test>
+					<And>
+						<Arg NotEmpty="IE_SET_STATE"/>
+						<Arg NotEmpty="IE_GET_STATE"/>
+					</And>
+				</Test>
+				<True>
+					<Switch Param="VALUE_TYPE">
+						<Case Value="M16K">
+							<IE_SET_CODE>p0 #FULL_RANGE# * #MIN_VALUE# + #CLAMP_VALUE# #IE_SET_STATE#</IE_SET_CODE>
+							<IE_INC_TO_SETTABLE_VALUE>#IE_GET_STATE# #MIN_VALUE# - #FULL_RANGE# / #SCALED_IE_INCREMENT_INC# 100 / +</IE_INC_TO_SETTABLE_VALUE>
+							<IE_DEC_TO_SETTABLE_VALUE>#IE_GET_STATE# #MIN_VALUE# - #FULL_RANGE# / #SCALED_IE_INCREMENT_DEC# 100 / -</IE_DEC_TO_SETTABLE_VALUE>
+							<IE_VALUE_CODE>#IE_GET_STATE# #MIN_VALUE# - #FULL_RANGE# / @16K *</IE_VALUE_CODE>
+						</Case>
+						<Case Value="NUMBER">
+							<Condition Check="NO_MIN_MAX_VALUE">
+								<True>
+									<Condition NotEmpty="CLAMP_VALUE">
+										<True>
+											<IE_SET_CODE>p0 #CLAMP_VALUE# #IE_SET_STATE#</IE_SET_CODE>
+										</True>
+										<False>
+											<IE_SET_CODE>p0 #IE_SET_STATE#</IE_SET_CODE>
+										</False>
+									</Condition>
+									<IE_INC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_INC# +</IE_INC_TO_SETTABLE_VALUE>
+									<IE_DEC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_DEC# -</IE_DEC_TO_SETTABLE_VALUE>
+									<IE_VALUE_CODE>#IE_GET_STATE#</IE_VALUE_CODE>
+									<GET_IE_VALUE>#IE_GET_STATE#</GET_IE_VALUE>
+								</True>
+								<False>
+									<IE_SET_CODE>p0 #FULL_RANGE# * #MIN_VALUE# + #CLAMP_VALUE# #IE_SET_STATE#</IE_SET_CODE>
+									<IE_INC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_INC# + #MIN_VALUE# - #FULL_RANGE# /</IE_INC_TO_SETTABLE_VALUE>
+									<IE_DEC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_DEC# - #MIN_VALUE# - #FULL_RANGE# /</IE_DEC_TO_SETTABLE_VALUE>
+									<IE_VALUE_CODE>#IE_GET_STATE# #CLAMP_VALUE#</IE_VALUE_CODE>
+									<GET_IE_VALUE_AS_PERCENT_OVER_100>(B:#IE_PRESET_ID#) #MIN_VALUE# - #FULL_RANGE# /</GET_IE_VALUE_AS_PERCENT_OVER_100>
+								</False>
+							</Condition>
+						</Case>
+						<Default>
+							<Condition Check="NO_MIN_MAX_VALUE">
+								<True>
+									<Condition NotEmpty="CLAMP_VALUE">
+										<True>
+											<IE_SET_CODE>p0 #CLAMP_VALUE# #IE_SET_STATE#</IE_SET_CODE>
+										</True>
+										<False>
+											<IE_SET_CODE>p0 #IE_SET_STATE#</IE_SET_CODE>
+										</False>
+									</Condition>
+									<IE_INC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_INC# +</IE_INC_TO_SETTABLE_VALUE>
+									<IE_DEC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_DEC# -</IE_DEC_TO_SETTABLE_VALUE>
+									<Switch Param="INTERACTION_TYPE_VARIANT">
+										<Case Value="Infinite">
+											<IE_VALUE_CODE>#GET_INFINITE_ANIM_VAR_VALUE_DEG#</IE_VALUE_CODE>
+										</Case>
+										<Default>
+											<IE_VALUE_CODE>#IE_GET_STATE#</IE_VALUE_CODE>									
+										</Default>
+									</Switch>
+									<GET_IE_VALUE>#IE_GET_STATE#</GET_IE_VALUE>
+								</True>
+								<False>
+									<IE_SET_CODE>p0 #MAX_VALUE# * #CLAMP_VALUE# #IE_SET_STATE#</IE_SET_CODE>
+									<IE_INC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_INC# + #MAX_VALUE# /</IE_INC_TO_SETTABLE_VALUE>
+									<IE_DEC_TO_SETTABLE_VALUE>#IE_GET_STATE# #SCALED_IE_INCREMENT_DEC# - #MAX_VALUE# /</IE_DEC_TO_SETTABLE_VALUE>
+									<IE_VALUE_CODE>#IE_GET_STATE# #CLAMP_VALUE#</IE_VALUE_CODE>							
+								</False>
+							</Condition>
+						</Default>
+					</Switch>
+				</True>
+			</Condition>
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="PLOAD_AXIS_CURVE"/>
+						<Arg Check="PLOAD_AXIS_CURVE_CONFIG"/>
+					</And>
+				</Test>
+				<True>
+					<SaveParameters ID="#IE_PRESET_ID_UC#_CURVE">
+						<LoadParameters ID="#PLOAD_AXIS_CURVE#"/>
+					</SaveParameters>
+					<SaveParameters ID="#IE_PRESET_ID_UC#_CURVE_CONFIG">
+						<LoadParameters ID="#PLOAD_AXIS_CURVE_CONFIG#"/>
+					</SaveParameters>
+					<LoadParameters ID="#PLOAD_AXIS_CURVE_CONFIG#"/>
+				</True>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="ON_BEFORE_INC_CODE_VALUE_SET">
+				<IE_INC_TO_SETTABLE_VALUE>#IE_INC_TO_SETTABLE_VALUE# #ON_BEFORE_INC_CODE_VALUE_SET#</IE_INC_TO_SETTABLE_VALUE>
+			</Condition>
+			<Condition NotEmpty="ON_BEFORE_DEC_CODE_VALUE_SET">
+				<IE_DEC_TO_SETTABLE_VALUE>#IE_DEC_TO_SETTABLE_VALUE# #ON_BEFORE_DEC_CODE_VALUE_SET#</IE_DEC_TO_SETTABLE_VALUE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<IE_INC_CODE>#IE_INC_TO_SETTABLE_VALUE# (&gt;B:#IE_PRESET_ID#_Set)</IE_INC_CODE>
+			<IE_DEC_CODE>#IE_DEC_TO_SETTABLE_VALUE# (&gt;B:#IE_PRESET_ID#_Set)</IE_DEC_CODE>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="ON_AFTER_INC_CODE_VALUE_SET">
+				<IE_INC_CODE>#IE_INC_CODE# #ON_AFTER_INC_CODE_VALUE_SET#</IE_INC_CODE>
+			</Condition>
+			<Condition NotEmpty="ON_AFTER_DEC_CODE_VALUE_SET">
+				<IE_DEC_CODE>#IE_DEC_CODE# #ON_AFTER_DEC_CODE_VALUE_SET#</IE_DEC_CODE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="INTERACTION_TYPE_VARIANT">
+				<Case Value="Infinite">
+					<Condition Check="IE_GET_STATE">
+						<Condition Check="NO_MIN_MAX_VALUE">
+							<True>
+								<IE_SET_CODE>p0 #IE_GET_STATE# - #INC_INFINITE_ANIM_VAR_VALUE_DEG# #IE_SET_CODE#</IE_SET_CODE>							
+							</True>
+							<False>
+								<IE_SET_CODE>p0 #FULL_RANGE# * #IE_GET_STATE# #MIN_VALUE# - - #FULL_RANGE# / #INC_INFINITE_ANIM_VAR_VALUE_DEG# #IE_SET_CODE#</IE_SET_CODE>	
+							</False>
+						</Condition>
+					</Condition>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Condition NotEmpty="ON_BEFORE_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#ON_BEFORE_SET_CODE# #IE_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Condition NotEmpty="ON_AFTER_SET_CODE">
+			<Parameters Type="Override">
+				<IE_SET_CODE>#IE_SET_CODE# #ON_AFTER_SET_CODE#</IE_SET_CODE>
+			</Parameters>
+		</Condition>
+		<Parameters Type="Override">
+			<Condition>
+				<Test>
+					<And>
+						<Arg Check="PLOAD_AXIS_CURVE"/>
+						<Arg Check="PLOAD_AXIS_CURVE_CONFIG"/>
+					</And>
+				</Test>
+				<True>
+					<Loop>
+						<Setup>
+							<Value>POINT_ID</Value>
+							<Parameters>
+								<LoadParameters ID="#PLOAD_AXIS_CURVE#"/>
+							</Parameters>
+						</Setup>
+						<Do>
+							<Parameters Type="Override" Lifetime="Loop">
+								<UseParametersFn Name="ASOBO_Increment_ID_Helper">
+									<OUT_PARAM_ID_NAME>POINT_INDEX</OUT_PARAM_ID_NAME>
+								</UseParametersFn>
+							</Parameters>
+							<Parameters Type="Override">
+								<POINT_IE_PERCENT_SET Process="Param">#POINT_ID#_IE_PERCENT_SET</POINT_IE_PERCENT_SET>
+							</Parameters>
+							<SaveParameters ID="#IE_PARAMS#" Append="Default">
+								<BINDING_SET_ALIAS_ID_#POINT_INDEX#>#POINT_ID#</BINDING_SET_ALIAS_ID_#POINT_INDEX#>
+								<BINDING_SET_ALIAS_ID_#POINT_INDEX#_PARAM_0 Process="Float">#POINT_IE_PERCENT_SET# 100 /</BINDING_SET_ALIAS_ID_#POINT_INDEX#_PARAM_0>
+							</SaveParameters>
+						</Do>
+					</Loop>
+				</True>
+			</Condition>
+			<SaveParameters ID="Temp_IE_Save">
+				<UseParametersFn Name="ASOBO_Get_Drag_Axis_Parameters"/>
+			</SaveParameters>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="#IE_PARAMS#" Append="Default">
+				<LoadParameters ID="Temp_IE_Save"/>
+				<IE_SET_ARG_COUNT>#IE_SET_ARG_COUNT#</IE_SET_ARG_COUNT>
+				<IE_INC_ARG_COUNT>#IE_INC_ARG_COUNT#</IE_INC_ARG_COUNT>
+				<IE_DEC_ARG_COUNT>#IE_DEC_ARG_COUNT#</IE_DEC_ARG_COUNT>
+				<IE_SET_CODE>#IE_SET_CODE#</IE_SET_CODE>
+				<IE_INC_CODE>#IE_INC_CODE#</IE_INC_CODE>
+				<IE_DEC_CODE>#IE_DEC_CODE#</IE_DEC_CODE>
+				<IE_VALUE_CODE>#IE_VALUE_CODE#</IE_VALUE_CODE>
+				<IE_VALUE_UNITS>#IE_VALUE_UNITS#</IE_VALUE_UNITS>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Get_Action_Config
+		@Brief Format Action parameters based on the interaction type
+		@Param ACTION_TYPE_EVENT_REL type of the relative (inc, dec) events
+		@Param ACTION_TYPE_EVENT_ABS type of the absolute (set) events
+		@Return configured actions
+	-->
+	<ParametersFn Name="ASOBO_Get_Action_Config">
+		<Parameters Type="Default">
+			<ACTION_TYPE_EVENT_REL>DIGITAL</ACTION_TYPE_EVENT_REL>
+			<Switch Param="INTERACTION_VARIANT">
+				<Case Value="DRAG_AXIS">
+					<ACTION_TYPE_EVENT_ABS>AXIS</ACTION_TYPE_EVENT_ABS>
+				</Case>
+				<Default>
+					<ACTION_TYPE_EVENT_ABS>DIGITAL</ACTION_TYPE_EVENT_ABS>
+				</Default>
+			</Switch>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Configure_Set_Action_Helper">
+				<ACTION_TYPE>#ACTION_TYPE_EVENT_ABS#</ACTION_TYPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Configure_Inc_Action_Helper">
+				<ACTION_TYPE>#ACTION_TYPE_EVENT_REL#</ACTION_TYPE>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Configure_Dec_Action_Helper">
+				<ACTION_TYPE>#ACTION_TYPE_EVENT_REL#</ACTION_TYPE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Toggle_Action_Parameters">
+		<Parameters Type="Default">
+			<TOGGLE_ALIAS_ID>Toggle</TOGGLE_ALIAS_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<TOGGLE_ALIAS_ID_UC Process="String">'#TOGGLE_ALIAS_ID#' uc</TOGGLE_ALIAS_ID_UC>
+		</Parameters>
+		<ReturnParameters>
+			<TOGGLE_ACTION_TYPE>DIGITAL</TOGGLE_ACTION_TYPE>
+			<TOGGLE_ALIAS_ID>#TOGGLE_ALIAS_ID#</TOGGLE_ALIAS_ID>
+			<Condition Valid="DEFAULT_ACTION_TT_NAME">
+				<UseParametersFn Name="ASOBO_Default_TT_Name_Helper">
+					<OUT_PARAM_NAME>TOGGLE_ACTION_TT_NAME</OUT_PARAM_NAME>
+					<ACTION_NAME>#IE_PRESET_ID_UC#_#TOGGLE_ALIAS_ID_UC#</ACTION_NAME>
+				</UseParametersFn>
+			</Condition>
+			<Condition Valid="DEFAULT_ACTION_TT_DESCRIPTION">
+				<TOGGLE_ACTION_TT_DESCRIPTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_DESCRIPTION_PREFIX##IE_PRESET_ID_UC#_#TOGGLE_ALIAS_ID_UC##ACTION_TT_DESCRIPTION_SUFFIX#</TOGGLE_ACTION_TT_DESCRIPTION>
+			</Condition>
+			<Condition Valid="DEFAULT_ACTION_TT_FUNCTION">
+				<Condition Valid="DEFAULT_ACTION_TT_FUNCTION_TO_BUILTIN_FUNC">
+					<True>
+						<TOGGLE_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.FUNCTION_TOGGLE</TOGGLE_ACTION_TT_FUNCTION>
+					</True>
+					<False>
+						<TOGGLE_ACTION_TT_FUNCTION>#DEFAULT_STATES_ACTION_TT_PACKAGE#.#ACTION_TT_FUNCTION_PREFIX##IE_PRESET_ID_UC#_#TOGGLE_ALIAS_ID_UC##ACTION_TT_FUNCTION_SUFFIX#</TOGGLE_ACTION_TT_FUNCTION>
+					</False>
+				</Condition>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

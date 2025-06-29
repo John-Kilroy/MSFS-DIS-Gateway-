@@ -1,0 +1,47 @@
+<ModelBehaviors>
+	<!-- ############################### PARAMETERS FN ################################ -->
+	<!-- ############################################################################## -->
+	<!-- @DOC FUNCTION ASOBO_Gauge_Animation_Parameters
+		@Brief Create an animation given a GAUGE_VALUE, GAUGE_MIN and GAUGE_MAX
+		@Param GAUGE_VALUE Dynamic value driving the gauge needle animation
+		@Param GAUGE_MIN Minimum value displayed
+		@Param GAUGE_MAX Maximum value displayed
+		@Param GAUGE_MID Value at the half point of the gauge (only use if you're dealing with an asymmetric interpolation for value above and below the MID value)
+		@Param GET_GAUGE_VALUE Function returning a GAUGE_VALUE, GAUGE_MIN and GAUGE_MAX
+		@Return ANIM_CODE Animation code for a gauge in percent
+	-->
+	<ParametersFn Name="ASOBO_Gauge_Animation_Parameters">
+		<Parameters Type="Override">
+			<Condition Check="GET_GAUGE_VALUE">
+				<UseParametersFn Name="#GET_GAUGE_VALUE#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<GAUGE_VALUE_CLAMPED>#GAUGE_VALUE# #GAUGE_MIN# max #GAUGE_MAX# min</GAUGE_VALUE_CLAMPED>
+			<Condition NotEmpty="GAUGE_MID">
+				<GAUGE_UPPER_RANGE Process="Float">#GAUGE_MAX# #GAUGE_MID# -</GAUGE_UPPER_RANGE>
+				<GAUGE_LOWER_RANGE Process="Float">#GAUGE_MID# #GAUGE_MIN# -</GAUGE_LOWER_RANGE>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition NotEmpty="GAUGE_MID">
+				<True>
+					<GAUGE_VALUE_PERCENT>
+						#GAUGE_VALUE_CLAMPED# s0 #GAUGE_MID# &gt; if{
+							#GAUGE_VALUE_CLAMPED# #GAUGE_MID# - #GAUGE_UPPER_RANGE# / 50 * 50 +
+						} els{ 
+							50 #GAUGE_MID# #GAUGE_VALUE_CLAMPED# - #GAUGE_LOWER_RANGE# / 50 * -
+						}
+					</GAUGE_VALUE_PERCENT>
+				</True>
+				<False>
+					<GAUGE_VALUE_PERCENT>#GAUGE_VALUE_CLAMPED# #GAUGE_MIN# - #GAUGE_MAX# #GAUGE_MIN# - / 100 *</GAUGE_VALUE_PERCENT>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<ANIM_CODE>#GAUGE_VALUE_PERCENT#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

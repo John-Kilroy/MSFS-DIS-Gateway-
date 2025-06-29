@@ -1,0 +1,276 @@
+<ModelBehaviors>
+	<!-- ################################## COMMON #################################### -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Wiper_Animation_Parameters">
+		<Parameters Type="Default">
+			<GET_WIPER_POSITION>(L:1:XMLVAR_WIPER_POSITION)</GET_WIPER_POSITION>
+			<POSITION_SCALE>100</POSITION_SCALE>
+		</Parameters>
+		<Parameters Type="Default">
+			<FULL_WIPE_DISTANCE Process="Int">#POSITION_SCALE# 2 /</FULL_WIPE_DISTANCE>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_CODE>100 #GET_WIPER_POSITION# #FULL_WIPE_DISTANCE# - abs #FULL_WIPE_DISTANCE# / 100 * -</ANIM_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Nozzle_Animation_Parameters">
+		<Parameters Type="Default">
+			<ENGINE_ID>1</ENGINE_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_NOZZLE_POSITION>(A:TURB ENG PRIMARY NOZZLE PERCENT:#ENGINE_ID#, Percent)</GET_NOZZLE_POSITION>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_CODE>#GET_NOZZLE_POSITION#</ANIM_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_LaunchBar_Animation_Parameters">
+		<Parameters Type="Default">
+			<GET_LAUNCHBAR_POSITION>(A:LAUNCHBAR POSITION, Percent)</GET_LAUNCHBAR_POSITION>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_CODE>#GET_LAUNCHBAR_POSITION#</ANIM_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Door_Animation_Parameters">
+		<Parameters Type="Default">
+			<ID>0</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<DOOR_SIMVAR>INTERACTIVE POINT OPEN:#ID#</DOOR_SIMVAR>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_DOOR_POS>(A:#DOOR_SIMVAR#, Percent)</GET_DOOR_POS>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_CODE>#GET_DOOR_POS#</ANIM_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Dirt_Visibility_Parameters">
+		<Parameters Type="Default">
+			<Switch Param="TYPE">
+				<Case Value="REGULAR">
+					<DIRT_SIMVAR>REGULAR DIRT PCT</DIRT_SIMVAR>
+				</Case>
+				<Case Value="RUNWAY">
+					<DIRT_SIMVAR>RUNWAY DIRT PCT</DIRT_SIMVAR>
+				</Case>
+				<Case Value="MUD">
+					<DIRT_SIMVAR>MUD DIRT PCT</DIRT_SIMVAR>
+				</Case>
+				<Case Value="LEAKS">
+					<DIRT_SIMVAR>LEAKS DIRT PCT</DIRT_SIMVAR>
+				</Case>
+				<Case Value="DUST">
+					<DIRT_SIMVAR>DUST DIRT PCT</DIRT_SIMVAR>
+				</Case>
+				<Case Value="SCRATCHES">
+					<DIRT_SIMVAR>SCRATCHES DIRT PCT</DIRT_SIMVAR>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch Param="ADDITIONAL_CONDITION">
+				<Case Value="IS_GEAR_FLOATS">
+					<ADDITIONAL_CONDITION>(A:IS GEAR FLOATS, Boolean)</ADDITIONAL_CONDITION>
+				</Case>
+				<Case Value="IS_GEAR_NOT_FLOATS">
+					<ADDITIONAL_CONDITION>(A:IS GEAR FLOATS, Boolean) !</ADDITIONAL_CONDITION>
+				</Case>
+				<Case Value="IS_GEAR_WHEELS">
+					<ADDITIONAL_CONDITION>(A:IS GEAR WHEELS, Boolean)</ADDITIONAL_CONDITION>
+				</Case>
+				<Case Value="IS_GEAR_NOT_WHEELS">
+					<ADDITIONAL_CONDITION>(A:IS GEAR WHEELS, Boolean) !</ADDITIONAL_CONDITION>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_DIRT_LEVEL>(A:#DIRT_SIMVAR#, Percent over 100)</GET_DIRT_LEVEL>
+		</Parameters>
+		<Parameters Type="Default">
+			<VISIBILITY_CODE>#GET_DIRT_LEVEL#</VISIBILITY_CODE>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition NotEmpty="ADDITIONAL_CONDITION">
+				<VISIBILITY_CODE>#VISIBILITY_CODE# #ADDITIONAL_CONDITION# *</VISIBILITY_CODE>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<VISIBILITY_CODE>#VISIBILITY_CODE#</VISIBILITY_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Helicraft_Yaw_String_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Wind_Parameters">
+				<UNITS_RELATIVE_WIND_VELOCITY>feet per second</UNITS_RELATIVE_WIND_VELOCITY>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Aircraft_Forces_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_DISPLACEMENT>600</ANIM_DISPLACEMENT>
+			<MIN_AIRSPEED>9</MIN_AIRSPEED>
+			<MAX_AIRSPEED>80</MAX_AIRSPEED>
+			<EXTENDED_AIRSPEED>10</EXTENDED_AIRSPEED>
+			<AIRSPEED_ANIM_FACTOR>0.1</AIRSPEED_ANIM_FACTOR>
+			<ANGLE_FORWARD_FACTOR>0.5</ANGLE_FORWARD_FACTOR>
+			<VAR_SCOPE>O</VAR_SCOPE>
+			<VAR_LR_END_NAME>XMLVAR_YAW_STRING_L_R_END</VAR_LR_END_NAME>
+			<VAR_SPEED_FACTOR_NAME>XMLVAR_YAW_STRING_SPEED_FACTOR</VAR_SPEED_FACTOR_NAME>
+			<VAR_EXTENDED_NAME>XMLVAR_YAW_STRING_EXTENDED</VAR_EXTENDED_NAME>
+			<VAR_DIRECTION_NAME>XMLVAR_YAW_STRING_DIRECTION</VAR_DIRECTION_NAME>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_LR_END>#VAR_SCOPE#:#VAR_LR_END_NAME#</VAR_LR_END>
+			<VAR_SPEED_FACTOR>#VAR_SCOPE#:#VAR_SPEED_FACTOR_NAME#</VAR_SPEED_FACTOR>
+			<VAR_EXTENDED>#VAR_SCOPE#:#VAR_EXTENDED_NAME#</VAR_EXTENDED>
+			<VAR_DIRECTION>#VAR_SCOPE#:#VAR_DIRECTION_NAME#</VAR_DIRECTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<REVERSED_ANGLE_FORWARD_FACTOR Process="Float">1 #ANGLE_FORWARD_FACTOR# -</REVERSED_ANGLE_FORWARD_FACTOR>
+		</Parameters>
+		<Parameters Type="Default">
+			<YAW_STRING_ROTATION_ANIMATION>
+				(#VAR_EXTENDED#) 0 &gt; if{
+					#GET_AIRSPEED_TRUE# #MAX_AIRSPEED# / 1 min #REVERSED_ANGLE_FORWARD_FACTOR# * sp0
+					#GET_RELATIVE_WIND_VELOCITY_BODY_X# #GET_RELATIVE_WIND_VELOCITY_BODY_Z# l0 * atg2 rddg dnor (&gt;#VAR_DIRECTION#)
+				} els{
+					#GET_AIRSPEED_TRUE# #MAX_AIRSPEED# / 1 min #REVERSED_ANGLE_FORWARD_FACTOR# * sp0
+					#GET_RELATIVE_WIND_VELOCITY_BODY_X# s2 0 l2 abs 0.1 &gt; ? #GET_RELATIVE_WIND_VELOCITY_BODY_Z# abs l0 * atg2 rddg dnor sp0
+					l0 (#VAR_DIRECTION#) - abs 10 &gt; if{ l0 (&gt;#VAR_DIRECTION#) }
+				} (#VAR_DIRECTION#)
+			</YAW_STRING_ROTATION_ANIMATION>
+			<YAW_STRING_L_R_END_ANIMATION>
+				#GET_AIRSPEED_TRUE# #GET_AMBIENT_WIND_VELOCITY# max s1 #MIN_AIRSPEED# &gt; if{ 
+					1 #GET_AIRSPEED_TRUE# #GET_AMBIENT_WIND_VELOCITY# max #MIN_AIRSPEED# - 0 max #MAX_AIRSPEED# / 1 #AIRSPEED_ANIM_FACTOR# - min 0 max - (&gt;#VAR_SPEED_FACTOR#)
+					(#VAR_LR_END#) (#VAR_SPEED_FACTOR#) #ANIM_DISPLACEMENT# @E_SimulationDeltaTime * * rand 2 * 1 - * + 100 pmod (&gt;#VAR_LR_END#)
+				}  els{ 
+					rand 0.01 &gt; if{ (#VAR_LR_END#) rand 2 * 1 - + 100 pmod } els{ (#VAR_LR_END#) } (&gt;#VAR_LR_END#) 
+				} (#VAR_LR_END#)
+			</YAW_STRING_L_R_END_ANIMATION>
+			<YAW_STRING_IDLE_TO_STAND_ANIMATION>
+				#GET_AIRSPEED_TRUE# #GET_AMBIENT_WIND_VELOCITY# max #MIN_AIRSPEED# max #EXTENDED_AIRSPEED# min #MIN_AIRSPEED# - 100 * (&gt;#VAR_EXTENDED#) (#VAR_EXTENDED#)
+			</YAW_STRING_IDLE_TO_STAND_ANIMATION>
+			<YAW_STRING_L_R_ANIMATION>
+				(#VAR_EXTENDED#) 0 &gt; if{ 
+					#GET_ROTATION_VELOCITY_BODY_Z# -1 * 1 min -1 max 1 + 50 * }
+				els{
+					(#VAR_DIRECTION#) s0 90 pmod 45 - abs 45 / 50 * s1
+					l0 0 180 rng if{ 100 l1 - } els{ l1 }
+				}
+			</YAW_STRING_L_R_ANIMATION>
+		</Parameters>
+		<ReturnParameters>
+			<YAW_STRING_ROTATION_ANIMATION>#YAW_STRING_ROTATION_ANIMATION#</YAW_STRING_ROTATION_ANIMATION>
+			<YAW_STRING_L_R_END_ANIMATION>#YAW_STRING_L_R_END_ANIMATION#</YAW_STRING_L_R_END_ANIMATION>
+			<YAW_STRING_IDLE_TO_STAND_ANIMATION>#YAW_STRING_IDLE_TO_STAND_ANIMATION#</YAW_STRING_IDLE_TO_STAND_ANIMATION>
+			<YAW_STRING_L_R_ANIMATION>#YAW_STRING_L_R_ANIMATION#</YAW_STRING_L_R_ANIMATION>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Glider_Yaw_String_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Wind_Parameters">
+				<UNITS_RELATIVE_WIND_VELOCITY>feet per second</UNITS_RELATIVE_WIND_VELOCITY>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Aircraft_Forces_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<ANIM_DISPLACEMENT>600</ANIM_DISPLACEMENT>			<!-- Max %Anim per Sec -->
+			<MIN_AIRSPEED>10</MIN_AIRSPEED>
+			<EXTENDED_AIRSPEED>20</EXTENDED_AIRSPEED>
+			<MAX_AIRSPEED>80</MAX_AIRSPEED>
+			<MAX_AIRSPEED_ANIM_FACTOR>0.1</MAX_AIRSPEED_ANIM_FACTOR>
+			<ANGLE_FORWARD_FACTOR>0.5</ANGLE_FORWARD_FACTOR>
+			<VAR_NOISE_NAME>XMLVAR_YAW_STRING_NOISE</VAR_NOISE_NAME>
+			<VAR_SPEED_FACTOR_NAME>XMLVAR_YAW_STRING_SPEED_FACTOR</VAR_SPEED_FACTOR_NAME>
+			<VAR_SPEED_FACTOR_MAX_NAME>XMLVAR_YAW_STRING_SPEED_FACTOR_MAX</VAR_SPEED_FACTOR_MAX_NAME>
+			<VAR_SPEED_FACTOR_MIN_NAME>XMLVAR_YAW_STRING_SPEED_FACTOR_MIN</VAR_SPEED_FACTOR_MIN_NAME>
+			<VAR_DIRECTION_NAME>XMLVAR_YAW_STRING_DIRECTION</VAR_DIRECTION_NAME>
+			<VAR_INIT_NAME>XMLVAR_YAW_STRING_INIT</VAR_INIT_NAME>
+			<VAR_SCOPE>O</VAR_SCOPE>
+		</Parameters>
+		<Parameters Type="Default">
+			<VAR_NOISE>#VAR_SCOPE#:#VAR_NOISE_NAME#</VAR_NOISE>
+			<VAR_SPEED_FACTOR>#VAR_SCOPE#:#VAR_SPEED_FACTOR_NAME#</VAR_SPEED_FACTOR>
+			<VAR_SPEED_FACTOR_MAX>#VAR_SCOPE#:#VAR_SPEED_FACTOR_MAX_NAME#</VAR_SPEED_FACTOR_MAX>
+			<VAR_SPEED_FACTOR_MIN>#VAR_SCOPE#:#VAR_SPEED_FACTOR_MIN_NAME#</VAR_SPEED_FACTOR_MIN>
+			<VAR_DIRECTION>#VAR_SCOPE#:#VAR_DIRECTION_NAME#</VAR_DIRECTION>
+			<VAR_INIT>#VAR_SCOPE#:#VAR_INIT_NAME#</VAR_INIT>
+		</Parameters>
+		<Parameters Type="Override">
+			<REVERSED_ANGLE_FORWARD_FACTOR Process="Float">1 #ANGLE_FORWARD_FACTOR# -</REVERSED_ANGLE_FORWARD_FACTOR>
+			<Condition Valid="REDUCE_NOISE_WITH_AIRSPEED">
+				<True>
+					<CLAMP_CODE>(O:#VAR_SPEED_FACTOR_MIN#) max (O:#VAR_SPEED_FACTOR_MAX#) min</CLAMP_CODE>
+				</True>
+				<False>
+					<CLAMP_CODE>0 max 100 min</CLAMP_CODE>
+				</False>
+			</Condition>
+		</Parameters>
+
+		<Parameters Type="Default">
+			<YAW_STRING_ROTATION_ANIMATION>
+				#GET_AIRSPEED_TRUE# #GET_AMBIENT_WIND_VELOCITY# max #MIN_AIRSPEED# max #MIN_AIRSPEED# - #EXTENDED_AIRSPEED# min 20 / 100 * 0 &gt; if{
+					1 l1 #MIN_AIRSPEED# - 0 max #MAX_AIRSPEED# / 1 min #REVERSED_ANGLE_FORWARD_FACTOR# * - sp0
+					#GET_RELATIVE_WIND_VELOCITY_BODY_X# #GET_RELATIVE_WIND_VELOCITY_BODY_Z# l0 * atg2 rddg dnor (&gt;#VAR_DIRECTION#)
+				} els{
+					(#VAR_INIT#) ! if{
+						rand 360 * (&gt;#VAR_DIRECTION#)
+						1 (&gt;#VAR_INIT#)
+					}
+				}
+
+				(#VAR_DIRECTION#)
+			</YAW_STRING_ROTATION_ANIMATION>
+			<YAW_STRING_L_R_ANIMATION>
+				#GET_INCIDENCE_BETA# 0.2 / 1 min -1 max 1 + 50 *
+			</YAW_STRING_L_R_ANIMATION>
+			<YAW_STRING_NOISE_ANIMATION>
+				#GET_AIRSPEED_TRUE# #GET_AMBIENT_WIND_VELOCITY# max s1 #MIN_AIRSPEED# &gt; if{ 
+					1 #GET_AIRSPEED_TRUE# #GET_AMBIENT_WIND_VELOCITY# max #MIN_AIRSPEED# - 0 max #MAX_AIRSPEED# / 1 #MAX_AIRSPEED_ANIM_FACTOR# - min 0 max - (&gt;O:#VAR_SPEED_FACTOR#)
+					50 (O:#VAR_SPEED_FACTOR#) 50 * - (&gt;O:#VAR_SPEED_FACTOR_MIN#)
+					50 (O:#VAR_SPEED_FACTOR#) 50 * + (&gt;O:#VAR_SPEED_FACTOR_MAX#)
+					(O:#VAR_NOISE#) (O:#VAR_SPEED_FACTOR#) #ANIM_DISPLACEMENT# (E:SIMULATION DELTA TIME, seconds) * * rand 2 * 1 - * + #CLAMP_CODE# (&gt;O:#VAR_NOISE#)
+				}  els{ 0 (&gt;O:#VAR_NOISE#) }
+				(O:#VAR_NOISE#)
+			</YAW_STRING_NOISE_ANIMATION>
+		</Parameters>
+		<ReturnParameters>
+			<YAW_STRING_ROTATION_ANIMATION>#YAW_STRING_ROTATION_ANIMATION#</YAW_STRING_ROTATION_ANIMATION>
+			<YAW_STRING_L_R_ANIMATION>#YAW_STRING_L_R_ANIMATION#</YAW_STRING_L_R_ANIMATION>
+			<YAW_STRING_NOISE_ANIMATION>#YAW_STRING_NOISE_ANIMATION#</YAW_STRING_NOISE_ANIMATION>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Cover_Visibility_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Cover_Parameters" />
+		</Parameters>
+		<Parameters Type="Default">
+			<VISIBILITY_CODE>#IS_COVER_ON#</VISIBILITY_CODE>
+		</Parameters>
+		<ReturnParameters>
+			<VISIBILITY_CODE>#VISIBILITY_CODE#</VISIBILITY_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

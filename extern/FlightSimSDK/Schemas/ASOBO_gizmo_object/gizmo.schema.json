@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "gizmo",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFProperty.schema.json" } ],
+    "properties": {
+        "type": {
+            "description": "Specifies the gizmo type.",
+            "anyOf": [
+                {
+                    "enum": [ "box" ]
+                },
+                {
+                    "enum": [ "sphere" ]
+                },
+                {
+                    "enum": [ "cylinder" ]
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "translation": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Translation of the gizmo node"
+        },
+        "rotation": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Rotation of the gizmo node"
+        },
+        "params": {
+            "type": "object",
+            "oneOf": [                
+                { "type": "number", "$ref": "boxgizmo.schema.json" },
+                { "type": "number", "$ref": "spheregizmo.schema.json"},
+                { "type": "number", "$ref": "cylindergizmo.schema.json" }
+              ],            
+            "description": "Parameters for gizmo type"
+        },        
+        "extensions": { 
+            "ASOBO_tags": {
+                "type": "array",
+                "$ref": "gltf.ASOBO_tags.schema.json"
+            }
+        },
+        "extras": { }
+    }
+}

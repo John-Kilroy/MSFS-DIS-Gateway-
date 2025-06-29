@@ -1,0 +1,14 @@
+{
+    "$schema" : "http://json-schema.org/draft-01/schema",
+    "title" : "gizmo/sphere",
+    "type" : "object",
+    "allOf": [ { "$ref": "glTFProperty.schema.json" } ],
+    "properties" : {
+        "tags" : {
+            "type" : "array",
+            "description" : "Array of type of collision"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

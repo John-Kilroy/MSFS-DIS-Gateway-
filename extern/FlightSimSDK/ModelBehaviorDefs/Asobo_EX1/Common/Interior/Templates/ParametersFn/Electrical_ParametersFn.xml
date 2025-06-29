@@ -1,0 +1,742 @@
+<ModelBehaviors>
+	<!-- ################################## ELECTRICAL ################################ -->
+	<!-- ############################################################################## -->
+	<!-- ################################ CIRCUIT TYPES ################################ -->
+	<Macro Name="CIRCUIT_INVALID">0</Macro>
+	<Macro Name="CIRCUIT_XML">1</Macro>
+	<Macro Name="CIRCUIT_GENERAL_PANEL">2</Macro>
+	<Macro Name="CIRCUIT_FLAP_MOTOR">3</Macro>
+	<Macro Name="CIRCUIT_GEAR_MOTOR">4</Macro>
+	<Macro Name="CIRCUIT_AUTOPILOT">5</Macro>
+	<Macro Name="CIRCUIT_AVIONICS">6</Macro>
+	<Macro Name="CIRCUIT_PITOT_HEAT">7</Macro>
+	<Macro Name="CIRCUIT_PROP_SYNC">8</Macro>
+	<Macro Name="CIRCUIT_AUTO_FEATHER">9</Macro>
+	<Macro Name="CIRCUIT_AUTO_BRAKES">10</Macro>
+	<Macro Name="CIRCUIT_STANDBY_VACUUM">11</Macro>
+	<Macro Name="CIRCUIT_MARKER_BEACON">12</Macro>
+	<Macro Name="CIRCUIT_GEAR_WARNING">13</Macro>
+	<Macro Name="CIRCUIT_HYDRAULIC_PUMP">14</Macro>
+	<Macro Name="CIRCUIT_HYDRAULIC_VALVE">15</Macro>
+	<Macro Name="CIRCUIT_FUEL_PUMP">16</Macro>
+	<Macro Name="CIRCUIT_FUEL_TRANSFER_PUMP">17</Macro>
+	<Macro Name="CIRCUIT_PROP_DEICE">18</Macro>
+	<Macro Name="CIRCUIT_STARTER">19</Macro>
+	<Macro Name="CIRCUIT_LIGHT_NAV">20</Macro>
+	<Macro Name="CIRCUIT_LIGHT_BEACON">21</Macro>
+	<Macro Name="CIRCUIT_LIGHT_LANDING">22</Macro>
+	<Macro Name="CIRCUIT_LIGHT_TAXI">23</Macro>
+	<Macro Name="CIRCUIT_LIGHT_STROBE">24</Macro>
+	<Macro Name="CIRCUIT_LIGHT_PANEL">25</Macro>
+	<Macro Name="CIRCUIT_LIGHT_RECOGNITION">26</Macro>
+	<Macro Name="CIRCUIT_LIGHT_WING">27</Macro>
+	<Macro Name="CIRCUIT_LIGHT_LOGO">28</Macro>
+	<Macro Name="CIRCUIT_LIGHT_CABIN">29</Macro>
+	<Macro Name="CIRCUIT_LIGHT_PEDESTAL">30</Macro>
+	<Macro Name="CIRCUIT_LIGHT_GLARESHIELD">31</Macro>
+	<Macro Name="CIRCUIT_DIRECTIONAL_GYRO">32</Macro>
+	<Macro Name="CIRCUIT_DIRECTIONAL_GYRO_SLAVING">33</Macro>
+	<Macro Name="CIRCUIT_NAV">34</Macro>
+	<Macro Name="CIRCUIT_COM">35</Macro>
+	<Macro Name="CIRCUIT_PFD">36</Macro>
+	<Macro Name="CIRCUIT_MFD">37</Macro>
+	<Macro Name="CIRCUIT_ADC_AHRS">38</Macro>
+	<Macro Name="CIRCUIT_FIS">39</Macro>
+	<Macro Name="CIRCUIT_ADF_DME">40</Macro>
+	<Macro Name="CIRCUIT_XPNDR">41</Macro>
+	<Macro Name="CIRCUIT_TURN_COORDINATOR">42</Macro>
+	<Macro Name="CIRCUIT_AUDIO">43</Macro>
+	<Macro Name="CIRCUIT_AVNFAN">44</Macro>
+	<Macro Name="CIRCUIT_GPS">45</Macro>
+	<Macro Name="CIRCUIT_INST">46</Macro>
+	<Macro Name="CIRCUIT_INST_LIGHTS">47</Macro>
+	<Macro Name="CIRCUIT_ALTFLD">48</Macro>
+	<Macro Name="CIRCUIT_WARN">49</Macro>
+	<Macro Name="CIRCUIT_LTS_PWR">50</Macro>
+	<Macro Name="CIRCUIT_ATTITUDE_INDICATOR">51</Macro>
+	<Macro Name="CIRCUIT_STALL_WARNING">52</Macro>
+	<Macro Name="CIRCUIT_APU_STARTER">53</Macro>
+	<Macro Name="CIRCUIT_FUEL_VALVE">54</Macro>
+	<Macro Name="CIRCUIT_WING_FOLD">55</Macro>
+	<Macro Name="CIRCUIT_ELECTRIC_ENGINE">56</Macro>
+	<Macro Name="CIRCUIT_PNEUMATICS_VALVE">57</Macro>
+	<Macro Name="CIRCUIT_PNEUMATICS_PACK">58</Macro>
+	<Macro Name="CIRCUIT_CABIN_SIGNAL_GO">59</Macro>
+	<Macro Name="CIRCUIT_CABIN_SIGNAL_STANDBY">60</Macro>
+	<Macro Name="CIRCUIT_CABIN_SIGNAL_STOP">61</Macro>
+	<Macro Name="CIRCUIT_LIQUID_DROPPING_DOOR">62</Macro>
+	<Macro Name="CIRCUIT_LIQUID_DROPPING_SCOOP">63</Macro>
+	<Macro Name="CIRCUIT_ROTOR_BRAKE">64</Macro>
+	<Macro Name="CIRCUIT_HOIST">65</Macro>
+	<Macro Name="CIRCUIT_SLING">66</Macro>
+	<Macro Name="CIRCUIT_PNEUMATICS_FAN">67</Macro>
+	<Macro Name="CIRCUIT_ROTOR_CLUTCH">68</Macro>
+	<Macro Name="CIRCUIT_INTERACTIVE_POINT">69</Macro>
+	<Macro Name="CIRCUIT_DEICE">70</Macro>
+	<!-- ############################################################################## -->
+	<Include RelativeFile="InteractionPresets\\Electrical_Interactions.xml"/>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Battery_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<BATTERY_ID>1</BATTERY_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_BATTERY_SWITCH>ELECTRICAL MASTER BATTERY:#BATTERY_ID#</SIMVAR_BATTERY_SWITCH>
+			<SIMVAR_BATTERY_VOLTAGE>ELECTRICAL BATTERY VOLTAGE:#BATTERY_ID#</SIMVAR_BATTERY_VOLTAGE>
+			<SIMVAR_BATTERY_LOAD>ELECTRICAL BATTERY LOAD:#BATTERY_ID#</SIMVAR_BATTERY_LOAD>
+			<UNITS_BATTERY_VOLTAGE>volts</UNITS_BATTERY_VOLTAGE>
+			<UNITS_BATTERY_LOAD>amps</UNITS_BATTERY_LOAD>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_BATTERY_SWITCH>(A:#SIMVAR_BATTERY_SWITCH#, Bool)</GET_BATTERY_SWITCH>
+			<GET_BATTERY_VOLTAGE>(A:#SIMVAR_BATTERY_VOLTAGE#, #UNITS_BATTERY_VOLTAGE#)</GET_BATTERY_VOLTAGE>
+			<GET_BATTERY_LOAD>(A:#SIMVAR_BATTERY_LOAD#, #UNITS_BATTERY_LOAD#)</GET_BATTERY_LOAD>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_BATTERY>#BATTERY_ID# (&gt;K:TOGGLE_MASTER_BATTERY)</TOGGLE_BATTERY>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_BATTERY>#GET_BATTERY_SWITCH# != if{ #TOGGLE_BATTERY# }</SET_BATTERY>
+		</Parameters>
+		<ReturnParameters>
+			<TOGGLE_BATTERY#OUT_PARAM_SUFFIX#>#TOGGLE_BATTERY#</TOGGLE_BATTERY#OUT_PARAM_SUFFIX#>
+			<SET_BATTERY#OUT_PARAM_SUFFIX#>#SET_BATTERY#</SET_BATTERY#OUT_PARAM_SUFFIX#>
+			<GET_BATTERY#OUT_PARAM_SUFFIX#_SWITCH>#GET_BATTERY_SWITCH#</GET_BATTERY#OUT_PARAM_SUFFIX#_SWITCH>
+			<GET_BATTERY#OUT_PARAM_SUFFIX#_VOLTAGE>#GET_BATTERY_VOLTAGE#</GET_BATTERY#OUT_PARAM_SUFFIX#_VOLTAGE>
+			<GET_BATTERY#OUT_PARAM_SUFFIX#_LOAD>#GET_BATTERY_LOAD#</GET_BATTERY#OUT_PARAM_SUFFIX#_LOAD>
+			<SIMVAR_BATTERY#OUT_PARAM_SUFFIX#_SWITCH>#SIMVAR_BATTERY_SWITCH#</SIMVAR_BATTERY#OUT_PARAM_SUFFIX#_SWITCH>
+			<SIMVAR_BATTERY#OUT_PARAM_SUFFIX#_VOLTAGE>#SIMVAR_BATTERY_VOLTAGE#</SIMVAR_BATTERY#OUT_PARAM_SUFFIX#_VOLTAGE>
+			<SIMVAR_BATTERY#OUT_PARAM_SUFFIX#_LOAD>#SIMVAR_BATTERY_LOAD#</SIMVAR_BATTERY#OUT_PARAM_SUFFIX#_LOAD>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Alternator_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<ALTERNATOR_ID>1</ALTERNATOR_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<SIMVAR_ALTERNATOR_SWITCH>ELECTRICAL GENERATOR SWITCH:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_SWITCH>
+					<SIMVAR_ALTERNATOR_ACTIVE>ELECTRICAL GENERATOR ACTIVE:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_ACTIVE>
+					<SIMVAR_ALTERNATOR_VOLTAGE>ELECTRICAL GENERATOR VOLTAGE:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_VOLTAGE>
+					<SIMVAR_ALTERNATOR_LOAD>ELECTRICAL GENERATOR AMPS:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_LOAD>
+				</Case>
+				<Default>
+					<SIMVAR_ALTERNATOR_SWITCH>GENERAL ENG MASTER ALTERNATOR:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_SWITCH>
+					<SIMVAR_ALTERNATOR_VOLTAGE>ELECTRICAL GENALT BUS VOLTAGE:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_VOLTAGE>
+					<SIMVAR_ALTERNATOR_LOAD>ELECTRICAL GENALT BUS AMPS:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_LOAD>
+					<SIMVAR_ALTERNATOR_LOAD_RATIO>ELECTRICAL GENALT LOAD:#ALTERNATOR_ID#</SIMVAR_ALTERNATOR_LOAD_RATIO>
+				</Default>
+			</Switch>
+			<UNITS_ALTERNATOR_VOLTAGE>volts</UNITS_ALTERNATOR_VOLTAGE>
+			<UNITS_ALTERNATOR_LOAD>amps</UNITS_ALTERNATOR_LOAD>
+			<UNITS_ALTERNATOR_LOAD_RATIO>percent</UNITS_ALTERNATOR_LOAD_RATIO>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_ALTERNATOR_SWITCH>(A:#SIMVAR_ALTERNATOR_SWITCH#, Bool)</GET_ALTERNATOR_SWITCH>
+			<GET_ALTERNATOR_VOLTAGE>(A:#SIMVAR_ALTERNATOR_VOLTAGE#, #UNITS_ALTERNATOR_VOLTAGE#)</GET_ALTERNATOR_VOLTAGE>
+			<GET_ALTERNATOR_LOAD>(A:#SIMVAR_ALTERNATOR_LOAD#, #UNITS_ALTERNATOR_LOAD#)</GET_ALTERNATOR_LOAD>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<GET_ALTERNATOR_ACTIVE>(A:#SIMVAR_ALTERNATOR_ACTIVE#, Bool)</GET_ALTERNATOR_ACTIVE>
+				</Case>
+				<Default>
+					<GET_ALTERNATOR_LOAD_RATIO>(A:#SIMVAR_ALTERNATOR_LOAD_RATIO#, #UNITS_ALTERNATOR_LOAD_RATIO#)</GET_ALTERNATOR_LOAD_RATIO>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_ALTERNATOR>#GET_ALTERNATOR_SWITCH# != if{ #ALTERNATOR_ID# (&gt;K:TOGGLE_MASTER_ALTERNATOR) }</SET_ALTERNATOR>
+			<TOGGLE_ALTERNATOR>#ALTERNATOR_ID# (&gt;K:TOGGLE_MASTER_ALTERNATOR)</TOGGLE_ALTERNATOR>
+		</Parameters>
+		<ReturnParameters>
+			<TOGGLE_ALTERNATOR#OUT_PARAM_SUFFIX#>#TOGGLE_ALTERNATOR#</TOGGLE_ALTERNATOR#OUT_PARAM_SUFFIX#>
+			<SET_ALTERNATOR#OUT_PARAM_SUFFIX#>#SET_ALTERNATOR#</SET_ALTERNATOR#OUT_PARAM_SUFFIX#>
+			<GET_ALTERNATOR#OUT_PARAM_SUFFIX#_SWITCH>#GET_ALTERNATOR_SWITCH#</GET_ALTERNATOR#OUT_PARAM_SUFFIX#_SWITCH>
+			<GET_ALTERNATOR#OUT_PARAM_SUFFIX#_VOLTAGE>#GET_ALTERNATOR_VOLTAGE#</GET_ALTERNATOR#OUT_PARAM_SUFFIX#_VOLTAGE>
+			<GET_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD>#GET_ALTERNATOR_LOAD#</GET_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<GET_ALTERNATOR#OUT_PARAM_SUFFIX#_ACTIVE>#GET_ALTERNATOR_ACTIVE#</GET_ALTERNATOR#OUT_PARAM_SUFFIX#_ACTIVE>
+				</Case>
+				<Default>
+					<GET_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD_RATIO>#GET_ALTERNATOR_LOAD_RATIO#</GET_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD_RATIO>
+				</Default>
+			</Switch>
+			<SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_SWITCH>#SIMVAR_ALTERNATOR_SWITCH#</SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_SWITCH>
+			<SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_VOLTAGE>#SIMVAR_ALTERNATOR_VOLTAGE#</SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_SWITCH>
+			<SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD>#SIMVAR_ALTERNATOR_LOAD#</SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD>
+			<SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD_RATIO>#UNITS_ALTERNATOR_LOAD_RATIO#</SIMVAR_ALTERNATOR#OUT_PARAM_SUFFIX#_LOAD_RATIO>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_External_Power_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<EXTERNAL_POWER_ID>1</EXTERNAL_POWER_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_EXTERNAL_POWER_SWITCH>EXTERNAL POWER ON:#EXTERNAL_POWER_ID#</SIMVAR_EXTERNAL_POWER_SWITCH>
+			<SIMVAR_EXTERNAL_POWER_AVAILABLE>EXTERNAL POWER AVAILABLE:#EXTERNAL_POWER_ID#</SIMVAR_EXTERNAL_POWER_AVAILABLE>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<SIMVAR_EXTERNAL_POWER_VOLTAGE>ELECTRICAL EXTERNAL POWER VOLTAGE:#EXTERNAL_POWER_ID#</SIMVAR_EXTERNAL_POWER_VOLTAGE>
+					<SIMVAR_EXTERNAL_POWER_LOAD>ELECTRICAL EXTERNAL POWER AMPS:#EXTERNAL_POWER_ID#</SIMVAR_EXTERNAL_POWER_LOAD>
+					<UNITS_EXTERNAL_POWER_VOLTAGE>volts</UNITS_EXTERNAL_POWER_VOLTAGE>
+					<UNITS_EXTERNAL_POWER_LOAD>amps</UNITS_EXTERNAL_POWER_LOAD>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_EXTERNAL_POWER_SWITCH>(A:#SIMVAR_EXTERNAL_POWER_SWITCH#, Bool)</GET_EXTERNAL_POWER_SWITCH>
+			<GET_EXTERNAL_POWER_AVAILABLE>(A:#SIMVAR_EXTERNAL_POWER_AVAILABLE#, Bool)</GET_EXTERNAL_POWER_AVAILABLE>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<GET_EXTERNAL_POWER_VOLTAGE>(A:#SIMVAR_EXTERNAL_POWER_VOLTAGE#, #UNITS_EXTERNAL_POWER_VOLTAGE#)</GET_EXTERNAL_POWER_VOLTAGE>
+					<GET_EXTERNAL_POWER_LOAD>(A:#SIMVAR_EXTERNAL_POWER_LOAD#, #UNITS_EXTERNAL_POWER_LOAD#)</GET_EXTERNAL_POWER_LOAD>
+				</Case>
+			</Switch>
+			<SET_EXTERNAL_POWER>#EXTERNAL_POWER_ID# (&gt;K:2:SET_EXTERNAL_POWER)</SET_EXTERNAL_POWER>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_EXTERNAL_POWER>#GET_EXTERNAL_POWER_SWITCH# ! #SET_EXTERNAL_POWER#</TOGGLE_EXTERNAL_POWER>
+		</Parameters>
+		<ReturnParameters>
+			<TOGGLE_EXTERNAL_POWER#OUT_PARAM_SUFFIX#>#TOGGLE_EXTERNAL_POWER#</TOGGLE_EXTERNAL_POWER#OUT_PARAM_SUFFIX#>
+			<SET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#>#SET_EXTERNAL_POWER#</SET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#>
+			<GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_SWITCH>#GET_EXTERNAL_POWER_SWITCH#</GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_SWITCH>
+			<GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_AVAILABLE>#GET_EXTERNAL_POWER_AVAILABLE#</GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_AVAILABLE>
+			<SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_SWITCH>#SIMVAR_EXTERNAL_POWER_SWITCH#</SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_SWITCH>
+			<SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_AVAILABLE>#SIMVAR_EXTERNAL_POWER_AVAILABLE#</SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_AVAILABLE>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_VOLTAGE>#GET_EXTERNAL_POWER_VOLTAGE#</GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_VOLTAGE>
+					<GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_LOAD>#GET_EXTERNAL_POWER_LOAD#</GET_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_LOAD>
+					<SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_VOLTAGE>#SIMVAR_EXTERNAL_POWER_VOLTAGE#</SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_VOLTAGE>
+					<SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_LOAD>#SIMVAR_EXTERNAL_POWER_LOAD#</SIMVAR_EXTERNAL_POWER#OUT_PARAM_SUFFIX#_LOAD>
+				</Case>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Bus_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<BUS_ID>1</BUS_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_BUS_LOAD>ELECTRICAL BUS AMPS:#BUS_ID#</SIMVAR_BUS_LOAD>
+			<SIMVAR_BUS_VOLTAGE>ELECTRICAL BUS VOLTAGE:#BUS_ID#</SIMVAR_BUS_VOLTAGE>
+			<UNITS_BUS_VOLTAGE>volts</UNITS_BUS_VOLTAGE>
+			<UNITS_BUS_LOAD>amps</UNITS_BUS_LOAD>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_BUS_VOLTAGE>(A:#SIMVAR_BUS_VOLTAGE#, #UNITS_BUS_VOLTAGE#)</GET_BUS_VOLTAGE>
+			<GET_BUS_LOAD>(A:#SIMVAR_BUS_LOAD#, #UNITS_BUS_LOAD#)</GET_BUS_LOAD>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_BUS#OUT_PARAM_SUFFIX#_VOLTAGE>#SIMVAR_BUS_VOLTAGE#</SIMVAR_BUS#OUT_PARAM_SUFFIX#_VOLTAGE>
+			<SIMVAR_BUS#OUT_PARAM_SUFFIX#_LOAD>#SIMVAR_BUS_LOAD#</SIMVAR_BUS#OUT_PARAM_SUFFIX#_LOAD>
+			<GET_BUS#OUT_PARAM_SUFFIX#_VOLTAGE>#GET_BUS_VOLTAGE#</GET_BUS#OUT_PARAM_SUFFIX#_VOLTAGE>
+			<GET_BUS#OUT_PARAM_SUFFIX#_LOAD>#GET_BUS_LOAD#</GET_BUS#OUT_PARAM_SUFFIX#_LOAD>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_APU_Generator_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<APU_ID>1</APU_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_APU_GENERATOR_SWITCH>APU GENERATOR SWITCH:#APU_ID#</SIMVAR_APU_GENERATOR_SWITCH>
+			<SIMVAR_APU_GENERATOR_ACTIVE>APU GENERATOR ACTIVE:#APU_ID#</SIMVAR_APU_GENERATOR_ACTIVE>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_APU_GENERATOR_SWITCH>(A:#SIMVAR_APU_GENERATOR_SWITCH#, Bool)</GET_APU_GENERATOR_SWITCH>
+			<GET_APU_GENERATOR_ACTIVE>(A:#SIMVAR_APU_GENERATOR_ACTIVE#, Bool)</GET_APU_GENERATOR_ACTIVE>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_APU_GENERATOR>#APU_ID# #GET_APU_GENERATOR_SWITCH# ! (&gt;K:2:APU_GENERATOR_SWITCH_SET)</TOGGLE_APU_GENERATOR>
+			<SET_APU_GENERATOR>#GET_APU_GENERATOR_SWITCH# != if{ #APU_ID# #GET_APU_GENERATOR_SWITCH# ! (&gt;K:2:APU_GENERATOR_SWITCH_SET) }</SET_APU_GENERATOR>
+		</Parameters>
+		<ReturnParameters>
+			<TOGGLE_APU_GENERATOR#OUT_PARAM_SUFFIX#>#TOGGLE_APU_GENERATOR#</TOGGLE_APU_GENERATOR#OUT_PARAM_SUFFIX#>
+			<SET_APU_GENERATOR#OUT_PARAM_SUFFIX#>#SET_APU_GENERATOR#</SET_APU_GENERATOR#OUT_PARAM_SUFFIX#>
+			<GET_APU_GENERATOR#OUT_PARAM_SUFFIX#_SWITCH>#GET_APU_GENERATOR_SWITCH#</GET_APU_GENERATOR#OUT_PARAM_SUFFIX#_SWITCH>
+			<GET_APU_GENERATOR#OUT_PARAM_SUFFIX#_ACTIVE>#GET_APU_GENERATOR_ACTIVE#</GET_APU_GENERATOR#OUT_PARAM_SUFFIX#_ACTIVE>
+			<SIMVAR_APU_GENERATOR#OUT_PARAM_SUFFIX#_SWITCH>#SIMVAR_APU_GENERATOR_SWITCH#</SIMVAR_APU_GENERATOR#OUT_PARAM_SUFFIX#_SWITCH>
+			<SIMVAR_APU_GENERATOR#OUT_PARAM_SUFFIX#_ACTIVE>#SIMVAR_APU_GENERATOR_ACTIVE#</SIMVAR_APU_GENERATOR#OUT_PARAM_SUFFIX#_ACTIVE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Circuit_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<CIRCUIT_ID>1</CIRCUIT_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_CIRCUIT_SWITCH>CIRCUIT SWITCH ON:#CIRCUIT_ID#</SIMVAR_CIRCUIT_SWITCH>
+			<SIMVAR_CIRCUIT_ON>CIRCUIT ON:#CIRCUIT_ID#</SIMVAR_CIRCUIT_ON>
+			<SIMVAR_CIRCUIT_POWER>CIRCUIT POWER SETTING:#CIRCUIT_ID#</SIMVAR_CIRCUIT_POWER>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<SIMVAR_CIRCUIT_EXISTS>ELECTRICAL CIRCUIT EXISTS:#CIRCUIT_ID#</SIMVAR_CIRCUIT_EXISTS>
+					<SIMVAR_CIRCUIT_VOLTAGE>ELECTRICAL CIRCUIT VOLTAGE:#CIRCUIT_ID#</SIMVAR_CIRCUIT_VOLTAGE>
+					<SIMVAR_CIRCUIT_LOAD>ELECTRICAL CIRCUIT AMPS:#CIRCUIT_ID#</SIMVAR_CIRCUIT_LOAD>
+					<UNITS_CIRCUIT_VOLTAGE>volts</UNITS_CIRCUI_VOLTAGE>
+					<UNITS_CIRCUIT_LOAD>amps</UNITS_CIRCUIT_LOAD>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_CIRCUIT_SWITCH>(A:#SIMVAR_CIRCUIT_SWITCH#, Bool)</GET_CIRCUIT_SWITCH>
+			<GET_CIRCUIT_ON>(A:#SIMVAR_CIRCUIT_ON#, Bool)</GET_CIRCUIT_ON>
+			<GET_CIRCUIT_POWER_SETTING>(A:#SIMVAR_CIRCUIT_POWER#, Percent)</GET_CIRCUIT_POWER_SETTING>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<GET_CIRCUIT_EXISTS>(A:#SIMVAR_CIRCUIT_EXISTS#, Bool)</GET_CIRCUIT_EXISTS>
+					<GET_CIRCUIT_VOLTAGE>(A:#SIMVAR_CIRCUIT_VOLTAGE#, #UNITS_CIRCUIT_VOLTAGE#)</GET_CIRCUIT_VOLTAGE>
+					<GET_CIRCUIT_LOAD>(A:#SIMVAR_CIRCUIT_LOAD#, #SIMVAR_CIRCUIT_LOAD#)</GET_CIRCUIT_LOAD>
+				</Case>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_CIRCUIT>#CIRCUIT_ID# (&gt;K:ELECTRICAL_CIRCUIT_TOGGLE)</TOGGLE_CIRCUIT>
+			<SET_CIRCUIT>#GET_CIRCUIT_SWITCH# != if{ #CIRCUIT_ID# (&gt;K:ELECTRICAL_CIRCUIT_TOGGLE) }</SET_CIRCUIT>
+			<SET_CIRCUIT_POWER_SETTING>#CIRCUIT_ID# (&gt;K:2:ELECTRICAL_CIRCUIT_POWER_SETTING_SET)</SET_CIRCUIT_POWER_SETTING>
+		</Parameters>
+		<ReturnParameters>
+			<SET_CIRCUIT#OUT_PARAM_SUFFIX#>#SET_CIRCUIT#</SET_CIRCUIT#OUT_PARAM_SUFFIX#>
+			<TOGGLE_CIRCUIT#OUT_PARAM_SUFFIX#>#TOGGLE_CIRCUIT#</TOGGLE_CIRCUIT#OUT_PARAM_SUFFIX#>
+			<SET_CIRCUIT#OUT_PARAM_SUFFIX#_POWER_SETTING>#SET_CIRCUIT_POWER_SETTING#</SET_CIRCUIT#OUT_PARAM_SUFFIX#_POWER_SETTING>
+			<GET_CIRCUIT#OUT_PARAM_SUFFIX#_SWITCH>#GET_CIRCUIT_SWITCH#</GET_CIRCUIT#OUT_PARAM_SUFFIX#_SWITCH>
+			<GET_CIRCUIT#OUT_PARAM_SUFFIX#_ON>#GET_CIRCUIT_ON#</GET_CIRCUIT#OUT_PARAM_SUFFIX#_ON>
+			<GET_CIRCUIT#OUT_PARAM_SUFFIX#_POWER_SETTING>#GET_CIRCUIT_POWER_SETTING#</GET_CIRCUIT#OUT_PARAM_SUFFIX#_POWER_SETTING>
+			<SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_SWITCH>#SIMVAR_CIRCUIT_SWITCH#</SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_SWITCH>
+			<SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_ON>#SIMVAR_CIRCUIT_ON#</SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_ON>
+			<SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_POWER>#SIMVAR_CIRCUIT_POWER#</SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_POWER>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_EXISTS>#SIMVAR_CIRCUIT_EXISTS#</SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_EXISTS>
+					<SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_VOLTAGE>#SIMVAR_CIRCUIT_VOLTAGE#</SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_VOLTAGE>
+					<SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_LOAD>#SIMVAR_CIRCUIT_LOAD#</SIMVAR_CIRCUIT#OUT_PARAM_SUFFIX#_LOAD>
+					<GET_CIRCUIT#OUT_PARAM_SUFFIX#_EXISTS>#GET_CIRCUIT_EXISTS#</GET_CIRCUIT#OUT_PARAM_SUFFIX#_EXISTS>
+					<GET_CIRCUIT#OUT_PARAM_SUFFIX#_VOLTAGE>#GET_CIRCUIT_EXISTS#</GET_CIRCUIT#OUT_PARAM_SUFFIX#_VOLTAGE>
+					<GET_CIRCUIT#OUT_PARAM_SUFFIX#_LOAD>#GET_CIRCUIT_EXISTS#</GET_CIRCUIT#OUT_PARAM_SUFFIX#_LOAD>
+				</Case>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Procedure_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_PROCEDURE>1</GET_PROCEDURE>
+			<PROC_ID>1</PROC_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_PROCEDURE>#GET_PROCEDURE# ! #PROC_ID# (&gt;K:2:ELECTRICAL_EXECUTE_PROCEDURE)</TOGGLE_PROCEDURE>
+			<EXEC_PROCEDURE>0 #PROC_ID# (&gt;K:2:ELECTRICAL_EXECUTE_PROCEDURE)</EXEC_PROCEDURE>
+			<EXEC_INVERT_PROCEDURE>1 #PROC_ID# (&gt;K:2:ELECTRICAL_EXECUTE_PROCEDURE)</EXEC_INVERT_PROCEDURE>
+		</Parameters>
+		<ReturnParameters>
+			<TOGGLE_PROCEDURE#OUT_PARAM_SUFFIX#>#TOGGLE_PROCEDURE#</TOGGLE_PROCEDURE#OUT_PARAM_SUFFIX#>
+			<EXEC_PROCEDURE#OUT_PARAM_SUFFIX#>#EXEC_PROCEDURE#</EXEC_PROCEDURE#OUT_PARAM_SUFFIX#>
+			<EXEC_INVERT_PROCEDURE#OUT_PARAM_SUFFIX#>#EXEC_INVERT_PROCEDURE#</EXEC_INVERT_PROCEDURE#OUT_PARAM_SUFFIX#>
+			<GET_PROCEDURE#OUT_PARAM_SUFFIX#>#GET_PROCEDURE#</GET_PROCEDURE#OUT_PARAM_SUFFIX#>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Connection_Parameters_Default">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_BUS_ID>1</SOURCE_BUS_ID>
+			<TARGET_ID>1</TARGET_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_ID>#SOURCE_BUS_ID#</SOURCE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<TOGGLE_CONNECTION>#TARGET_ID# #SOURCE_ID# (&gt;K:2:ELECTRICAL_BUS_TO_#TARGET_COMPONENT#_CONNECTION_TOGGLE)</TOGGLE_CONNECTION>
+			<GET_CONNECTION>#SOURCE_ID# (A:1:#TARGET_COMPONENT# CONNECTION ON:#TARGET_ID#, Bool)</GET_CONNECTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<SET_CONNECTION>#GET_CONNECTION# != if{ #TOGGLE_CONNECTION# }</SET_CONNECTION>
+		</Parameters>
+		<ReturnParameters>
+			<SET#OUT_PARAM_SUFFIX#_CONNECTION>#SET_CONNECTION#</SET#OUT_PARAM_SUFFIX#_CONNECTION>
+			<TOGGLE#OUT_PARAM_SUFFIX#_CONNECTION>#TOGGLE_CONNECTION#</TOGGLE#OUT_PARAM_SUFFIX#_CONNECTION>
+			<GET#OUT_PARAM_SUFFIX#_CONNECTION>#GET_CONNECTION#</GET#OUT_PARAM_SUFFIX#_CONNECTION>
+		</ReturnParameters>
+	</ParametersFn>
+
+	<ParametersFn Name="ASOBO_Connection_Parameters_EX1">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_BUS_ID></SOURCE_BUS_ID>
+			<TARGET_ID>1</TARGET_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_ID>#SOURCE_BUS_ID#</SOURCE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<SIMVAR_CONNECTION>#TARGET_COMPONENT# CONNECTION ON:#TARGET_ID#</SIMVAR_CONNECTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<Switch>
+				<Case NotEmpty="SOURCE_ID">
+					<TOGGLE_CONNECTION>#SOURCE_ID# #TARGET_ID# (&gt;K:2:ELECTRICAL_BUS_TO_#TARGET_COMPONENT#_CONNECTION_TOGGLE)</TOGGLE_CONNECTION>
+				</Case>
+				<Default>
+					<TOGGLE_CONNECTION>#TARGET_ID# (&gt;K:ELECTRICAL_BUS_TO_#TARGET_COMPONENT#_CONNECTION_TOGGLE)</TOGGLE_CONNECTION>
+				</Default>
+			</Switch>
+			<Switch>
+				<Case NotEmpty="SOURCE_ID">
+					<GET_CONNECTION>#SOURCE_ID# (A:1:#SIMVAR_CONNECTION#, Bool)</GET_CONNECTION>
+				</Case>
+				<Default>
+					<GET_CONNECTION>(A:#SIMVAR_CONNECTION#, Bool)</GET_CONNECTION>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Override">
+			<SET_CONNECTION>#GET_CONNECTION# != if{ #TOGGLE_CONNECTION# }</SET_CONNECTION>
+		</Parameters>
+		<ReturnParameters>
+			<SET#OUT_PARAM_SUFFIX#_CONNECTION>#SET_CONNECTION#</SET#OUT_PARAM_SUFFIX#_CONNECTION>
+			<TOGGLE#OUT_PARAM_SUFFIX#_CONNECTION>#TOGGLE_CONNECTION#</TOGGLE#OUT_PARAM_SUFFIX#_CONNECTION>
+			<GET#OUT_PARAM_SUFFIX#_CONNECTION>#GET_CONNECTION#</GET#OUT_PARAM_SUFFIX#_CONNECTION>
+			<SIMVAR#OUT_PARAM_SUFFIX#_CONNECTION>#SIMVAR_CONNECTION#</SIMVAR#OUT_PARAM_SUFFIX#_CONNECTION>
+		</ReturnParameters>
+	</ParametersFn>
+
+	<ParametersFn Name="ASOBO_Connection_Parameters">
+		<ReturnParameters>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<UseParametersFn Name="ASOBO_Connection_Parameters_EX1"/>
+				</Case>
+				<Default>
+					<UseParametersFn Name="ASOBO_Connection_Parameters_Default"/>
+				</Default>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+
+	<ParametersFn Name="ASOBO_Breaker_Parameters_Default">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_BUS_ID>1</SOURCE_BUS_ID>
+			<TARGET_ID>1</TARGET_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_ID>#SOURCE_BUS_ID#</SOURCE_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_BREAKER>#TARGET_ID# #SOURCE_ID# (&gt;K:2:ELECTRICAL_#TARGET_COMPONENT#_BREAKER_TOGGLE)</TOGGLE_BREAKER>
+			<GET_BREAKER>#SOURCE_ID# (A:1:#TARGET_COMPONENT# BREAKER PULLED:#TARGET_ID#, Bool)</GET_BREAKER>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_BREAKER>#GET_BREAKER# != if{ #TOGGLE_BREAKER# }</SET_BREAKER>
+		</Parameters>
+		<ReturnParameters>
+			<SET#OUT_PARAM_SUFFIX#_BREAKER>#SET_BREAKER#</SET#OUT_PARAM_SUFFIX#_BREAKER>
+			<TOGGLE#OUT_PARAM_SUFFIX#_BREAKER>#TOGGLE_BREAKER#</TOGGLE#OUT_PARAM_SUFFIX#_BREAKER>
+			<GET#OUT_PARAM_SUFFIX#_BREAKER>#GET_BREAKER#</GET#OUT_PARAM_SUFFIX#_BREAKER>
+		</ReturnParameters>
+	</ParametersFn>
+
+	<Macro Name="Electrical_Breaker_Pulled">1</Macro>
+	<Macro Name="Electrical_Breaker_Pushed">0</Macro>
+	<ParametersFn Name="ASOBO_Breaker_Parameters_EX1">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_BUS_ID></SOURCE_BUS_ID>
+			<TARGET_ID>1</TARGET_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SOURCE_ID>#SOURCE_BUS_ID#</SOURCE_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<Switch>
+				<Case NotEmpty="SOURCE_ID">
+					<TOGGLE_BREAKER>#SOURCE_ID# #TARGET_ID# (&gt;K:2:ELECTRICAL_#TARGET_COMPONENT#_BREAKER_TOGGLE)</TOGGLE_BREAKER>
+				</Case>
+				<Default>
+					<TOGGLE_BREAKER>#TARGET_ID# (&gt;K:ELECTRICAL_#TARGET_COMPONENT#_BREAKER_TOGGLE)</TOGGLE_BREAKER>
+				</Default>
+			</Switch>
+			<Switch>
+				<Case NotEmpty="SOURCE_ID">
+					<GET_BREAKER>#SOURCE_ID# (A:1:#TARGET_COMPONENT# BREAKER PULLED:#TARGET_ID#, Bool)</GET_BREAKER>
+				</Case>
+				<Default>
+					<GET_BREAKER>(A:#TARGET_COMPONENT# BREAKER PULLED:#TARGET_ID#, Bool)</GET_BREAKER>
+				</Default>
+			</Switch>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_BREAKER>#GET_BREAKER# != if{ #TOGGLE_BREAKER# }</SET_BREAKER>
+		</Parameters>
+		<ReturnParameters>
+			<SET#OUT_PARAM_SUFFIX#_BREAKER>#SET_BREAKER#</SET#OUT_PARAM_SUFFIX#_BREAKER>
+			<TOGGLE#OUT_PARAM_SUFFIX#_BREAKER>#TOGGLE_BREAKER#</TOGGLE#OUT_PARAM_SUFFIX#_BREAKER>
+			<GET#OUT_PARAM_SUFFIX#_BREAKER>#GET_BREAKER#</GET#OUT_PARAM_SUFFIX#_BREAKER>
+		</ReturnParameters>
+	</ParametersFn>
+
+	<ParametersFn Name="ASOBO_Breaker_Parameters">
+		<ReturnParameters>
+			<Switch Param="ELECTRICAL_SYSTEM">
+				<Case Value="EX1">
+					<UseParametersFn Name="ASOBO_Breaker_Parameters_EX1"/>
+				</Case>
+				<Default>
+					<UseParametersFn Name="ASOBO_Breaker_Parameters_Default"/>
+				</Default>
+			</Switch>
+		</ReturnParameters>
+	</ParametersFn>
+
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Bus_Connection_Parameters">
+		<Parameters Type="Default">
+			<BUS_ID>1</BUS_ID>
+			<SOURCE_BUS_ID>1</SOURCE_BUS_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Connection_Parameters">
+				<TARGET_COMPONENT>BUS</TARGET_COMPONENT>
+				<TARGET_ID>#BUS_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Bus_Breaker_Parameters">
+		<Parameters Type="Default">
+			<BUS_ID>1</BUS_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Breaker_Parameters">
+				<TARGET_COMPONENT>BUS</TARGET_COMPONENT>
+				<TARGET_ID>#BUS_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Circuit_Connection_Parameters">
+		<Parameters Type="Default">
+			<CIRCUIT_ID>1</CIRCUIT_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Connection_Parameters">
+				<TARGET_COMPONENT>CIRCUIT</TARGET_COMPONENT>
+				<TARGET_ID>#CIRCUIT_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Circuit_Breaker_Parameters">
+		<Parameters Type="Default">
+			<CIRCUIT_ID>1</CIRCUIT_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Breaker_Parameters">
+				<TARGET_COMPONENT>CIRCUIT</TARGET_COMPONENT>
+				<TARGET_ID>#CIRCUIT_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Alternator_Connection_Parameters">
+		<Parameters Type="Default">
+			<ALTERNATOR_ID>1</ALTERNATOR_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Connection_Parameters">
+				<TARGET_COMPONENT>ALTERNATOR</TARGET_COMPONENT>
+				<TARGET_ID>#ALTERNATOR_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Alternator_Breaker_Parameters">
+		<Parameters Type="Default">
+			<ALTERNATOR_ID>1</ALTERNATOR_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Breaker_Parameters">
+				<TARGET_COMPONENT>ALTERNATOR</TARGET_COMPONENT>
+				<TARGET_ID>#ALTERNATOR_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Battery_Connection_Parameters">
+		<Parameters Type="Default">
+			<BATTERY_ID>1</BATTERY_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Connection_Parameters">
+				<TARGET_COMPONENT>BATTERY</TARGET_COMPONENT>
+				<TARGET_ID>#BATTERY_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Battery_Breaker_Parameters">
+		<Parameters Type="Default">
+			<BATTERY_ID>1</BATTERY_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Breaker_Parameters">
+				<TARGET_COMPONENT>BATTERY</TARGET_COMPONENT>
+				<TARGET_ID>#BATTERY_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_External_Power_Connection_Parameters">
+		<Parameters Type="Default">
+			<EXTERNAL_POWER_ID>1</EXTERNAL_POWER_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Connection_Parameters">
+				<TARGET_COMPONENT>EXTERNAL_POWER</TARGET_COMPONENT>
+				<TARGET_ID>#EXTERNAL_POWER_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_External_Power_Breaker_Parameters">
+		<Parameters Type="Default">
+			<EXTERNAL_POWER_ID>1</EXTERNAL_POWER_ID>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Breaker_Parameters">
+				<TARGET_COMPONENT>EXTERNAL_POWER</TARGET_COMPONENT>
+				<TARGET_ID>#EXTERNAL_POWER_ID#</TARGET_ID>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Macro Name="Electrical_Line_Connected">1</Macro>
+	<Macro Name="Electrical_Line_Disconnected">0</Macro>
+	<ParametersFn Name="ASOBO_Line_Connection_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<LINE_ID>1</LINE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<SIMVAR_CONNECTION>LINE CONNECTION ON:#LINE_ID#</SIMVAR_CONNECTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<TOGGLE_CONNECTION>#LINE_ID# (&gt;K:ELECTRICAL_LINE_CONNECTION_TOGGLE)</TOGGLE_CONNECTION>
+			<GET_CONNECTION>(A:#SIMVAR_CONNECTION#, Bool)</GET_CONNECTION>
+		</Parameters>
+		<Parameters Type="Override">
+			<SET_CONNECTION>#GET_CONNECTION# != if{ #TOGGLE_CONNECTION# }</SET_CONNECTION>
+		</Parameters>
+		<ReturnParameters>
+			<SET#OUT_PARAM_SUFFIX#_CONNECTION>#SET_CONNECTION#</SET#OUT_PARAM_SUFFIX#_CONNECTION>
+			<SET#OUT_PARAM_SUFFIX#_CONNECTED>@Electrical_Line_Connected #SET_CONNECTION#</SET#OUT_PARAM_SUFFIX#_CONNECTED>
+			<SET#OUT_PARAM_SUFFIX#_DISCONNECTED>@Electrical_Line_Disconnected #SET_CONNECTION#</SET#OUT_PARAM_SUFFIX#_DISCONNECTED>
+			<TOGGLE#OUT_PARAM_SUFFIX#_CONNECTION>#TOGGLE_CONNECTION#</TOGGLE#OUT_PARAM_SUFFIX#_CONNECTION>
+			<GET#OUT_PARAM_SUFFIX#_CONNECTION>#GET_CONNECTION#</GET#OUT_PARAM_SUFFIX#_CONNECTION>
+			<SIMVAR#OUT_PARAM_SUFFIX#_CONNECTION>#SIMVAR_CONNECTION#</SIMVAR#OUT_PARAM_SUFFIX#_CONNECTION>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Line_Breaker_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<LINE_ID>1</LINE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<SIMVAR_BREAKER>LINE BREAKER PULLED:#LINE_ID#</SIMVAR_BREAKER>
+		</Parameters>
+		<Parameters Type="Override">
+			<TOGGLE_BREAKER>#LINE_ID# (&gt;K:ELECTRICAL_LINE_BREAKER_TOGGLE)</TOGGLE_BREAKER>
+			<GET_BREAKER>(A:#SIMVAR_BREAKER#, Bool)</GET_BREAKER>
+		</Parameters>
+		<Parameters Type="Override">
+			<SET_BREAKER>#GET_BREAKER# != if{ #TOGGLE_BREAKER# }</SET_BREAKER>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR#OUT_PARAM_SUFFIX#_BREAKER>#SIMVAR_BREAKER#</SIMVAR#OUT_PARAM_SUFFIX#_BREAKER>
+			<SET#OUT_PARAM_SUFFIX#_BREAKER>#SET_BREAKER#</SET#OUT_PARAM_SUFFIX#_BREAKER>
+			<SET#OUT_PARAM_SUFFIX#_PULLED>@Electrical_Breaker_Pulled #SET_BREAKER#</SET#OUT_PARAM_SUFFIX#_PULLED>
+			<SET#OUT_PARAM_SUFFIX#_PUSHED>@Electrical_Breaker_Pushed #SET_BREAKER#</SET#OUT_PARAM_SUFFIX#_PUSHED>
+			<TOGGLE#OUT_PARAM_SUFFIX#_BREAKER>#TOGGLE_BREAKER#</TOGGLE#OUT_PARAM_SUFFIX#_BREAKER>
+			<GET#OUT_PARAM_SUFFIX#_BREAKER>#GET_BREAKER#</GET#OUT_PARAM_SUFFIX#_BREAKER>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_One_Line_Active_Junction_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper" />
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>LINE_ID</Param>
+					<Parameters>
+						<LoadParameters ID="Lines_Parameters" />
+						<RemoveSavedParameters ID="Lines_Parameters" />
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="ASOBO_Increment_ID_Helper">
+							<OUT_PARAM_ID_NAME>LOOP_INDEX</OUT_PARAM_ID_NAME>
+						</UseParametersFn>
+					</Parameters>
+					<Parameters Type="Default" Lifetime="Loop">
+						<SET_JUNCTION_STATE>sp0</SET_JUNCTION_STATE>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="ASOBO_Line_Connection_Parameters">
+							<OUT_PARAM_SUFFIX />
+							<LINE_ID>'#LINE_ID#'_n</LINE_ID>
+						</UseParametersFn>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<GET_LINE_STATE>#GET_CONNECTION#</GET_LINE_STATE>
+						<TOGGLE_LINE_STATE>#TOGGLE_CONNECTION#</TOGGLE_LINE_STATE>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<SET_JUNCTION_STATE>#SET_JUNCTION_STATE# l0 #LOOP_INDEX# == #GET_LINE_STATE# != if{ #TOGGLE_LINE_STATE# }</SET_JUNCTION_STATE>
+					</Parameters>
+				</Do>
+				<Then>
+					<SET_JUNCTION#OUT_PARAM_SUFFIX#_STATE>#SET_JUNCTION_STATE#</SET_JUNCTION#OUT_PARAM_SUFFIX#_STATE>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

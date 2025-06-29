@@ -1,0 +1,219 @@
+<ModelBehaviors>
+	<!-- ################################# TEMPLATES ################################## -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Emissive_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Power_Dependant_Emissive_Template
+		@Brief Create en emissive which by default will be tied to an electrical source
+		@Param FINAL_EMISSIVE_TEMPLATE Emissive template used to create the component
+	-->
+	<Template Name="ASOBO_IT_Power_Dependant_Emissive_Template">
+		<Parameters Type="Default">
+			<FINAL_EMISSIVE_TEMPLATE>ASOBO_GT_Component_Emissive_Template</FINAL_EMISSIVE_TEMPLATE>
+		</Parameters>
+		<UseTemplate Name="#FINAL_EMISSIVE_TEMPLATE#">
+			<UseParametersFn Name="ASOBO_Power_Dependant_Emissive_Parameters"/>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Screen_Brightness_Template
+		@Brief Create en emissive for a screen display preventing a value of 0 (effectively turning off the screen)
+		@Param BASE_EMISSIVE_TEMPLATE Emissive template used to create the component
+		@Param MIN_SCREEN_BRIGHTNESS Minimum emissive value
+		@Param MAX_SCREEN_BRIGHTNESS Maximum emissive value
+		@Param SCREEN_GAMMA Gamma value
+		@Param EMISSIVE_CODE Factor (0 to 100) driving the brightness
+		@Param GET_EMISSIVE Function returning an EMISSIVE_CODE, MAX_SCREEN_BRIGHTNESS and MIN_SCREEN_BRIGHTNESS
+	-->
+	<Template Name="ASOBO_IT_Screen_Brightness_Template">
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_EMISSIVE">
+				<UseParametersFn Name="#GET_EMISSIVE#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<BASE_EMISSIVE_TEMPLATE>ASOBO_IT_Power_Dependant_Emissive_Template</BASE_EMISSIVE_TEMPLATE>
+			<MIN_SCREEN_BRIGHTNESS>0.001</MIN_SCREEN_BRIGHTNESS>
+			<MAX_SCREEN_BRIGHTNESS>1</MAX_SCREEN_BRIGHTNESS>
+			<SCREEN_GAMMA>2.2</SCREEN_GAMMA>
+		</Parameters>
+		<Parameters Type="Override">
+			<BRIGHTNESS_RANGE Process="Float">#MAX_SCREEN_BRIGHTNESS# #MIN_SCREEN_BRIGHTNESS# -</BRIGHTNESS_RANGE>
+		</Parameters>
+		<Parameters Type="Default">
+			<SCREEN_EMISSIVE_CODE>#EMISSIVE_CODE# 100 / #SCREEN_GAMMA# pow #BRIGHTNESS_RANGE# * #MIN_SCREEN_BRIGHTNESS# +</SCREEN_EMISSIVE_CODE>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="STATIC_EMISSIVE">
+				<SCREEN_EMISSIVE_CODE Process="Float">#SCREEN_EMISSIVE_CODE#</SCREEN_EMISSIVE_CODE>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="#BASE_EMISSIVE_TEMPLATE#">
+			<EMISSIVE_CODE>#SCREEN_EMISSIVE_CODE#</EMISSIVE_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Screen_With_Automatic_Brightness_Template">
+		<Parameters Type="Default">
+			<BASE_EMISSIVE_TEMPLATE>ASOBO_IT_Power_Dependant_Emissive_Template</BASE_EMISSIVE_TEMPLATE>
+			<MIN_SCREEN_BRIGHTNESS>0.001</MIN_SCREEN_BRIGHTNESS>
+			<MAX_SCREEN_BRIGHTNESS>1</MAX_SCREEN_BRIGHTNESS>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Light_Parameters">
+				<FACTOR_MIN>#MIN_SCREEN_BRIGHTNESS#</FACTOR_MIN>
+				<FACTOR_MAX>#MAX_SCREEN_BRIGHTNESS#</FACTOR_MAX>
+			</UseParametersFn>
+		</Parameters>
+		<UseTemplate Name="#BASE_EMISSIVE_TEMPLATE#">
+			<EMISSIVE_CODE>#GET_AUTOMATIC_BRIGHTNESS_FACTOR#</EMISSIVE_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Screen_With_Adjustable_Automatic_Brightness_Template">
+		<Parameters Type="Default">
+			<BASE_EMISSIVE_TEMPLATE>ASOBO_IT_Power_Dependant_Emissive_Template</BASE_EMISSIVE_TEMPLATE>
+			<MIN_SCREEN_BRIGHTNESS>0.001</MIN_SCREEN_BRIGHTNESS>
+			<MAX_SCREEN_BRIGHTNESS>1</MAX_SCREEN_BRIGHTNESS>
+			<LVAR_OFFSET_NAME>XMLVAR_SCREEN_BRIGHTNESS_OFFSET</LVAR_OFFSET_NAME>
+		</Parameters>
+		<Parameters Type="Default">
+			<OFFSET>(L:1:#LVAR_OFFSET_NAME#)</OFFSET>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Light_Parameters">
+				<FACTOR_MIN>#MIN_SCREEN_BRIGHTNESS#</FACTOR_MIN>
+				<FACTOR_MAX>#MAX_SCREEN_BRIGHTNESS#</FACTOR_MAX>
+			</UseParametersFn>
+		</Parameters>
+		<UseTemplate Name="#BASE_EMISSIVE_TEMPLATE#">
+			<EMISSIVE_CODE>
+				#OFFSET# 0 &gt; if{ #OFFSET# #GET_AUTOMATIC_BRIGHTNESS_FACTOR# #MAX_SCREEN_BRIGHTNESS# (F:Lerp) }
+								els{ 0 #OFFSET# - #GET_AUTOMATIC_BRIGHTNESS_FACTOR# #MIN_SCREEN_BRIGHTNESS# (F:Lerp) }
+			</EMISSIVE_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Ambient_Update_Template
+		@Brief Create an update component to synchronize an AMBIENT_FACTOR to a potentiometer value (used by ambient lights)
+		@Param BASE_UPDATE_TEMPLATE Update template used to create the component
+		@Param UPDATE_PER_SECOND How many times per second this update will run
+		@Param POTENTIOMETER_ID Index of the potentiometer to set
+		@Param AMBIENT_FACTOR Factor (0 to 100) driving the ambient intensity
+		@Param GET_AMBIENT Function returning an AMBIENT_FACTOR
+		@Param TEST_NO_FAILURE Optional condition for which the ambient can be set, if the condition returns false the potentiometer will be set to 0
+	-->
+	<Template Name="ASOBO_IT_Ambient_Update_Template">
+		<Parameters Type="Override">
+			<Condition NotEmpty="GET_AMBIENT">
+				<UseParametersFn Name="#GET_AMBIENT#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<BASE_UPDATE_TEMPLATE>@BaseUpdateTemplate</BASE_UPDATE_TEMPLATE>
+			<UPDATE_PER_SECOND>10</UPDATE_PER_SECOND>
+			<POTENTIOMETER_ID>1</POTENTIOMETER_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Potentiometer_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition NotEmpty="TEST_NO_FAILURE">
+				<True>
+					<AMBIENT_UPDATE_CODE_IF_NO_FAILURE>#AMBIENT_FACTOR# s0 #GET_POTENTIOMETER# != if{ l0 near #SET_POTENTIOMETER# }</AMBIENT_UPDATE_CODE_IF_NO_FAILURE>
+					<AMBIENT_UPDATE_CODE_IF_FAILURE>0 s0 #GET_POTENTIOMETER# != if{ l0 #SET_POTENTIOMETER# }</AMBIENT_UPDATE_CODE_IF_FAILURE>
+				</True>
+				<False>
+					<AMBIENT_UPDATE_CODE>#AMBIENT_FACTOR# s0 #GET_POTENTIOMETER# != if{ l0 near #SET_POTENTIOMETER# }</AMBIENT_UPDATE_CODE>
+				</False>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition NotEmpty="TEST_NO_FAILURE">
+				<AMBIENT_UPDATE_CODE>#TEST_NO_FAILURE# if{ #AMBIENT_UPDATE_CODE_IF_NO_FAILURE# } els{ #AMBIENT_UPDATE_CODE_IF_FAILURE# }</AMBIENT_UPDATE_CODE>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="#BASE_UPDATE_TEMPLATE#">
+			<UPDATE_CODE>#AMBIENT_UPDATE_CODE#</UPDATE_CODE>
+			<UPDATE_FREQUENCY>#UPDATE_PER_SECOND#</UPDATE_FREQUENCY>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Emissive_Brightness_Template
+		@Brief Create en emissive with a dynamic brightness factor
+		@Param BASE_EMISSIVE_TEMPLATE Emissive template used to create the component
+		@Param EMISSIVE_CODE Emissive value
+		@Param GET_EMISSIVE Function returning an EMISSIVE_CODE
+	-->
+	<Template Name="ASOBO_IT_Emissive_Brightness_Template">
+		<Parameters Type="Override">
+			<Condition Check="GET_EMISSIVE">
+				<UseParametersFn Name="#GET_EMISSIVE#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<BASE_EMISSIVE_TEMPLATE>ASOBO_IT_Power_Dependant_Emissive_Template</BASE_EMISSIVE_TEMPLATE>
+		</Parameters>
+		<UseTemplate Name="#BASE_EMISSIVE_TEMPLATE#"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Indicator_Emissive_Template
+		@Brief Create a trackable emissive (used by indicator lights)
+		@Param LOG_LVL Type of indication
+		@Param #LOG_LVL#_ID ID of the indicator
+		@Param BASE_EMISSIVE_TEMPLATE Emissive template used to create the component
+		@Param EMISSIVE_CODE Condition for which the indicator should be active
+		@Param GET_EMISSIVE Function returning an EMISSIVE_CODE
+		@Param INDICATOR_LIGHT_PROCESSOR Function processessing the indicator EMISSIVE_CODE and returning the final EMISSIVE_CODE
+	-->
+	<Template Name="ASOBO_IT_Indicator_Emissive_Template">
+		<Parameters Type="Override">
+			<LOG_ID Process="Param">#LOG_LVL#_ID</LOG_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="GET_EMISSIVE">
+				<UseParametersFn Name="#GET_EMISSIVE#"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition CheckSavedParameters="Global_Default_Emissive_Indicators_Config">
+				<LoadParameters ID="Global_Default_Emissive_Indicators_Config"/>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#INDICATOR_LIGHT_PROCESSOR#"/>
+		</Parameters>
+		<UseTemplate Name="#BASE_EMISSIVE_TEMPLATE#"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Info_Emissive_Template
+		@Brief Emissive triggering a INFO annunciation
+		@Param INFO_ID ID of the indicator
+	-->
+	<Template Name="ASOBO_IT_Info_Emissive_Template">
+		<UseTemplate Name="ASOBO_IT_Indicator_Emissive_Template">
+			<LOG_LVL>Info</LOG_LVL>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Warning_Emissive_Template
+		@Brief Emissive triggering a WARNING annunciation
+		@Param WARNING_ID ID of the indicator
+	-->
+	<Template Name="ASOBO_IT_Warning_Emissive_Template">
+		<UseTemplate Name="ASOBO_IT_Indicator_Emissive_Template">
+			<LOG_LVL>Warning</LOG_LVL>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Caution_Emissive_Template
+		@Brief Emissive triggering a CAUTION annunciation
+		@Param CAUTION_ID ID of the indicator
+	-->
+	<Template Name="ASOBO_IT_Caution_Emissive_Template">
+		<UseTemplate Name="ASOBO_IT_Indicator_Emissive_Template">
+			<LOG_LVL>Caution</LOG_LVL>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

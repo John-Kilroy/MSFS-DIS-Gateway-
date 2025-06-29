@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LodSimplificationConfig version="1.0">
+	<LODS>
+		<!--
+			WARNING: values set in common lod are NOT automatically inherited
+			
+			inheritance can be added using attribute:
+				inheritFromCommon="true"
+			inheritance from previous lods can also be added using attribute:
+				inheritFromPreviousLod="true"
+            ProcessingParams cannot be inherited
+		-->
+
+		<LOD id="0">
+			<ProcessingParams>
+				<GenerateFromLod id="0"/>
+				<MinSize value="35.0"/>
+			</ProcessingParams>
+		</LOD>
+		<LOD id="1">
+			<ProcessingParams>
+				<GenerateFromLod id="1" id="0"/>
+				<MinSize value="5.0"/> <!-- new LOD minSize value. MANDATORY if no associated LOD in model XML! -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<OnScreenSize value="10.0"/> <!-- float percent ; 0.0 disable -->
+			</TriangleReduction>
+		</LOD>
+		<LOD id="2">
+			<ProcessingParams>
+				<GenerateFromLod id="2" id="1" id="0"/>
+				<MinSize value="3.0"/> <!-- new LOD minSize value. MANDATORY if no associated LOD in model XML! -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<OnScreenSize value="5.0"/> <!-- float percent ; 0.0 disable -->
+			</TriangleReduction>
+		</LOD>
+		<LOD id="3">
+			<ProcessingParams>
+				<GenerateFromLod id="3" id="2" id="1" id="0"/>
+				<MinSize value="0.5"/> <!-- new LOD minSize value. MANDATORY if no associated LOD in model XML! -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="100"/> <!-- integer greater than 0 ; -1 disable -->
+				<OnScreenSize value="1.0"/> <!-- float percent ; 0.0 disable -->
+			</TriangleReduction>
+		</LOD>
+		<LOD id="4">
+			<ProcessingParams>
+				<GenerateFromLod id="9" id="8" id="7" id="6" id="5" id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="0.0"/> <!-- new LOD minSize value. MANDATORY if no associated LOD in model XML! -->
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="16"/> <!-- integer greater than 0 ; -1 disable -->
+				<OnScreenSize value="0.5"/> <!-- float percent ; 0.0 disable -->
+			</TriangleReduction>
+		</LOD>
+	</LODS>
+</LodSimplificationConfig>

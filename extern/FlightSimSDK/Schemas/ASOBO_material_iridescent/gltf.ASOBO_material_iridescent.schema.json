@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_iridescent glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "description": "Define a material with a iridescent layer effect.",
+    "properties": {
+        "iridescentThicknessTexture": {
+            "description": "Optionnal texture used to determine the thickness of the iridescent layer on the surface. It affect the way of the gradient of the iridescent is show.",
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+		"iridescentMinThickness": {
+            "description": "Controls the minimal thickness of the iridescent layer.",
+            "default": 10.0,
+            "minimum": 10.0,
+            "type": "number"
+        },
+        "iridescentMaxThickness": {
+            "description": "Controls the maximum thickness of the iridescent layer.",
+            "default": 400.0,
+            "minimum": 10.0,
+            "type": "number"
+        },
+        "iridescentBrightness": {
+            "description": "Controls the brightness of the apparent iridescent effect.",
+            "default": 1.0,
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

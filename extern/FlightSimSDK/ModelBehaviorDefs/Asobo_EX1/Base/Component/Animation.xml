@@ -1,0 +1,162 @@
+<ModelBehaviors>
+	<Include RelativeFile="AnimationTriggers.xml"/>
+	<!-- ParametersFn Definitions -->
+	<ParametersFn Name="ASOBO_Anim_Base_Default_Parameters">
+		<ReturnParameters>
+			<ANIM_LAG>0</ANIM_LAG>
+			<ANIM_WRAP>False</ANIM_WRAP>
+			<ANIM_GUID/>
+			<ANIM_NAME/>
+			<ANIM_LENGTH>100</ANIM_LENGTH>
+			<ANIM_TYPE>Sim</ANIM_TYPE>
+			<ANIM_TYPE_PARAMS>AutoPlay</ANIM_TYPE_PARAMS>
+			<ANIM_DELTA>False</ANIM_DELTA>
+			<ANIM_BLENDWEIGHT>1.0</ANIM_BLENDWEIGHT>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Anim_Base_Parameters">
+		<ReturnParameters>
+			<LAG>#ANIM_LAG#</LAG>
+			<WRAP>#ANIM_WRAP#</WRAP>
+			<GUID>#ANIM_GUID#</GUID>
+			<NAME>#ANIM_NAME#</NAME>
+			<LENGTH>#ANIM_LENGTH#</LENGTH>
+			<TYPE>#ANIM_TYPE#</TYPE>
+			<TYPE_PARAMS>#ANIM_TYPE_PARAMS#</TYPE_PARAMS>
+			<DELTA>#ANIM_DELTA#</DELTA>
+			<BLENDWEIGHT>#ANIM_BLENDWEIGHT#</BLENDWEIGHT>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Anim_Sim_Default_Parameters">
+		<ReturnParameters>
+			<ANIM_SIMVAR/>
+			<ANIM_SIMVAR_UNITS/>
+			<ANIM_SIMVAR_SCALE>1</ANIM_SIMVAR_SCALE>
+			<ANIM_SIMVAR_BIAS>0</ANIM_SIMVAR_BIAS>			
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Anim_Sim_Base_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Anim_Sim_Default_Parameters"/>
+			<UseParametersFn Name="ASOBO_Anim_Base_Default_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Anim_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>ANIM_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+			<SIMVAR>#ANIM_SIMVAR#</SIMVAR>
+			<SIMVAR_UNITS>#ANIM_SIMVAR_UNITS#</SIMVAR_UNITS>
+			<SIMVAR_SCALE>#ANIM_SIMVAR_SCALE#</SIMVAR_SCALE>
+			<SIMVAR_BIAS>#ANIM_SIMVAR_BIAS#</SIMVAR_BIAS>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- IN (opt): Anim_Code_Transform_Stack (Saved parameters containing a list of ANIM_CODE_TRANSFORM_PFN_N to tranform the ANIM_CODE) -->
+	<!-- IN Anim_Code_Transform_Stack (opt): ANIM_CODE_TRANSFORM_PFN_RETURN (PFN to call to change the values return by the transform, by default only returns ANIM_CODE) -->
+	<ParametersFn Name="ASOBO_Anim_Code_Base_Parameters">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Anim_Base_Default_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="Anim_Code_Transform_Stack">
+				<UseParametersFn Name="ASOBO_Anim_Code_Transform_Value">
+					<PLOAD_ANIM_CODE_TRANSFORMS>Anim_Code_Transform_Stack</PLOAD_ANIM_CODE_TRANSFORMS>
+				</UseParametersFn>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Anim_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>ANIM_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+			<CODE>#ANIM_CODE#</CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Anim_Code_Transform_Value">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+				<SAVED_PARAMETERS>PLOAD_ANIM_CODE_TRANSFORMS</SAVED_PARAMETERS>
+			</UseParametersFn>	
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Valid="ANIM_CODE_TRANSFORM_PFN_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<ANIM_CODE_TRANSFORM_PFN Process="Param">ANIM_CODE_TRANSFORM_PFN_#CUR_ID#</ANIM_CODE_TRANSFORM_PFN>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="#ANIM_CODE_TRANSFORM_PFN#"/>
+					</Parameters>
+				</Do>
+				<Then>
+					<Condition Check="ANIM_CODE_TRANSFORM_PFN_RETURN">
+						<True>
+							<UseParametersFn Name="#ANIM_CODE_TRANSFORM_PFN_RETURN#"/>
+						</True>
+						<False>
+							<ANIM_CODE>#ANIM_CODE#</ANIM_CODE>							
+						</False>
+					</Condition>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- Template Definitions -->
+	<Template Name="ASOBO_Anim_Template">
+		<Switch>
+			<Case NotEmpty="ANIM_CODE">
+				<UseTemplate Name="ASOBO_Anim_Code_Base_Template"/>
+			</Case>
+			<Case NotEmpty="ANIM_SIMVAR">
+				<UseTemplate Name="ASOBO_Anim_Sim_Base_Template"/>
+			</Case>
+		</Switch>
+	</Template>
+	<Template Name="ASOBO_Anim_Sim_Base_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Anim_Sim_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>ANIM_SIM_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Animation Name="#NAME#" Guid="#GUID#" Length="#LENGTH#" Type="#TYPE#" TypeParam="#TYPE_PARAMS#">
+			<Parameter>
+				<Sim>
+					<Variable>#SIMVAR#</Variable>
+					<Units>#SIMVAR_UNITS#</Units>
+					<Scale>#SIMVAR_SCALE#</Scale>
+					<Bias>#SIMVAR_BIAS#</Bias>
+				</Sim>
+				<Lag>#LAG#</Lag>
+				<Wrap>#WRAP#</Wrap>
+				<Delta>#DELTA#</Delta>
+				<BlendWeight>#BLENDWEIGHT#</BlendWeight>
+			</Parameter>
+		</Animation>
+	</Template>
+	<Template Name="ASOBO_Anim_Code_Base_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_PFN_Call_Overridable_ParametersFn_Helper">
+				<PFN_PARAM_DEFAULT>ASOBO_Anim_Code_Base_Parameters</PFN_PARAM_DEFAULT>
+				<PFN_PARAM_NAME>ANIM_CODE_BASE_PARAMETERS_FN</PFN_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Animation Name="#NAME#" Guid="#GUID#" Length="#LENGTH#" Type="#TYPE#" TypeParam="#TYPE_PARAMS#">
+			<Parameter>
+				<Code>#CODE#</Code>
+				<Lag>#LAG#</Lag>
+				<Wrap>#WRAP#</Wrap>
+				<Delta>#DELTA#</Delta>
+				<BlendWeight>#BLENDWEIGHT#</BlendWeight>
+			</Parameter>
+		</Animation>
+	</Template>
+</ModelBehaviors>

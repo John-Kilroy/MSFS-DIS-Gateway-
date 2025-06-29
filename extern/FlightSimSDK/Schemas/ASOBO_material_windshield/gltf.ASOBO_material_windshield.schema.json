@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_windshield glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "rainDropScale": {
+            "type": "number"
+        },
+        "wiper1State": {
+            "type": "number"
+        },
+        "wiper2State": {
+            "type": "number"
+        },
+        "wiper3State": {
+            "type": "number"
+        },
+        "wiper4State": {
+            "type": "number"
+        },
+        "wiperMaskTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

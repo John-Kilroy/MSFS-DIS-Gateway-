@@ -1,0 +1,162 @@
+<ModelBehaviors>
+	<!-- ################################## SAFETY #################################### -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_ELT_State_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_ELT_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<VAR_ELT_TEST_NAME>XMLVAR_ELT_TEST</VAR_ELT_TEST_NAME>
+			<VAR_SCOPE_ELT_TEST>L:1</VAR_SCOPE_ELT_TEST>
+		</Parameters>
+		<Parameters Type="Override">
+			<VAR_ELT_TEST>#VAR_SCOPE_ELT_TEST#:#VAR_ELT_TEST_NAME#</VAR_ELT_TEST>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_ELT_TEST>(#VAR_ELT_TEST#)</GET_ELT_TEST>
+			<SET_ELT_TEST>(&gt;#VAR_ELT_TEST#)</SET_ELT_TEST>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_SimVar_Helper">
+				<SIMVAR>#SIMVAR_ELT#</SIMVAR>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Watch_LocalVar_Helper">
+				<LOCAL_VAR>#VAR_ELT_TEST_NAME#</LOCAL_VAR>
+				<VAR_SCOPE>#VAR_SCOPE_ELT_TEST#</VAR_SCOPE>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_ON_CHECK>#GET_ELT#</POS_ON_CHECK>
+			<POS_ARMED_CHECK>#GET_ELT# ! #GET_ELT_TEST# ! and</POS_ARMED_CHECK>
+			<POS_TEST_CHECK>#GET_ELT# ! #GET_ELT_TEST# and</POS_TEST_CHECK>
+			<!-- Set position -->
+			<POS_ON_CODE>1 #SET_ELT# 0 #SET_ELT_TEST#</POS_ON_CODE>
+			<POS_ARMED_CODE>0 #SET_ELT# 0 #SET_ELT_TEST#</POS_ARMED_CODE>
+			<POS_TEST_CODE>0 #SET_ELT# 1 #SET_ELT_TEST#</POS_TEST_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Wipers_Control_Settings_Config">
+		<Parameters Type="Default">
+			<WIPER_SWITCH_NAME>WIPER_SWITCH</WIPER_SWITCH_NAME>
+		</Parameters>
+		<Parameters Type="Default">
+			<WIPER_SWITCH_POSITION_VAR>XMLVAR_#WIPER_SWITCH_NAME#_POSITION</WIPER_SWITCH_POSITION_VAR>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_WIPERS_SWITCH_POSITION>(L:1:#WIPER_SWITCH_POSITION_VAR#)</GET_WIPERS_SWITCH_POSITION>
+			<SET_WIPERS_SWITCH_POSITION>(&gt;L:1:#WIPER_SWITCH_POSITION_VAR#)</SET_WIPERS_SWITCH_POSITION>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_WIPERS_SWITCH_POSITION# 0 ==</POS_OFF_CHECK>
+			<POS_INT_CHECK>#GET_WIPERS_SWITCH_POSITION# 1 ==</POS_INT_CHECK>
+			<POS_LOW_CHECK>#GET_WIPERS_SWITCH_POSITION# 2 ==</POS_LOW_CHECK>
+			<POS_HIGH_CHECK>#GET_WIPERS_SWITCH_POSITION# 3 ==</POS_HIGH_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_WIPERS_SWITCH_POSITION#</POS_OFF_CODE>
+			<POS_INT_CODE>1 #SET_WIPERS_SWITCH_POSITION#</POS_INT_CODE>
+			<POS_LOW_CODE>2 #SET_WIPERS_SWITCH_POSITION#</POS_LOW_CODE>
+			<POS_HIGH_CODE>3 #SET_WIPERS_SWITCH_POSITION#</POS_HIGH_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ##### Wiper Procedure #####-->
+	<ParametersFn Name="Get_Procedure_Wipers_Parameters">
+		<Parameters Type="Default">
+			<SLOW_MOVE_SPEED_PER_SECOND>100</SLOW_MOVE_SPEED_PER_SECOND>
+			<FAST_MOVE_SPEED_PER_SECOND>200</FAST_MOVE_SPEED_PER_SECOND>
+			<INTERMITTENT_COOLDOWN_SECOND>7</INTERMITTENT_COOLDOWN_SECOND>
+			<WIPER_NAME>WIPER</WIPER_NAME>
+			<WIPER_SWITCH_NAME>WIPER_SWITCH</WIPER_SWITCH_NAME>
+		</Parameters>
+		<Parameters Type="Default">
+			<WIPER_POSITION_VAR>XMLVAR_#WIPER_NAME#_POSITION</WIPER_POSITION_VAR>
+			<WIPER_SWITCH_POSITION_VAR>XMLVAR_#WIPER_SWITCH_NAME#_POSITION</WIPER_SWITCH_POSITION_VAR>
+		</Parameters>
+		<Parameters Type="Default">
+			<POS_PARK>0</POS_PARK>
+			<POS_INT>1</POS_INT>
+			<POS_LOW>2</POS_LOW>
+			<POS_HIGH>3</POS_HIGH>
+			<GET_WIPER_POSITION>(L:1:#WIPER_POSITION_VAR#)</GET_WIPER_POSITION>
+			<SET_WIPER_POSITION>(&gt;L:1:#WIPER_POSITION_VAR#)</SET_WIPER_POSITION>
+			<GET_SWITCH_POS>(L:1:#WIPER_SWITCH_POSITION_VAR#)</GET_SWITCH_POS>
+			<GET_STORED_POSITION>(O:XMLVAR_#WIPER_NAME#_SWITCH_POSITION)</GET_STORED_POSITION>
+			<SET_STORED_POSITION>(&gt;O:XMLVAR_#WIPER_NAME#_SWITCH_POSITION)</SET_STORED_POSITION>
+			<GET_WIPER_SPEED>(O:XMLVAR_#WIPER_NAME#_SPEED)</GET_WIPER_SPEED>
+			<SET_WIPER_SPEED>(&gt;O:XMLVAR_#WIPER_NAME#_SPEED)</SET_WIPER_SPEED>
+			<GET_WIPER_GOAL>(O:XMLVAR_#WIPER_NAME#_GOAL)</GET_WIPER_GOAL>
+			<SET_WIPER_GOAL>(&gt;O:XMLVAR_#WIPER_NAME#_GOAL)</SET_WIPER_GOAL>
+			<GET_LAST_WIPER_INT_UPDATE>(O:XMLVAR_#WIPER_NAME#_INT_UPDATE)</GET_LAST_WIPER_INT_UPDATE>
+			<SET_LAST_WIPER_INT_UPDATE>(&gt;O:XMLVAR_#WIPER_NAME#_INT_UPDATE)</SET_LAST_WIPER_INT_UPDATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Move_Interpolation_Helper">
+				<START_VALUE>#GET_WIPER_POSITION#</START_VALUE>
+				<SET_NEW_VALUE>#SET_WIPER_POSITION#</SET_NEW_VALUE>
+				<END_VALUE>#GET_WIPER_GOAL#</END_VALUE>
+				<COEFFICIENT>#GET_WIPER_SPEED# @TICK_Get_Delta_Time *</COEFFICIENT>
+				<OUT_PARAM_NAME>UPDATE_WIPER_POSITION</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Procedure_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>AFTER_POS_CHANGED</OUT_PARAM_NAME>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Procedure_Next_Safe_Jump_Flag_Helper">
+				<OUT_PARAM_NAME>AFTER_POS_TICK</OUT_PARAM_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<ON_POS_CHANGED>
+				l0 #POS_HIGH# == if{
+					#FAST_MOVE_SPEED_PER_SECOND# #SET_WIPER_SPEED#
+					g#AFTER_POS_CHANGED#
+				} els{
+					#SLOW_MOVE_SPEED_PER_SECOND# #SET_WIPER_SPEED#
+					g#AFTER_POS_CHANGED#
+				}
+				:#AFTER_POS_CHANGED#
+			</ON_POS_CHANGED>
+			<ON_POS_TICK>
+				l0 #POS_PARK# == if{
+					(* Park *)
+					#GET_WIPER_GOAL# sp1
+					g#AFTER_POS_TICK#
+				}
+				l0 #POS_INT# == if{
+					(* Intermittent *)
+					#GET_WIPER_GOAL# sp1
+					@E_SimulationTime #GET_LAST_WIPER_INT_UPDATE# - #INTERMITTENT_COOLDOWN_SECOND# &gt; if{ 
+						@E_SimulationTime #SET_LAST_WIPER_INT_UPDATE# 
+						0 100 #GET_WIPER_GOAL# 50 &gt; ? sp1
+					}
+					g#AFTER_POS_TICK#
+				}
+				l0 #POS_LOW# == l0 #POS_HIGH# == or if{
+					(* Low or High *)
+					#GET_WIPER_GOAL# #GET_WIPER_POSITION# == if{ 0 100 #GET_WIPER_GOAL# 50 &gt; ? sp1 } els{ #GET_WIPER_GOAL# sp1 }
+					g#AFTER_POS_TICK#
+				}
+				:#AFTER_POS_TICK#
+				#GET_WIPER_GOAL# l1 != if{ l1 #SET_WIPER_GOAL# }
+			</ON_POS_TICK>
+		</Parameters>
+		<Parameters Type="Override">
+			<THIS_WIPER_UPDATE>
+				#GET_SWITCH_POS# s0 #GET_STORED_POSITION# != if{ l0 #SET_STORED_POSITION# } els{ g#AFTER_POS_CHANGED# }
+				#ON_POS_CHANGED#
+				#ON_POS_TICK#
+				(A:CIRCUIT GENERAL PANEL ON, Bool) if{
+					#UPDATE_WIPER_POSITION#
+				}
+			</THIS_WIPER_UPDATE>
+		</Parameters>
+
+		<ReturnParameters>
+			<TICK_EVERY_FRAME>True</TICK_EVERY_FRAME>
+			<ON_VALUE_CHANGED>#THIS_WIPER_UPDATE#</ON_VALUE_CHANGED>
+		</ReturnParameters>
+	</ParametersFn>
+</ModelBehaviors>

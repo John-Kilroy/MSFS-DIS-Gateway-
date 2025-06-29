@@ -1,0 +1,1219 @@
+<ModelBehaviors>
+	<Template Name="ASOBO_GT_Helper_Recursive_Param_Builder">
+		<DefaultTemplateParameters>
+			<PARAM_REPEATED_START/>
+			<PARAM_REPEATED_END/>
+			<PARAM_START/>
+			<PARAM_END/>
+			<ID>1</ID>
+		</DefaultTemplateParameters>
+		<OverrideTemplateParameters>
+			<PARAM_TO_BUILD/>
+			<NEXT_ID>2</NEXT_ID>
+		</OverrideTemplateParameters>
+		
+		<UseTemplate Name="ASOBO_GT_Helper_Recursive_Param_Builder_2">
+		</UseTemplate>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Recursive_Param_Builder_2">
+		<DefaultTemplateParameters>
+			<PARAM_REPEATED_2_START/>
+			<PARAM_REPEATED_2_END/>
+		</DefaultTemplateParameters>
+		<OverrideTemplateParameters>
+			<Condition>
+				<Test>
+					<Or>
+						<Arg NotEmpty="PARAM_REPEATED_2_START"/>
+						<Arg NotEmpty="PARAM_REPEATED_2_END"/>
+					</Or>
+				</Test>
+				<True>
+					<PARAM_TO_BUILD>#PARAM_TO_BUILD##PARAM_REPEATED_START##ID##PARAM_REPEATED_END##PARAM_REPEATED_2_START##ID##PARAM_REPEATED_2_END#</PARAM_TO_BUILD>
+				</True>
+				<False>
+					<PARAM_TO_BUILD>#PARAM_TO_BUILD##PARAM_REPEATED_START##ID##PARAM_REPEATED_END#</PARAM_TO_BUILD>
+				</False>
+			</Condition>
+			<TEST_ID Process="Param">ID#NEXT_ID#</TEST_ID>
+		</OverrideTemplateParameters>
+		
+		<Condition NotEmpty="TEST_ID">
+			<True>
+				<UseTemplate Name="ASOBO_GT_Helper_Recursive_Param_Builder_2">
+					<ID>#TEST_ID#</ID>
+					<NEXT_ID Process="Int">#NEXT_ID# 1 +</NEXT_ID>
+				</UseTemplate>
+			</True>
+			<False>
+				<UseTemplate Name="#EXIT_TEMPLATE#">
+					<#PARAM_NAME#>#PARAM_START##PARAM_TO_BUILD##PARAM_END#</#PARAM_NAME#>
+				</UseTemplate>
+			</False>
+		</Condition>
+	</Template>
+
+	<!-- Incremental param builder: build as much param as requested with desired content, prefix and suffix -->
+	<Template Name="ASOBO_GT_Helper_Param_Builder_INC">
+		<DefaultTemplateParameters>
+			<CONTENT></CONTENT><!-- What's in between prefix and suffix (both optional) -->
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_GT_Helper_Param_Builder_INC_1">
+			<PARAM_ID>1</PARAM_ID><!-- Must be an integer (incremented) -->
+		</UseTemplate>
+	</Template>
+	<Template Name="ASOBO_GT_Helper_Param_Builder_INC_1">
+		<OverrideTemplateParameters>
+			<Condition Valid="PARAM#PARAM_ID#">
+				<Condition Valid="PROCESS_PARAM#PARAM_ID#">
+					<PROCESS_PARAM>True</PROCESS_PARAM>
+				</Condition>
+				<PARAM_NAME Process="Param">PARAM#PARAM_ID#</PARAM_NAME>
+				<Condition Valid="PARAM#PARAM_ID#_PREFIX">
+					<True>
+						<PREFIX Process="Param">PARAM#PARAM_ID#_PREFIX</PREFIX>
+					</True>
+					<False>
+						<PREFIX/>
+					</False>
+				</Condition>
+				<Condition Valid="PARAM#PARAM_ID#_SUFFIX">
+					<True>
+						<SUFFIX Process="Param">PARAM#PARAM_ID#_SUFFIX</SUFFIX>
+					</True>
+					<False>
+						<SUFFIX/>
+					</False>
+				</Condition>
+			</Condition>
+		</OverrideTemplateParameters>
+		<Switch>
+			<Case Valid="PARAM#PARAM_ID#">
+				<UseTemplate Name="ASOBO_GT_Helper_Param_Builder_INC_1">
+					<PARAM_ID Process="Int">#PARAM_ID# 1 +</PARAM_ID>
+					<Condition Valid="PROCESS_PARAM">
+						<True>
+							<Condition NotEmpty="#PREFIX##CONTENT##SUFFIX#"><!-- Make sure param is not empty -->
+								<#PARAM_NAME# Process="Param">#PREFIX##CONTENT##SUFFIX#</#PARAM_NAME#>
+								<PROCESS_PARAM>False</PROCESS_PARAM><!-- Reset flag -->
+							</Condition>
+						</True>
+						<False>
+							<#PARAM_NAME#>#PREFIX##CONTENT##SUFFIX#</#PARAM_NAME#>
+						</False>
+					</Condition>
+				</UseTemplate>
+			</Case>
+			<Default>
+				<UseTemplate Name="#EXIT_TEMPLATE#">
+				</UseTemplate>
+			</Default>
+		</Switch>
+	</Template>
+
+	<!-- call EXIT_TEMPLATE as many times as MAX_ID each time with the param PARAM increasing by one
+	-->
+	<Template Name="ASOBO_GT_Helper_Increasing_ID">
+		<DefaultTemplateParameters>
+			<FIRST_ID>1</FIRST_ID>
+			<MAX_ID>1</MAX_ID>
+			<PARAM>BTN_ID</PARAM>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_GT_Helper_Increasing_ID_2">
+			<NEXT_ID>#FIRST_ID#</NEXT_ID>
+		</UseTemplate>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Increasing_ID_2">
+		<UseTemplate Name="#EXIT_TEMPLATE#">
+			<#PARAM#>#NEXT_ID#</#PARAM#>
+		</UseTemplate>
+		
+		<Condition>
+			<Test>
+				<Lower>
+					<Number>#NEXT_ID#</Number>
+					<Number>#MAX_ID#</Number>
+				</Lower>
+			</Test>
+			<True>
+				<UseTemplate Name="ASOBO_GT_Helper_Increasing_ID_2">
+					<NEXT_ID Process="Int">#NEXT_ID# 1 +</NEXT_ID>
+				</UseTemplate>
+			</True>
+		</Condition>
+	</Template>
+
+	<!-- call EXIT_TEMPLATE with as much parameters as given for multiple IDs
+		PARAM1 (ID by default): dynamic, goes from FIRST_ID to MAX_ID (Integer)
+		can be configured to add as many as you want with specified PREFIX and SUFFIX 
+		(ex: PARAM2: NODE_ID, PARAM2_PREFIX: Node_, MAX_ID:2 ; will generate: 
+			<NODE_ID>Node_1</NODE_ID><ID>1</ID> for the first call to EXIT_TEMPLATE
+			<NODE_ID>Node_2</NODE_ID><ID>2</ID> for the second
+		)
+	-->
+	<Template Name="ASOBO_GT_Helper_Recursive_ID">
+		<DefaultTemplateParameters>
+			<FIRST_ID>1</FIRST_ID>
+			<MAX_ID>1</MAX_ID>
+			<PARAM1>ID</PARAM1>
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_GT_Helper_Recursive_ID_2">
+			<NEXT_ID>#FIRST_ID#</NEXT_ID>
+		</UseTemplate>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Recursive_ID_2">
+		<UseTemplate Name="ASOBO_GT_Helper_Param_Builder_INC">
+			<CONTENT>#NEXT_ID#</CONTENT>
+		</UseTemplate>
+		<Condition>
+			<Test>
+				<Lower>
+					<Number>#NEXT_ID#</Number>
+					<Number>#MAX_ID#</Number>
+				</Lower>
+			</Test>
+			<True>
+				<UseTemplate Name="ASOBO_GT_Helper_Recursive_ID_2">
+					<NEXT_ID Process="Int">#NEXT_ID# 1 +</NEXT_ID>
+				</UseTemplate>
+			</True>
+		</Condition>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Suffix_ID_Appender">
+		<DefaultTemplateParameters>
+			<Switch>
+				<Case Valid="DONT_APPEND_ID">
+					<SUFFIX_ID></SUFFIX_ID>
+				</Case>
+				<Default>
+					<Condition NotEmpty="CONTAINER_ID">
+						<True>
+							<SUFFIX_ID>_#CONTAINER_ID#</SUFFIX_ID>
+						</True>
+						<False>
+							<SUFFIX_ID>_#ID#</SUFFIX_ID>
+						</False>
+					</Condition>
+				</Default>
+			</Switch>
+		</DefaultTemplateParameters>
+		
+		<UseTemplate Name="#TEMPLATE_TO_CALL#">
+		</UseTemplate>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Non_Linear_Animation_Code">
+		<DefaultTemplateParameters>
+			<SELECTION>50</SELECTION><!-- dynamic parameter for example gallons qty in a fuel tank -->
+			<!-- at least 2 points of reference to interpolate -->
+			<!-- ANIM_VALUE = frame for which the REF_VALUE is corresponding -->
+			<!-- REF_VALUE = value used as a comparison point to SELECTION -->
+			<ANIM_VALUE_0>0</ANIM_VALUE_0>
+			<REF_VALUE_0>0</REF_VALUE_0>
+			<ANIM_VALUE_1>100</ANIM_VALUE_1>
+			<REF_VALUE_1>100</REF_VALUE_1>
+			<!-- Add as much as necessary when calling the template -->
+			<!-- ######################################################### -->
+			<ANIM_LENGTH>100</ANIM_LENGTH><!-- number of frame in the animation -->
+			<MAX_POINT_INDEX>1</MAX_POINT_INDEX><!-- index of latest point of reference -->
+			<MAX_DISPLAYABLE>100</MAX_DISPLAYABLE><!-- higher bound the value SELECTION can reach (the maximum your gauge can display) -->
+			<MIN_DISPLAYABLE>0</MIN_DISPLAYABLE><!-- lower bound the value SELECTION can reach (the minimum your gauge can display) -->
+			<EXIT_TEMPLATE>ASOBO_GT_Anim_Code</EXIT_TEMPLATE>
+			<EXIT_PARAM_NAME>ANIM_CODE</EXIT_PARAM_NAME>
+			<CONTENT></CONTENT><!-- CONTENT init: can be used to tweak the value before interpolating -->
+		</DefaultTemplateParameters>
+		<UseTemplate Name="ASOBO_GT_Helper_Non_Linear_Animation_Code_2">
+			<NEXT_ID Process="Int">#MAX_POINT_INDEX#</NEXT_ID>
+		</UseTemplate>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Non_Linear_Animation_Code_2">
+		<OverrideTemplateParameters>
+			<ANIM_VAL_CURRENT_POINT Process="Param">ANIM_VALUE_#NEXT_ID#</ANIM_VAL_CURRENT_POINT>
+			<REF_VAL_CURRENT_POINT Process="Param">REF_VALUE_#NEXT_ID#</REF_VAL_CURRENT_POINT>
+		</OverrideTemplateParameters>
+		<Condition>
+			<Test>
+				<GreaterOrEqual>
+					<Number>#NEXT_ID#</Number>
+					<Number>0</Number>
+				</GreaterOrEqual>
+			</Test>
+			<True>
+				<Condition>
+					<Test>
+						<Equal>
+							<Number>#NEXT_ID#</Number>
+							<Number>#MAX_POINT_INDEX#</Number>
+						</Equal>
+					</Test>
+					<True>
+						<!-- First point (higher bound) -->
+						<UseTemplate Name="ASOBO_GT_Helper_Non_Linear_Animation_Code_2">
+							<NEXT_ID Process="Int">#NEXT_ID# 1 -</NEXT_ID>
+							<ANIM_VAL_PREVIOUS_POINT Process="Param">ANIM_VALUE_#NEXT_ID#</ANIM_VAL_PREVIOUS_POINT>
+							<REF_VAL_PREVIOUS_POINT Process="Param">REF_VALUE_#NEXT_ID#</REF_VAL_PREVIOUS_POINT>
+						</UseTemplate>
+					</True>
+					<False>
+						<UseTemplate Name="ASOBO_GT_Helper_Non_Linear_Animation_Code_2">
+							<NEXT_ID Process="Int">#NEXT_ID# 1 -</NEXT_ID>
+							<CONTENT>
+								#CONTENT#
+								l0 #REF_VAL_CURRENT_POINT# &gt; if{
+									l0 #REF_VAL_CURRENT_POINT# - #REF_VAL_PREVIOUS_POINT# #REF_VAL_CURRENT_POINT# - / #ANIM_VAL_PREVIOUS_POINT# #ANIM_VAL_CURRENT_POINT# - * #ANIM_VAL_CURRENT_POINT# + sp1 g1
+								}
+							</CONTENT>
+							<ANIM_VAL_PREVIOUS_POINT Process="Param">ANIM_VALUE_#NEXT_ID#</ANIM_VAL_PREVIOUS_POINT>
+							<REF_VAL_PREVIOUS_POINT Process="Param">REF_VALUE_#NEXT_ID#</REF_VAL_PREVIOUS_POINT>
+						</UseTemplate>
+					</False>
+				</Condition>
+			</True>
+			<False>
+				<UseTemplate Name="ASOBO_GT_Helper_Non_Linear_Animation_Code_3">
+				</UseTemplate>
+			</False>
+		</Condition>
+	</Template>
+
+	<Template Name="ASOBO_GT_Helper_Non_Linear_Animation_Code_3">
+		<UseTemplate Name="#EXIT_TEMPLATE#">
+			<#EXIT_PARAM_NAME#>
+				#SELECTION# #MAX_DISPLAYABLE# min #MIN_DISPLAYABLE# max sp0
+				#CONTENT#
+				:1 l1
+			</#EXIT_PARAM_NAME#>
+		</UseTemplate>
+	</Template>
+	
+	<ParametersFn Name="Get_Max_Param_Iteration">
+		<Parameters Type="Default">
+			<MAX_VALUE>-1</MAX_VALUE>
+			<PARAM_PREFIX/>
+			<PARAM_SUFFIX/>
+			<MAX_ITERATION>0</MAX_ITERATION>
+			<OUTGOING_PARAM>OUT_VALUE</OUTGOING_PARAM>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>1</From>
+					<Inc>1</Inc>
+					<While>
+						<Not>
+							<Arg Valid="INFINITE"/>
+						</Not>
+					</While>
+				</Setup>
+				<Do>
+					<SaveParameters ID="Prop_#ID#_FoundValue">
+						<FOUND_VALUE>False</FOUND_VALUE>
+						<MAX_ITERATION>#MAX_ITERATION#</MAX_ITERATION>
+					</SaveParameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Loop>
+							<Setup>
+								<Param>CUR_PARAM_ID</Param>
+								<From>0</From>
+								<Inc>1</Inc>
+								<While>
+									<Or>
+										<Arg NotEmpty="PARAM_PREFIX_#CUR_PARAM_ID#"/>
+										<Arg NotEmpty="PARAM_SUFIX_#CUR_PARAM_ID#"/>
+									</Or>
+								</While>
+							</Setup>
+							<Do>
+								<Parameters Type="Override" Lifetime="Iteration">
+									<PARAM_PREFIX Process="Param">PARAM_PREFIX_#CUR_PARAM_ID#</PARAM_PREFIX>
+									<PARAM_SUFIX Process="Param">PARAM_SUFIX_#CUR_PARAM_ID#</PARAM_SUFIX>
+								</Parameters>
+								<Parameters Type="Override" Lifetime="Iteration">
+									<PARAM_FINAL Process="Param">#PARAM_PREFIX##CUR_ID##PARAM_SUFFIX#</PARAM_FINAL>
+								</Parameters>
+								<Parameters Type="Override" Lifetime="Loop">
+									<Condition NotEmpty="PARAM_FINAL">
+										<SaveParameters ID="Prop_#ID#_FoundValue">
+											<FOUND_VALUE>True</FOUND_VALUE>
+											<MAX_ITERATION Process="Int">#MAX_ITERATION# #CUR_ID# max</MAX_ITERATION>
+										</SaveParameters>
+									</Condition>
+								</Parameters>
+							</Do>
+						</Loop>
+						<LoadParameters ID="Prop_#ID#_FoundValue"/>
+						<Condition Valid="FOUND_VALUE">
+							<False>
+								<Break/>
+							</False>
+						</Condition>
+					</Parameters>
+				</Do>
+			</Loop>
+			<LoadParameters ID="Prop_#ID#_FoundValue"/>
+		</Parameters>
+		
+		<ReturnParameters>
+			<#OUTGOING_PARAM# Process="Int">#MAX_ITERATION#</#OUTGOING_PARAM#>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Append if not Empty -->
+	<ParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+		<Parameters Type="Default">
+			<OUT_PARAM_NAME>#PARAM#</OUT_PARAM_NAME>
+		</Parameters>
+		<Parameters Type="Override">
+			<PARAM_CONTENT Process="Param">#PARAM#</PARAM_CONTENT>
+			<PREV_CONTENT Process="Param">#OUT_PARAM_NAME#</PREV_CONTENT>
+		</Parameters>
+		<ReturnParameters>
+			<Condition NotEmpty="PARAM_CONTENT">
+				<Condition NotEmpty="PREV_CONTENT">
+					<True>
+						<Switch>
+							<Case Valid="APPEND_BEFORE">
+								<#OUT_PARAM_NAME#>#PARAM_CONTENT# #PREV_CONTENT#</#OUT_PARAM_NAME#>
+							</Case>
+							<Default>
+								<#OUT_PARAM_NAME#>#PREV_CONTENT# #PARAM_CONTENT#</#OUT_PARAM_NAME#>
+							</Default>
+						</Switch>
+					</True>
+					<False>
+						<#OUT_PARAM_NAME#>#PARAM_CONTENT#</#OUT_PARAM_NAME#>
+					</False>
+				</Condition>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Gates_Input_Handling">
+		<Parameters Type="Default">
+			<VAR_UID/>
+			<GET_GATES>Lever_Gates</GET_GATES>
+			<GET_GATES_CONFIG>Lever_Gates_Config</GET_GATES_CONFIG>
+			<OUT_PARAM_NAME>GATE_CLAMP_VALUE_CHECK</OUT_PARAM_NAME>
+			<OUT_PARAM_IS_AT_GATE>IS_AT_ANY_GATE_CHECK</OUT_PARAM_IS_AT_GATE>
+			<OUT_PARAM_SET_CAN_BYPASS_GATE>SET_CAN_BYPASS_GATE</OUT_PARAM_SET_CAN_BYPASS_GATE>
+			<INC_HOLD_DURATION_TO_BYPASS_GATE>0.0</INC_HOLD_DURATION_TO_BYPASS_GATE>
+			<DEC_HOLD_DURATION_TO_BYPASS_GATE>0.3</DEC_HOLD_DURATION_TO_BYPASS_GATE>
+			<IN_RANGE_OFFSET>0.0001</IN_RANGE_OFFSET>
+		</Parameters>
+		<Parameters Type="Override">
+			<LoadParameters ID="#GET_GATES_CONFIG#"/>
+			<Condition NotEmpty="VAR_UID">
+				<True>
+					<VAR_UID_PREFIX>_#VAR_UID#</VAR_UID_PREFIX>
+				</True>
+				<False>
+					<VAR_UID_PREFIX/>
+				</False>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Value>GATE_NAME</Value>
+					<Parameters>
+						<LoadParameters ID="#GET_GATES#"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<GATE_POSITION Process="Param">#GATE_NAME#_IE_PERCENT_SET</GATE_POSITION>
+						<GATE_DIRECTION Process="Param">#GATE_NAME#_GATE_DIRECTION</GATE_DIRECTION>
+						<GATE_DEC_HOLD_DURATION Process="Param">#GATE_NAME#_DEC_HOLD_DURATION</GATE_DEC_HOLD_DURATION>
+						<GATE_INC_HOLD_DURATION Process="Param">#GATE_NAME#_INC_HOLD_DURATION</GATE_INC_HOLD_DURATION>
+					</Parameters>
+					<Parameters Type="Override">
+						<GATE_POS_NORMALIZED Process="Float">#GATE_POSITION# 100 /</GATE_POS_NORMALIZED>
+						<Condition NotEmpty="GATE_INC_HOLD_DURATION">
+							<False>
+								<GATE_INC_HOLD_DURATION>#INC_HOLD_DURATION_TO_BYPASS_GATE#</GATE_INC_HOLD_DURATION>
+							</False>
+						</Condition>
+						<Condition NotEmpty="GATE_DEC_HOLD_DURATION">
+							<False>
+								<GATE_DEC_HOLD_DURATION>#DEC_HOLD_DURATION_TO_BYPASS_GATE#</GATE_DEC_HOLD_DURATION>
+							</False>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<GATE_POS_NORMALIZED_UP Process="Float">#GATE_POS_NORMALIZED# #IN_RANGE_OFFSET# +</GATE_POS_NORMALIZED_UP>
+						<GATE_POS_NORMALIZED_DN Process="Float">#GATE_POS_NORMALIZED# #IN_RANGE_OFFSET# -</GATE_POS_NORMALIZED_DN>
+					</Parameters>
+					<Parameters Type="Override">
+						<IS_AT_GATE_CHECK>#GATE_POS_NORMALIZED_DN# #GATE_POS_NORMALIZED_UP# l0 rng</IS_AT_GATE_CHECK>
+					</Parameters>
+					<Parameters Type="Override">
+						<Switch Param="GATE_DIRECTION">
+							<Case Value="Both">
+								<!-- check is we in/decremented past the gate or already are at the gate -->
+								<THIS_GATE_CHECK>
+									l1 #GATE_POS_NORMALIZED_UP# &gt; l0 #GATE_POS_NORMALIZED_DN# &lt;= and
+									l1 #GATE_POS_NORMALIZED_UP# &lt; l0 #GATE_POS_NORMALIZED_DN# &gt;= and or
+									#IS_AT_GATE_CHECK# or
+								</THIS_GATE_CHECK>
+								<THIS_GATE_VALUE_AND_HOLD_DURATION>
+									#GATE_POS_NORMALIZED# sp4 l1 l0 &gt; if{ #GATE_INC_HOLD_DURATION# sp6 } els{ #GATE_DEC_HOLD_DURATION# sp6 }
+								</THIS_GATE_VALUE_AND_HOLD_DURATION>
+							</Case>
+							<Case Value="Inc">
+								<THIS_GATE_CHECK>l1 #GATE_POS_NORMALIZED_UP# &gt; l0 #GATE_POS_NORMALIZED_DN# &lt;= and #IS_AT_GATE_CHECK# or</THIS_GATE_CHECK>
+								<THIS_GATE_VALUE_AND_HOLD_DURATION>#GATE_POS_NORMALIZED# sp4 #GATE_INC_HOLD_DURATION# sp6</THIS_GATE_VALUE_AND_HOLD_DURATION>
+							</Case>
+							<Case Value="Dec">
+								<THIS_GATE_CHECK>l1 #GATE_POS_NORMALIZED_UP# &lt; l0 #GATE_POS_NORMALIZED_DN# &gt;= and #IS_AT_GATE_CHECK# or</THIS_GATE_CHECK>
+								<THIS_GATE_VALUE_AND_HOLD_DURATION>#GATE_POS_NORMALIZED# sp4 #GATE_DEC_HOLD_DURATION# sp6</THIS_GATE_VALUE_AND_HOLD_DURATION>
+							</Case>
+						</Switch>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition NotEmpty="THIS_GATE_CHECK">
+							<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+								<PARAM>THIS_CHECK_GATE_BYPASSED</PARAM>
+								<OUT_PARAM_NAME>CHECK_GATE_BYPASSED</OUT_PARAM_NAME>
+								<THIS_CHECK_GATE_BYPASSED>#THIS_GATE_CHECK# if{ 1 sp3 #THIS_GATE_VALUE_AND_HOLD_DURATION# }</THIS_CHECK_GATE_BYPASSED>
+							</UseParametersFn>
+							<Condition NotEmpty="CHECK_IS_AT_ANY_GATE">
+								<True>
+									<CHECK_IS_AT_ANY_GATE>#CHECK_IS_AT_ANY_GATE# #IS_AT_GATE_CHECK# or</CHECK_IS_AT_ANY_GATE>
+								</True>
+								<False>
+									<CHECK_IS_AT_ANY_GATE>#IS_AT_GATE_CHECK#</CHECK_IS_AT_ANY_GATE>
+								</False>
+							</Condition>
+						</Condition>
+					</Parameters>
+				</Do>
+				<Then>
+					<Condition NotEmpty="CHECK_GATE_BYPASSED">
+						<True>
+							<#OUT_PARAM_NAME#>
+								sp1 '#INPUT_NAME#' 'pressed_or_down'_n (F:InputAction) if{
+									#GET_POSITION_PCT_OVER_100# sp0
+									#CHECK_GATE_BYPASSED#
+									l3 if{
+										'#INPUT_NAME#' 'pressed_or_down_time'_n (F:InputAction) sp5
+										(O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate) ! if{
+											l5 (O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time) &lt; if{
+												(* we release the button and started pressing again *)
+												1 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate)
+												0 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time)
+											} els{ 
+												l5 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time) l4 sp1
+											}
+										} 
+										(O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate) if{
+											l5 l6 &lt; if{ l4 sp1 } els{ 0 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate) }
+										}
+									} els{ 0 (&gt;O:XMLVAR#VAR_UID_PREFIX#_Last_Pressed_Time) }
+								} l1
+							</#OUT_PARAM_NAME#>
+							<#OUT_PARAM_IS_AT_GATE#>#CHECK_IS_AT_ANY_GATE#</#OUT_PARAM_IS_AT_GATE#>
+							<#OUT_PARAM_SET_CAN_BYPASS_GATE#>(&gt;O:XMLVAR#VAR_UID_PREFIX#_Can_Bypass_Gate)</#OUT_PARAM_SET_CAN_BYPASS_GATE#>
+						</True>
+						<False>
+							<#OUT_PARAM_NAME# />
+							<#OUT_PARAM_IS_AT_GATE# />
+							<#OUT_PARAM_SET_CAN_BYPASS_GATE# />
+						</False>
+					</Condition>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_GT_Procedure_Template">
+		<Parameters Type="Default">
+			<VALUE_UNITS />
+			<VALUE_CODE />
+			<INIT_CODE />
+			<INC_CODE />
+			<DEC_CODE />
+			<SET_CODE />
+		</Parameters>
+		<UseInputEvent ID="ASOBO_GIE_Base">
+			<INPUT_EVENT_ID_SOURCE>PROCEDURE</INPUT_EVENT_ID_SOURCE>
+			<IE_NAME>#IE_NAME#</IE_NAME>
+			<TT_INOP>True</TT_INOP>
+			<TT_ICON />
+			<TT_INTERACTION />
+			<TT_INTERACTION_LOCKABLE />
+			<TT_DESCRIPTION />
+			<TT_DESCRIPTION_IS_DYNAMIC>False</TT_DESCRIPTION_IS_DYNAMIC>
+			<TT_VALUE />
+			<TT_VALUE_IS_DYNAMIC>False</TT_VALUE_IS_DYNAMIC>
+			<Loop>
+				<Setup>
+					<Value>SIMVAR_TO_WATCH</Value>
+					<Parameters>
+						<LoadParameters ID="Simvars_To_Watch"/>
+						<RemoveSavedParameters ID="Simvars_To_Watch"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition Check="ID">
+							<True>
+								<ID Process="Int">#ID# 1 +</ID>
+							</True>
+							<False>
+								<ID>0</ID>
+							</False>
+						</Condition>
+					</Parameters>
+					<SIMVAR_TO_WATCH_#ID#>#SIMVAR_TO_WATCH#</SIMVAR_TO_WATCH_#ID#>
+				</Do>
+			</Loop>
+			<Loop>
+				<Setup>
+					<Value>LOCAL_VAR_TO_WATCH</Value>
+					<Parameters>
+						<LoadParameters ID="LocalVars_To_Watch"/>
+						<RemoveSavedParameters ID="LocalVars_To_Watch"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition Check="ID">
+							<True>
+								<ID Process="Int">#ID# 1 +</ID>
+							</True>
+							<False>
+								<ID>0</ID>
+							</False>
+						</Condition>
+					</Parameters>
+					<LOCAL_VAR_TO_WATCH_#ID#>#LOCAL_VAR_TO_WATCH#</LOCAL_VAR_TO_WATCH_#ID#>
+				</Do>
+			</Loop>
+		</UseInputEvent>
+		<UseTemplate Name="ASOBO_Process_Saved_Updates_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_Intercept_Key_Events_Template">
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="GET_KEY_EVENTS_TO_INTERCEPT">
+				<Loop>
+					<Setup>
+						<Param>PFN_GET_KEY_EVENTS_TO_INTERCEPT</Param>
+						<Parameters>
+							<LoadParameters ID="GET_KEY_EVENTS_TO_INTERCEPT"/>
+							<RemoveSavedParameters ID="GET_KEY_EVENTS_TO_INTERCEPT"/>
+						</Parameters>
+					</Setup>
+					<Do>
+						<SaveParameters ID="Key_Events_To_Intercept" Append="Override">
+							<UseParametersFn Name="#PFN_GET_KEY_EVENTS_TO_INTERCEPT#" />
+						</SaveParameters>
+					</Do>
+				</Loop>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Procedure_Template">
+			<IE_NAME>Intercept_Key_Events</IE_NAME>
+			<SET_ARG_COUNT>1</SET_ARG_COUNT>
+			<SET_PARAM_0>p0</SET_PARAM_0>
+			<SET_PARAM_0_TYPE>Float</SET_PARAM_0_TYPE>
+			<SET_PARAM_0_IS_DYNAMIC>True</SET_PARAM_0_IS_DYNAMIC>
+			<Loop>
+				<Setup>
+					<Param>EVENT_ID</Param>
+					<Value>EVENT_CODE</Value>
+					<Parameters>
+						<LoadParameters ID="Key_Events_To_Intercept"/>
+						<RemoveSavedParameters ID="Key_Events_To_Intercept"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Override" Lifetime="Loop">
+						<Condition Check="ID">
+							<True>
+								<ID Process="Int">#ID# 1 +</ID>
+							</True>
+							<False>
+								<ID>0</ID>
+							</False>
+						</Condition>
+					</Parameters>
+					<BINDING_SET_#ID#>#EVENT_ID#</BINDING_SET_#ID#>
+					<BINDING_SET_#ID#_EVENT_ID>#EVENT_ID#</BINDING_SET_#ID#_EVENT_ID>
+					<BINDING_SET_#ID#_EVENT_ID_ONLY>True</BINDING_SET_#ID#_EVENT_ID_ONLY>
+					<BINDING_SET_#ID#_PARAM_0>#EVENT_CODE#</BINDING_SET_#ID#_PARAM_0>
+					<BINDING_SET_#ID#_PARAM_0_IS_DYNAMIC>True</BINDING_SET_#ID#_PARAM_0_IS_DYNAMIC>
+				</Do>
+			</Loop>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Save_Update_Helper">
+		<Parameters Type="Default">
+			<UPDATE_CODE/>
+			<UPDATE_INTERACTION_MODEL>All</UPDATE_INTERACTION_MODEL>
+			<UPDATE_FREQUENCY>1</UPDATE_FREQUENCY>
+			<UPDATE_TEMPLATE>ASOBO_GT_Update</UPDATE_TEMPLATE>
+			<SAVE_UPDATE_TO>Temp_Update</SAVE_UPDATE_TO>
+		</Parameters>
+		<Parameters Type="Override">
+			<SaveParameters ID="#SAVE_UPDATE_TO#" Append="Default">
+				<UPDATE_TEMPLATE>#UPDATE_TEMPLATE#</UPDATE_TEMPLATE>
+				<UPDATE_CODE>#UPDATE_CODE#</UPDATE_CODE>
+				<Condition Check="UPDATE_ONCE">
+					<True>
+						<UPDATE_ONCE>#UPDATE_ONCE#</UPDATE_ONCE>
+					</True>
+					<False>
+						<FREQUENCY>#UPDATE_FREQUENCY#</FREQUENCY>
+					</False>
+				</Condition>
+				<INTERACTION_MODEL>#UPDATE_INTERACTION_MODEL#</INTERACTION_MODEL>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Increment_ID_Helper">
+		<Parameters Type="Default">
+			<OUT_PARAM_ID_NAME>CUR_ID</OUT_PARAM_ID_NAME>
+			<OUT_FIRST_ID>0</OUT_FIRST_ID>
+			<INCREMENT_COUNT>1</INCREMENT_COUNT>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="#OUT_PARAM_ID_NAME#">
+				<CUR_VALUE Process="Param">#OUT_PARAM_ID_NAME#</CUR_VALUE>
+			</Condition>
+		</Parameters>
+		<ReturnParameters>
+			<Condition Check="#OUT_PARAM_ID_NAME#">
+				<True>
+					<#OUT_PARAM_ID_NAME# Process="Int">#CUR_VALUE# #INCREMENT_COUNT# +</#OUT_PARAM_ID_NAME#>
+				</True>
+				<False>
+					<#OUT_PARAM_ID_NAME#>#OUT_FIRST_ID#</#OUT_PARAM_ID_NAME#>
+				</False>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Incremental_Save_Helper">
+		<Parameters Type="Default">
+			<SAVE_ELEMENT_PREFIX>Saved_#ELEMENT_TYPE_NAME#</SAVE_ELEMENT_PREFIX>
+			<APPEND_ELEMENT>Append_With_#ELEMENT_TYPE_NAME#</APPEND_ELEMENT>
+			<SAVE_INCREMENT_TO>Saved_#ELEMENT_TYPE_NAME#_Parameters</SAVE_INCREMENT_TO>
+			<SAVE_ELEMENT>ASOBO_Save_#ELEMENT_TYPE_NAME#_Helper</SAVE_ELEMENT>
+		</Parameters>
+		<Parameters Type="Override">
+			<LoadParameters ID="#SAVE_INCREMENT_TO#"/>
+			<ELEMENT_TYPE_NAME_UC Process="String">'#ELEMENT_TYPE_NAME#' uc</ELEMENT_TYPE_NAME_UC>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Increment_ID_Helper">
+				<OUT_PARAM_ID_NAME>#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED</OUT_PARAM_ID_NAME>
+			</UseParametersFn>
+		</Parameters>
+		<Parameters Type="Override">
+			<LAST_ID_USED Process="Param">#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED</LAST_ID_USED>
+		</Parameters>
+		<Parameters Type="Default">
+			<SAVE_#ELEMENT_TYPE_NAME_UC#_TO>#SAVE_ELEMENT_PREFIX#_#LAST_ID_USED#</SAVE_#ELEMENT_TYPE_NAME_UC#_TO>
+			<Condition CheckSavedParameters="#APPEND_ELEMENT#">
+				<APPEND_WITH_SAVED_#ELEMENT_TYPE_NAME_UC#>#APPEND_ELEMENT#</APPEND_WITH_SAVED_#ELEMENT_TYPE_NAME_UC#>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="#SAVE_ELEMENT#"/>
+			<SaveParameters ID="#SAVE_INCREMENT_TO#" Append="Override">
+				<#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED>#LAST_ID_USED#</#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED>
+			</SaveParameters>
+		</Parameters>
+	</ParametersFn>
+	<ParametersFn Name="ASOBO_Add_Update_Helper">
+		<Parameters Type="Override">
+			<Condition Check="UPDATE_TYPE_NAME">
+				<SAVE_ELEMENT_PREFIX>Saved_#UPDATE_TYPE_NAME#_Update</SAVE_ELEMENT_PREFIX>
+				<SAVE_INCREMENT_TO>Saved_#UPDATE_TYPE_NAME#_Update_Parameters</SAVE_INCREMENT_TO>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Incremental_Save_Helper">
+				<ELEMENT_TYPE_NAME>Update</ELEMENT_TYPE_NAME>
+			</UseParametersFn>
+		</Parameters>
+	</ParametersFn>
+	<Template Name="ASOBO_Process_Saved_Updates_Template">
+		<Parameters Type="Override">
+			<Condition Check="ELEMENT_TYPE_NAME">
+				<GET_SAVED_ELEMENT_PREFIX>Saved_#ELEMENT_TYPE_NAME#_Update</GET_SAVED_ELEMENT_PREFIX>
+				<GET_SAVED_INCREMENT_TO>Saved_#ELEMENT_TYPE_NAME#_Update_Parameters</GET_SAVED_INCREMENT_TO>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_Process_Saved_Elements_Template">
+			<ELEMENT_TYPE_NAME>Update</ELEMENT_TYPE_NAME>
+		</UseTemplate>
+	</Template>
+	<ParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+		<Parameters Type="Default">
+			<REMOVE_#SAVED_PARAMETERS#>True</REMOVE_#SAVED_PARAMETERS#>
+		</Parameters>
+		<Parameters Type="Override">
+			<__SAVED_PARAMETERS__ Process="Param">#SAVED_PARAMETERS#</__SAVED_PARAMETERS__>
+		</Parameters>
+		<ReturnParameters>
+			<Condition CheckSavedParameters="#__SAVED_PARAMETERS__#">
+				<LoadParameters ID="#__SAVED_PARAMETERS__#"/>
+				<Condition Valid="REMOVE_#SAVED_PARAMETERS#">
+					<RemoveSavedParameters ID="#__SAVED_PARAMETERS__#"/>					
+				</Condition>
+			</Condition>
+		</ReturnParameters>
+	</ParametersFn>
+	<Template Name="ASOBO_Process_Saved_Elements_Template">
+		<Parameters Type="Default">
+			<GET_SAVED_ELEMENT_PREFIX>Saved_#ELEMENT_TYPE_NAME#</GET_SAVED_ELEMENT_PREFIX>
+			<GET_SAVED_INCREMENT_TO>Saved_#ELEMENT_TYPE_NAME#_Parameters</GET_SAVED_INCREMENT_TO>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition CheckSavedParameters="#GET_SAVED_INCREMENT_TO#">
+				<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+					<SAVED_PARAMETERS>GET_SAVED_INCREMENT_TO</SAVED_PARAMETERS>
+				</UseParametersFn>	
+				<ELEMENT_TYPE_NAME_UC Process="String">'#ELEMENT_TYPE_NAME#' uc</ELEMENT_TYPE_NAME_UC>
+				<__PROCESS_ELEMENTS__>True</__PROCESS_ELEMENTS__>
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Valid="__PROCESS_ELEMENTS__">
+				<LAST_ID_USED Process="Param">#ELEMENT_TYPE_NAME_UC#_LAST_ID_USED</LAST_ID_USED>
+			</Condition>
+		</Parameters>
+		<Condition Valid="__PROCESS_ELEMENTS__">
+			<Loop>
+				<Setup>
+					<Param>ELEMENT_ID</Param>
+					<From>0</From>
+					<Inc>1</Inc>
+					<To>#LAST_ID_USED#</To>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Load_Then_Remove_Parameters_Helper">
+							<PLOAD_#ELEMENT_TYPE_NAME_UC#_PARAMETERS>#GET_SAVED_ELEMENT_PREFIX#_#ELEMENT_ID#</PLOAD_#ELEMENT_TYPE_NAME_UC#_PARAMETERS>
+							<SAVED_PARAMETERS>PLOAD_#ELEMENT_TYPE_NAME_UC#_PARAMETERS</SAVED_PARAMETERS>
+						</UseParametersFn>
+						<#ELEMENT_TYPE_NAME_UC#_ID>#ELEMENT_ID#</#ELEMENT_TYPE_NAME_UC#_ID>
+					</Parameters>
+					<Parameters Type="Override">
+						<TEMPLATE_TO_USE Process="Param">#ELEMENT_TYPE_NAME_UC#_TEMPLATE</TEMPLATE_TO_USE>
+					</Parameters>
+					<UseTemplate Name="#TEMPLATE_TO_USE#"/>
+				</Do>
+			</Loop>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- IN (opt): TOKEN_PREFIX (Param prefix to look for) -->
+	<!-- IN (opt): TOKEN_SUFFIX (Param suffix to look for) -->
+	<!-- OUT: TOKEN_COUNT (number of loop iterations) -->
+	<!-- OUT: LAST_TOKEN_ID (last valid id iterated on) -->
+	<ParametersFn Name="ASOBO_Count_Token_Helper">
+		<Parameters Type="Default">
+			<FROM>0</FROM>
+			<INC>1</INC>
+			<TOKEN_PREFIX/>
+			<TOKEN_SUFFIX/>
+			<OUT_PARAM_NAME_COUNT>TOKEN_COUNT</OUT_PARAM_NAME_COUNT>
+			<OUT_PARAM_NAME_LAST_ID>LAST_TOKEN_ID</OUT_PARAM_NAME_LAST_ID>
+		</Parameters>
+		<ReturnParameters>
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>#FROM#</From>
+					<Inc>#INC#</Inc>
+					<While>
+						<Arg NotEmpty="#TOKEN_PREFIX##CUR_ID##TOKEN_SUFFIX#"/>
+					</While>
+				</Setup>
+				<Do/>
+				<Then>
+					<#OUT_PARAM_NAME_COUNT# Process="Int">#CUR_ID# #FROM# -</#OUT_PARAM_NAME_COUNT#>
+					<#OUT_PARAM_NAME_LAST_ID# Process="Int">#CUR_ID# 1 -</#OUT_PARAM_NAME_LAST_ID#>
+				</Then>
+			</Loop>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<Macro Name="Lerp">(F:Lerp)</Macro><!-- Ex: 0.5 0 100 @Lerp = 50 -->
+	<Macro Name="MapRange">(F:MapRange)</Macro><!-- Ex: 12550 100 25000 0 1 @MapRange = 0.5 -->
+	<Macro Name="Clamp">(F:Clamp)</Macro><!-- Ex: 110 0 100 @Clamp = 100 -->
+	<Macro Name="Ratio">(F:Ratio)</Macro><!-- Ex: 125 50 150 @Ratio = 0.75 -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Get_Throttle_Key_Events_To_Intercepts">
+		<Parameters Type="Default">
+			<THROTTLE_INCREMENT_SCALE>0.01</THROTTLE_INCREMENT_SCALE>
+		</Parameters>
+		<Parameters Type="Default">
+			<INPUT_VALUE>p1</INPUT_VALUE>
+			<MAP_INPUT_VALUE>@16K /</MAP_INPUT_VALUE>
+			<MAP_AXIS_VALUE>@16K / 1 + 0.5 *</MAP_AXIS_VALUE>
+			<DECREMENT>p0 #THROTTLE_INCREMENT_SCALE# * -</DECREMENT>
+			<INCREMENT>p0 #THROTTLE_INCREMENT_SCALE# * +</INCREMENT>
+			<THROTTLE_CUT_VALUE>0</THROTTLE_CUT_VALUE>
+			<THROTTLE_FULL_VALUE>1</THROTTLE_FULL_VALUE>
+			<SET_ALL_REVERSE_THRUST_ENABLED>(&gt;A:GENERAL ENG REVERSE THRUST ENGAGED:0, Bool)</SET_ALL_REVERSE_THRUST_ENABLED>
+		</Parameters>
+		<Parameters Type="Default">
+			<Condition Check="THROTTLE_CUT_VALUE" Match="0">
+				<THROTTLE_CUT_AT_ZERO>True</THROTTLE_CUT_AT_ZERO>
+			</Condition>
+			<SET_ACTIVE_RANGE>(&gt;O:_Input_Throttle_Range_Max) (&gt;O:_Input_Throttle_Range_Min)</SET_ACTIVE_RANGE>
+			<CLAMP_IN_ACTIVE_RANGE>(O:_Input_Throttle_Range_Min) (O:_Input_Throttle_Range_Max) @Clamp</CLAMP_IN_ACTIVE_RANGE>
+			<ACTIVE_RANGE_MIN>(O:_Input_Throttle_Range_Min)</ACTIVE_RANGE_MIN>
+			<ACTIVE_RANGE_MAX>(O:_Input_Throttle_Range_Max)</ACTIVE_RANGE_MAX>
+			<GET_IS_LOCKED_IN_RANGE>(O:_Input_Is_Locked_In_Range)</GET_IS_LOCKED_IN_RANGE>
+			<SET_IS_LOCKED_IN_RANGE>(&gt;O:_Input_Is_Locked_In_Range)</SET_IS_LOCKED_IN_RANGE>
+			<SET_BLOCKED_BY_UPPER_BOUNDS>(&gt;A:THROTTLE INPUT BLOCKED BY UPPER BOUNDS, Bool)</SET_BLOCKED_BY_UPPER_BOUNDS>
+			<SET_BLOCKED_BY_LOWER_BOUNDS>(&gt;A:THROTTLE INPUT BLOCKED BY LOWER BOUNDS, Bool)</SET_BLOCKED_BY_LOWER_BOUNDS>
+			<GET_BLOCKED_BY_UPPER_BOUNDS>(A:THROTTLE INPUT BLOCKED BY UPPER BOUNDS, Bool)</GET_BLOCKED_BY_UPPER_BOUNDS>
+			<GET_BLOCKED_BY_LOWER_BOUNDS>(A:THROTTLE INPUT BLOCKED BY LOWER BOUNDS, Bool)</GET_BLOCKED_BY_LOWER_BOUNDS>
+			<DETENT_COMPARISON_DELTA>0.001</DETENT_COMPARISON_DELTA>
+			<Condition CheckSavedParameters="Input_Detents">
+				<!-- By default overrides FS2020 key events as we removed specific key events created for this purpose for retrocompatibility reasons.. -->
+				<EV_RANGE_INC_THROTTLE>THROTTLE_INCR</EV_RANGE_INC_THROTTLE><!-- THROTTLE_RANGE_INCR -->
+				<EV_RANGE_DEC_THROTTLE>THROTTLE_DECR</EV_RANGE_DEC_THROTTLE><!-- THROTTLE_RANGE_DECR -->
+				<EV_RANGE_NEXT_DETENT>THROTTLE_FULL</EV_RANGE_NEXT_DETENT><!-- THROTTLE_DETENT_NEXT -->
+				<EV_RANGE_PREV_DETENT>THROTTLE_CUT</EV_RANGE_PREV_DETENT><!-- THROTTLE_DETENT_PREV -->
+			</Condition>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>THROTTLE_NAME</Param>
+					<Value>THROTTLE_INDEX</Value>
+					<Parameters>
+						<LoadParameters ID="Throttles"/>
+						<RemoveSavedParameters ID="Throttles"/>
+					</Parameters>
+				</Setup>
+				<Do>
+					<Parameters Type="Default">
+						<IS_REVERSE_THRUST_ENABLED>(A:GENERAL ENG REVERSE THRUST ENGAGED:#THROTTLE_INDEX#, Bool)</IS_REVERSE_THRUST_ENABLED>
+						<SET_REVERSE_THRUST_ENABLED>(&gt;A:GENERAL ENG REVERSE THRUST ENGAGED:#THROTTLE_INDEX#, Bool)</SET_REVERSE_THRUST_ENABLED>
+						<GET_POSITION_PCT_OVER_100>(B:#THROTTLE_NAME#, percent over 100)</GET_POSITION_PCT_OVER_100>
+						<GET_GATES>#THROTTLE_NAME#_CURVE</GET_GATES>
+						<GET_GATES_CONFIG>#THROTTLE_NAME#_CURVE_CONFIG</GET_GATES_CONFIG>
+					</Parameters>
+					<Parameters Type="Default">
+						<Condition NotEmpty="PFN_MAP_SETTABLE_VALUE">
+							<True>
+								<UseParametersFn Name="#PFN_MAP_SETTABLE_VALUE#" />
+							</True>
+							<False>
+								<Condition Valid="THROTTLE_CUT_AT_ZERO">
+									<True>
+										<!-- No remap needed send axis mapped between 0 and 1 -->
+										<MAP_SETTABLE_VALUE/>
+									</True>
+									<False>
+										<MAP_SETTABLE_VALUE>0 1 #THROTTLE_CUT_VALUE# 0 #THROTTLE_FULL_VALUE# #IS_REVERSE_THRUST_ENABLED# ? @MapRange</MAP_SETTABLE_VALUE>
+									</False>
+								</Condition>
+							</False>
+						</Condition>
+					</Parameters>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Gates_Input_Handling">
+							<INPUT_NAME>KEY_THROTTLE_INCR</INPUT_NAME>
+							<OUT_PARAM_NAME>GLB_CLAMP_THROTTLE_INCR</OUT_PARAM_NAME>
+							<VAR_UID>#THROTTLE_NAME#</VAR_UID>
+							<OUT_PARAM_SET_CAN_BYPASS_GATE>GLB_SET_CAN_BYPASS_GATE</OUT_PARAM_SET_CAN_BYPASS_GATE>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Gates_Input_Handling">
+							<INPUT_NAME>KEY_THROTTLE_DECR</INPUT_NAME>
+							<OUT_PARAM_NAME>GLB_CLAMP_THROTTLE_DECR</OUT_PARAM_NAME>
+							<VAR_UID>#THROTTLE_NAME#</VAR_UID>
+							<OUT_PARAM_SET_CAN_BYPASS_GATE>GLB_SET_CAN_BYPASS_GATE</OUT_PARAM_SET_CAN_BYPASS_GATE>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Gates_Input_Handling">
+							<INPUT_NAME>KEY_THROTTLE#THROTTLE_INDEX#_INCR</INPUT_NAME>
+							<OUT_PARAM_NAME>CLAMP_THROTTLE_INCR</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Gates_Input_Handling">
+							<INPUT_NAME>KEY_THROTTLE#THROTTLE_INDEX#_DECR</INPUT_NAME>
+							<OUT_PARAM_NAME>CLAMP_THROTTLE_DECR</OUT_PARAM_NAME>
+						</UseParametersFn>
+					</Parameters>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Add_Update_Helper">
+							<UPDATE_ONCE>True</UPDATE_ONCE>
+							<UPDATE_CODE>#GET_POSITION_PCT_OVER_100# sp0 #IS_AT_ANY_GATE_CHECK# if{ 1 #SET_CAN_BYPASS_GATE# 1 #GLB_SET_CAN_BYPASS_GATE# }</UPDATE_CODE>
+						</UseParametersFn>
+						<Condition NotEmpty="THROTTLE_FULL_ALIAS_ID">
+							<True>
+								<THIS_THROTTLE_FULL>(&gt;B:#THROTTLE_NAME#_#THROTTLE_FULL_ALIAS_ID#)</THIS_THROTTLE_FULL>
+							</True>
+							<False>
+								<THIS_THROTTLE_FULL>#THROTTLE_FULL_VALUE# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_FULL>
+							</False>
+						</Condition>
+						<Condition NotEmpty="THROTTLE_CUT_ALIAS_ID">
+							<True>
+								<THIS_THROTTLE_CUT>(&gt;B:#THROTTLE_NAME#_#THROTTLE_CUT_ALIAS_ID#)</THIS_THROTTLE_CUT>
+							</True>
+							<False>
+								<THIS_THROTTLE_CUT>#THROTTLE_CUT_VALUE# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_CUT>
+							</False>
+						</Condition>
+						<INCREMENT_THIS_THROTTLE>#GET_POSITION_PCT_OVER_100# #INCREMENT#</INCREMENT_THIS_THROTTLE>
+						<DECREMENT_THIS_THROTTLE>#GET_POSITION_PCT_OVER_100# #DECREMENT#</DECREMENT_THIS_THROTTLE>
+						<THIS_THROTTLE_SET>#INPUT_VALUE# #MAP_INPUT_VALUE# #MAP_SETTABLE_VALUE# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_SET>
+						<THIS_THROTTLE_AXIS_SET>#INPUT_VALUE# #MAP_AXIS_VALUE# #MAP_SETTABLE_VALUE# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_AXI_SET>
+						<THIS_THROTTLE_RESET_IN_RANGE>
+							#GET_POSITION_PCT_OVER_100# sp0 #IS_REVERSE_THRUST_ENABLED# if{
+								l0 #THROTTLE_CUT_VALUE# &gt; if{ l0 #THROTTLE_CUT_VALUE# #THROTTLE_FULL_VALUE# #THROTTLE_CUT_VALUE# 0 @MapRange (&gt;B:#THROTTLE_NAME#_SET) }
+							} els{
+								l0 #THROTTLE_CUT_VALUE# &lt; if{ l0 0 #THROTTLE_CUT_VALUE# #THROTTLE_FULL_VALUE# #THROTTLE_CUT_VALUE# @MapRange (&gt;B:#THROTTLE_NAME#_SET) }
+							}
+						</THIS_THROTTLE_RESET_IN_RANGE>
+					</Parameters>
+					<Parameters Type="Override" Lifetime="Loop">
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_INCR</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_INCR</OUT_PARAM_NAME>
+							<THIS_THROTTLE_INCR>#INCREMENT_THIS_THROTTLE# #GLB_CLAMP_THROTTLE_INCR# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_INCR>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_DECR</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_DECR</OUT_PARAM_NAME>
+							<THIS_THROTTLE_DECR>#DECREMENT_THIS_THROTTLE# #GLB_CLAMP_THROTTLE_DECR# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_DECR>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_INCR_IN_RANGE</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_INCR_IN_RANGE</OUT_PARAM_NAME>
+							<THIS_THROTTLE_INCR_IN_RANGE>#INCREMENT_THIS_THROTTLE# #CLAMP_IN_ACTIVE_RANGE# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_INCR_IN_RANGE>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_DECR_IN_RANGE</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_DECR_IN_RANGE</OUT_PARAM_NAME>
+							<THIS_THROTTLE_DECR_IN_RANGE>#DECREMENT_THIS_THROTTLE# #CLAMP_IN_ACTIVE_RANGE# (&gt;B:#THROTTLE_NAME#_SET)</THIS_THROTTLE_DECR_IN_RANGE>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_FULL</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_FULL</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_CUT</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_CUT</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_SET</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_SET</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_AXIS_SET</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_AXIS_SET</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THIS_THROTTLE_RESET_IN_RANGE</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_RESET_IN_RANGE</OUT_PARAM_NAME>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+							<PARAM>THROTTLE_SET_TO_L0</PARAM>
+							<OUT_PARAM_NAME>ALL_THROTTLE_SET_TO_L0</OUT_PARAM_NAME>
+							<THROTTLE_SET_TO_L0>l0 (&gt;B:#THROTTLE_NAME#_SET)</THROTTLE_SET_TO_L0>
+						</UseParametersFn>
+						<Condition Check="GET_1ST_THROTTLE_POSITION">
+							<False>
+								<GET_1ST_THROTTLE_POSITION>#GET_POSITION_PCT_OVER_100#</GET_1ST_THROTTLE_POSITION>
+							</False>
+						</Condition>
+					</Parameters>
+					<SaveParameters ID="Throttle_Key_Events_To_Intercept" Append="Override">
+						<THROTTLE#THROTTLE_INDEX#_INCR>#INCREMENT_THIS_THROTTLE# #CLAMP_THROTTLE_INCR# (&gt;B:#THROTTLE_NAME#_SET)</THROTTLE#THROTTLE_INDEX#_INCR>
+						<THROTTLE#THROTTLE_INDEX#_DECR>#DECREMENT_THIS_THROTTLE# #CLAMP_THROTTLE_DECR# (&gt;B:#THROTTLE_NAME#_SET)</THROTTLE#THROTTLE_INDEX#_DECR>
+						<THROTTLE#THROTTLE_INDEX#_FULL>#THIS_THROTTLE_FULL#</THROTTLE#THROTTLE_INDEX#_FULL>
+						<THROTTLE#THROTTLE_INDEX#_CUT>#THIS_THROTTLE_CUT#</THROTTLE#THROTTLE_INDEX#_CUT>
+						<THROTTLE#THROTTLE_INDEX#_SET>#THIS_THROTTLE_SET#</THROTTLE#THROTTLE_INDEX#_SET>
+						<THROTTLE#THROTTLE_INDEX#_AXIS_SET_EX1>#THIS_THROTTLE_AXIS_SET#</THROTTLE#THROTTLE_INDEX#_AXIS_SET_EX1>
+						<TOGGLE_THROTTLE#THROTTLE_INDEX#_REVERSE_THRUST>#IS_REVERSE_THRUST_ENABLED# ! #SET_REVERSE_THRUST_ENABLED# #THIS_THROTTLE_RESET_IN_RANGE#</TOGGLE_THROTTLE#THROTTLE_INDEX#_REVERSE_THRUST>
+						<SET_THROTTLE#THROTTLE_INDEX#_REVERSE_THRUST_ON>1 #SET_REVERSE_THRUST_ENABLED# #THIS_THROTTLE_RESET_IN_RANGE#</SET_THROTTLE#THROTTLE_INDEX#_REVERSE_THRUST_ON>
+						<SET_THROTTLE#THROTTLE_INDEX#_REVERSE_THRUST_OFF>0 #SET_REVERSE_THRUST_ENABLED# #THIS_THROTTLE_RESET_IN_RANGE#</SET_THROTTLE#THROTTLE_INDEX#_REVERSE_THRUST_OFF>
+					</SaveParameters>
+				</Do>
+				<Then>
+					<SaveParameters ID="Throttle_Key_Events_To_Intercept" Append="Override">
+						<THROTTLE_INCR>#ALL_THROTTLE_INCR#</THROTTLE_INCR>
+						<THROTTLE_DECR>#ALL_THROTTLE_DECR#</THROTTLE_DECR>
+						<THROTTLE_CUT>#ALL_THROTTLE_CUT#</THROTTLE_CUT>
+						<THROTTLE_FULL>#ALL_THROTTLE_FULL#</THROTTLE_FULL>
+						<THROTTLE_SET>#ALL_THROTTLE_SET#</THROTTLE_SET>
+						<THROTTLE_AXIS_SET_EX1>#ALL_THROTTLE_AXIS_SET#</THROTTLE_AXIS_SET_EX1>
+						<THROTTLE_REVERSE_THRUST_TOGGLE>(A:GENERAL ENG REVERSE THRUST ENGAGED:1, Bool) ! #SET_ALL_REVERSE_THRUST_ENABLED# #ALL_THROTTLE_RESET_IN_RANGE#</THROTTLE_REVERSE_THRUST_TOGGLE>
+						<THROTTLE_REVERSE_THRUST_HOLD>p1 #SET_ALL_REVERSE_THRUST_ENABLED# #ALL_THROTTLE_RESET_IN_RANGE#</THROTTLE_REVERSE_THRUST_HOLD>
+						<SET_THROTTLE_REVERSE_THRUST_ON>1 #SET_ALL_REVERSE_THRUST_ENABLED# #ALL_THROTTLE_RESET_IN_RANGE#</SET_THROTTLE_REVERSE_THRUST_ON>
+						<SET_THROTTLE_REVERSE_THRUST_OFF>0 #SET_ALL_REVERSE_THRUST_ENABLED# #ALL_THROTTLE_RESET_IN_RANGE#</SET_THROTTLE_REVERSE_THRUST_OFF>
+					</SaveParameters>
+					<ALL_THROTTLE_SET_TO_L0>#ALL_THROTTLE_SET_TO_L0#</ALL_THROTTLE_SET_TO_L0>
+					<ALL_THROTTLE_INCR_IN_RANGE>#ALL_THROTTLE_INCR_IN_RANGE#</ALL_THROTTLE_INCR_IN_RANGE>
+					<ALL_THROTTLE_DECR_IN_RANGE>#ALL_THROTTLE_DECR_IN_RANGE#</ALL_THROTTLE_DECR_IN_RANGE>
+					<GET_1ST_THROTTLE_POSITION>#GET_1ST_THROTTLE_POSITION#</GET_1ST_THROTTLE_POSITION>
+				</Then>
+			</Loop>
+		</Parameters>
+		<Condition CheckSavedParameters="Input_Detents">
+			<Parameters Type="Override">
+				<LoadParameters ID="Input_Detents"/>
+			</Parameters>
+			<Parameters Type="Override">
+				<UseParametersFn Name="ASOBO_Count_Token_Helper">
+					<TOKEN_PREFIX>DETENT_</TOKEN_PREFIX>
+					<OUT_PARAM_NAME_LAST_ID>LAST_DETENT_ID</OUT_PARAM_NAME_LAST_ID>
+				</UseParametersFn>	
+			</Parameters>
+			<Parameters Type="Override">
+				<Loop>
+					<Setup>
+						<Param>DETENT_ID</Param>
+						<From>0</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg Check="DETENT_#DETENT_ID#"/>
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<PREV_DETENT_ID Process="Int">#DETENT_ID# 1 - 0 max</PREV_DETENT_ID>
+							<NEXT_DETENT_ID Process="Int">#DETENT_ID# 1 + #LAST_DETENT_ID# min</NEXT_DETENT_ID>
+						</Parameters>
+						<Parameters Type="Override">
+							<DETENT_POSITION Process="Param">DETENT_#DETENT_ID#</DETENT_POSITION>
+							<PREV_DETENT_POSITION Process="Param">DETENT_#PREV_DETENT_ID#</PREV_DETENT_POSITION>
+							<NEXT_DETENT_POSITION Process="Param">DETENT_#NEXT_DETENT_ID#</NEXT_DETENT_POSITION>
+						</Parameters>
+						<Parameters Type="Override">
+							<DETENT_POSITION_POS Process="Float">#DETENT_POSITION# #DETENT_COMPARISON_DELTA# +</DETENT_POSITION_POS>
+							<DETENT_POSITION_NEG Process="Float">#DETENT_POSITION# #DETENT_COMPARISON_DELTA# -</DETENT_POSITION_NEG>
+						</Parameters>
+						<Parameters Type="Override" Lifetime="Loop">
+							<Condition Check="PREV_DETENT_ID" Different="#DETENT_ID#">
+								<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+									<PARAM>THIS_DETENT_CHECK</PARAM>
+									<OUT_PARAM_NAME>GET_DETENT_BELOW</OUT_PARAM_NAME>
+									<Condition Check="PREV_DETENT_ID" Match="0">
+										<True>
+											<THIS_DETENT_CHECK>l0 #DETENT_POSITION_POS# &lt;= if{ #PREV_DETENT_POSITION# }</THIS_DETENT_CHECK>
+										</True>
+										<False>
+											<THIS_DETENT_CHECK>l0 #PREV_DETENT_POSITION# &gt; l0 #DETENT_POSITION_POS# &lt;= and if{ #PREV_DETENT_POSITION# }</THIS_DETENT_CHECK>
+										</False>
+									</Condition>
+								</UseParametersFn>
+							</Condition>
+							<Condition Check="NEXT_DETENT_ID" Different="#DETENT_ID#">
+								<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+									<PARAM>THIS_DETENT_CHECK</PARAM>
+									<OUT_PARAM_NAME>GET_DETENT_ABOVE</OUT_PARAM_NAME>
+									<Condition Check="NEXT_DETENT_ID" Match="#LAST_DETENT_ID#">
+										<True>
+											<THIS_DETENT_CHECK>l0 #DETENT_POSITION_NEG# &gt;= if{ #NEXT_DETENT_POSITION# }</THIS_DETENT_CHECK>
+										</True>
+										<False>
+											<THIS_DETENT_CHECK>l0 #NEXT_DETENT_POSITION# &lt; l0 #DETENT_POSITION_NEG# &gt;= and if{ #NEXT_DETENT_POSITION# }</THIS_DETENT_CHECK>
+										</False>
+									</Condition>
+								</UseParametersFn>
+							</Condition>
+							<Condition>
+								<Test>
+									<Or>
+										<Equal>
+											<Number>#PREV_DETENT_ID#</Number>
+											<Number>#DETENT_ID#</Number>
+										</Equal>
+										<Equal>
+											<Number>#NEXT_DETENT_ID#</Number>
+											<Number>#DETENT_ID#</Number>
+										</Equal>
+									</Or>
+								</Test>
+								<False>
+									<UseParametersFn Name="ASOBO_Append_If_Necessary_Helper">
+										<PARAM>THIS_DETENT_CHECK</PARAM>
+										<OUT_PARAM_NAME>GET_RANGE_IN_BETWEEN_DETENTS</OUT_PARAM_NAME>
+										<THIS_DETENT_CHECK>
+											#PREV_DETENT_POSITION# #NEXT_DETENT_POSITION# l0 rng if{ 
+												l0 #DETENT_POSITION# &lt; if{ #PREV_DETENT_POSITION# #DETENT_POSITION# } els{ #DETENT_POSITION# #NEXT_DETENT_POSITION# }
+											}
+										</THIS_DETENT_CHECK>
+									</UseParametersFn>
+								</False>
+							</Condition>
+						</Parameters>
+					</Do>
+					<Then>
+						<UseParametersFn Name="ASOBO_Add_Update_Helper">
+							<UPDATE_ONCE>True</UPDATE_ONCE>
+							<!-- active range cover full range and not locked -->
+							<UPDATE_CODE>0 #SET_IS_LOCKED_IN_RANGE# 0 1 #SET_ACTIVE_RANGE#</UPDATE_CODE>
+						</UseParametersFn>
+						<UseParametersFn Name="ASOBO_Add_Update_Helper">
+							<!-- Reset lock if out of bounds (using other mappings of manually interacting) -->
+							<UPDATE_CODE>
+								#GET_IS_LOCKED_IN_RANGE# #ACTIVE_RANGE_MIN# #DETENT_COMPARISON_DELTA# - #ACTIVE_RANGE_MAX# #DETENT_COMPARISON_DELTA# + #GET_1ST_THROTTLE_POSITION# rng ! and if{
+									0 #SET_IS_LOCKED_IN_RANGE# 0 1 #SET_ACTIVE_RANGE#
+									0 #SET_BLOCKED_BY_LOWER_BOUNDS# 0 #SET_BLOCKED_BY_UPPER_BOUNDS#
+								}
+								#GET_BLOCKED_BY_LOWER_BOUNDS# #GET_1ST_THROTTLE_POSITION# #ACTIVE_RANGE_MIN# - abs #DETENT_COMPARISON_DELTA# &gt; and if{
+									0 #SET_BLOCKED_BY_LOWER_BOUNDS#
+								}
+								#GET_BLOCKED_BY_UPPER_BOUNDS# #GET_1ST_THROTTLE_POSITION# #ACTIVE_RANGE_MAX# - abs #DETENT_COMPARISON_DELTA# &gt; and if{
+									0 #SET_BLOCKED_BY_UPPER_BOUNDS#
+								}
+							</UPDATE_CODE>
+							<UPDATE_FREQUENCY>5</UPDATE_FREQUENCY>
+						</UseParametersFn>
+						<SaveParameters ID="Throttle_Key_Events_To_Intercept" Append="Override">
+							<!-- active range is settled past the first increment after a prev/next input -->
+							<#EV_RANGE_INC_THROTTLE#>
+								#GET_1ST_THROTTLE_POSITION# sp1 #ALL_THROTTLE_INCR_IN_RANGE# #GET_1ST_THROTTLE_POSITION# sp2
+								l1 l2 - abs #DETENT_COMPARISON_DELTA# &lt; #ACTIVE_RANGE_MAX# 1 != and #SET_BLOCKED_BY_UPPER_BOUNDS# 0 #SET_BLOCKED_BY_LOWER_BOUNDS#
+								#GET_IS_LOCKED_IN_RANGE# ! if{
+									1 #SET_IS_LOCKED_IN_RANGE# l2 sp0
+									#GET_RANGE_IN_BETWEEN_DETENTS# #SET_ACTIVE_RANGE#
+								}
+							</#EV_RANGE_INC_THROTTLE#>
+							<#EV_RANGE_DEC_THROTTLE#>
+								#GET_1ST_THROTTLE_POSITION# sp1 #ALL_THROTTLE_DECR_IN_RANGE# #GET_1ST_THROTTLE_POSITION# sp2
+								l1 l2 - abs #DETENT_COMPARISON_DELTA# &lt; #ACTIVE_RANGE_MIN# 0 != and #SET_BLOCKED_BY_LOWER_BOUNDS# 0 #SET_BLOCKED_BY_UPPER_BOUNDS#
+								#GET_IS_LOCKED_IN_RANGE# ! if{
+									1 #SET_IS_LOCKED_IN_RANGE# l2 sp0
+									#GET_RANGE_IN_BETWEEN_DETENTS# #SET_ACTIVE_RANGE#
+								}
+							</#EV_RANGE_DEC_THROTTLE#>
+							<#EV_RANGE_NEXT_DETENT#>#GET_1ST_THROTTLE_POSITION# sp0
+								#GET_IS_LOCKED_IN_RANGE# if{ #ACTIVE_RANGE_MAX# } els{ #GET_DETENT_ABOVE# } sp0 #ALL_THROTTLE_SET_TO_L0#
+								0 #SET_IS_LOCKED_IN_RANGE# 0 1 #SET_ACTIVE_RANGE# 0
+								0 #SET_BLOCKED_BY_LOWER_BOUNDS# 0 #SET_BLOCKED_BY_UPPER_BOUNDS#
+							</#EV_RANGE_NEXT_DETENT#>
+							<#EV_RANGE_PREV_DETENT#>#GET_1ST_THROTTLE_POSITION# sp0
+								#GET_IS_LOCKED_IN_RANGE# if{ #ACTIVE_RANGE_MIN# } els{ #GET_DETENT_BELOW# } sp0 #ALL_THROTTLE_SET_TO_L0#
+								0 #SET_IS_LOCKED_IN_RANGE# 0 1 #SET_ACTIVE_RANGE#
+								0 #SET_BLOCKED_BY_LOWER_BOUNDS# 0 #SET_BLOCKED_BY_UPPER_BOUNDS#
+							</#EV_RANGE_PREV_DETENT#>
+						</SaveParameters>
+					</Then>
+				</Loop>
+			</Parameters>
+		</Condition>
+		<ReturnParameters>
+			<LoadParameters ID="Throttle_Key_Events_To_Intercept"/>
+			<RemoveSavedParameters ID="Throttle_Key_Events_To_Intercept"/>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

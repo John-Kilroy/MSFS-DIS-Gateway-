@@ -1,0 +1,356 @@
+<ModelBehaviors>
+	<!-- ################################## ELECTRICAL ################################ -->
+	<!-- ############################################################################## -->
+	<!-- Battery -->
+	<ParametersFn Name="ASOBO_Battery_State_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Battery_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_BATTERY_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_BATTERY_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_BATTERY_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_BATTERY#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_BATTERY#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Circuit connection -->
+	<ParametersFn Name="ASOBO_Circuit_Power_Settings_Config">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Circuit_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<VALUE_TYPE>Percent</VALUE_TYPE>
+			<IE_GET_STATE>#GET_CIRCUIT_POWER_SETTING#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_CIRCUIT_POWER_SETTING#</IE_SET_STATE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_CIRCUIT_POWER#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Circuit_Switch_Settings_Config">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Circuit_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_CIRCUIT_ON#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_CIRCUIT_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_CIRCUIT_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_CIRCUIT#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_CIRCUIT#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Circuit connection -->
+	<ParametersFn Name="ASOBO_Circuit_State_Settings_Config">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Circuit_Connection_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_CONNECTION#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_CONNECTION# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_CONNECTION#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_CONNECTION#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_CONNECTION#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Bus connection -->
+	<ParametersFn Name="ASOBO_Bus_State_Settings_Config">
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Bus_Connection_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_CONNECTION# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_CONNECTION#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_CONNECTION#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_CONNECTION#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Bus connection swap -->
+	<ParametersFn Name="ASOBO_Bus_Swap_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<BUS_ID_1>#ID#</BUS_ID_1>
+			<BUS_ID_2>#ID#</BUS_ID_2>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Bus_Connection_Parameters">
+				<BUS_ID>#BUS_ID_1#</BUS_ID>
+				<OUT_PARAM_SUFFIX>_1</OUT_PARAM_SUFFIX>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Bus_Connection_Parameters">
+				<BUS_ID>#BUS_ID_2#</BUS_ID>
+				<OUT_PARAM_SUFFIX>_2</OUT_PARAM_SUFFIX>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_1_CONNECTION# ! #GET_2_CONNECTION# and</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_1_CONNECTION# #GET_2_CONNECTION# ! and</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_1_CONNECTION# 1 #SET_2_CONNECTION#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_1_CONNECTION# 0 #SET_2_CONNECTION#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- Generator -->
+	<ParametersFn Name="ASOBO_Generator_State_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<ALTERNATOR_ID>#ID#</ALTERNATOR_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_Alternator_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ALTERNATOR_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_ALTERNATOR_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_ALTERNATOR_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_ALTERNATOR#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_ALTERNATOR#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- External_Power -->
+	<ParametersFn Name="ASOBO_External_Power_State_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<EXTERNAL_POWER_ID>#ID#</EXTERNAL_POWER_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_External_Power_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_EXTERNAL_POWER_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_EXTERNAL_POWER_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_EXTERNAL_POWER_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_EXTERNAL_POWER#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_EXTERNAL_POWER#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- APU_Generator -->
+	<ParametersFn Name="ASOBO_APU_Generator_State_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<APU_ID>#ID#</APU_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<UseParametersFn Name="ASOBO_APU_Generator_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_APU_GENERATOR_SWITCH#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_APU_GENERATOR_SWITCH# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_APU_GENERATOR_SWITCH#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_APU_GENERATOR#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_APU_GENERATOR#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- (EX1) Line Connection -->
+	<ParametersFn Name="ASOBO_Line_Connection_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<LINE_ID>#ID#</LINE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Line_Connection_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_CONNECTION#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_CONNECTION# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_CONNECTION#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_CONNECTION#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_CONNECTION#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- (EX1) LineSwap Connection -->
+	<ParametersFn Name="ASOBO_Line_Swap_Connection_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<LINE_ID_1>#ID#</LINE_ID_1>
+			<LINE_ID_2>#ID#</LINE_ID_2>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Line_Connection_Parameters">
+				<LINE_ID>#LINE_ID_1#</LINE_ID>
+				<OUT_PARAM_SUFFIX>_1</OUT_PARAM_SUFFIX>
+			</UseParametersFn>
+			<UseParametersFn Name="ASOBO_Line_Connection_Parameters">
+				<LINE_ID>#LINE_ID_2#</LINE_ID>
+				<OUT_PARAM_SUFFIX>_2</OUT_PARAM_SUFFIX>
+			</UseParametersFn>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_1_CONNECTION#</SIMVAR>
+				<SIMVAR>#SIMVAR_2_CONNECTION#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_1_CONNECTION# #GET_2_CONNECTION# ! and</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_1_CONNECTION# ! #GET_2_CONNECTION# and</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>1 #SET_1_CONNECTION# 0 #SET_2_CONNECTION#</POS_OFF_CODE>
+			<POS_ON_CODE>0 #SET_1_CONNECTION# 1 #SET_2_CONNECTION#</POS_ON_CODE>
+			<UseParametersFn Name="ASOBO_Add_Update_Helper">
+				<UPDATE_CODE>
+					1 #SET_1_CONNECTION#
+					0 #SET_2_CONNECTION#
+				</UPDATE_CODE>
+				<UPDATE_ONCE>True</UPDATE_ONCE>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- (EX1) Line Breaker -->
+	<ParametersFn Name="ASOBO_Line_Breaker_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<LINE_ID>#ID#</LINE_ID>
+			<FORWARD_INC_DEC_TO_IE>False</FORWARD_INC_DEC_TO_IE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Line_Breaker_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_BREAKER#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#GET_BREAKER# !</POS_OFF_CHECK>
+			<POS_ON_CHECK>#GET_BREAKER#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>0 #SET_BREAKER#</POS_OFF_CODE>
+			<POS_ON_CODE>1 #SET_BREAKER#</POS_ON_CODE>
+
+			<FORWARD_INC_DEC_TO_IE>#FORWARD_INC_DEC_TO_IE#</FORWARD_INC_DEC_TO_IE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- (EX1) Multiple Lines Breaker -->
+	<ParametersFn Name="ASOBO_Multiple_Line_Breaker_Settings_Config">
+		<Parameters Type="Default">
+			<ID>1</ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<LINE_ID>#ID#</LINE_ID>
+		</Parameters>
+		<Parameters Type="Override">
+			<POS_OFF_CHECK>1</POS_OFF_CHECK>
+			<POS_ON_CHECK>1</POS_ON_CHECK>
+			<POS_OFF_CODE/>
+			<POS_ON_CODE/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Loop>
+				<Setup>
+					<Param>CUR_ID</Param>
+					<From>1</From>
+					<Inc>1</Inc>
+					<While>
+						<Arg Check="LINE_ID_#CUR_ID#"/>
+					</While>
+				</Setup>
+				<Do>
+					<Parameters Type="Override">
+						<UseParametersFn Name="ASOBO_Line_Breaker_Parameters">
+							<LINE_ID Process="Param">LINE_ID_#CUR_ID#</LINE_ID>
+						</UseParametersFn>
+					</Parameters>
+					<Parameters Type="Override" LifeTime="Loop">
+						<POS_OFF_CHECK>#POS_OFF_CHECK# #GET_BREAKER# ! and</POS_OFF_CHECK>
+						<POS_ON_CHECK>#POS_ON_CHECK# #GET_BREAKER# and</POS_ON_CHECK>
+						<POS_OFF_CODE>#POS_OFF_CODE# 0 #SET_BREAKER#</POS_OFF_CODE>
+						<POS_ON_CODE>#POS_ON_CODE# 1 #SET_BREAKER#</POS_ON_CODE>
+						<SIMVAR_#CUR_ID#>#SIMVAR_BREAKER#</SIMVAR_#CUR_ID#>
+					</Parameters>
+				</Do>
+			</Loop>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<Loop>
+					<Setup>
+						<Param>CUR_ID</Param>
+						<From>1</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg Check="LINE_ID_#CUR_ID#"/>
+						</While>
+					</Setup>
+					<Do>
+						<SIMVAR Process="Param">SIMVAR_#CUR_ID#</SIMVAR>
+					</Do>
+				</Loop>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_OFF_CHECK>#POS_OFF_CHECK#</POS_OFF_CHECK>
+			<POS_ON_CHECK>#POS_ON_CHECK#</POS_ON_CHECK>
+			<!-- Set position -->
+			<POS_OFF_CODE>#POS_OFF_CODE#</POS_OFF_CODE>
+			<POS_ON_CODE>#POS_ON_CODE#</POS_ON_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

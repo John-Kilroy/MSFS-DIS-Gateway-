@@ -1,0 +1,83 @@
+<ModelBehaviors>
+	<!-- ################################## HANDLING ################################## -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_HANDLING_Surface_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Surface_Animation_Parameters"/>
+		</Parameters>
+		<Condition Valid="USE_DIFFERENT_L_R_ANIMATIONS">
+			<True>
+				<Condition NotEmpty="ANIM_NAME_L">
+					<UseTemplate Name="ASOBO_GT_Anim_Template">
+						<ANIM_NAME>#ANIM_NAME_L#</ANIM_NAME>
+						<ANIM_CODE>#ANIM_CODE_L#</ANIM_CODE>
+					</UseTemplate>
+				</Condition>
+				<Condition NotEmpty="ANIM_NAME_R">
+					<UseTemplate Name="ASOBO_GT_Anim_Template">
+						<ANIM_NAME>#ANIM_NAME_R#</ANIM_NAME>
+						<ANIM_CODE>#ANIM_CODE_R#</ANIM_CODE>
+					</UseTemplate>
+				</Condition>
+			</True>
+			<False>
+				<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+			</False>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_HANDLING_Flaps_Slats_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Flaps_Slats_Animation_Parameters"/>
+		</Parameters>
+		<Condition NotEmpty="ANIM_NAME_L">
+			<UseTemplate Name="ASOBO_GT_Anim_Template">
+				<ANIM_NAME>#ANIM_NAME_L#</ANIM_NAME>
+				<ANIM_CODE>#ANIM_CODE_L#</ANIM_CODE>
+			</UseTemplate>
+		</Condition>
+		<Condition NotEmpty="ANIM_NAME_R">
+			<UseTemplate Name="ASOBO_GT_Anim_Template">
+				<ANIM_NAME>#ANIM_NAME_R#</ANIM_NAME>
+				<ANIM_CODE>#ANIM_CODE_R#</ANIM_CODE>
+			</UseTemplate>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_HANDLING_Spoilers_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Spoilers_Animation_Parameters"/>
+		</Parameters>
+		<Condition NotEmpty="ANIM_NAME_L">
+			<UseTemplate Name="ASOBO_GT_Anim_Template">
+				<ANIM_NAME>#ANIM_NAME_L#</ANIM_NAME>
+				<ANIM_CODE>#ANIM_CODE_L#</ANIM_CODE>
+			</UseTemplate>
+		</Condition>
+		<Condition NotEmpty="ANIM_NAME_R">
+			<UseTemplate Name="ASOBO_GT_Anim_Template">
+				<ANIM_NAME>#ANIM_NAME_R#</ANIM_NAME>
+				<ANIM_CODE>#ANIM_CODE_R#</ANIM_CODE>
+			</UseTemplate>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_HANDLING_Water_Rudder_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Water_Rudder_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template">
+			<ANIM_CODE>#GET_WATER_RUDDER#</ANIM_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_HANDLING_Ski_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Ski_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template">
+			<ANIM_CODE>#GET_SKI_ANIMATION#</ANIM_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

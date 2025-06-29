@@ -1,0 +1,8 @@
+<ModelBehaviors>
+	<Include RelativeFile="DefaultConfig.xml"/>
+	<Include RelativeFile="Base\\Index.xml"/>
+	<Include RelativeFile="Generic\\Shared\\Index.xml"/>
+	<Include RelativeFile="Generic\\Exterior\\Index.xml"/>
+	<Include RelativeFile="Common\\Shared\\Index.xml"/>
+	<Include RelativeFile="Common\\Exterior\\Index.xml"/>
+</ModelBehaviors>

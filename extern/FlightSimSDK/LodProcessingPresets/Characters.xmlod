@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LodSimplificationConfig version="1.0">
+	<LODS>
+		<!--
+		WARNING: values set in common lod are NOT automatically inherited
+		
+		inheritance can be added using attribute:
+			inheritFromCommon="true"
+		inheritance from previous lods can also be added using attribute:
+			inheritFromPreviousLod="true"
+		-->
+		<LOD id="Common">
+			<BoneReduction>
+				<LockSet>
+					<Bone name="RootMotion"/>
+					<Bone name="SOL"/>
+					<Bone name="Hips"/>
+					<Bone name="Spine"/>
+					<Bone name="Spine1"/>
+					<Bone name="Neck"/>
+					<Bone name="Neck1"/>
+					<Bone name="Head"/>
+					
+					<Bone name="LeftArm"/>
+					<!-- <Bone name="LeftForeArm"/> -->
+					<Bone name="LeftLeg"/>
+					<Bone name="LeftShoulder"/>
+					<Bone name="LeftUpLeg"/>
+					
+					<Bone name="RightArm"/>
+					<!-- <Bone name="RightForeArm"/> -->
+					<Bone name="RightLeg"/>
+					<Bone name="RightShoulder"/>
+					<Bone name="RightUpLeg"/>
+				</LockSet>
+				<MergeSkins value="true"/> <!-- Merge all skins sharing a common skeleton together -->
+			</BoneReduction>
+		</LOD>
+		
+		<LOD id="0">
+			<ProcessingParams>
+				<GenerateFromLod id="0"/>
+				<MinSize value="90.0" overrideModel="false"/> <!-- dont override initial value if it was set properly in model -->
+			</ProcessingParams>
+			<BoneReduction>
+				<MergeSkins inheritFromCommon="true"/>
+			</BoneReduction>
+		</LOD>
+		<LOD id="1">
+			<ProcessingParams>
+				<GenerateFromLod id="1" id="0"/>
+				<MinSize value="20"/>
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="7500"/> <!-- integer greater than 0 ; -1 disable -->
+			</TriangleReduction>
+			<BoneReduction>
+				<LockSet inheritFromCommon="true"/>
+				<RemoveSet>
+					<Bone name="LeftHandIndex3"/>
+					<Bone name="LeftHandMiddle3"/>
+					<Bone name="LeftHandPinky3"/>
+					<Bone name="LeftHandRing3"/>
+					<Bone name="LeftHandThumb3"/>
+					
+					<Bone name="RightHandIndex3"/>
+					<Bone name="RightHandMiddle3"/>
+					<Bone name="RightHandPinky3"/>
+					<Bone name="RightHandRing3"/>
+					<Bone name="RightHandThumb3"/>
+				</RemoveSet>
+				<MergeSkins inheritFromCommon="true"/>
+			</BoneReduction>
+		</LOD>
+		<LOD id="2">
+			<ProcessingParams>
+				<GenerateFromLod id="2" id="1" id="0"/>
+				<MinSize value="4"/>
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="2500"/> <!-- integer greater than 0 ; -1 disable -->
+			</TriangleReduction>
+			<BoneReduction>
+				<LockSet inheritFromCommon="true"/>
+				<RemoveSet inheritFromPreviousLod="true">
+					<Bone name="LeftHandIndex1"/>
+					<Bone name="LeftHandMiddle1"/>
+					<Bone name="LeftHandPinky1"/>
+					<Bone name="LeftHandRing1"/>
+					<Bone name="LeftHandThumb1"/>
+					<Bone name="LeftHandIndex2"/>
+					<Bone name="LeftHandMiddle2"/>
+					<Bone name="LeftHandPinky2"/>
+					<Bone name="LeftHandRing2"/>
+					<Bone name="LeftHandThumb2"/>
+					<Bone name="LeftToeBase"/>
+					
+					<Bone name="RightHandIndex1"/>
+					<Bone name="RightHandMiddle1"/>
+					<Bone name="RightHandPinky1"/>
+					<Bone name="RightHandRing1"/>
+					<Bone name="RightHandThumb1"/>
+					<Bone name="RightHandIndex2"/>
+					<Bone name="RightHandMiddle2"/>
+					<Bone name="RightHandPinky2"/>
+					<Bone name="RightHandRing2"/>
+					<Bone name="RightHandThumb2"/>
+					<Bone name="RightToeBase"/>
+				</RemoveSet>
+				<MergeSkins inheritFromCommon="true"/>
+			</BoneReduction>
+		</LOD>
+		<LOD id="3">
+			<ProcessingParams>
+				<GenerateFromLod id="3" id="2" id="1" id="0"/>
+				<MinSize value="1"/>
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="600"/> <!-- integer greater than 0 ; -1 disable -->
+			</TriangleReduction>
+			<BoneReduction>
+				<LockSet inheritFromCommon="true"/>
+				<RemoveSet inheritFromPreviousLod="true">
+					<Bone name="LeftFoot"/>
+					<Bone name="LeftHand"/>
+					
+					<Bone name="RightFoot"/>
+					<Bone name="RightHand"/>
+				</RemoveSet>
+				<MergeSkins inheritFromCommon="true"/>
+			</BoneReduction>
+		</LOD>
+		<LOD id="4">
+			<ProcessingParams>
+				<GenerateFromLod id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="0.5"/>
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="120"/> <!-- integer greater than 0 ; -1 disable -->
+			</TriangleReduction>
+			<BoneReduction>
+				<LockSet inheritFromCommon="true"/>
+				<RemoveSet inheritFromPreviousLod="true"/>
+				<MaxBonesPerVertex value="1"/>
+				<MergeSkins inheritFromCommon="true"/>
+			</BoneReduction>
+		</LOD>
+		<LOD id="5">
+			<ProcessingParams>
+				<GenerateFromLod id="9" id="8" id="7" id="6" id="5" id="4" id="3" id="2" id="1" id="0"/>
+				<MinSize value="0"/>
+			</ProcessingParams>
+			<TriangleReduction>
+				<MaxCount value="50"/> <!-- integer greater than 0 ; -1 disable -->
+			</TriangleReduction>
+			<BoneReduction>
+				<LockSet inheritFromPreviousLod="true"/>
+				<RemoveSet inheritFromPreviousLod="true"/>
+				<MaxBonesPerVertex inheritFromPreviousLod="true"/>
+				<MergeSkins inheritFromCommon="true"/>
+			</BoneReduction>
+		</LOD>
+	</LODS>	
+</LodSimplificationConfig>

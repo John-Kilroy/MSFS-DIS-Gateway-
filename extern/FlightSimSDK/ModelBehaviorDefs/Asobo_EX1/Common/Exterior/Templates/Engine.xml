@@ -1,0 +1,63 @@
+<ModelBehaviors>
+	<!-- ################################## ENGINE #################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="SubTemplates\\Engine_SubTemplates.xml"/>
+	<Include RelativeFile="ParametersFn\\Engine_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ENGINE_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ENGINE_Animation_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ENGINE_Beta_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ENGINE_Beta_Animation_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ENGINE_Reverser_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ENGINE_Reverser_Animation_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_Primary_ROTOR_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ROTOR_Animation_SubTemplate">
+			<ROTOR>PRIMARY</ROTOR>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_Secondary_ROTOR_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ROTOR_Animation_SubTemplate">
+			<ROTOR>SECONDARY</ROTOR>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_Primary_ROTOR_Coning_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ROTOR_Coning_Animation_SubTemplate">
+			<ROTOR>PRIMARY</ROTOR>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_Secondary_ROTOR_Coning_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ROTOR_Coning_Animation_SubTemplate">
+			<ROTOR>SECONDARY</ROTOR>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ROTOR_Swashplate_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ROTOR_Swashplate_Animation_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ROTOR_Tail_Blade_Pitch_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ROTOR_Tail_Blade_Pitch_Animation_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ENGINE_Components_Animation_Template">
+		<UseTemplate Name="ASOBO_ET_ENGINE_Components_Animation_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ENGINE_Rotor_Model_Swap_RPM_Template">
+		<UseTemplate Name="ASOBO_ET_ENGINE_Rotor_Model_Swap_RPM_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_ENGINE_Propeller_Model_Swap_RPM_Template">
+		<UseTemplate Name="ASOBO_ET_ENGINE_Propeller_Model_Swap_RPM_SubTemplate"/>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

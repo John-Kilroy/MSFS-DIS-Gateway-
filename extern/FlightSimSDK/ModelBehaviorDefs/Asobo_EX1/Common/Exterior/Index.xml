@@ -1,0 +1,10 @@
+<ModelBehaviors>
+	<!-- Common > Exterior -->
+	<Include RelativeFile="Templates\\Engine.xml"/>
+	<Include RelativeFile="Templates\\VFX.xml"/>
+	<Include RelativeFile="Templates\\Landing.xml"/>
+	<Include RelativeFile="Templates\\Handling.xml"/>
+	<Include RelativeFile="Templates\\Common.xml"/>
+	<Include RelativeFile="Templates\\Lighting.xml"/>
+	<Include RelativeFile="Templates\\Airframe.xml"/>
+</ModelBehaviors>

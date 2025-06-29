@@ -1,0 +1,641 @@
+<ModelBehaviors>
+	<!-- ################################## AUTOPILOT ################################# -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="InteractionPresets\\Autopilot_Interactions.xml"/>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Baro_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<BARO_ID>0</BARO_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_BARO_HG>KOHLSMAN SETTING HG:#BARO_ID#</SIMVAR_BARO_HG>
+			<SIMVAR_BARO_MB>KOHLSMAN SETTING MB:#BARO_ID#</SIMVAR_BARO_MB>
+			<SIMVAR_BARO_STD>KOHLSMAN SETTING STD:#BARO_ID#</SIMVAR_BARO_STD>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_BARO_STD_PRESSURE>#BARO_ID# (&gt;K:BAROMETRIC_STD_PRESSURE)</SET_BARO_STD_PRESSURE>
+			<GET_BARO_HG>(A:#SIMVAR_BARO_HG#, inHg)</GET_BARO_HG>
+			<GET_BARO_MB>(A:#SIMVAR_BARO_MB#, Millibar)</GET_BARO_MB>
+			<GET_BARO_STD>(A:#SIMVAR_BARO_STD#, Bool)</GET_BARO_STD>
+			<SET_BARO_STD>(&gt;A:#SIMVAR_BARO_STD#, Bool)</SET_BARO_STD>
+			<SET_BARO_MB>sp0 #BARO_ID# l0 16 * (&gt;K:2:KOHLSMAN_SET)</SET_BARO_MB>
+			<SET_BARO_HG>33.863886667 / sp0 #BARO_ID# l0 16 * (&gt;K:2:KOHLSMAN_SET)</SET_BARO_HG>
+		</Parameters>
+		<ReturnParameters>
+			<GET_BARO#OUT_PARAM_SUFFIX#_HG>#GET_BARO_HG#</GET_BARO#OUT_PARAM_SUFFIX#_HG>
+			<GET_BARO#OUT_PARAM_SUFFIX#_MB>#GET_BARO_MB#</GET_BARO#OUT_PARAM_SUFFIX#_MB>
+			<GET_BARO#OUT_PARAM_SUFFIX#_STD>#GET_BARO_STD#</GET_BARO#OUT_PARAM_SUFFIX#_STD>
+			<SET_BARO#OUT_PARAM_SUFFIX#_MB>#SET_BARO_MB#</SET_BARO#OUT_PARAM_SUFFIX#_MB>
+			<SET_BARO#OUT_PARAM_SUFFIX#_HG>#SET_BARO_HG#</SET_BARO#OUT_PARAM_SUFFIX#_HG>
+			<SET_BARO#OUT_PARAM_SUFFIX#_STD>#SET_BARO_STD#</SET_BARO#OUT_PARAM_SUFFIX#_STD>
+			<SET_BARO#OUT_PARAM_SUFFIX#_STD_PRESSURE>#SET_BARO_STD_PRESSURE#</SET_BARO#OUT_PARAM_SUFFIX#_STD_PRESSURE>
+			<SIMVAR_BARO#OUT_PARAM_SUFFIX#_HG>#SIMVAR_BARO_HG#</SIMVAR_BARO#OUT_PARAM_SUFFIX#_HG>
+			<SIMVAR_BARO#OUT_PARAM_SUFFIX#_MB>#SIMVAR_BARO_MB#</SIMVAR_BARO#OUT_PARAM_SUFFIX#_MB>
+			<SIMVAR_BARO#OUT_PARAM_SUFFIX#_STD>#SIMVAR_BARO_STD#</SIMVAR_BARO#OUT_PARAM_SUFFIX#_STD>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Disengage_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_AP_DISENGAGE>AUTOPILOT DISENGAGED</SIMVAR_AP_DISENGAGE>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_AP_DISENGAGE>(A:#SIMVAR_AP_DISENGAGE#, Bool)</GET_AP_DISENGAGE>
+			<SET_AP_DISENGAGE>(&gt;K:AUTOPILOT_DISENGAGE_SET)</SET_AP_DISENGAGE>
+			<TOGGLE_AP_DISENGAGE>(&gt;K:AUTOPILOT_DISENGAGE_TOGGLE)</TOGGLE_AP_DISENGAGE>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_AP_DISENGAGE>#SIMVAR_AP_DISENGAGE#</SIMVAR_AP_DISENGAGE>
+			<GET_AP_DISENGAGE>#GET_AP_DISENGAGE#</GET_AP_DISENGAGE>
+			<SET_AP_DISENGAGE>#SET_AP_DISENGAGE#</SET_AP_DISENGAGE>
+			<TOGGLE_AP_DISENGAGE>#TOGGLE_AP_DISENGAGE#</TOGGLE_AP_DISENGAGE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Disconnect_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_AP_CONNECTED>AUTOPILOT MASTER</SIMVAR_AP_CONNECTED>
+			<H_EVENT_AP_DISCONNECT>Generic_Autopilot_Disc</H_EVENT_AP_DISCONNECT>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_H_EVENT_AP_DISCONNECT>(&gt;H:#H_EVENT_AP_DISCONNECT#)</SET_H_EVENT_AP_DISCONNECT>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_AP_DISCONNECT>(A:#SIMVAR_AP_CONNECTED#, Bool) !</GET_AP_DISCONNECT>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_AP_DISCONNECT>if{ (&gt;K:AUTOPILOT_OFF) #SET_H_EVENT_AP_DISCONNECT# } els{ (&gt;K:AUTOPILOT_ON) }</SET_AP_DISCONNECT>
+			<TOGGLE_AP_DISCONNECT>#GET_AP_DISCONNECT# if{ #SET_H_EVENT_AP_DISCONNECT# } (&gt;K:AP_MASTER)</TOGGLE_AP_DISCONNECT>
+		</Parameters>
+		<Parameters Type="Default">
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_AP_CONNECTED>#SIMVAR_AP_CONNECTED#</SIMVAR_AP_CONNECTED>
+			<GET_AP_DISCONNECT>#GET_AP_DISCONNECT#</GET_AP_DISCONNECT>
+			<SET_AP_DISCONNECT>#SET_AP_DISCONNECT#</SET_AP_DISCONNECT>
+			<TOGGLE_AP_DISCONNECT>#TOGGLE_AP_DISCONNECT#</TOGGLE_AP_DISCONNECT>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Master_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_AP_MASTER>AUTOPILOT MASTER</SIMVAR_AP_MASTER>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_AP_MASTER>(A:#SIMVAR_AP_MASTER#, Bool)</GET_AP_MASTER>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_AP_MASTER>#GET_AP_MASTER# != if{ (&gt;K:AP_MASTER) }</SET_AP_MASTER>
+			<TOGGLE_AP_MASTER>(&gt;K:AP_MASTER)</TOGGLE_AP_MASTER>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_AP_MASTER>#SIMVAR_AP_MASTER#</SIMVAR_AP_MASTER>
+			<GET_AP_MASTER>#GET_AP_MASTER#</GET_AP_MASTER>
+			<SET_AP_MASTER>#SET_AP_MASTER#</SET_AP_MASTER>
+			<TOGGLE_AP_MASTER>#TOGGLE_AP_MASTER#</TOGGLE_AP_MASTER>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Altitude_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_ALTITUDE_LOCK>AUTOPILOT ALTITUDE LOCK</SIMVAR_ALTITUDE_LOCK>
+			<KEY_ALTITUDE_LOCK_TOGGLE>AP_ALT_HOLD</KEY_ALTITUDE_LOCK_TOGGLE>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_ALTITUDE_LOCK>(A:#SIMVAR_ALTITUDE_LOCK#, Bool)</GET_ALTITUDE_LOCK>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_ALTITUDE_LOCK>#GET_ALTITUDE_LOCK# != if{ (&gt;K:#KEY_ALTITUDE_LOCK_TOGGLE#) }</SET_ALTITUDE_LOCK>
+			<TOGGLE_ALTITUDE_LOCK>(&gt;K:#KEY_ALTITUDE_LOCK_TOGGLE#)</TOGGLE_ALTITUDE_LOCK>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_ALTITUDE_LOCK>#SIMVAR_ALTITUDE_LOCK#</SIMVAR_ALTITUDE_LOCK>
+			<GET_ALTITUDE_LOCK>#GET_ALTITUDE_LOCK#</GET_ALTITUDE_LOCK>
+			<SET_ALTITUDE_LOCK>#SET_ALTITUDE_LOCK#</SET_ALTITUDE_LOCK>
+			<TOGGLE_ALTITUDE_LOCK>#TOGGLE_ALTITUDE_LOCK#</TOGGLE_ALTITUDE_LOCK>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_VerticalSpeed_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_VERTICAL_SPEED_MODE>AUTOPILOT VERTICAL HOLD</SIMVAR_VERTICAL_SPEED_MODE>
+			<KEY_VERTICAL_SPEED_MODE_TOGGLE>AP_PANEL_VS_HOLD</KEY_VERTICAL_SPEED_MODE_TOGGLE>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_VERTICAL_SPEED_MODE>(A:#SIMVAR_VERTICAL_SPEED_MODE#, Bool)</GET_VERTICAL_SPEED_MODE>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_VERTICAL_SPEED_MODE>#GET_VERTICAL_SPEED_MODE# != if{ (&gt;K:#KEY_VERTICAL_SPEED_MODE_TOGGLE#) }</SET_VERTICAL_SPEED_MODE>
+			<TOGGLE_VERTICAL_SPEED_MODE>(&gt;K:#KEY_VERTICAL_SPEED_MODE_TOGGLE#)</TOGGLE_VERTICAL_SPEED_MODE>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_VERTICAL_SPEED_MODE>#SIMVAR_VERTICAL_SPEED_MODE#</SIMVAR_VERTICAL_SPEED_MODE>
+			<GET_VERTICAL_SPEED_MODE>#GET_VERTICAL_SPEED_MODE#</GET_VERTICAL_SPEED_MODE>
+			<SET_VERTICAL_SPEED_MODE>#SET_VERTICAL_SPEED_MODE#</SET_VERTICAL_SPEED_MODE>
+			<TOGGLE_VERTICAL_SPEED_MODE>#TOGGLE_VERTICAL_SPEED_MODE#</TOGGLE_VERTICAL_SPEED_MODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Navigation_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_NAV_LOCK>AUTOPILOT NAV1 LOCK</SIMVAR_NAV_LOCK>
+			<KEY_NAV_LOCK_TOGGLE>AP_NAV1_HOLD</KEY_NAV_LOCK_TOGGLE>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_NAV_LOCK>(A:#SIMVAR_NAV_LOCK#, Bool)</GET_NAV_LOCK>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_NAV_LOCK>#GET_NAV_LOCK# != if{ (&gt;K:#KEY_NAV_LOCK_TOGGLE#) }</SET_NAV_LOCK>
+			<TOGGLE_NAV_LOCK>(&gt;K:#KEY_NAV_LOCK_TOGGLE#)</TOGGLE_NAV_LOCK>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_NAV_LOCK>#SIMVAR_NAV_LOCK#</SIMVAR_NAV_LOCK>
+			<GET_NAV_LOCK>#GET_NAV_LOCK#</GET_NAV_LOCK>
+			<SET_NAV_LOCK>#SET_NAV_LOCK#</SET_NAV_LOCK>
+			<TOGGLE_NAV_LOCK>#TOGGLE_NAV_LOCK#</TOGGLE_NAV_LOCK>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Vertical_Navigation_Parameters">
+		<Parameters Type="Default">
+			<LOCALVAR_VNAV_LOCK>XMLVAR_VNAVButtonValue</LOCALVAR_VNAV_LOCK>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_VNAV_LOCK>(L:#LOCALVAR_VNAV_LOCK#, Bool)</GET_VNAV_LOCK>
+			<SET_VNAV_LOCK>(&gt;L:#LOCALVAR_VNAV_LOCK#, Bool)</SET_VNAV_LOCK>
+		</Parameters>
+		<Parameters Type="Default">
+			<TOGGLE_VNAV_LOCK>#GET_VNAV_LOCK# ! #SET_VNAV_LOCK#</TOGGLE_VNAV_LOCK>
+		</Parameters>
+		<ReturnParameters>
+			<LOCALVAR_VNAV_LOCK>#LOCALVAR_VNAV_LOCK#</LOCALVAR_VNAV_LOCK>
+			<GET_VNAV_LOCK>#GET_VNAV_LOCK#</GET_VNAV_LOCK>
+			<SET_VNAV_LOCK>#SET_VNAV_LOCK#</SET_VNAV_LOCK>
+			<TOGGLE_VNAV_LOCK>#TOGGLE_VNAV_LOCK#</TOGGLE_VNAV_LOCK>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Approach_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_APPROACH_LOCK>AUTOPILOT APPROACH HOLD</SIMVAR_APPROACH_LOCK>
+			<SIMVAR_GLIDESLOPE_LOCK>AUTOPILOT GLIDESLOPE HOLD</SIMVAR_GLIDESLOPE_LOCK>
+			<KEY_APPROACH_LOCK_TOGGLE>AP_APR_HOLD</KEY_APPROACH_LOCK_TOGGLE>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_APPROACH_LOCK>(A:#SIMVAR_APPROACH_LOCK#, Bool)</GET_APPROACH_LOCK>
+			<GET_GLIDESLOPE_LOCK>(A:#SIMVAR_GLIDESLOPE_LOCK#, Bool)</GET_GLIDESLOPE_LOCK>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_APPROACH_LOCK>#GET_APPROACH_LOCK# != if{ (&gt;K:#KEY_APPROACH_LOCK_TOGGLE#) }</SET_APPROACH_LOCK>
+			<TOGGLE_APPROACH_LOCK>(&gt;K:#KEY_APPROACH_LOCK_TOGGLE#)</TOGGLE_APPROACH_LOCK>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_APPROACH_LOCK>#SIMVAR_APPROACH_LOCK#</SIMVAR_APPROACH_LOCK>
+			<GET_APPROACH_LOCK>#GET_APPROACH_LOCK#</GET_APPROACH_LOCK>
+			<SET_APPROACH_LOCK>#SET_APPROACH_LOCK#</SET_APPROACH_LOCK>
+			<TOGGLE_APPROACH_LOCK>#TOGGLE_APPROACH_LOCK#</TOGGLE_APPROACH_LOCK>
+			<SIMVAR_GLIDESLOPE_LOCK>#SIMVAR_GLIDESLOPE_LOCK#</SIMVAR_GLIDESLOPE_LOCK>
+			<GET_GLIDESLOPE_LOCK>#GET_GLIDESLOPE_LOCK#</GET_GLIDESLOPE_LOCK>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Heading_Mode_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_HEADING_MODE>AUTOPILOT HEADING LOCK</SIMVAR_HEADING_MODE>
+			<KEY_HEADING_MODE_TOGGLE>AP_PANEL_HEADING_HOLD</KEY_HEADING_MODE_TOGGLE>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_HEADING_MODE>(A:#SIMVAR_HEADING_MODE#, Bool)</GET_HEADING_MODE>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_HEADING_MODE>#GET_HEADING_MODE# != if{ (&gt;K:#KEY_HEADING_MODE_TOGGLE#) }</SET_HEADING_MODE>
+			<TOGGLE_HEADING_MODE>(&gt;K:#KEY_HEADING_MODE_TOGGLE#)</TOGGLE_HEADING_MODE>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_HEADING_MODE>#SIMVAR_HEADING_MODE#</SIMVAR_HEADING_MODE>
+			<GET_HEADING_MODE>#GET_HEADING_MODE#</GET_HEADING_MODE>
+			<SET_HEADING_MODE>#SET_HEADING_MODE#</SET_HEADING_MODE>
+			<TOGGLE_HEADING_MODE>#TOGGLE_HEADING_MODE#</TOGGLE_HEADING_MODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Heading_Setting_Parameters">
+		<Parameters Type="Default">
+			<HEADING_ID>1</HEADING_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_HEADING_DIR>AUTOPILOT HEADING LOCK DIR</SIMVAR_HEADING_DIR>
+			<SIMVAR_HEADING_DIR_UNIT>degrees</SIMVAR_HEADING_DIR_UNIT>
+			<KEY_HEADING_BUG_SET>2:HEADING_BUG_SET</KEY_HEADING_BUG_SET>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_HEADING_DIR>(A:#SIMVAR_HEADING_DIR#:#HEADING_ID#, #SIMVAR_HEADING_DIR_UNIT#)</GET_HEADING_DIR>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_HEADING_DIR>#HEADING_ID# r (&gt;K:#KEY_HEADING_BUG_SET#)</SET_HEADING_DIR>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_HEADING_DIR>#SIMVAR_HEADING_DIR#</SIMVAR_HEADING_DIR>
+			<GET_HEADING_DIR>#GET_HEADING_DIR#</GET_HEADING_DIR>
+			<SET_HEADING_DIR>#SET_HEADING_DIR#</SET_HEADING_DIR>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Altitude_Setting_Parameters">
+		<Parameters Type="Default">
+			<ALTITUDE_ID>1</ALTITUDE_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_ALTITUDE_LOCK>AUTOPILOT ALTITUDE LOCK VAR</SIMVAR_ALTITUDE_LOCK>
+			<SIMVAR_ALTITUDE_LOCK_UNIT>feet</SIMVAR_ALTITUDE_LOCK_UNIT>
+			<KEY_ALTITUDE_LOCK_SET>2:AP_ALT_VAR_SET_ENGLISH</KEY_ALTITUDE_LOCK_SET>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_ALTITUDE_LOCK>(A:#SIMVAR_ALTITUDE_LOCK#:#ALTITUDE_ID#, #SIMVAR_ALTITUDE_LOCK_UNIT#)</GET_ALTITUDE_LOCK>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_ALTITUDE_LOCK>#ALTITUDE_ID# r (&gt;K:#KEY_ALTITUDE_LOCK_SET#)</SET_ALTITUDE_LOCK>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_ALTITUDE_LOCK>#SIMVAR_ALTITUDE_LOCK#</SIMVAR_ALTITUDE_LOCK>
+			<GET_ALTITUDE_LOCK>#GET_ALTITUDE_LOCK#</GET_ALTITUDE_LOCK>
+			<SET_ALTITUDE_LOCK>#SET_ALTITUDE_LOCK#</SET_ALTITUDE_LOCK>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Airspeed_Setting_Parameters">
+		<Parameters Type="Default">
+			<AIRSPEED_ID>1</AIRSPEED_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_AIRSPEED_LOCK_VAR>AUTOPILOT AIRSPEED HOLD VAR</SIMVAR_AIRSPEED_LOCK_VAR>
+			<SIMVAR_AIRSPEED_LOCK_VAR_UNIT>knot</SIMVAR_AIRSPEED_LOCK_VAR_UNIT>
+			<KEY_AIRSPEED_LOCK_VAR_SET>2:AP_SPD_VAR_SET</KEY_AIRSPEED_LOCK_VAR_SET>
+			<KEY_AIRSPEED_LOCK_VAR_INC>AP_SPD_VAR_INC</KEY_AIRSPEED_LOCK_VAR_INC>
+			<KEY_AIRSPEED_LOCK_VAR_DEC>AP_SPD_VAR_DEC</KEY_AIRSPEED_LOCK_VAR_DEC>
+			<SIMVAR_AIRSPEED_MACH_LOCK_VAR>AUTOPILOT MACH HOLD VAR</SIMVAR_AIRSPEED_MACH_LOCK_VAR>
+			<SIMVAR_AIRSPEED_MACH_LOCK_VAR_UNIT>number</SIMVAR_AIRSPEED_MACH_LOCK_VAR_UNIT>
+			<KEY_AIRSPEED_MACH_LOCK_VAR_SET>2:AP_MACH_VAR_SET</KEY_AIRSPEED_MACH_LOCK_VAR_SET>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_AIRSPEED_LOCK_VAR>(A:#SIMVAR_AIRSPEED_LOCK_VAR#:#AIRSPEED_ID#, #SIMVAR_AIRSPEED_LOCK_VAR_UNIT#)</GET_AIRSPEED_LOCK_VAR>
+			<GET_AIRSPEED_MACH_LOCK_VAR>(A:#SIMVAR_AIRSPEED_MACH_LOCK_VAR#:#AIRSPEED_ID#, #SIMVAR_AIRSPEED_MACH_LOCK_VAR_UNIT#)</GET_AIRSPEED_MACH_LOCK_VAR>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_AIRSPEED_LOCK_VAR>#AIRSPEED_ID# r (&gt;K:#KEY_AIRSPEED_LOCK_VAR_SET#)</SET_AIRSPEED_LOCK_VAR>
+			<INC_AIRSPEED_LOCK_VAR>#AIRSPEED_ID# (&gt;K:#KEY_AIRSPEED_LOCK_VAR_INC#)</INC_AIRSPEED_LOCK_VAR>
+			<DEC_AIRSPEED_LOCK_VAR>#AIRSPEED_ID# (&gt;K:#KEY_AIRSPEED_LOCK_VAR_DEC#)</DEC_AIRSPEED_LOCK_VAR>
+			<SET_AIRSPEED_MACH_LOCK_VAR>#AIRSPEED_ID# r (&gt;K:#KEY_AIRSPEED_MACH_LOCK_VAR_SET#)</SET_AIRSPEED_MACH_LOCK_VAR>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_AIRSPEED_LOCK_VAR>#SIMVAR_AIRSPEED_LOCK_VAR#</SIMVAR_AIRSPEED_LOCK_VAR>
+			<GET_AIRSPEED_LOCK_VAR>#GET_AIRSPEED_LOCK_VAR#</GET_AIRSPEED_LOCK_VAR>
+			<SET_AIRSPEED_LOCK_VAR>#SET_AIRSPEED_LOCK_VAR#</SET_AIRSPEED_LOCK_VAR>
+			<SIMVAR_AIRSPEED_MACH_LOCK_VAR>#SIMVAR_AIRSPEED_MACH_LOCK_VAR#</SIMVAR_AIRSPEED_MACH_LOCK_VAR>
+			<GET_AIRSPEED_MACH_LOCK_VAR>#GET_AIRSPEED_MACH_LOCK_VAR#</GET_AIRSPEED_MACH_LOCK_VAR>
+			<SET_AIRSPEED_MACH_LOCK_VAR>#SET_AIRSPEED_MACH_LOCK_VAR#</SET_AIRSPEED_MACH_LOCK_VAR>
+			<INC_AIRSPEED_LOCK_VAR>#INC_AIRSPEED_LOCK_VAR#</INC_AIRSPEED_LOCK_VAR>
+			<DEC_AIRSPEED_LOCK_VAR>#DEC_AIRSPEED_LOCK_VAR#</DEC_AIRSPEED_LOCK_VAR>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_VerticalSpeed_Setting_Parameters">
+		<Parameters Type="Default">
+			<VS_ID>1</VS_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_VS_LOCK>AUTOPILOT VERTICAL HOLD</SIMVAR_VS_LOCK>
+			<SIMVAR_VS_LOCK_VAR>AUTOPILOT VERTICAL HOLD VAR</SIMVAR_VS_LOCK_VAR>
+			<SIMVAR_VS_LOCK_VAR_UNIT>feet per minute</SIMVAR_VS_LOCK_VAR_UNIT>
+			<KEY_VS_LOCK_VAR_SET>2:AP_VS_VAR_SET_ENGLISH</KEY_VS_LOCK_VAR_SET>
+			<KEY_VS_LOCK_VAR_INC>AP_VS_VAR_INC</KEY_VS_LOCK_VAR_INC>
+			<KEY_VS_LOCK_VAR_DEC>AP_VS_VAR_DEC</KEY_VS_LOCK_VAR_DEC>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_VS_LOCK>(A:#SIMVAR_VS_LOCK#:#VS_ID#, Bool)</GET_VS_LOCK>
+			<GET_VS_LOCK_VAR>(A:#SIMVAR_VS_LOCK_VAR#:#VS_ID#, #SIMVAR_VS_LOCK_VAR_UNIT#)</GET_VS_LOCK_VAR>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_VS_LOCK_VAR>#VS_ID# r (&gt;K:#KEY_VS_LOCK_VAR_SET#)</SET_VS_LOCK_VAR>
+			<INC_VS_LOCK_VAR>#VS_ID# (&gt;K:#KEY_VS_LOCK_VAR_INC#)</INC_VS_LOCK_VAR>
+			<DEC_VS_LOCK_VAR>#VS_ID# (&gt;K:#KEY_VS_LOCK_VAR_DEC#)</DEC_VS_LOCK_VAR>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_VS_LOCK>#SIMVAR_VS_LOCK#</SIMVAR_VS_LOCK>
+			<GET_VS_LOCK>#GET_VS_LOCK#</GET_VS_LOCK>
+			<GET_VS_LOCK_VAR>#GET_VS_LOCK_VAR#</GET_VS_LOCK_VAR>
+			<SET_VS_LOCK_VAR>#SET_VS_LOCK_VAR#</SET_VS_LOCK_VAR>
+			<INC_VS_LOCK_VAR>#INC_VS_LOCK_VAR#</INC_VS_LOCK_VAR>
+			<DEC_VS_LOCK_VAR>#DEC_VS_LOCK_VAR#</DEC_VS_LOCK_VAR>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Pitch_Setting_Parameters">
+		<Parameters Type="Default">
+			<PITCH_ID>1</PITCH_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_PITCH_LOCK>AUTOPILOT PITCH HOLD</SIMVAR_PITCH_LOCK>
+			<SIMVAR_PITCH_LOCK_VAR>AUTOPILOT PITCH HOLD REF</SIMVAR_PITCH_LOCK_VAR>
+			<SIMVAR_PITCH_LOCK_VAR_UNIT>degrees</SIMVAR_PITCH_LOCK_VAR_UNIT>
+			<KEY_PITCH_LOCK_VAR_SET>2:AP_PITCH_REF_SET</KEY_PITCH_LOCK_VAR_SET>
+			<KEY_PITCH_LOCK_VAR_INC>AP_PITCH_REF_INC_UP</KEY_PITCH_LOCK_VAR_INC>
+			<KEY_PITCH_LOCK_VAR_DEC>AP_PITCH_REF_INC_DN</KEY_PITCH_LOCK_VAR_DEC>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_PITCH_LOCK>(A:#SIMVAR_PITCH_LOCK#:#PITCH_ID#, Bool)</GET_PITCH_LOCK>
+			<GET_PITCH_LOCK_VAR>(A:#SIMVAR_PITCH_LOCK_VAR#:#PITCH_ID#, #SIMVAR_PITCH_LOCK_VAR_UNIT#)</GET_PITCH_LOCK_VAR>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_PITCH_LOCK_VAR>#PITCH_ID# r (&gt;K:#KEY_PITCH_LOCK_VAR_SET#)</SET_PITCH_LOCK_VAR>
+			<INC_PITCH_LOCK_VAR>#PITCH_ID# (&gt;K:#KEY_PITCH_LOCK_VAR_INC#)</INC_PITCH_LOCK_VAR>
+			<DEC_PITCH_LOCK_VAR>#PITCH_ID# (&gt;K:#KEY_PITCH_LOCK_VAR_DEC#)</DEC_PITCH_LOCK_VAR>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_PITCH_LOCK>#SIMVAR_PITCH_LOCK#</SIMVAR_PITCH_LOCK>
+			<GET_PITCH_LOCK>#GET_PITCH_LOCK#</GET_PITCH_LOCK>
+			<GET_PITCH_LOCK_VAR>#GET_PITCH_LOCK_VAR#</GET_PITCH_LOCK_VAR>
+			<SET_PITCH_LOCK_VAR>#SET_PITCH_LOCK_VAR#</SET_PITCH_LOCK_VAR>
+			<DEC_PITCH_LOCK_VAR>#DEC_PITCH_LOCK_VAR#</DEC_PITCH_LOCK_VAR>
+			<INC_PITCH_LOCK_VAR>#INC_PITCH_LOCK_VAR#</INC_PITCH_LOCK_VAR>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_FlightLevelChange_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_FLIGHT_LEVEL_CHANGE>AUTOPILOT FLIGHT LEVEL CHANGE</SIMVAR_FLIGHT_LEVEL_CHANGE>
+			<KEY_FLIGHT_LEVEL_CHANGE_TOGGLE>FLIGHT_LEVEL_CHANGE</KEY_FLIGHT_LEVEL_CHANGE_TOGGLE>
+			<SIMVAR_INDICATED_AIRSPEED>AIRSPEED INDICATED</SIMVAR_INDICATED_AIRSPEED>
+			<SIMVAR_INDICATED_AIRSPEED_UNIT>knot</SIMVAR_INDICATED_AIRSPEED_UNIT>
+			<KEY_SPEED_VAR_SET>AP_SPD_VAR_SET</KEY_SPEED_VAR_SET>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_FLIGHT_LEVEL_CHANGE>(A:#SIMVAR_FLIGHT_LEVEL_CHANGE#, Bool)</GET_FLIGHT_LEVEL_CHANGE>
+			<GET_INDICATED_AIRSPEED>(A:#SIMVAR_INDICATED_AIRSPEED#, #SIMVAR_INDICATED_AIRSPEED_UNIT#)</GET_INDICATED_AIRSPEED>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_FLIGHT_LEVEL_CHANGE>#GET_FLIGHT_LEVEL_CHANGE# != if{ (&gt;K:#KEY_FLIGHT_LEVEL_CHANGE_TOGGLE#) }</SET_FLIGHT_LEVEL_CHANGE>
+			<TOGGLE_FLIGHT_LEVEL_CHANGE>(&gt;K:#KEY_FLIGHT_LEVEL_CHANGE_TOGGLE#)</TOGGLE_FLIGHT_LEVEL_CHANGE>
+			<SET_SPEED_VAR>(&gt;K:#KEY_SPEED_VAR_SET#)</SET_SPEED_VAR>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_FLIGHT_LEVEL_CHANGE>#SIMVAR_FLIGHT_LEVEL_CHANGE#</SIMVAR_FLIGHT_LEVEL_CHANGE>
+			<GET_FLIGHT_LEVEL_CHANGE>#GET_FLIGHT_LEVEL_CHANGE#</GET_FLIGHT_LEVEL_CHANGE>
+			<SET_FLIGHT_LEVEL_CHANGE>#SET_FLIGHT_LEVEL_CHANGE#</SET_FLIGHT_LEVEL_CHANGE>
+			<TOGGLE_FLIGHT_LEVEL_CHANGE>#TOGGLE_FLIGHT_LEVEL_CHANGE#</TOGGLE_FLIGHT_LEVEL_CHANGE>
+			<GET_INDICATED_AIRSPEED>#GET_INDICATED_AIRSPEED#</GET_INDICATED_AIRSPEED>
+			<SET_SPEED_VAR>#SET_SPEED_VAR#</SET_SPEED_VAR>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Leveler_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_LEVELER>AUTOPILOT WING LEVELER</SIMVAR_LEVELER>
+			<KEY_LEVELER_TOGGLE>AP_WING_LEVELER</KEY_LEVELER_TOGGLE>
+			<KEY_PITCH_LEVELER_ON>AP_PITCH_LEVELER_ON</KEY_PITCH_LEVELER_ON>
+			<KEY_PITCH_LEVELER_OFF>AP_PITCH_LEVELER_OFF</KEY_PITCH_LEVELER_OFF>
+			<SIMVAR_AP_ON>AUTOPILOT MASTER</SIMVAR_AP_ON>
+			<KEY_AP_ON>AUTOPILOT_ON</KEY_AP_ON>
+			<KEY_AP_OFF>AUTOPILOT_OFF</KEY_AP_OFF>
+		</Parameters> 
+		<Parameters Type="Default">
+			<GET_LEVELER>(A:#SIMVAR_LEVELER#, Bool)</GET_LEVELER>
+			<GET_AP_ON>(A:#SIMVAR_AP_ON#, Bool)</GET_AP_ON>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_LEVELER>#GET_LEVELER# != if{ (&gt;K:#KEY_LEVELER_TOGGLE#) }</SET_LEVELER>
+			<TOGGLE_LEVELER>(&gt;K:#KEY_LEVELER_TOGGLE#)</TOGGLE_LEVELER>
+			<SET_PITCH_LEVELER_ON>(&gt;K:#KEY_PITCH_LEVELER_ON#)</SET_PITCH_LEVELER_ON>
+			<SET_PITCH_LEVELER_OFF>(&gt;K:#KEY_PITCH_LEVELER_OFF#)</SET_PITCH_LEVELER_OFF>
+			<SET_AP_ON>(&gt;K:#KEY_AP_ON#)</SET_AP_ON>
+			<SET_AP_OFF>(&gt;K:#KEY_AP_OFF#)</SET_AP_OFF>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_LEVELER>#SIMVAR_LEVELER#</SIMVAR_LEVELER>
+			<GET_LEVELER>#GET_LEVELER#</GET_LEVELER>
+			<SET_LEVELER>#SET_LEVELER#</SET_LEVELER>
+			<TOGGLE_LEVELER>#TOGGLE_LEVELER#</TOGGLE_LEVELER>
+			<SET_PITCH_LEVELER_ON>#SET_PITCH_LEVELER_ON#</SET_PITCH_LEVELER_ON>
+			<SET_PITCH_LEVELER_OFF>#SET_PITCH_LEVELER_OFF#</SET_PITCH_LEVELER_OFF>
+			<SIMVAR_AP_ON>#SIMVAR_AP_ON#</SIMVAR_AP_ON>
+			<GET_AP_ON>#GET_AP_ON#</GET_AP_ON>
+			<SET_AP_ON>#SET_AP_ON#</SET_AP_ON>
+			<SET_AP_OFF>#SET_AP_OFF#</SET_AP_OFF>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Autothrottle_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<ENG_ID>0</ENG_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_AUTOTHROTTLE_ARM>AUTOPILOT THROTTLE ARM:#ENG_ID#</SIMVAR_AUTOTHROTTLE_ARM>
+			<SIMVAR_AUTOTHROTTLE_TOGA>AUTOPILOT TAKEOFF POWER ACTIVE</SIMVAR_AUTOTHROTTLE_TOGA>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_AUTOTHROTTLE_ARM>(A:#SIMVAR_AUTOTHROTTLE_ARM#, Bool)</GET_AUTOTHROTTLE_ARM>
+			<GET_AUTOTHROTTLE_TOGA>(A:#SIMVAR_AUTOTHROTTLE_TOGA#, Bool)</GET_AUTOTHROTTLE_TOGA>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_AUTOTHROTTLE_ARM>#GET_AUTOTHROTTLE_ARM# != if{ #ENG_ID# (&gt;K:AUTO_THROTTLE_ARM) }</SET_AUTOTHROTTLE_ARM>
+			<TOGGLE_AUTOTHROTTLE_ARM>#ENG_ID# (&gt;K:AUTO_THROTTLE_ARM)</TOGGLE_AUTOTHROTTLE_ARM>
+			<SET_AUTOTHROTTLE_TOGA>#GET_AUTOTHROTTLE_TOGA# != if{ (&gt;K:AUTO_THROTTLE_TO_GA) }</SET_AUTOTHROTTLE_TOGA>
+			<TOGGLE_AUTOTHROTTLE_TOGA>(&gt;K:AUTO_THROTTLE_TO_GA)</TOGGLE_AUTOTHROTTLE_TOGA>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>#SIMVAR_AUTOTHROTTLE_ARM#</SIMVAR_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>
+			<GET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>#GET_AUTOTHROTTLE_ARM#</GET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>
+			<SET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>#SET_AUTOTHROTTLE_ARM#</SET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>
+			<TOGGLE_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>#TOGGLE_AUTOTHROTTLE_ARM#</TOGGLE_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_ARM>
+			<SIMVAR_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>#SIMVAR_AUTOTHROTTLE_TOGA#</SIMVAR_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>
+			<GET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>#GET_AUTOTHROTTLE_TOGA#</GET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>
+			<SET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>#SET_AUTOTHROTTLE_TOGA#</SET_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>
+			<TOGGLE_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>#TOGGLE_AUTOTHROTTLE_TOGA#</TOGGLE_AUTOTHROTTLE#OUT_PARAM_SUFFIX#_TOGA>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Flight_Director_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Param_Suffix_Helper"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<FD_ID>1</FD_ID>
+		</Parameters>
+		<Parameters Type="Default">
+			<SIMVAR_FD_ACTIVE>AUTOPILOT FLIGHT DIRECTOR ACTIVE:#FD_ID#</SIMVAR_FD_ACTIVE>
+			<SIMVAR_FD_PITCH>AUTOPILOT FLIGHT DIRECTOR PITCH</SIMVAR_FD_PITCH>
+			<SIMVAR_FD_PITCH_REF>AUTOPILOT FLIGHT DIRECTOR PITCH EX1</SIMVAR_FD_PITCH_REF>
+			<SIMVAR_FD_BANK>AUTOPILOT FLIGHT DIRECTOR BANK</SIMVAR_FD_BANK>
+			<SIMVAR_FD_BANK_REF>AUTOPILOT FLIGHT DIRECTOR BANK EX1</SIMVAR_FD_BANK_REF>
+			<UNITS_FD_PITCH>Degree</UNITS_FD_PITCH>
+			<UNITS_FD_PITCH_REF>Degree</UNITS_FD_PITCH_REF>
+			<UNITS_FD_BANK>Degree</UNITS_FD_BANK>
+			<UNITS_FD_BANK_REF>Degree</UNITS_FD_BANK_REF>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_FD_ACTIVE>(A:#SIMVAR_FD_ACTIVE#, Bool)</GET_FD_ACTIVE>
+			<GET_FD_PITCH>(A:#SIMVAR_FD_PITCH#, #UNITS_FD_PITCH#)</GET_FD_PITCH>
+			<GET_FD_PITCH_REF>(A:#SIMVAR_FD_PITCH_REF#, #UNITS_FD_PITCH_REF#)</GET_FD_PITCH_REF>
+			<GET_FD_BANK>(A:#SIMVAR_FD_BANK#, #UNITS_FD_BANK#)</GET_FD_BANK>
+			<GET_FD_BANK_REF>(A:#SIMVAR_FD_BANK_REF#, #UNITS_FD_BANK_REF#)</GET_FD_BANK_REF>
+		</Parameters>
+		<Parameters Type="Default">
+			<SET_FD_ACTIVE>#GET_FD_ACTIVE# != if{ #FD_ID# (&gt;K:TOGGLE_FLIGHT_DIRECTOR) }</SET_FD_ACTIVE>
+			<TOGGLE_FD>#FD_ID# (&gt;K:TOGGLE_FLIGHT_DIRECTOR)</TOGGLE_FD>
+			<SET_PITCH_REF_16K>(&gt;K:AP_PITCH_REF_SET)</SET_PITCH_REF_16K>
+			<SET_PITCH_REF>@16K / (&gt;K:AP_PITCH_REF_SET)</SET_PITCH_REF>
+			<SYNC_FD_PITCH>(&gt;K:SYNC_FLIGHT_DIRECTOR_PITCH)</SYNC_FD_PITCH>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_FD#OUT_PARAM_SUFFIX#_ACTIVE>#SIMVAR_FD_ACTIVE#</SIMVAR_FD#OUT_PARAM_SUFFIX#_ACTIVE>
+			<SIMVAR_FD_PITCH>#SIMVAR_FD_PITCH#</SIMVAR_FD_PITCH>
+			<SIMVAR_FD_PITCH_REF>#SIMVAR_FD_PITCH_REF#</SIMVAR_FD_PITCH_REF>
+			<SIMVAR_FD_BANK>#SIMVAR_FD_BANK#</SIMVAR_FD_BANK>
+			<SIMVAR_FD_BANK_REF>#SIMVAR_FD_BANK_REF#</SIMVAR_FD_BANK_REF>
+			<GET_FD#OUT_PARAM_SUFFIX#_ACTIVE>#GET_FD_ACTIVE#</GET_FD#OUT_PARAM_SUFFIX#_ACTIVE>
+			<GET_FD_PITCH>#GET_FD_PITCH#</GET_FD_PITCH>
+			<GET_FD_PITCH_REF>#GET_FD_PITCH_REF#</GET_FD_PITCH_REF>
+			<GET_FD_BANK>#GET_FD_BANK#</GET_FD_BANK>
+			<GET_FD_BANK_REF>#GET_FD_BANK_REF#</GET_FD_BANK_REF>
+			<SET_FD#OUT_PARAM_SUFFIX#_ACTIVE>#SET_FD_ACTIVE#</SET_FD#OUT_PARAM_SUFFIX#_ACTIVE>
+			<TOGGLE_FD#OUT_PARAM_SUFFIX#>#TOGGLE_FD#</TOGGLE_FD#OUT_PARAM_SUFFIX#>
+			<SET_PITCH_REF_16K>#SET_PITCH_REF_16K#</SET_PITCH_REF_16K>
+			<SET_PITCH_REF>#SET_PITCH_REF#</SET_PITCH_REF>
+			<SYNC_FD_PITCH>#SYNC_FD_PITCH#</SYNC_FD_PITCH>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Yaw_Damper_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_YAW_DAMPER>AUTOPILOT YAW DAMPER</SIMVAR_YAW_DAMPER>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_YAW_DAMPER>(A:#SIMVAR_YAW_DAMPER#, Bool)</GET_YAW_DAMPER>
+			<SET_YAW_DAMPER>(&gt;K:YAW_DAMPER_SET)</SET_YAW_DAMPER>
+			<TOGGLE_YAW_DAMPER>(&gt;K:YAW_DAMPER_TOGGLE)</TOGGLE_YAW_DAMPER>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_YAW_DAMPER>#SIMVAR_YAW_DAMPER#</SIMVAR_YAW_DAMPER>
+			<GET_YAW_DAMPER>#GET_YAW_DAMPER#</GET_YAW_DAMPER>
+			<SET_YAW_DAMPER>#SET_YAW_DAMPER#</SET_YAW_DAMPER>
+			<TOGGLE_YAW_DAMPER>#TOGGLE_YAW_DAMPER#</TOGGLE_YAW_DAMPER>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_BackCourse_Parameters">
+		<Parameters Type="Default">
+			<SIMVAR_BACKCOURSE>AUTOPILOT BACKCOURSE HOLD</SIMVAR_BACKCOURSE>
+		</Parameters>
+		<Parameters Type="Default">
+			<GET_BACKCOURSE>(A:#SIMVAR_BACKCOURSE#, Bool)</GET_BACKCOURSE>
+			<TOGGLE_BACKCOURSE>(&gt;K:AP_BC_HOLD)</TOGGLE_BACKCOURSE>
+		</Parameters>
+		<Parameters Type="Override">
+			<SET_BACKCOURSE>#GET_BACKCOURSE# != if{ #TOGGLE_BACKCOURSE# }</SET_BACKCOURSE>
+		</Parameters>
+		<ReturnParameters>
+			<SIMVAR_BACKCOURSE>#SIMVAR_BACKCOURSE#</SIMVAR_BACKCOURSE>
+			<GET_BACKCOURSE>#GET_BACKCOURSE#</GET_BACKCOURSE>
+			<SET_BACKCOURSE>#SET_BACKCOURSE#</SET_BACKCOURSE>
+			<TOGGLE_BACKCOURSE>#TOGGLE_BACKCOURSE#</TOGGLE_BACKCOURSE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<!-- ############################# EMISSIVE PARAMETERS ############################ -->
+	<ParametersFn Name="ASOBO_AP_Altitude_Mode_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Altitude_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_ALTITUDE_LOCK#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_VerticalSpeed_Mode_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_VerticalSpeed_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_VERTICAL_SPEED_MODE#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Vertical_Navigation_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Vertical_Navigation_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_VNAV_LOCK#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_FlightLevelChange_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_FlightLevelChange_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_FLIGHT_LEVEL_CHANGE#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Leveler_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Leveler_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_LEVELER#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Flight_Director_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Flight_Director_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_FD_ACTIVE#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Master_Emissive_Parameters"> 
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Master_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_AP_MASTER#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Heading_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Heading_Mode_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_HEADING_MODE#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Navigation_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Navigation_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_NAV_LOCK#</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_AP_Approach_Emissive_Parameters">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_AP_Approach_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<EMISSIVE_CODE>#GET_APPROACH_LOCK# #GET_GLIDESLOPE_LOCK# and</EMISSIVE_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

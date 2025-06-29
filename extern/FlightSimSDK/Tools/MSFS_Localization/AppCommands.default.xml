@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppCommandDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <AppCommand Name="NewProjectFromMSFSProjectXml" Title="New Project From MSFS Project XML"/>
+    <AppCommand Name="OpenProject" Title="Open Project" KeyGesture="Ctrl+O" IconName="../Images/Open_File.png"/>
+    <AppCommand Name="CloseProject" Title="Close Project" KeyGesture="Ctrl+C" />
+    <AppCommand Name="Exit" Title="Exit" KeyGesture="Alt+F4" />
+    <AppCommand Name="SaveProject" Title="Save All" KeyGesture="Ctrl+S" />
+		<AppCommand Name="Undo" Title="Undo" KeyGesture="Ctrl+Z" ToolTip="Undo" IconName="../Images/Undo.png"/>
+		<AppCommand Name="Redo" Title="Redo" KeyGesture="Ctrl+Y" ToolTip="Redo" IconName="../Images/Redo.png"/>
+		<AppCommand Name="EditProjectSettings" Title="Edit Project Settings" />
+    <AppCommand Name="EditCommands" Title="Edit Commands" />
+    <AppCommand Name="EditNamingConventions" Title="Edit Naming Conventions" />
+    <AppCommand Name="ForceSync" Title="Force Sync" />
+    
+    <AppCommand Name="NewElement" Title="New Element" KeyGesture="Ctrl+N" IconName="../Images/add_blue.png"  />
+    <AppCommand Name="DeleteElement" Title="Delete" KeyGesture="Ctrl+Delete" />
+
+    <AppCommand Name="NewFile" Title="New File" KeyGesture="Ctrl+N" IconName="../Images/add_blue.png"  />
+    <AppCommand Name="NewTag" Title="New Tag"/>
+    
+    <AppCommand Name="ResolveFile" Title="Resolve File"  />
+
+    <AppCommand Name="RenameEntry" Title="Rename" />
+    <AppCommand Name="DuplicateEntry" Title="Duplicate" />
+    <AppCommand Name="FindInTreeView" Title="Find In Tree View" />
+    <AppCommand Name="ShowEntryHistory" Title="Show History" />
+    <AppCommand Name="NavigateBackwards" Title="Navigate Backwards" KeyGesture="Ctrl+Z" IconName="../Images/LeftArrowBlue32.png" ToolTip="Navigate Backwards" />
+    <AppCommand Name="NavigateForwards" Title="Navigate Forwards" KeyGesture="Ctrl+Shift+Z" IconName="../Images/RightArrowBlue32.png" ToolTip="Navigate Forwards" />
+    <AppCommand Name="Expand" Title="Expand" KeyGesture="Alt+Left" />
+    <AppCommand Name="Collapse" Title="Collapse" KeyGesture="Alt+Right" />
+    <AppCommand Name="ImportWaves" Title="Import Waves" />
+    <AppCommand Name="ExportToTTs" Title="Export To TTs" IconName="../Images/text-to-speech.png" />
+		<AppCommand Name="EditTTsVoices" Title="Edit TTs Voices" IconName="../Images/text-to-speech.png" />
+		
+    <AppCommand Name="ExportAsDialogue" Title="Export As Dialogue" />
+    <AppCommand Name="Export" Title="Export" />
+    <AppCommand Name="ImportExport" Title="Import/Export" />
+
+    <AppCommand Name="ImportJSonFile" Title="Import JSon File"  />
+    <AppCommand Name="ImportAirportFiles" Title="Import Airport Files"  />
+    <AppCommand Name="ImportExcelFile" Title="Import Excel File" IconName="../Images/Excel_15.png" />
+    <AppCommand Name="ExportToExcel" Title="Export To Excel" IconName="../Images/ExportExcel.png" />
+    <AppCommand Name="ExportToXml" Title="Export To Xml" />
+
+    <AppCommand Name="MoveToLocFile" Title="Move Entries To Localization File" />
+    <AppCommand Name="DuplicateToLocFile" Title="Duplicate Entries to another package" ToolTip="Duplicate Entries To a Localization File of another package" />
+    <AppCommand Name="ImportXmlFiles" Title="Import Xml Files"  />
+    <AppCommand Name="ImportExternalPackage" Title="Import External Package"  />
+    <AppCommand Name="ExportToExternalPackage" Title="Export To External Package"  />
+
+
+    <AppCommand Name="BatchOperations" Title="Batch Operations"/>
+		<AppCommand Name="PlayWave" Title="Play Wave" KeyGesture="Space" IconName="../Images/icon_play_sound.png" ToolTip="Play Wave" />
+		<AppCommand Name="EditColumns" Title="Edit Columns" KeyGesture="Ctrl+E" ToolTip="Edit Columns" />
+		<AppCommand Name="ShowInExplorer" Title="Show In Explorer" KeyGesture="Ctrl+E" ToolTip="Show In Explorer" />
+		<AppCommand Name="ChangeCommands" Title="ChangeCommands" />
+
+    <AppCommand Name="ParseAllAssets" Title="Parse All Assets" />
+    <AppCommand Name="ParsePackageAssets" Title="Parse Package Assets" />
+    <AppCommand Name="ParseAssetsIncludingSourceCode" Title="Parse Assets Including Source Code" />
+    <AppCommand Name="ConvertALMStrings" Title="Convert ALM Strings" />
+    <AppCommand Name="ParseLanguageDll" Title="Parse Language Dll" />
+
+    <AppCommand Name="EditTagDescriptions" Title="Edit Tag Descriptions"  />
+
+
+    <AppCommand Name="StatsView" Title="Statistics" />
+		<AppCommand Name="EntryView" Title="Selected Entries" />
+    <AppCommand Name="OptionsView" Title="Options" />
+		<AppCommand Name="AudioView" Title="Audio" />
+
+    <AppCommand Name="AboutApp" Title="About..." />
+  </Commands>
+</AppCommandDefinitions>

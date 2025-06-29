@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_UV_options glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "clampUVX": {
+            "type": "boolean",
+            "default": true
+        },
+        "clampUVY": {
+            "type": "boolean",
+            "default": true
+        },
+        "UVOffSetU": {
+            "type": "number"
+        },
+        "UVOffSetV": {
+            "type": "number"
+        },
+        "UVTilingU": {
+            "type": "number"
+        },
+        "UVTilingV": {
+            "type": "number"
+        },
+        "UVRotation": {
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

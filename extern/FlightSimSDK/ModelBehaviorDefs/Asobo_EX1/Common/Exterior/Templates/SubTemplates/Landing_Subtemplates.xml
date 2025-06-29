@@ -1,0 +1,64 @@
+<ModelBehaviors>
+	<!-- ################################## LANDING ################################### -->
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_LANDING_Gear_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Gear_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_LANDING_Gear_Tire_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Gear_Tire_Animation_Parameters"/>
+		</Parameters>
+		<Parameters Type="Override">
+			<Condition Check="NODE_ID_STILL">
+				<SaveParameters ID="STILL_NODE_IDs" Append="Default">
+					<#NODE_ID_STILL#/>
+				</SaveParameters>
+			</Condition>
+			<Condition Check="NODE_ID_BLURRED">
+				<SaveParameters ID="BLURRED_NODE_IDs" Append="Default">
+					<#NODE_ID_BLURRED#/>
+				</SaveParameters>
+			</Condition>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+
+		<Condition Valid="SKIP_NODE_SWAP">
+			<False>
+				<UseTemplate Name="ASOBO_ET_COMMON_Collection_Visibility_Template">
+					<SAVED_NODE_IDS>STILL_NODE_IDs</SAVED_NODE_IDS>
+					<VISIBILITY_CODE>#VISIBILITY_CODE_STILL#</VISIBILITY_CODE>
+				</UseTemplate>
+				<UseTemplate Name="ASOBO_ET_COMMON_Collection_Visibility_Template">
+					<SAVED_NODE_IDS>BLURRED_NODE_IDs</SAVED_NODE_IDS>
+					<VISIBILITY_CODE>#VISIBILITY_CODE_BLURRED#</VISIBILITY_CODE>
+				</UseTemplate>
+			</False>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_LANDING_Gear_Steering_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Gear_Steering_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+	</Template> 
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_LANDING_Contact_Point_Steering_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Contact_Point_Steering_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+	</Template> 
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_LANDING_Contact_Point_SubTemplate">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Contact_Point_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

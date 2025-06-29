@@ -1,0 +1,173 @@
+<ModelBehaviors>
+	<!-- ################################## INSTRUMENT ################################ -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\INSTRUMENT_Inputs.xml" />
+	<Include RelativeFile="ParametersFn\\INSTRUMENT_ParametersFn.xml" />
+	<Include RelativeFile="ParametersFn\\Common_ParametersFn.xml" />
+	<Include RelativeFile="ParametersFn\\Radio_ParametersFn.xml" />
+	<Include RelativeFile="SubTemplates\\INSTRUMENT_SubTemplates.xml" />
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Flag_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Flag_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Instrument_Indicator_With_Flag_Template">
+		<Parameters Type="Default">
+			<FLAG_TEMPLATE>ASOBO_IT_Flag_Indicator_Template</FLAG_TEMPLATE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Instrument_Flag_Animation_Parameters" />
+		</Parameters>
+		<UseTemplate Name="#FLAG_TEMPLATE#">
+			<ANIM_NAME>#ANIM_NAME_FLAG#</ANIM_NAME>
+		</UseTemplate>
+		<UseTemplate Name="#INDICATOR_TEMPLATE#">
+			<ANIM_TEST_NO_FAILURE_CODE>#SHOW_FLAG_CONDITION# !</ANIM_TEST_NO_FAILURE_CODE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Airspeed_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Airspeed_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Heading_Indicator_Template">
+		<Condition Check="ANIM_NAME_FLAG">
+			<True>
+				<UseTemplate Name="ASOBO_IT_Instrument_Indicator_With_Flag_Template">
+					<INDICATOR_TEMPLATE>ASOBO_IT_Heading_Indicator_SubTemplate</INDICATOR_TEMPLATE>
+				</UseTemplate>
+			</True>
+			<False>
+				<UseTemplate Name="ASOBO_IT_Heading_Indicator_SubTemplate" />
+			</False>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Attitude_Indicator_Template">
+		<Condition Check="ANIM_NAME_FLAG">
+			<True>
+				<UseTemplate Name="ASOBO_IT_Instrument_Indicator_With_Flag_Template">
+					<INDICATOR_TEMPLATE>ASOBO_IT_Attitude_Indicator_SubTemplate</INDICATOR_TEMPLATE>
+				</UseTemplate>
+			</True>
+			<False>
+				<UseTemplate Name="ASOBO_IT_Attitude_Indicator_SubTemplate" />
+			</False>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_CDI_Indicator_Template">
+		<Condition Check="ANIM_NAME_FLAG">
+			<True>
+				<UseTemplate Name="ASOBO_IT_Instrument_Indicator_With_Flag_Template">
+					<INDICATOR_TEMPLATE>ASOBO_LOCAL_CDI_Indicator_Base_Template</INDICATOR_TEMPLATE>
+				</UseTemplate>
+			</True>
+			<False>
+				<UseTemplate Name="ASOBO_LOCAL_CDI_Indicator_Base_Template" />
+			</False>
+		</Condition>
+	</Template>
+	<!-- Use this template if the CDI is connected to the state of the GPS-->
+	<Template Name="ASOBO_IT_CDI_Indicator_With_GPS_Template">
+		<UseTemplate Name="ASOBO_IT_CDI_Indicator_With_GPS_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Altitude_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Altitude_Indicator_SubTemplate">
+			<SaveParameters ID="Altitude_Indicator_ALTITUDE_TO_ANIM_NAME" Append="Override">
+				<Condition Check="ANIM_NAME_100">
+					<100>#ANIM_NAME_100#</100>
+				</Condition>
+				<Condition Check="ANIM_NAME_1000">
+					<1000>#ANIM_NAME_1000#</1000>
+				</Condition>
+				<Condition Check="ANIM_NAME_10000">
+					<10000>#ANIM_NAME_10000#</10000>
+				</Condition>
+			</SaveParameters>
+		</UseTemplate>
+		<Condition Check="ANIM_NAME_STRIP">
+			<UseTemplate Name="ASOBO_IT_Altitude_Strip_Indicator_Template">
+				<ANIM_NAME>#ANIM_NAME_STRIP#</ANIM_NAME>
+			</UseTemplate>
+		</Condition>
+	</Template>
+	<Template Name="ASOBO_IT_Altitude_Strip_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Altitude_Strip_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Turn_Indicator_Template">
+		<Condition Check="ANIM_NAME_FLAG">
+			<True>
+				<UseTemplate Name="ASOBO_IT_Instrument_Indicator_With_Flag_Template">
+					<INDICATOR_TEMPLATE>ASOBO_IT_Turn_Indicator_SubTemplate</INDICATOR_TEMPLATE>
+				</UseTemplate>
+			</True>
+			<False>
+				<UseTemplate Name="ASOBO_IT_Turn_Indicator_SubTemplate" />
+			</False>
+		</Condition>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Vertical_Speed_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Vertical_Speed_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Hourmeter_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Hourmeter_Indicator_SubTemplate">
+			<SaveParameters ID="Hourmeter_Indicator_DIGIT_INDEX_TO_ANIM_NAME" Append="Override">
+				<Loop>
+					<Setup>
+						<Param>DIGIT_INDEX</Param>
+						<From>1</From>
+						<Inc>1</Inc>
+						<While>
+							<Arg NotEmpty="HOURMETER_DIGIT_#DIGIT_INDEX#_ANIM_NAME" />
+						</While>
+					</Setup>
+					<Do>
+						<Parameters Type="Override">
+							<ANIM_NAME Process="Param">HOURMETER_DIGIT_#DIGIT_INDEX#_ANIM_NAME</ANIM_NAME>
+						</Parameters>
+						<#DIGIT_INDEX#>#ANIM_NAME#</#DIGIT_INDEX#>
+					</Do>
+				</Loop>
+			</SaveParameters>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Hobbs_Hourmeter_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Hourmeter_Indicator_Template">
+			<USE_HOBBS_TIME>True</USE_HOBBS_TIME>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Compass_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Compass_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Compass_Bank_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Compass_Bank_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Compass_Pitch_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Compass_Pitch_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Fuel_Pressure_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Fuel_Pressure_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_IT_Liquid_Dropping_Indicator_Template">
+		<UseTemplate Name="ASOBO_IT_Liquid_Dropping_Indicator_SubTemplate" />
+	</Template>
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_INSTRUMENT_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>INSTRUMENT</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,138 @@
+<ModelBehaviors>
+	<!-- ################################## INSTRUMENT ################################ -->
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Attitude_Indicator_Cage_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Attitude_Indicator_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<UseParametersFn Name="ASOBO_Auto_Define_XStates_Variant_Helper"/>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ATTITUDE_CAGE#</SIMVAR>
+			</UseParametersFn>
+			<!-- Check position -->
+			<POS_CAGED_CHECK>#GET_ATTITUDE_CAGE#</POS_CAGED_CHECK>
+			<POS_UNCAGED_CHECK>#GET_ATTITUDE_CAGE# !</POS_UNCAGED_CHECK>
+			<!-- Set position -->
+			<POS_CAGED_CODE>1 #SET_ATTITUDE_CAGE#</POS_CAGED_CODE>
+			<POS_UNCAGED_CODE>0 #SET_ATTITUDE_CAGE#</POS_UNCAGED_CODE>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Attitude_Indicator_Cage_Momentary_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Attitude_Indicator_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<ON_EVENT>1 #SET_ATTITUDE_CAGE#</ON_EVENT>
+			<ON_RELEASE>0 #SET_ATTITUDE_CAGE#</ON_RELEASE>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ATTITUDE_CAGE#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Attitude_Indicator_Bars_Settings_Config">
+		<Parameters Type="Default">
+			<TOOLTIP_VALUE_FORMAT>'%.2f%%'</TOOLTIP_VALUE_FORMAT>
+			<NB_INCREMENT_FOR_FULL_RANGE>20</NB_INCREMENT_FOR_FULL_RANGE>
+		</Parameters>
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Attitude_Indicator_Parameters"/>
+		</Parameters>
+		<ReturnParameters>
+			<NB_INCREMENT_FOR_FULL_RANGE>#NB_INCREMENT_FOR_FULL_RANGE#</NB_INCREMENT_FOR_FULL_RANGE>
+			<VALUE_TYPE>NUMBER</VALUE_TYPE>
+			<MIN_VALUE>-100</MIN_VALUE>
+			<MAX_VALUE>100</MAX_VALUE>
+			<IE_GET_STATE>#GET_ATTITUDE_INDICATOR_BARS#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_ATTITUDE_BARS#</IE_SET_STATE>
+			<TOOLTIP_VALUE_FORMAT>#TOOLTIP_VALUE_FORMAT#</TOOLTIP_VALUE_FORMAT>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ATTITUDE_INDICATOR_BARS#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Altimeter_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Altimeter_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<MIN_ALTIMETER_MB>955</MIN_ALTIMETER_MB>
+			<MAX_ALTIMETER_MB>1060</MAX_ALTIMETER_MB>
+			<ALTIMETER_INC_HG>0.01</ALTIMETER_INC_HG>
+		</Parameters>
+		<Parameters Type="Default">
+			<ALTIMETER_INC_MB Process="Float">#ALTIMETER_INC_HG# @inHg_to_millibar</ALTIMETER_INC_MB>
+			<TOOLTIP_VALUE_FORMAT>'%.2f inHg'</TOOLTIP_VALUE_FORMAT>
+			<NB_INCREMENT_FOR_FULL_RANGE>3000</NB_INCREMENT_FOR_FULL_RANGE>
+		</Parameters>
+		<ReturnParameters>
+			<NB_INCREMENT_FOR_FULL_RANGE>#NB_INCREMENT_FOR_FULL_RANGE#</NB_INCREMENT_FOR_FULL_RANGE>
+			<VALUE_TYPE>NUMBER</VALUE_TYPE>
+			<MIN_VALUE>#MIN_ALTIMETER_MB#</MIN_VALUE>
+			<MAX_VALUE>#MAX_ALTIMETER_MB#</MAX_VALUE>
+			<IE_INCREMENT>#ALTIMETER_INC_MB#</IE_INCREMENT>
+			<IE_GET_STATE>#GET_ALTIMETER_SETTING_MB#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_ALTIMETER_SETTING_MB#</IE_SET_STATE>
+			<IE_VALUE_UNITS>Millibar</IE_VALUE_UNITS>
+			<VAR_TOOLTIP_VALUE_UNIT>inHG</VAR_TOOLTIP_VALUE_UNIT>
+			<TOOLTIP_VALUE_FORMAT>#TOOLTIP_VALUE_FORMAT#</TOOLTIP_VALUE_FORMAT>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_ALTIMETER_SETTING#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_Heading_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Heading_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<HEADING_DEGREE_INCREMENT>1</HEADING_DEGREE_INCREMENT>
+			<TOOLTIP_VALUE_FORMAT>'%d°'</TOOLTIP_VALUE_FORMAT>
+			<NB_INCREMENT_FOR_FULL_RANGE>360</NB_INCREMENT_FOR_FULL_RANGE>
+		</Parameters>
+		<ReturnParameters>
+			<NB_INCREMENT_FOR_FULL_RANGE>#NB_INCREMENT_FOR_FULL_RANGE#</NB_INCREMENT_FOR_FULL_RANGE>
+			<VALUE_TYPE>NUMBER</VALUE_TYPE>
+			<CLAMP_VALUE>dnor</CLAMP_VALUE>
+			<IE_INCREMENT>#HEADING_DEGREE_INCREMENT#</IE_INCREMENT>
+			<IE_GET_STATE>#GET_HEADING#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_HEADING#</IE_SET_STATE>
+			<IE_VALUE_UNITS>Degrees</IE_VALUE_UNITS>
+			<VAR_TOOLTIP_VALUE_UNIT>Degrees</VAR_TOOLTIP_VALUE_UNIT>
+			<TOOLTIP_VALUE_FORMAT>#TOOLTIP_VALUE_FORMAT#</TOOLTIP_VALUE_FORMAT>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_HEADING#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+	<ParametersFn Name="ASOBO_CDI_OBS_Settings_Config">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_NAV_Parameters"/>
+		</Parameters>
+		<Parameters Type="Default">
+			<OBS_DEGREE_INCREMENT>1</OBS_DEGREE_INCREMENT>
+			<TOOLTIP_VALUE_FORMAT>'%d°'</TOOLTIP_VALUE_FORMAT>
+			<NB_INCREMENT_FOR_FULL_RANGE>360</NB_INCREMENT_FOR_FULL_RANGE>
+		</Parameters>
+		<ReturnParameters>
+			<NB_INCREMENT_FOR_FULL_RANGE>#NB_INCREMENT_FOR_FULL_RANGE#</NB_INCREMENT_FOR_FULL_RANGE>
+			<VALUE_TYPE>NUMBER</VALUE_TYPE>
+			<CLAMP_VALUE>dnor</CLAMP_VALUE>
+			<IE_INCREMENT>#OBS_DEGREE_INCREMENT#</IE_INCREMENT>
+			<IE_GET_STATE>#GET_NAV_OBS#</IE_GET_STATE>
+			<IE_SET_STATE>#SET_NAV_OBS#</IE_SET_STATE>
+			<IE_VALUE_UNITS>Degrees</IE_VALUE_UNITS>
+			<VAR_TOOLTIP_VALUE_UNIT>Degrees</VAR_TOOLTIP_VALUE_UNIT>
+			<TOOLTIP_VALUE_FORMAT>#TOOLTIP_VALUE_FORMAT#</TOOLTIP_VALUE_FORMAT>
+			<UseParametersFn Name="ASOBO_Watch_Simvar_Helper">
+				<SIMVAR>#SIMVAR_NAV_OBS#</SIMVAR>
+			</UseParametersFn>
+		</ReturnParameters>
+	</ParametersFn>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,16 @@
+<ModelBehaviors>
+	<!-- ################################## FUEL ###################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Inputs\\Fuel_Inputs.xml"/>
+	<Include RelativeFile="ParametersFn\\Fuel_ParametersFn.xml"/>
+	<Include RelativeFile="SubTemplates\\Fuel_SubTemplates.xml"/>
+	<!-- ############################################################################## -->
+	<!-- ############################################################################## -->
+	<!-- IN: PFN_GET_PARAMETERS -->
+	<Template Name="ASOBO_IT_FUEL_Interaction_Template">
+		<UseTemplate Name="ASOBO_Interaction_Template">
+			<IE_TYPE>FUEL</IE_TYPE>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_sail glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "description": "Define a material with a sail translucency shader. The result is a material with an additionnal lighting on the backface and with a translucency effect. It is mandatory to enable the 'Double Sided' parameter to light the backface.",
+    "properties": {
+        "sailLightAbsorption": {
+            "description": "Controls the absorption of the surface. If the value is 0, the surface let the light go trough it. If the value is 1, the surface is opaque.",
+            "default": 1.0,
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "type": "number"
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}

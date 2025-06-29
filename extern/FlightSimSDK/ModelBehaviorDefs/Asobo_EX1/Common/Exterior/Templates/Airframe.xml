@@ -1,0 +1,13 @@
+<ModelBehaviors>
+	<!-- ################################## AIRFRAME ################################### -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="ParametersFn\\Airframe_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<Template Name="ASOBO_ET_AIRFRAME_Wing_Fold_Template">
+		<Parameters Type="Override">
+			<UseParametersFn Name="ASOBO_Get_Wing_Fold_Animation_Parameters"/>
+		</Parameters>
+		<UseTemplate Name="ASOBO_GT_Anim_Template"/>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,19 @@
+<ModelBehaviors>
+	<!-- ################################# TEMPLATES ################################## -->
+	<!-- ############################################################################## -->
+	<Include RelativeFile="Animation_ParametersFn.xml"/>
+	<!-- ############################################################################## -->
+	<!-- @DOC TEMPLATE ASOBO_IT_Gauge_Template
+		@Brief Make a gauge animation using ASOBO_Gauge_Animation_Parameters as processor
+		@Param FINAL_ANIMATION_TEMPLATE Animation template used for the gauge animation
+	-->
+	<Template Name="ASOBO_IT_Gauge_Template">
+		<Parameters Type="Default">
+			<FINAL_ANIMATION_TEMPLATE>ASOBO_GT_Anim_Template</FINAL_ANIMATION_TEMPLATE>
+		</Parameters>
+		<UseTemplate Name="#FINAL_ANIMATION_TEMPLATE#">
+			<UseParametersFn Name="ASOBO_Gauge_Animation_Parameters"/>
+		</UseTemplate>
+	</Template>
+	<!-- ############################################################################## -->
+</ModelBehaviors>

@@ -1,0 +1,12 @@
+<ModelBehaviors>
+	<!-- Common > Shared -->
+	<Include RelativeFile="Templates\\Common.xml"/>
+	<!-- Special case -->
+	<Include RelativeFile="Utils\\Procedures\\Procedures.xml"/>
+	<Include RelativeFile="Utils\\Procedures\\Common\\Utils.xml"/>
+	<Include RelativeFile="Utils\\Variables\\Variables.xml"/>
+	<Include RelativeFile="Utils\\Visibility\\Visibility_Templates.xml"/>
+	<Include RelativeFile="Utils\\Interaction\\Interaction_Templates.xml"/>
+	<Include RelativeFile="Utils\\Emissives\\Emissive_Templates.xml"/>
+	<Include RelativeFile="Utils\\Animations\\Animation_Templates.xml"/>
+</ModelBehaviors>

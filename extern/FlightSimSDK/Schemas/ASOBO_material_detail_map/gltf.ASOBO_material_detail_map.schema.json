@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "ASOBO_material_detail_map glTF extension",
+    "type": "object",
+    "allOf": [ { "$ref": "glTFChildOfRootProperty.schema.json" } ],
+    "properties": {
+        "UVScale": {
+            "type": "number"
+        },
+        "blendThreshold": {
+            "type": "number"
+        },     
+        "detailColorTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+        "detailNormalTexture": {
+            "allOf": [ { "$ref": "material.normalTextureInfo.schema.json" } ]
+        },
+        "detailMetalRoughAOTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+        "blendMaskTexture": {
+            "allOf": [ { "$ref": "textureInfo.schema.json" } ]
+        },
+        "extensions": { },
+        "extras": { }
+    }
+}
