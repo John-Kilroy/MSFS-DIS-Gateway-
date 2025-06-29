@@ -1,3 +1,1 @@
-extern directory: \n
-Contains all relevant external, open-source, resources \n
-open-dis and FlightSimSDK
+extern directory: Contains all relevant external, open-source, resources like open-dis and FlightSimSDK
