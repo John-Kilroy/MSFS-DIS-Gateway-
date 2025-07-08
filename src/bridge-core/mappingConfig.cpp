@@ -1,56 +1,34 @@
 #include "MappingConfig.h"
-#include <nlohmann/json.hpp>
-#include <fstream>
-#include <iostream>
+#include <DIS/EntityStatePdu.h>
+#include <stdexcept>
 
-MappingConfig::MappingConfig(const std::string& path) {
-    std::ifstream in(path);
-    if (!in.is_open()) {
-        throw std::runtime_error("Could not open mapping config file: " + path);
-    }
-    nlohmann::json j;
-    in >> j;
-    loadJson(j);
-}
-
-void MappingConfig::loadJson(const nlohmann::json& j) {
-    // Load event name → PDU type mappings
-    for (auto& item : j["eventToPdu"]) {
-        std::string eventName = item["event"].get<std::string>();
-        std::string pduType = item["pduType"].get<std::string>();
-        eventToPduMap_[eventName] = pduType;
-    }
-    // Load PDU type → event name mappings
-    for (auto& item : j["pduToEvent"]) {
-        std::string pduType = item["pduType"].get<std::string>();
-        std::string eventName = item["event"].get<std::string>();
-        pduToEventMap_[pduType] = eventName;
-    }
+MappingConfig::MappingConfig() {
+    // Hard-code one mapping: FlightData events ↔ EntityStatePdu
+    eventToPduMap_["FlightDataUpdate"] = "EntityStatePdu";
+    pduToEventMap_["EntityStatePdu"] = "FlightDataUpdate";
 }
 
 InternalEvent MappingConfig::createEventFromFlightData(const FlightData& fd) const {
     InternalEvent ev;
     ev.name = "FlightDataUpdate";
-    // Pack payload fields
-    ev.payload["latitude"] = fd.latitude;
+    ev.payload.clear();
+    ev.payload["latitude"]  = fd.latitude;
     ev.payload["longitude"] = fd.longitude;
-    ev.payload["altitude"] = fd.altitude;
-    ev.payload["pitch"] = fd.pitch;
-    ev.payload["bank"] = fd.bank;
-    ev.payload["heading"] = fd.heading;
-    ev.payload["airspeed"] = fd.airspeed;
+    ev.payload["altitude"]  = fd.altitude;
+    ev.payload["pitch"]     = fd.pitch;
+    ev.payload["bank"]      = fd.bank;
+    ev.payload["heading"]   = fd.heading;
+    ev.payload["airspeed"]  = fd.airspeed;
     return ev;
 }
 
 std::unique_ptr<DIS::Pdu> MappingConfig::createPduFromEvent(const InternalEvent& event) const {
     auto it = eventToPduMap_.find(event.name);
     if (it == eventToPduMap_.end()) return nullptr;
-    const std::string& type = it->second;
-    if (type == "EntityStatePdu") {
+
+    if (it->second == "EntityStatePdu") {
         auto pdu = std::make_unique<DIS::EntityStatePdu>();
-        // Fill PDU fields from payload
         const auto& pl = event.payload;
-        pdu->setEntityLinearVelocity(0,0,0); // optional
         pdu->setEntityLocation(
             static_cast<float>(pl.at("latitude")),
             static_cast<float>(pl.at("longitude")),
@@ -61,30 +39,30 @@ std::unique_ptr<DIS::Pdu> MappingConfig::createPduFromEvent(const InternalEvent&
             static_cast<float>(pl.at("bank")),
             static_cast<float>(pl.at("heading"))
         );
+        // Optionally set velocity or other fields here
         return pdu;
     }
-    // Add other PDU types here
     return nullptr;
 }
 
 InternalEvent MappingConfig::createEventFromPdu(const DIS::Pdu& pdu) const {
     std::string type = pdu.getClassName();
     auto it = pduToEventMap_.find(type);
-    if (it == pduToEventMap_.end()) return InternalEvent{};
+    if (it == pduToEventMap_.end()) return {};
+
     InternalEvent ev;
     ev.name = it->second;
-    // Extract payload
     if (type == "EntityStatePdu") {
         const auto& esp = static_cast<const DIS::EntityStatePdu&>(pdu);
         auto& pl = ev.payload;
         auto pos = esp.getEntityLocation();
         auto orient = esp.getOrientation();
-        pl["latitude"] = pos.getX();
+        pl["latitude"]  = pos.getX();
         pl["longitude"] = pos.getY();
-        pl["altitude"] = pos.getZ();
-        pl["pitch"] = orient.getPhi();
-        pl["bank"] = orient.getTheta();
-        pl["heading"] = orient.getPsi();
+        pl["altitude"]  = pos.getZ();
+        pl["pitch"]     = orient.getPhi();
+        pl["bank"]      = orient.getTheta();
+        pl["heading"]   = orient.getPsi();
     }
     return ev;
 }
