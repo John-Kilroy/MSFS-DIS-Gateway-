@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -103,23 +103,35 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <PostBuildEvent>
+      <Message>Copying SimConnect.dll to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy "C:/Users/Jack/MSFS-DIS-Gateway-/extern/FlightSimSDK/SimConnect SDK/lib/SimConnect.dll" C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>Debug\bridge-core.lib;SimConnect.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib;C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bin\Debug\bridge-core.lib;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\lib\SimConnect.lib;bin\Debug\OpenDIS6.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/Debug/TestBridge.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug/TestBridge.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug/TestBridge.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -129,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -146,23 +158,35 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <PostBuildEvent>
+      <Message>Copying SimConnect.dll to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy "C:/Users/Jack/MSFS-DIS-Gateway-/extern/FlightSimSDK/SimConnect SDK/lib/SimConnect.dll" C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>Release\bridge-core.lib;SimConnect.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib;C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bin\Release\bridge-core.lib;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\lib\SimConnect.lib;bin\Release\OpenDIS6.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/Release/TestBridge.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release/TestBridge.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release/TestBridge.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -172,7 +196,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -189,23 +213,35 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <PostBuildEvent>
+      <Message>Copying SimConnect.dll to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy "C:/Users/Jack/MSFS-DIS-Gateway-/extern/FlightSimSDK/SimConnect SDK/lib/SimConnect.dll" C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>MinSizeRel\bridge-core.lib;SimConnect.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib;C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bin\MinSizeRel\bridge-core.lib;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\lib\SimConnect.lib;bin\MinSizeRel\OpenDIS6.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/MinSizeRel/TestBridge.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel/TestBridge.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel/TestBridge.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -215,7 +251,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -231,23 +267,35 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\SimConnect\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src;C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\src;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\include;C:\Users\Jack\MSFS-DIS-Gateway-\src\bridge-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
+    <PostBuildEvent>
+      <Message>Copying SimConnect.dll to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy "C:/Users/Jack/MSFS-DIS-Gateway-/extern/FlightSimSDK/SimConnect SDK/lib/SimConnect.dll" C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>RelWithDebInfo\bridge-core.lib;SimConnect.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib;C:/Users/Jack/MSFS-DIS-Gateway-/extern/SimConnect/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bin\RelWithDebInfo\bridge-core.lib;C:\Users\Jack\MSFS-DIS-Gateway-\extern\FlightSimSDK\SimConnect SDK\lib\SimConnect.lib;bin\RelWithDebInfo\OpenDIS6.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/RelWithDebInfo/TestBridge.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/TestBridge.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/TestBridge.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -321,6 +369,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Jack\MSFS-DIS-Gateway-\build\open-dis-build\OpenDIS6.vcxproj">
+      <Project>{F58B2FF1-08E4-3729-B527-CA2A3166D810}</Project>
+      <Name>OpenDIS6</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\Jack\MSFS-DIS-Gateway-\build\bridge-core.vcxproj">
       <Project>{6F4ECA32-3542-386D-9B24-F200973F2243}</Project>

@@ -119,7 +119,7 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/Debug/OpenDIS6.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug/OpenDIS6.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug/OpenDIS6.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -161,7 +161,7 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/Release/OpenDIS6.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release/OpenDIS6.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release/OpenDIS6.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -203,7 +203,7 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/MinSizeRel/OpenDIS6.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel/OpenDIS6.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel/OpenDIS6.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -244,7 +244,7 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/RelWithDebInfo/OpenDIS6.lib</ImportLibrary>
+      <ImportLibrary>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/OpenDIS6.lib</ImportLibrary>
       <ProgramDataBaseFile>C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/OpenDIS6.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>

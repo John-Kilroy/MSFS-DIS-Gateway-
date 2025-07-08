@@ -3,27 +3,35 @@ project(msfs-dis-bridge LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Set output directories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)  # For static libraries
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)  # For shared libraries
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)  # For executables
 
 # ---------------------------------------------------------------------------
-# 1) open‑DIS (DIS 6) submodule - now pointing to the correct folder
+# 1) open‑DIS (DIS 6) submodule
 # ---------------------------------------------------------------------------
-add_subdirectory(extern/open-dis-cpp
-                 ${CMAKE_BINARY_DIR}/open-dis-build)
+set(OPENDIS_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern/open-dis-cpp)
+set(OPENDIS_BUILD_DIR ${CMAKE_BINARY_DIR}/open-dis-build)
+add_subdirectory(${OPENDIS_SOURCE_DIR} ${OPENDIS_BUILD_DIR})
+include_directories(
+    ${OPENDIS_SOURCE_DIR}/src
+    ${OPENDIS_BUILD_DIR}/src
+)
 
 # ---------------------------------------------------------------------------
 # 2) SimConnect SDK
 # ---------------------------------------------------------------------------
-set(SIMCONNECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/extern/SimConnect/include)
-set(SIMCONNECT_LIB_DIR     ${CMAKE_SOURCE_DIR}/extern/SimConnect/lib)
-
+set(SIMCONNECT_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/FlightSimSDK/SimConnect SDK/include")
+set(SIMCONNECT_LIB_DIR "${CMAKE_SOURCE_DIR}/extern/FlightSimSDK/SimConnect SDK/lib")
 include_directories(${SIMCONNECT_INCLUDE_DIR})
-link_directories(${SIMCONNECT_LIB_DIR})
 
 # ---------------------------------------------------------------------------
-# 3) bridge-core library
+# 3) bridge-core library - BUILD AS STATIC LIBRARY
 # ---------------------------------------------------------------------------
-add_library(bridge-core
+# Change to static library
+add_library(bridge-core STATIC
     src/bridge-core/Encode.cpp
     src/bridge-core/Decode.cpp
     src/bridge-core/MappingConfig.cpp
@@ -31,15 +39,16 @@ add_library(bridge-core
 
 target_include_directories(bridge-core PUBLIC
     ${CMAKE_SOURCE_DIR}/src/bridge-core
-    ${CMAKE_SOURCE_DIR}/extern/open-dis-cpp/src
+    ${OPENDIS_SOURCE_DIR}/src
+    ${OPENDIS_BUILD_DIR}/src
 )
 
 target_link_libraries(bridge-core PRIVATE
-    OpenDIS6         # Updated to match open-dis-cpp target name
+    OpenDIS6
 )
 
 # ---------------------------------------------------------------------------
-# 4) TestBridge executable
+# 4) TestBridge executable with DLL copy
 # ---------------------------------------------------------------------------
 add_executable(TestBridge
     tests/pdu-replay/TestBridge.cpp
@@ -47,12 +56,25 @@ add_executable(TestBridge
 
 target_include_directories(TestBridge PRIVATE
     ${SIMCONNECT_INCLUDE_DIR}
+    ${OPENDIS_SOURCE_DIR}/src
+    ${OPENDIS_BUILD_DIR}/src
 )
 
-target_link_libraries(TestBridge PRIVATE
-    bridge-core
-    SimConnect
-)
+if(WIN32)
+    target_link_libraries(TestBridge PRIVATE
+        bridge-core
+        "${SIMCONNECT_LIB_DIR}/SimConnect.lib"
+        OpenDIS6
+    )
+    
+    # Add DLL copy command
+    add_custom_command(TARGET TestBridge POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+            "${SIMCONNECT_LIB_DIR}/SimConnect.dll"
+            $<TARGET_FILE_DIR:TestBridge>
+        COMMENT "Copying SimConnect.dll to output directory"
+    )
+endif()
 
 # ---------------------------------------------------------------------------
 # 5) (Optional) install rules

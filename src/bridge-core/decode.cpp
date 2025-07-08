@@ -1,7 +1,7 @@
 #include "Decode.h"
 #include "MappingConfig.h"
-#include <DIS/PduFactory.h>
-#include <DIS/DataStream.h>
+#include <dis6/utils/PduFactory.h>
+#include <dis6/utils/DataStream.h>
 #include <iostream>
 
 Decode::Decode(MappingConfig& config)
@@ -9,9 +9,14 @@ Decode::Decode(MappingConfig& config)
 {}
 
 FlightData Decode::decodePacket(const std::vector<uint8_t>& buffer) {
-    // Unmarshal buffer into DIS PDU
-    DIS::DataStream ds(buffer.begin(), buffer.end());
-    std::unique_ptr<DIS::Pdu> pdu(DIS::PduFactory::createPdu(&ds));
+    // Create PDU factory instance
+    DIS::PduFactory factory;
+    
+    // Create PDU from buffer
+    std::unique_ptr<DIS::Pdu> pdu(
+        factory.createPdu(reinterpret_cast<const char*>(buffer.data()))
+    );
+    
     if (!pdu) {
         throw std::runtime_error("Failed to decode PDU from buffer");
     }

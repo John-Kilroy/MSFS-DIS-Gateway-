@@ -6,7 +6,7 @@
 #include <vector>
 #include "FlightData.h"   // Will's FlightData struct
 #include "InternalEvent.h"
-#include <DIS/Pdu.h>
+#include <dis6/Pdu.h>
 
 class MappingConfig {
 public:

@@ -1,5 +1,5 @@
 #include "MappingConfig.h"
-#include <DIS/EntityStatePdu.h>
+#include <dis6/EntityStatePdu.h>
 #include <stdexcept>
 
 MappingConfig::MappingConfig() {
@@ -29,24 +29,47 @@ std::unique_ptr<DIS::Pdu> MappingConfig::createPduFromEvent(const InternalEvent&
     if (it->second == "EntityStatePdu") {
         auto pdu = std::make_unique<DIS::EntityStatePdu>();
         const auto& pl = event.payload;
-        pdu->setEntityLocation(
-            static_cast<float>(pl.at("latitude")),
-            static_cast<float>(pl.at("longitude")),
-            static_cast<float>(pl.at("altitude"))
-        );
-        pdu->setOrientation(
-            static_cast<float>(pl.at("pitch")),
-            static_cast<float>(pl.at("bank")),
-            static_cast<float>(pl.at("heading"))
-        );
-        // Optionally set velocity or other fields here
+        
+        // Create location and orientation objects
+        DIS::Vector3Double location;
+        location.setX(pl.at("latitude"));
+        location.setY(pl.at("longitude"));
+        location.setZ(pl.at("altitude"));
+        
+        DIS::Orientation orientation;
+        orientation.setPhi(static_cast<float>(pl.at("pitch")));
+        orientation.setTheta(static_cast<float>(pl.at("bank")));
+        orientation.setPsi(static_cast<float>(pl.at("heading")));
+        
+        // Set values in PDU
+        pdu->setEntityLocation(location);
+        pdu->setEntityOrientation(orientation);
+        
         return pdu;
     }
     return nullptr;
 }
 
 InternalEvent MappingConfig::createEventFromPdu(const DIS::Pdu& pdu) const {
-    std::string type = pdu.getClassName();
+    // Get PDU type
+    unsigned char pduType = pdu.getPduType();
+    std::string type;
+    
+    // Map PDU type to string
+    switch(pduType) {
+        case 1: type = "EntityStatePdu"; break;
+        // Add other PDU types as needed
+        default: 
+            // Use a fallback method to get class name
+            const char* className = typeid(pdu).name();
+            // Demangle if needed (simplified for Windows)
+            if (strstr(className, "EntityStatePdu")) {
+                type = "EntityStatePdu";
+            } else {
+                type = "Unknown";
+            }
+    }
+    
     auto it = pduToEventMap_.find(type);
     if (it == pduToEventMap_.end()) return {};
 
@@ -55,11 +78,14 @@ InternalEvent MappingConfig::createEventFromPdu(const DIS::Pdu& pdu) const {
     if (type == "EntityStatePdu") {
         const auto& esp = static_cast<const DIS::EntityStatePdu&>(pdu);
         auto& pl = ev.payload;
-        auto pos = esp.getEntityLocation();
-        auto orient = esp.getOrientation();
-        pl["latitude"]  = pos.getX();
-        pl["longitude"] = pos.getY();
-        pl["altitude"]  = pos.getZ();
+        
+        // Get location and orientation
+        DIS::Vector3Double location = esp.getEntityLocation();
+        DIS::Orientation orient = esp.getEntityOrientation();
+        
+        pl["latitude"]  = location.getX();
+        pl["longitude"] = location.getY();
+        pl["altitude"]  = location.getZ();
         pl["pitch"]     = orient.getPhi();
         pl["bank"]      = orient.getTheta();
         pl["heading"]   = orient.getPsi();
