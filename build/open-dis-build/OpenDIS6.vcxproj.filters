@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\Conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\DataStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\IncomingMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\PacketFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\PDUBank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\PduFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\utils\StreamUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcknowledgePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcknowledgeReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcousticBeamData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcousticBeamFundamentalParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcousticEmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcousticEmitterSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AcousticEmitterSystemData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ActionRequestPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ActionRequestReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ActionResponsePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ActionResponseReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AggregateID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AggregateMarking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AggregateStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AggregateType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AngularVelocityVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\AntennaLocation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ApaData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ArealObjectStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ArticulationParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\BeamAntennaPattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\BeamData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\BurstDescriptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ClockTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\CollisionElasticPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\CollisionPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\CommentPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\CommentReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\CreateEntityPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\CreateEntityReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DataPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DataQueryPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DataQueryReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DataReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DeadReckoningParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DesignatorPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DetonationPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\DistributedEmissionsFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EightByteChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ElectromagneticEmissionBeamData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ElectromagneticEmissionsPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ElectromagneticEmissionSystemData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EmitterSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EntityID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EntityInformationFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EntityManagementFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EntityStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EntityStateUpdatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EntityType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EnvironmentalProcessPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Environment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EventID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EventReportPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\EventReportReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\FastEntityStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\FirePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\FixedDatum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\FourByteChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\FundamentalParameterData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\FundamentalParameterDataIff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\GridAxisRecord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\GridAxisRecordRepresentation0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\GridAxisRecordRepresentation1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\GridAxisRecordRepresentation2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\GriddedDataPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IffAtcNavAidsLayer1Pdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IffAtcNavAidsLayer2Pdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IffFundamentalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IntercomCommunicationsParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IntercomControlPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IntercomSignalPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IsGroupOfPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\IsPartOfPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\LayerHeader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\LinearObjectStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\LinearSegmentParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\LogisticsFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\LogisticsPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Marking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\MinefieldDataPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\MinefieldFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\MinefieldPduFamily.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\MinefieldQueryPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\MinefieldResponseNackPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\MinefieldStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ModulationType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\NamedLocation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ObjectType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Orientation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\PduContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Pdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\PointObjectStatePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\PropulsionSystemData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RadioCommunicationsFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RadioEntityType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ReceiverPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RecordQueryReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RecordSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Relationship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RemoveEntityPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RemoveEntityReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RepairCompletePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\RepairResponsePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ResupplyCancelPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ResupplyOfferPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ResupplyReceivedPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SeesPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ServiceRequestPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SetDataPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SetDataReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SetRecordReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\ShaftRPMs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SignalPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SimulationAddress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SimulationManagementFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SimulationManagementWithReliabilityFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SixByteChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SphericalHarmonicAntennaPattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\StartResumePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\StartResumeReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\StopFreezePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\StopFreezeReliablePdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SupplyQuantity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SyntheticEnvironmentFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\SystemID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\TrackJamTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\TransferControlRequestPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\TransmitterPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\TwoByteChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\UaPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\VariableDatum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Vector3Double.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\Vector3Float.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\VectoringNozzleSystemData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\src\dis6\WarfareFamilyPdu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Jack\MSFS-DIS-Gateway-\extern\open-dis-cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A05EA219-4DDE-322C-A821-DF8BCFF860ED}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
