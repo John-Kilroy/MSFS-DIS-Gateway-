@@ -102,9 +102,9 @@ void CALLBACK MyDispatchProc(SIMCONNECT_RECV* pData, DWORD cbData, void* pContex
                 << "Lat: " << pFlightData->latitude
                 << ", Lon: " << pFlightData->longitude
                 << ", Alt: " << pFlightData->altitude << " ft"
-                << ", Pitch: " << pFlightData->pitch << "°"
-                << ", Bank: " << pFlightData->bank << "°"
-                << ", Hdg: " << pFlightData->heading << "°"
+                << ", Pitch: " << pFlightData->pitch << "Â°"
+                << ", Bank: " << pFlightData->bank << "Â°"
+                << ", Hdg: " << pFlightData->heading << "Â°"
                 << ", IAS: " << pFlightData->airspeed << " kts"
                 << "          " << std::flush;
         }
