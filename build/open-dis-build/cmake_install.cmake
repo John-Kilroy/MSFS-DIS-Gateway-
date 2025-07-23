@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Jack/MSFS-DIS-Gateway-/extern/open-dis-cpp
+# Install script for directory: C:/Users/kilro/MSFS-DIS-Gateway-/extern/open-dis-cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,25 +34,25 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug/OpenDIS6.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/Debug/OpenDIS6.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release/OpenDIS6.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/Release/OpenDIS6.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel/OpenDIS6.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/MinSizeRel/OpenDIS6.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/OpenDIS6.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/OpenDIS6.lib")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Debug/OpenDIS6.dll")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/Debug/OpenDIS6.dll")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/Release/OpenDIS6.dll")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/Release/OpenDIS6.dll")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/MinSizeRel/OpenDIS6.dll")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/MinSizeRel/OpenDIS6.dll")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/OpenDIS6.dll")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/bin/RelWithDebInfo/OpenDIS6.dll")
   endif()
 endif()
 
@@ -60,7 +60,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS/OpenDISTargets.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS/OpenDISTargets.cmake"
-         "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets.cmake")
+         "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS/OpenDISTargets-*.cmake")
       if(_cmake_old_config_files)
@@ -73,25 +73,25 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-debug.cmake")
   endif()
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-minsizerel.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-minsizerel.cmake")
   endif()
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-relwithdebinfo.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-relwithdebinfo.cmake")
   endif()
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-release.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/CMakeFiles/Export/0341073d7c1887d5fc28ea381bea62af/OpenDISTargets-release.cmake")
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/src/cmake_install.cmake")
-  include("C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/cmake/cmake_install.cmake")
+  include("C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/src/cmake_install.cmake")
+  include("C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/cmake/cmake_install.cmake")
 
 endif()
 

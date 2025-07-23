@@ -7,7 +7,7 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:211 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
-      The system is: Windows - 10.0.26100 - AMD64
+      The system is: Windows - 10.0.22631 - AMD64
   -
     kind: "message-v1"
     backtrace:
@@ -23,10 +23,10 @@ events:
       
       The output was:
       0
-      MSBuild version 17.8.5+b5265ef37 for .NET Framework
-      Build started 7/8/2025 5:59:37 PM.
+      MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+      Build started 7/23/2025 11:35:29 AM.
       
-      Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
         Creating directory "Debug\\".
         Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
@@ -39,7 +39,7 @@ events:
         CMakeCXXCompilerId.cpp
       Link:
         C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdCXX\\CompilerIdCXX.exe
+        CompilerIdCXX.vcxproj -> C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdCXX\\CompilerIdCXX.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
         :VCEnd
@@ -47,13 +47,13 @@ events:
       FinalizeBuildStatus:
         Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
         Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
-      Done Building Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
       
       Build succeeded.
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.43
+      Time Elapsed 00:00:01.98
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -61,7 +61,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
       
       The CXX compiler identification is MSVC, found in:
-        C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CompilerIdCXX/CompilerIdCXX.exe
+        C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CompilerIdCXX/CompilerIdCXX.exe
       
   -
     kind: "try_compile-v1"
@@ -72,8 +72,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-pft882"
-      binary: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-pft882"
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ln37cz"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ln37cz"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -82,40 +82,40 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-pft882'
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ln37cz'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_dc941.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        MSBuild version 17.8.5+b5265ef37 for .NET Framework
-        Build started 7/8/2025 5:59:38 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d5f2a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:35:32 AM.
         
-        Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pft882\\cmTC_dc941.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ln37cz\\cmTC_d5f2a.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_dc941.dir\\Debug\\".
+          Creating directory "cmTC_d5f2a.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pft882\\Debug\\".
-          Creating directory "cmTC_dc941.dir\\Debug\\cmTC_dc941.tlog\\".
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ln37cz\\Debug\\".
+          Creating directory "cmTC_d5f2a.dir\\Debug\\cmTC_d5f2a.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_dc941.dir\\Debug\\cmTC_dc941.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_dc941.dir\\Debug\\cmTC_dc941.tlog\\unsuccessfulbuild".
+          Creating "cmTC_d5f2a.dir\\Debug\\cmTC_d5f2a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_d5f2a.dir\\Debug\\cmTC_d5f2a.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_dc941.dir\\Debug\\\\" /Fd"cmTC_dc941.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33135 for x64
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d5f2a.dir\\Debug\\\\" /Fd"cmTC_d5f2a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_dc941.dir\\Debug\\\\" /Fd"cmTC_dc941.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d5f2a.dir\\Debug\\\\" /Fd"cmTC_d5f2a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pft882\\Debug\\cmTC_dc941.exe" /INCREMENTAL /ILK:"cmTC_dc941.dir\\Debug\\cmTC_dc941.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-pft882/Debug/cmTC_dc941.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-pft882/Debug/cmTC_dc941.lib" /MACHINE:X64  /machine:x64 cmTC_dc941.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_dc941.vcxproj -> C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pft882\\Debug\\cmTC_dc941.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ln37cz\\Debug\\cmTC_d5f2a.exe" /INCREMENTAL /ILK:"cmTC_d5f2a.dir\\Debug\\cmTC_d5f2a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ln37cz/Debug/cmTC_d5f2a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ln37cz/Debug/cmTC_d5f2a.lib" /MACHINE:X64  /machine:x64 cmTC_d5f2a.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_d5f2a.vcxproj -> C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ln37cz\\Debug\\cmTC_d5f2a.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_dc941.dir\\Debug\\cmTC_dc941.tlog\\unsuccessfulbuild".
-          Touching "cmTC_dc941.dir\\Debug\\cmTC_dc941.tlog\\cmTC_dc941.lastbuildstate".
-        Done Building Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pft882\\cmTC_dc941.vcxproj" (default targets).
+          Deleting file "cmTC_d5f2a.dir\\Debug\\cmTC_d5f2a.tlog\\unsuccessfulbuild".
+          Touching "cmTC_d5f2a.dir\\Debug\\cmTC_d5f2a.tlog\\cmTC_d5f2a.lastbuildstate".
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ln37cz\\cmTC_d5f2a.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.42
+        Time Elapsed 00:00:01.71
         
       exitCode: 0
   -
@@ -133,10 +133,10 @@ events:
       
       The output was:
       0
-      MSBuild version 17.8.5+b5265ef37 for .NET Framework
-      Build started 7/8/2025 5:59:38 PM.
+      MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+      Build started 7/23/2025 11:35:34 AM.
       
-      Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
         Creating directory "Debug\\".
         Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
@@ -149,7 +149,7 @@ events:
         CMakeCCompilerId.c
       Link:
         C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
-        CompilerIdC.vcxproj -> C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdC\\CompilerIdC.exe
+        CompilerIdC.vcxproj -> C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdC\\CompilerIdC.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
         :VCEnd
@@ -157,13 +157,13 @@ events:
       FinalizeBuildStatus:
         Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
         Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
-      Done Building Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\3.27.2-msvc1\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
       
       Build succeeded.
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.41
+      Time Elapsed 00:00:01.82
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -171,7 +171,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
       
       The C compiler identification is MSVC, found in:
-        C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CompilerIdC/CompilerIdC.exe
+        C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CompilerIdC/CompilerIdC.exe
       
   -
     kind: "try_compile-v1"
@@ -182,8 +182,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-w8ng1h"
-      binary: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-w8ng1h"
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-t5gwnx"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-t5gwnx"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
@@ -191,40 +191,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-w8ng1h'
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-t5gwnx'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_de0a7.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        MSBuild version 17.8.5+b5265ef37 for .NET Framework
-        Build started 7/8/2025 5:59:39 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_4d8fa.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:35:37 AM.
         
-        Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-w8ng1h\\cmTC_de0a7.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5gwnx\\cmTC_4d8fa.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_de0a7.dir\\Debug\\".
+          Creating directory "cmTC_4d8fa.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-w8ng1h\\Debug\\".
-          Creating directory "cmTC_de0a7.dir\\Debug\\cmTC_de0a7.tlog\\".
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5gwnx\\Debug\\".
+          Creating directory "cmTC_4d8fa.dir\\Debug\\cmTC_4d8fa.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_de0a7.dir\\Debug\\cmTC_de0a7.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_de0a7.dir\\Debug\\cmTC_de0a7.tlog\\unsuccessfulbuild".
+          Creating "cmTC_4d8fa.dir\\Debug\\cmTC_4d8fa.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_4d8fa.dir\\Debug\\cmTC_4d8fa.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_de0a7.dir\\Debug\\\\" /Fd"cmTC_de0a7.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33135 for x64
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4d8fa.dir\\Debug\\\\" /Fd"cmTC_4d8fa.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_de0a7.dir\\Debug\\\\" /Fd"cmTC_de0a7.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4d8fa.dir\\Debug\\\\" /Fd"cmTC_4d8fa.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-w8ng1h\\Debug\\cmTC_de0a7.exe" /INCREMENTAL /ILK:"cmTC_de0a7.dir\\Debug\\cmTC_de0a7.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-w8ng1h/Debug/cmTC_de0a7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-w8ng1h/Debug/cmTC_de0a7.lib" /MACHINE:X64  /machine:x64 cmTC_de0a7.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_de0a7.vcxproj -> C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-w8ng1h\\Debug\\cmTC_de0a7.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5gwnx\\Debug\\cmTC_4d8fa.exe" /INCREMENTAL /ILK:"cmTC_4d8fa.dir\\Debug\\cmTC_4d8fa.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-t5gwnx/Debug/cmTC_4d8fa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-t5gwnx/Debug/cmTC_4d8fa.lib" /MACHINE:X64  /machine:x64 cmTC_4d8fa.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_4d8fa.vcxproj -> C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5gwnx\\Debug\\cmTC_4d8fa.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_de0a7.dir\\Debug\\cmTC_de0a7.tlog\\unsuccessfulbuild".
-          Touching "cmTC_de0a7.dir\\Debug\\cmTC_de0a7.tlog\\cmTC_de0a7.lastbuildstate".
-        Done Building Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-w8ng1h\\cmTC_de0a7.vcxproj" (default targets).
+          Deleting file "cmTC_4d8fa.dir\\Debug\\cmTC_4d8fa.tlog\\unsuccessfulbuild".
+          Touching "cmTC_4d8fa.dir\\Debug\\cmTC_4d8fa.tlog\\cmTC_4d8fa.lastbuildstate".
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t5gwnx\\cmTC_4d8fa.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.41
+        Time Elapsed 00:00:01.79
         
       exitCode: 0
   -
@@ -239,8 +239,8 @@ events:
     checks:
       - "Performing Test COMPILER_HAS_DEPRECATED_ATTR"
     directories:
-      source: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-fqgwv2"
-      binary: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-fqgwv2"
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ldgn1n"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ldgn1n"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
@@ -248,50 +248,50 @@ events:
       variable: "COMPILER_HAS_DEPRECATED_ATTR"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-fqgwv2'
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-ldgn1n'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_6550b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        MSBuild version 17.8.5+b5265ef37 for .NET Framework
-        Build started 7/8/2025 5:59:40 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c9d3c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:35:40 AM.
         
-        Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_6550b.dir\\Debug\\".
+          Creating directory "cmTC_c9d3c.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\Debug\\".
-          Creating directory "cmTC_6550b.dir\\Debug\\cmTC_6550b.tlog\\".
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\Debug\\".
+          Creating directory "cmTC_c9d3c.dir\\Debug\\cmTC_c9d3c.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_6550b.dir\\Debug\\cmTC_6550b.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_6550b.dir\\Debug\\cmTC_6550b.tlog\\unsuccessfulbuild".
+          Creating "cmTC_c9d3c.dir\\Debug\\cmTC_c9d3c.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_c9d3c.dir\\Debug\\cmTC_c9d3c.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_6550b.dir\\Debug\\\\" /Fd"cmTC_6550b.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33135 for x64
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_c9d3c.dir\\Debug\\\\" /Fd"cmTC_c9d3c.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_6550b.dir\\Debug\\\\" /Fd"cmTC_6550b.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_c9d3c.dir\\Debug\\\\" /Fd"cmTC_c9d3c.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx"
           src.cxx
-        C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,16): error C2065: '__deprecated__': undeclared identifier [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-        C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-        C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,33): error C2062: type 'int' unexpected [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-        C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,48): error C2143: syntax error: missing ';' before '{' [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-        C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,48): error C2447: '{': missing function header (old-style formal list?) [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-        C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(2,25): error C3861: 'somefunc': identifier not found [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-        Done Building Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj" (default targets) -- FAILED.
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,16): error C2065: '__deprecated__': undeclared identifier [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,33): error C2062: type 'int' unexpected [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,48): error C2143: syntax error: missing ';' before '{' [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,48): error C2447: '{': missing function header (old-style formal list?) [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(2,25): error C3861: 'somefunc': identifier not found [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj" (default target) (1) ->
+        "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj" (default target) (1) ->
         (ClCompile target) -> 
-          C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,16): error C2065: '__deprecated__': undeclared identifier [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-          C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-          C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,33): error C2062: type 'int' unexpected [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-          C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,48): error C2143: syntax error: missing ';' before '{' [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-          C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(1,48): error C2447: '{': missing function header (old-style formal list?) [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
-          C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\src.cxx(2,25): error C3861: 'somefunc': identifier not found [C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fqgwv2\\cmTC_6550b.vcxproj]
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,16): error C2065: '__deprecated__': undeclared identifier [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,33): error C2062: type 'int' unexpected [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,48): error C2143: syntax error: missing ';' before '{' [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(1,48): error C2447: '{': missing function header (old-style formal list?) [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\src.cxx(2,25): error C3861: 'somefunc': identifier not found [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ldgn1n\\cmTC_c9d3c.vcxproj]
         
             0 Warning(s)
             6 Error(s)
         
-        Time Elapsed 00:00:00.29
+        Time Elapsed 00:00:01.78
         
       exitCode: 1
   -
@@ -306,8 +306,8 @@ events:
     checks:
       - "Performing Test COMPILER_HAS_DEPRECATED"
     directories:
-      source: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9f5l4r"
-      binary: "C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9f5l4r"
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9yi9qx"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9yi9qx"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
@@ -315,40 +315,212 @@ events:
       variable: "COMPILER_HAS_DEPRECATED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9f5l4r'
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9yi9qx'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_49159.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        MSBuild version 17.8.5+b5265ef37 for .NET Framework
-        Build started 7/8/2025 5:59:40 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e3bdd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:35:42 AM.
         
-        Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\cmTC_49159.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\cmTC_e3bdd.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_49159.dir\\Debug\\".
+          Creating directory "cmTC_e3bdd.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\Debug\\".
-          Creating directory "cmTC_49159.dir\\Debug\\cmTC_49159.tlog\\".
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\Debug\\".
+          Creating directory "cmTC_e3bdd.dir\\Debug\\cmTC_e3bdd.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_49159.dir\\Debug\\cmTC_49159.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_49159.dir\\Debug\\cmTC_49159.tlog\\unsuccessfulbuild".
+          Creating "cmTC_e3bdd.dir\\Debug\\cmTC_e3bdd.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e3bdd.dir\\Debug\\cmTC_e3bdd.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_49159.dir\\Debug\\\\" /Fd"cmTC_49159.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\src.cxx"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33135 for x64
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_e3bdd.dir\\Debug\\\\" /Fd"cmTC_e3bdd.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\src.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_49159.dir\\Debug\\\\" /Fd"cmTC_49159.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\src.cxx"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_e3bdd.dir\\Debug\\\\" /Fd"cmTC_e3bdd.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\src.cxx"
           src.cxx
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\Debug\\cmTC_49159.exe" /INCREMENTAL /ILK:"cmTC_49159.dir\\Debug\\cmTC_49159.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9f5l4r/Debug/cmTC_49159.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9f5l4r/Debug/cmTC_49159.lib" /MACHINE:X64  /machine:x64 cmTC_49159.dir\\Debug\\src.obj
-          cmTC_49159.vcxproj -> C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\Debug\\cmTC_49159.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\Debug\\cmTC_e3bdd.exe" /INCREMENTAL /ILK:"cmTC_e3bdd.dir\\Debug\\cmTC_e3bdd.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9yi9qx/Debug/cmTC_e3bdd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-9yi9qx/Debug/cmTC_e3bdd.lib" /MACHINE:X64  /machine:x64 cmTC_e3bdd.dir\\Debug\\src.obj
+          cmTC_e3bdd.vcxproj -> C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\Debug\\cmTC_e3bdd.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_49159.dir\\Debug\\cmTC_49159.tlog\\unsuccessfulbuild".
-          Touching "cmTC_49159.dir\\Debug\\cmTC_49159.tlog\\cmTC_49159.lastbuildstate".
-        Done Building Project "C:\\Users\\Jack\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f5l4r\\cmTC_49159.vcxproj" (default targets).
+          Deleting file "cmTC_e3bdd.dir\\Debug\\cmTC_e3bdd.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e3bdd.dir\\Debug\\cmTC_e3bdd.tlog\\cmTC_e3bdd.lastbuildstate".
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9yi9qx\\cmTC_e3bdd.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.42
+        Time Elapsed 00:00:01.83
         
       exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "extern/crow/cmake/Findasio.cmake:17 (find_package)"
+      - "extern/crow/CMakeLists.txt:85 (find_package)"
+    directories:
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-rg3oka"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-rg3oka"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/kilro/MSFS-DIS-Gateway-/extern/crow/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-rg3oka'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_766eb.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:35:57 AM.
+        
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\cmTC_766eb.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_766eb.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\Debug\\".
+          Creating directory "cmTC_766eb.dir\\Debug\\cmTC_766eb.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_766eb.dir\\Debug\\cmTC_766eb.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_766eb.dir\\Debug\\cmTC_766eb.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_766eb.dir\\Debug\\\\" /Fd"cmTC_766eb.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\src.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_766eb.dir\\Debug\\\\" /Fd"cmTC_766eb.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\src.cxx"
+          src.cxx
+        C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\src.cxx(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\cmTC_766eb.vcxproj]
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\cmTC_766eb.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\cmTC_766eb.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\src.cxx(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rg3oka\\cmTC_766eb.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:01.59
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "extern/crow/cmake/Findasio.cmake:17 (find_package)"
+      - "extern/crow/CMakeLists.txt:85 (find_package)"
+    directories:
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-gl5w9w"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-gl5w9w"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/kilro/MSFS-DIS-Gateway-/extern/crow/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-gl5w9w'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_09620.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:35:59 AM.
+        
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\cmTC_09620.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_09620.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\Debug\\".
+          Creating directory "cmTC_09620.dir\\Debug\\cmTC_09620.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_09620.dir\\Debug\\cmTC_09620.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_09620.dir\\Debug\\cmTC_09620.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_09620.dir\\Debug\\\\" /Fd"cmTC_09620.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\CheckFunctionExists.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_09620.dir\\Debug\\\\" /Fd"cmTC_09620.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\CheckFunctionExists.cxx"
+          CheckFunctionExists.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\Debug\\cmTC_09620.exe" /INCREMENTAL /ILK:"cmTC_09620.dir\\Debug\\cmTC_09620.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-gl5w9w/Debug/cmTC_09620.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-gl5w9w/Debug/cmTC_09620.lib" /MACHINE:X64  /machine:x64 cmTC_09620.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\cmTC_09620.vcxproj]
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\cmTC_09620.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\cmTC_09620.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gl5w9w\\cmTC_09620.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:01.65
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "extern/crow/cmake/Findasio.cmake:17 (find_package)"
+      - "extern/crow/CMakeLists.txt:85 (find_package)"
+    directories:
+      source: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-8rdhvv"
+      binary: "C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-8rdhvv"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Users/kilro/MSFS-DIS-Gateway-/extern/crow/cmake"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-8rdhvv'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_08ad2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.8.3+195e7f5a3 for .NET Framework
+        Build started 7/23/2025 11:36:01 AM.
+        
+        Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\cmTC_08ad2.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_08ad2.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\Debug\\".
+          Creating directory "cmTC_08ad2.dir\\Debug\\cmTC_08ad2.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_08ad2.dir\\Debug\\cmTC_08ad2.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_08ad2.dir\\Debug\\cmTC_08ad2.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_08ad2.dir\\Debug\\\\" /Fd"cmTC_08ad2.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\CheckFunctionExists.cxx"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_08ad2.dir\\Debug\\\\" /Fd"cmTC_08ad2.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\CheckFunctionExists.cxx"
+          CheckFunctionExists.cxx
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\Debug\\cmTC_08ad2.exe" /INCREMENTAL /ILK:"cmTC_08ad2.dir\\Debug\\cmTC_08ad2.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-8rdhvv/Debug/cmTC_08ad2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/CMakeScratch/TryCompile-8rdhvv/Debug/cmTC_08ad2.lib" /MACHINE:X64  /machine:x64 cmTC_08ad2.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\cmTC_08ad2.vcxproj]
+        Done Building Project "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\cmTC_08ad2.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\cmTC_08ad2.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\kilro\\MSFS-DIS-Gateway-\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8rdhvv\\cmTC_08ad2.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:01.56
+        
+      exitCode: 1
 ...

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Jack/MSFS-DIS-Gateway-/extern/open-dis-cpp/cmake
+# Install script for directory: C:/Users/kilro/MSFS-DIS-Gateway-/extern/open-dis-cpp/cmake
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,8 +34,8 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/OpenDIS" TYPE FILE FILES
-    "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/cmake/OpenDISConfig.cmake"
-    "C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/cmake/OpenDISConfigVersion.cmake"
+    "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/cmake/OpenDISConfig.cmake"
+    "C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/cmake/OpenDISConfigVersion.cmake"
     )
 endif()
 

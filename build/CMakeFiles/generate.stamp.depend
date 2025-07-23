@@ -26,6 +26,8 @@ C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtens
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CMakeTestCompilerCommon.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CMakeTestRCCompiler.cmake
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CPack.cmake
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CPackComponent.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Compiler/ADSP-DetermineCompiler.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Compiler/ARMCC-DetermineCompiler.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Compiler/ARMClang-DetermineCompiler.cmake
@@ -67,6 +69,7 @@ C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtens
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/CompilerId/VS-10.vcxproj.in
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/InstallRequiredSystemLibraries.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Internal/FeatureTesting.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Platform/Windows-Determine-CXX.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Platform/Windows-Initialize.cmake
@@ -74,7 +77,8 @@ C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtens
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Platform/Windows-MSVC.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Platform/Windows.cmake
 C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Modules/Platform/WindowsPaths.cmake
-C:/Users/Jack/MSFS-DIS-Gateway-/CMakeLists.txt
-C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CMakeCXXCompiler.cmake
-C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CMakeRCCompiler.cmake
-C:/Users/Jack/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CMakeSystem.cmake
+C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.27/Templates/CPackConfig.cmake.in
+C:/Users/kilro/MSFS-DIS-Gateway-/CMakeLists.txt
+C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CMakeCXXCompiler.cmake
+C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CMakeRCCompiler.cmake
+C:/Users/kilro/MSFS-DIS-Gateway-/build/CMakeFiles/3.27.2-msvc1/CMakeSystem.cmake

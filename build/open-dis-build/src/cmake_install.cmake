@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Jack/MSFS-DIS-Gateway-/extern/open-dis-cpp/src
+# Install script for directory: C:/Users/kilro/MSFS-DIS-Gateway-/extern/open-dis-cpp/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Jack/MSFS-DIS-Gateway-/build/open-dis-build/src/dis6/cmake_install.cmake")
+  include("C:/Users/kilro/MSFS-DIS-Gateway-/build/open-dis-build/src/dis6/cmake_install.cmake")
 
 endif()
 
