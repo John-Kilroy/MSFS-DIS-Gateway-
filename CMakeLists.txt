@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.5)
 project(msfs-dis-bridge LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -29,22 +29,12 @@ include_directories(${OPENDIS_SOURCE_DIR}/src)
 # 3) Asio (header‑only) for Crow
 # ----------------------------------------------------------------------------
 set(ASIO_STANDALONE ON)
-set(ASIO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/asio/include")
-include_directories(${ASIO_INCLUDE_DIR})
+set(ASIO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/asio/asio/include")
 
 # ----------------------------------------------------------------------------
 # 4) Crow HTTP framework submodule
 # ----------------------------------------------------------------------------
-set(CROW_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern/crow)
-set(CROW_BUILD_DIR  ${CMAKE_BINARY_DIR}/crow-build)
-# Ensure Findasio picks up our standalone Asio
-set(ASIO_INCLUDE_DIR "${ASIO_INCLUDE_DIR}")
-add_subdirectory(${CROW_SOURCE_DIR} ${CROW_BUILD_DIR})
-# Attach Asio includes to Crow’s interface target
-if (TARGET crow)
-    target_include_directories(crow INTERFACE ${ASIO_INCLUDE_DIR})
-endif()
-include_directories(${CROW_SOURCE_DIR}/include)
+set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/crow/include")
 
 # ----------------------------------------------------------------------------
 # 5) bridge-core library (static)
@@ -74,6 +64,31 @@ target_link_libraries(TestBridge PRIVATE
     OpenDIS6
     "${SIMCONNECT_LIB_DIR}/SimConnect.lib"
 )
+
+# ----------------------------------------------------------------------------
+# 7) REST‑API server using Crow
+# ----------------------------------------------------------------------------
+add_executable(rest-api
+    src/rest-api/main.cpp
+)
+
+target_include_directories(rest-api PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/bridge-core   
+    ${SIMCONNECT_INCLUDE_DIR}              
+    ${OPENDIS_SOURCE_DIR}/src             
+    ${CROW_INCLUDE_DIR}                   
+    ${ASIO_INCLUDE_DIR}                   
+)
+
+target_compile_definitions(rest-api PRIVATE
+    ASIO_STANDALONE
+)
+
+target_link_libraries(rest-api PRIVATE
+    bridge-core
+    OpenDIS6
+)
+
 if (WIN32)
     add_custom_command(TARGET TestBridge POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -83,26 +98,6 @@ if (WIN32)
         COMMENT "Copying required DLLs"
     )
 endif()
-
-# ----------------------------------------------------------------------------
-# 7) REST‑API server using Crow
-# ----------------------------------------------------------------------------
-add_executable(rest-api
-    src/rest-api/main.cpp
-)
-target_include_directories(rest-api PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/bridge-core
-    ${SIMCONNECT_INCLUDE_DIR}
-    ${OPENDIS_SOURCE_DIR}/src
-    ${CROW_SOURCE_DIR}/include
-    ${ASIO_INCLUDE_DIR}
-)
-target_link_libraries(rest-api PRIVATE
-    bridge-core
-    OpenDIS6
-    crow
-)
-
 # ----------------------------------------------------------------------------
 # 8) Packaging (CPack ZIP with both binaries + DLLs + README)
 # ----------------------------------------------------------------------------
