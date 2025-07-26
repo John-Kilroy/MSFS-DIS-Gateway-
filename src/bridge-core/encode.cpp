@@ -1,6 +1,7 @@
 #include "Encode.h"
 #include "MappingConfig.h"
 #include <dis6/EntityStatePdu.h>
+#include <GeographicLib/Geocentric.hpp>
 #include <iostream>
 
 Encode::Encode(MappingConfig& config)
@@ -10,6 +11,16 @@ Encode::Encode(MappingConfig& config)
 std::vector<uint8_t> Encode::encodeEvent(const FlightData& fd) {
     // Convert raw FlightData to InternalEvent
     InternalEvent event = config_.createEventFromFlightData(fd);
+
+    switch(ev.name) {
+        case "FlightDataUpdate":
+            double X, Y, Z;
+            GeographicLib::Geocentric::Forward(fd.latitude, fd.longitude, fd.altitude, X, Y, Z);
+            ev.payload['X'] = X;
+            ev.payload['Y'] = Y;
+            ev.payload['Z'] = Z;
+            break;
+    }
 
     // Map InternalEvent → DIS PDU
     std::unique_ptr<DIS::Pdu> pdu = config_.createPduFromEvent(event);
