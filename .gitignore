@@ -1,0 +1,46 @@
+# Compiled Object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Libraries
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Build directories
+build/
+cmake-build-*/
+Debug/
+Release/
+bin/
+obj/
+
+# IDE-specific files
+.idea/
+.vs/
+*.suo
+*.user
+*.ncb
+*.aps
+*.opensdf
+*.sdf
+*.ipch
+
+# Miscellaneous
+*.log
+*.tmp
+*.bak
+*.swp
