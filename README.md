@@ -60,14 +60,27 @@ cd MSFS-DIS-Gateway-
 # Initialize Open-DIS submodule if needed
 git submodule update --init --recursive extern/open-dis
 
+# build GeographicLib -- This section only needs to be done once
+cd extern/GeographicLib-2.5
+#geo_install_dir 
+mkdir install
+mkdir build
+cd build
+cmake -D CMAKE_INSTALL_PREFIX=../install
+cmake --build . --config Release --target ALL_BUILD
+#cmake --build . --config Release --target RUN_TESTS --Optional for ensuring accuracy (Some tests may fail)
+cmake --build . --config Release --target INSTALL 
+
+cd ../../..
+
 # Create a build directory
 mkdir build && cd build
 
 # Configure with CMake
-cmake ..
+cmake -D CMAKE_INSTALL_PREFIX=../extern/GeographicLib-2.5/install ..
 
 # Build all targets
-cmake --build . -- -j$(nproc)
+cmake --build .
 ```
 
 By default, this will compile the **bridge core library**, the **SimConnect adapter**, the **REST service**, and run the test suites.

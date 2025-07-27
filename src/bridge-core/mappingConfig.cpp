@@ -19,6 +19,7 @@ InternalEvent MappingConfig::createEventFromFlightData(const FlightData& fd) con
     ev.payload["bank"]      = fd.bank;
     ev.payload["heading"]   = fd.heading;
     ev.payload["airspeed"]  = fd.airspeed;
+    ev.payload["yaw"] = fd.yaw;
     return ev;
 }
 
@@ -32,9 +33,9 @@ std::unique_ptr<DIS::Pdu> MappingConfig::createPduFromEvent(const InternalEvent&
         
         // Create location and orientation objects
         DIS::Vector3Double location;
-        location.setX(pl.at("latitude"));
-        location.setY(pl.at("longitude"));
-        location.setZ(pl.at("altitude"));
+        location.setX(pl.at("X"));
+        location.setY(pl.at("Y"));
+        location.setZ(pl.at("Z"));
         
         DIS::Orientation orientation;
         orientation.setPhi(static_cast<float>(pl.at("pitch")));
@@ -88,7 +89,7 @@ InternalEvent MappingConfig::createEventFromPdu(const DIS::Pdu& pdu) const {
         pl["altitude"]  = location.getZ();
         pl["pitch"]     = orient.getPhi();
         pl["bank"]      = orient.getTheta();
-        pl["heading"]   = orient.getPsi();
+        pl["heading"]   = orient.getPsi();//yaw
     }
     return ev;
 }

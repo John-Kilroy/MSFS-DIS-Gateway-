@@ -8,4 +8,5 @@ struct FlightData {
     double bank;
     double heading;
     double airspeed;
+    double yaw;
 };

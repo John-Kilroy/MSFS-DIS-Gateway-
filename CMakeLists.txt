@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.17)
 project(msfs-dis-bridge LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -9,6 +9,24 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+
+set(GEOLIB_SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern/GeographicLib-2.5)
+set(GEOLIB_BUILD_DIR  ${CMAKE_BINARY_DIR}/geographiclib-build)
+set(GEOLIB_INSTALL_DIR ${GEOLIB_SOURCE_DIR}/install)
+set(GEOLIB_INCLUDE_DIR ${GEOLIB_INSTALL_DIR}/include)
+set(GeographicLib_DIR ${GEOLIB_INSTALL_DIR}/lib/cmake/GeographicLib)
+find_package(GeographicLib CONFIG REQUIRED)
+add_subdirectory(${GEOLIB_SOURCE_DIR} ${GEOLIB_BUILD_DIR})
+include_directories (${GeographicLib_INCLUDE_DIRS})
+#add_library(GeographicLib STATIC IMPORTED)
+#find_library()
+
+if (NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
+  # Set a default build type for single-configuration cmake generators
+  # if no build type is set.
+  set (CMAKE_BUILD_TYPE "Release")
+endif ()
 
 # ----------------------------------------------------------------------------
 # 1) SimConnect SDK (headers + libs must already be in extern/FlightSimSDK)
@@ -36,6 +54,8 @@ set(ASIO_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/asio/asio/include")
 # ----------------------------------------------------------------------------
 set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/crow/include")
 
+
+
 # ----------------------------------------------------------------------------
 # 5) bridge-core library (static)
 # ----------------------------------------------------------------------------
@@ -58,10 +78,12 @@ add_executable(TestBridge
 target_include_directories(TestBridge PRIVATE
     ${SIMCONNECT_INCLUDE_DIR}
     ${OPENDIS_SOURCE_DIR}/src
+    ${GEOLIB_INCLUDE_DIR}
 )
 target_link_libraries(TestBridge PRIVATE
     bridge-core
     OpenDIS6
+    GeographicLib
     "${SIMCONNECT_LIB_DIR}/SimConnect.lib"
 )
 
@@ -75,9 +97,10 @@ add_executable(rest-api
 target_include_directories(rest-api PRIVATE
     ${CMAKE_SOURCE_DIR}/src/bridge-core   
     ${SIMCONNECT_INCLUDE_DIR}              
-    ${OPENDIS_SOURCE_DIR}/src             
+    ${OPENDIS_SOURCE_DIR}/src    
+    ${GEOLIB_INCLUDE_DIR}
     ${CROW_INCLUDE_DIR}                   
-    ${ASIO_INCLUDE_DIR}                   
+    ${ASIO_INCLUDE_DIR} 
 )
 
 target_compile_definitions(rest-api PRIVATE
@@ -88,6 +111,7 @@ target_link_libraries(rest-api PRIVATE
     bridge-core
     OpenDIS6
     "${SIMCONNECT_LIB_DIR}/SimConnect.lib"
+    GeographicLib
 )
 
 if (WIN32)
@@ -96,6 +120,8 @@ if (WIN32)
             "${SIMCONNECT_LIB_DIR}/SimConnect.dll"   $<TARGET_FILE_DIR:TestBridge>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             $<TARGET_FILE:OpenDIS6>                  $<TARGET_FILE_DIR:TestBridge>
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${GEOLIB_SOURCE_DIR}/build/bin/Debug/GeographicLib_d.dll"                  $<TARGET_FILE_DIR:TestBridge>
         COMMENT "Copying required DLLs"
     )
 endif()
