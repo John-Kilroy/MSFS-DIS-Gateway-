@@ -87,6 +87,7 @@ target_compile_definitions(rest-api PRIVATE
 target_link_libraries(rest-api PRIVATE
     bridge-core
     OpenDIS6
+    "${SIMCONNECT_LIB_DIR}/SimConnect.lib"
 )
 
 if (WIN32)
