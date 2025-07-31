@@ -32,6 +32,7 @@ obj/
 # IDE-specific files
 .idea/
 .vs/
+.vccode/
 *.suo
 *.user
 *.ncb
