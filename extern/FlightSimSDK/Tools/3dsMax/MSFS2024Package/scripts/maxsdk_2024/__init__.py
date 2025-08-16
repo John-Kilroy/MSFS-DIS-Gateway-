@@ -1,1 +1,0 @@
-print("-----------MaxSDK Python Package installed-----------")

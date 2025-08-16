@@ -1,6 +1,0 @@
-<ModelBehaviors>
-	<!-- Common -->
-	<Include RelativeFile="Shared\\Index.xml"/>
-	<Include RelativeFile="Exterior\\Index.xml"/>
-	<Include RelativeFile="Interior\\Index.xml"/>
-</ModelBehaviors>

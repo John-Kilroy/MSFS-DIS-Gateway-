@@ -1,6 +1,0 @@
-<ModelBehaviors>
-	<!-- Root -->
-	<Include RelativeFile="Base\\Index.xml"/>
-	<Include RelativeFile="Common\\Index.xml"/>
-	<Include RelativeFile="Generic\\Index.xml"/>
-</ModelBehaviors>

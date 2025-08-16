@@ -48,7 +48,7 @@ msfs-dis-bridge/
 - **CMake >= 3.15**
 - **C++17** compatible compiler (e.g. MSVC 2019+, GCC 9+, Clang 10+)
 - **Git** for cloning and submodules
-- **MSFS 2024 SDK** and **SimConnect SDK** vendored under `extern/` (already included)
+- **MSFS 2024 SDK** and **SimConnect SDK**
 
 ## Building
 

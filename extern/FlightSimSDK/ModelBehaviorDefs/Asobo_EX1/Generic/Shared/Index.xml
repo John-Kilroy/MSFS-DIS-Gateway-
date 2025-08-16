@@ -1,8 +1,0 @@
-<ModelBehaviors>
-	<!-- Generic > Shared -->
-	<Include RelativeFile="Templates\\Animation.xml"/>
-	<Include RelativeFile="Templates\\Visibility.xml"/>
-	<Include RelativeFile="Templates\\Material.xml"/>
-	<Include RelativeFile="Templates\\Common.xml"/>
-	<Include RelativeFile="Helpers\\Helpers.xml"/>
-</ModelBehaviors>
