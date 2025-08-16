@@ -6,6 +6,9 @@ if(NOT DEFINED CMAKE_POLICY_VERSION_MINIMUM)
   set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 endif()
 
+# Define directory of MSFS 2024 SDK
+set(MSFS_SDK_BASE_DIR "C:")
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -18,8 +21,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # ----------------------------------------------------------------------------
 # 1) SimConnect SDK (headers + libs must already be in extern/FlightSimSDK)
 # ----------------------------------------------------------------------------
-set(SIMCONNECT_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/extern/FlightSimSDK/SimConnect SDK/include")
-set(SIMCONNECT_LIB_DIR     "${CMAKE_SOURCE_DIR}/extern/FlightSimSDK/SimConnect SDK/lib")
+set(SIMCONNECT_INCLUDE_DIR "${MSFS_SDK_BASE_DIR}/MSFS 2024 SDK/SimConnect SDK/include")
+set(SIMCONNECT_LIB_DIR     "${MSFS_SDK_BASE_DIR}/MSFS 2024 SDK/SimConnect SDK/lib")
 include_directories(${SIMCONNECT_INCLUDE_DIR})
 
 # ----------------------------------------------------------------------------

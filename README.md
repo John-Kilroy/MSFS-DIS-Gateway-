@@ -45,10 +45,11 @@ msfs-dis-bridge/
 
 ## Prerequisites
 
-- **CMake >= 3.15**
+- **CMake ≥ 3.15**
 - **C++17** compatible compiler (e.g. MSVC 2019+, GCC 9+, Clang 10+)
 - **Git** for cloning and submodules
-- **MSFS 2024 SDK** and **SimConnect SDK**
+- **MSFS 2024 SDK** and **SimConnect SDK** [Installation Guide](https://docs.flightsimulator.com/msfs2024/html/1_Introduction/SDK_Overview.htm?agt=index)
+
 
 ## Building
 
