@@ -59,6 +59,8 @@ cd MSFS-DIS-Gateway-
 
 # Initialize Open-DIS submodule if needed
 git submodule update --init --recursive extern/open-dis
+## Or, to initialize all submodules:
+git submodule update --init --recursive
 
 # Create a build directory
 mkdir build && cd build
